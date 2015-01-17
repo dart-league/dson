@@ -43,7 +43,7 @@ void main() {
 
 ## Serializing Cyclical Objects
 
-To serialize objects that contains Cyclical References it would be needed to use the annotation `@cyclical`. If this annotation is present and the `deep` variable is not set then the non-primitive objects are not going to be parsed and only the id or hashmap is going to be present. Let's see next to objects:
+To serialize objects that contains Cyclical References it would be needed to use the annotation `@cyclical`. If this annotation is present and the `depth` variable is not set then the non-primitive objects are not going to be parsed and only the id or hashmap is going to be present. Let's see next to objects:
 
 ```dart
 
