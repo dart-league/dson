@@ -2,7 +2,7 @@ name: dson
 version: 0.1.3
 author: Luis Vargas <luisvargastijerino@gmail.com>
 description: Convert Objects to Json and Json to Objects
-homepage: https://github.com/luisvt/Drails/tree/master/dson
+homepage: https://github.com/luisvt/dson
 environment:
   sdk: '>=1.6.0'
 dependencies:
