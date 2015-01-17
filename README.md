@@ -1,5 +1,7 @@
 # dson
 
+[![Build Status](https://drone.io/github.com/luisvt/dson/status.png)](https://drone.io/github.com/luisvt/dson/latest)
+
 dson is a dart library which converts Dart Objects into their JSON representation. It helps you keep your code clean of `fromJSON` and `toJSON` functions by using dart:mirrors reflection. **It works after dart2js compiling.**
 
 This library is a fork from [dartson](https://github.com/eredo/dartson). I removed transformers and add datetime parsing and other minor changes.
