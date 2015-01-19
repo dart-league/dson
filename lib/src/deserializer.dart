@@ -115,7 +115,7 @@ dynamic fill(Map dataObject, Object object) {
 void _fillObject(InstanceMirror objMirror, Map filler) {
   ClassMirror classMirror = objMirror.type;
 
-  classMirror.declarations.forEach((sym, decl) {
+  getPublicVariablesFromClass(classMirror).forEach((sym, decl) {
     if (!decl.isPrivate && (decl is VariableMirror || decl is MethodMirror)) {
       String varName = _getName(sym);
       String fieldName = varName;
