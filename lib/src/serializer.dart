@@ -6,7 +6,7 @@ Map<Object, Map> _serializedStack = {};
 
 bool isPrimitive(var value) => value is String || value is num || value is bool || value == null;
 
-bool isSuperPrimitive(var value) => isPrimitive(value) || value is DateTime || value is List || value is Map;
+bool isSimple(var value) => isPrimitive(value) || value is DateTime || value is List || value is Map;
 
 /**
  * Serializes the [object] to a JSON string.
@@ -144,4 +144,4 @@ void _pushField(Symbol symbol, DeclarationMirror variable, InstanceMirror instMi
   }
 }
 
-_isCiclical(value, InstanceMirror im) => !isSuperPrimitive(value) && new IsAnnotation<Cyclical>().onInstance(im);
+_isCiclical(value, InstanceMirror im) => !isSimple(value) && new IsAnnotation<Cyclical>().onInstance(im);
