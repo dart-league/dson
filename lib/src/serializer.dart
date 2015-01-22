@@ -84,7 +84,7 @@ Object _serializeObject(var obj, var depth, String fieldName) {
       if (depth is Map) depth = depth[fieldName];
     }
 
-    var publicVariables = getPublicVariablesFromClass(classMirror);
+    var publicVariables = getPublicVariablesAndGettersFromClass(classMirror);
     if (depth != null || !_isCiclical(obj, instMirror) || fieldName == null) {
       publicVariables.forEach((sym, decl) {
         _pushField(sym, decl, instMirror, result, depth);
