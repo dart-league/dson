@@ -16,11 +16,16 @@ import 'package:dson/dson.dart';
 @MirrorsUsed(targets:const['example'],override:'*')
 import 'dart:mirrors';
 
-class EntityClass {
-  String name;
+class Person {
+  int id;
+  String firstName;
+  var lastName; //This is a dynamic attribute could be String, int, duble, num, date or another type
+  double height;
+  DateTime dateOfBirth;
 
   @Property("renamed")
-  bool otherName;
+  String otherName;
+  
 
   @ignore
   String notVisible;
@@ -32,14 +37,18 @@ class EntityClass {
 }
 
 void main() {
-  EntityClass object = new EntityClass()
-    ..name = "test"
-    ..otherName = true
+  Person object = new Person()
+    ..id = 1
+    ..firstName = "Jhon"
+    ..lastName = "Doe"
+    ..height = 1.8
+    ..dateOfBirth = new DateTime(1988, 4, 1, 6, 31)
+    ..otherName = "Juan"
     ..notVisible = "hallo";
 
   String jsonString = serialize(object);
   print(jsonString);
-  // will return: '{"name":"test","renamed":"blub","doGetter":"name"}'
+  // will print: '{"id":1,"firstName":"Jhon","lastName":"Doe","height":1.8,"dateOfBirth":"1988-04-01T06:31:00.000","renamed":"Juan","doGetter":"name"}'
 }
 ```
 
