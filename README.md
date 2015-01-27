@@ -18,25 +18,25 @@ import 'dart:mirrors';
 
 class EntityClass {
   String name;
-  
-  @Property(name:"renamed")
+
+  @Property("renamed")
   bool otherName;
-  
+
   @ignore
   String notVisible;
-  
+
   // private members are never serialized
   String _private = "name";
-  
+
   String get doGetter => _private;
 }
 
 void main() {
   EntityClass object = new EntityClass()
-    ..name = "test";
-    ..otherName = "blub";
+    ..name = "test"
+    ..otherName = true
     ..notVisible = "hallo";
-  
+
   String jsonString = serialize(object);
   print(jsonString);
   // will return: '{"name":"test","renamed":"blub","doGetter":"name"}'
