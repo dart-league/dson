@@ -242,7 +242,7 @@ void main() {
 }
 ```
 
-## Converting Maps and Lists<Map> to dart objects
+## Converting `Maps` and `Lists<Map>` to dart objects
 Frameworks like Angular.dart come with several HTTP services which already transform the HTTP response to a map using JSON.encode. To use those encoded Maps or Lists use `map` and `mapList`.
 
 ```dart
