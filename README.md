@@ -140,7 +140,6 @@ as you can see employee has an address and the address has the employee as owner
 
 The same applies for lists:
 
-
 ```dart
 
     library example;
@@ -291,4 +290,88 @@ void main() {
   print(list[0].name); // > test
   print(list[0].children[0].name); // > child1
 }
+```
+
+## Excluding attributes from being serizlized
+To exclude parameter from being serialized we have two options the first option is using `@ignore` over the attribute to ignore. However this approach is too global. What I want to say with this is that the attribute is going to be ignored always.
+
+Another way to exclude attributes is adding the parameter `exclude` to `serialize` function. In this way we only exclude those attributes during that serialization.
+
+```dart
+
+    library example;
+
+    import 'package:dson/dson.dart';
+    
+    @MirrorsUsed(targets:const['example'],override:'*')
+    import 'dart:mirrors';
+    
+    @cyclical
+    class Student {
+      int id;
+      String name;
+      
+      List<Course> courses;
+    }
+    
+    @cyclical
+    class Course {
+      int id;
+      
+      DateTime beginDate;
+      
+      List<Student> students;
+    }
+    
+    void main() {
+    
+      print(serialize(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
+    
+      print(serialize(student1, depth: 'courses', exclude: 'name'));
+      /* will print:
+          '{'
+            '"id":1,'
+            '"courses":['
+              '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":[{"id":1},{"id":2}]},'
+              '{"id":3,"beginDate":"2015-01-03T00:00:00.000Z","students":[{"id":1},{"id":3}]}'
+            ']'
+          '}');
+       */
+    
+      print(serialize(student1.courses, exclude: 'beginDate')); 
+      /* will print:
+          '['
+            '{"id":1,"students":[{"id":1},{"id":2}]},'
+            '{"id":3,"students":[{"id":1},{"id":3}]}'
+          ']');
+      */
+      
+      print(serialize(student2.courses, depth: 'students', exclude: {'students': 'name'}));
+      /* will print: 
+          '['
+            '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":['
+              '{"id":1,"courses":[{"id":1},{"id":3}]},'
+              '{"id":2,"courses":[{"id":1},{"id":2}]}'
+            ']},'
+            '{"id":2,"beginDate":"2015-01-02T00:00:00.000Z","students":['
+              '{"id":2,"name":"student2","courses":[{"id":1},{"id":2}]},'
+              '{"id":3,"name":"student3","courses":[{"id":2},{"id":3}]}'
+            ']}'
+          ']'
+       */
+       
+       print(serialize(student2.courses, depth: 'students', exclude: ['beginDate', {'students': 'name'}]));
+      /* will print: 
+          '['
+            '{"id":1,"students":['
+              '{"id":1,"courses":[{"id":1},{"id":3}]},'
+              '{"id":2,"courses":[{"id":1},{"id":2}]}'
+            ']},'
+            '{"id":2,"students":['
+              '{"id":2,"name":"student2","courses":[{"id":1},{"id":2}]},'
+              '{"id":3,"name":"student3","courses":[{"id":2},{"id":3}]}'
+            ']}'
+          ']'
+       */
+   }
 ```

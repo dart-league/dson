@@ -34,14 +34,14 @@ void cyclic_reference_serialize() {
     });
     
     test('serialize employee with address and no manager', () {
-      expect(serialize(employee, depth: ['address']),
+      expect(serialize(employee, depth: 'address'),
              '{"id":2,"firstName":"Luis","lastName":"Vargas",'
                 '"address":{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}},'
                 '"manager":{"id":1}}');
     });
     
     test('serialize employee with address, manager and manager address', () {
-      expect(serialize(employee, depth: [{'manager': ['address']}, 'address']),
+      expect(serialize(employee, depth: [{'manager': 'address'}, 'address']),
              '{"id":2,"firstName":"Luis","lastName":"Vargas",'
                 '"address":{"id":2,"street":"some street","city":"Miami","country":"USA",'
                   '"owner":{"id":2}},'

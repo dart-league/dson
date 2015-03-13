@@ -9,6 +9,7 @@ import 'package:logging/logging.dart';
 
 part 'serializer/cyclic_reference_test.dart';
 part 'serializer/simple_test.dart';
+part 'serializer/exclude_test.dart';
 
 void main() {
 //  Logger.root.level = Level.ALL;
@@ -20,6 +21,8 @@ void main() {
   simple_serilize();
 
   cyclic_reference_serialize();
+  
+  exclude_test();
 
   test('deserialize: simple', () {
     TestClass1 test = deserialize('{"name":"test","matter":true,"intNumber":2,"number":5,"list":[1,2,3],"map":{"k":"o"},"the_renamed":"test"}', TestClass1);

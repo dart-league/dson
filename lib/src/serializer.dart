@@ -11,19 +11,19 @@ bool isSimple(var value) => isPrimitive(value) || value is DateTime || value is 
 /**
  * Serializes the [object] to a JSON string.
  */
-String serialize(object, {bool parseString: false, var depth}) {
+String serialize(object, {bool parseString: false, depth, exclude}) {
   _serLog.fine("Start serializing");
 
   if (object is String && !parseString) return object;
   
-  var result = JSON.encode(objectToSerializable(object, depth: depth));
+  var result = JSON.encode(objectToSerializable(object, depth: depth, exclude: exclude));
 
   _serializedStack.clear();
 
   return result;
 }
 
-Object objectToSerializable(obj, {var depth, String fieldName}) {
+Object objectToSerializable(obj, {depth, exclude, String fieldName}) {
   if (isPrimitive(obj)) {
     _serLog.fine("Found primetive: $obj");
     return obj;
@@ -38,7 +38,7 @@ Object objectToSerializable(obj, {var depth, String fieldName}) {
     return _serializeMap(obj);
   } else {
     _serLog.fine("Found object: $obj");
-    return _serializeObject(obj, depth, fieldName);
+    return _serializeObject(obj, depth, exclude, fieldName);
   }
 }
 
@@ -66,7 +66,7 @@ Map _serializeMap(Map map) {
 /**
  * Runs through the Object keys by using a ClassMirror.
  */
-Object _serializeObject(var obj, var depth, String fieldName) {
+Object _serializeObject(obj, depth, exclude, fieldName) {
   InstanceMirror instMirror = reflect(obj);
   ClassMirror classMirror = instMirror.type;
   _serLog.fine("Serializing class: ${_getName(classMirror.qualifiedName)}");
@@ -75,19 +75,11 @@ Object _serializeObject(var obj, var depth, String fieldName) {
 
   if (_serializedStack[obj] == null) {
 
-    if(fieldName != null) {
-      if (depth is List) {
-        depth = depth.firstWhere((e) => //
-        e == fieldName || e is Map && e.keys.contains(fieldName), orElse: () => null);
-      }
-  
-      if (depth is Map) depth = depth[fieldName];
-    }
-
     var publicVariables = getPublicVariablesAndGettersFromClass(classMirror);
+    depth = _getNextDepth(depth, fieldName);
     if (depth != null || !_isCiclical(obj, instMirror) || fieldName == null) {
       publicVariables.forEach((sym, decl) {
-        _pushField(sym, decl, instMirror, result, depth);
+        _pushField(sym, decl, instMirror, result, depth, exclude);
       });
 
       _serializedStack[obj] = result;
@@ -114,7 +106,7 @@ Object _serializeObject(var obj, var depth, String fieldName) {
  * the value to the [result] map. If there's no [Property] annotation 
  * with a different name set it will use the name of [symbol].
  */
-void _pushField(Symbol symbol, DeclarationMirror variable, InstanceMirror instMirror, Map<String, dynamic> result, var depth) {
+void _pushField(Symbol symbol, DeclarationMirror variable, InstanceMirror instMirror, Map<String, dynamic> result, depth, exclude) {
 
   String fieldName = _getName(symbol);
   if (fieldName.isEmpty) return;
@@ -136,12 +128,46 @@ void _pushField(Symbol symbol, DeclarationMirror variable, InstanceMirror instMi
   _serLog.finer("depth: $depth");
 
   //If the value is not null and the annotation @ignore is not on variable declaration
-  if (value != null && !new IsAnnotation<_Ignore>().onDeclaration(variable)) {
+  if (value != null && !new IsAnnotation<_Ignore>().onDeclaration(variable) && 
+      (exclude == null
+      || exclude is Map
+      || exclude is String && fieldName != exclude 
+      || exclude is List && !exclude.contains(fieldName))) {
 
     _serLog.finer("Serializing field: ${fieldName}");
 
-    result[fieldName] = objectToSerializable(value, depth: depth is List || depth is Map ? depth : null, fieldName: fieldName);
+    result[fieldName] = objectToSerializable(value,
+        depth: depth,
+        exclude: _getNextExclude(exclude, fieldName),
+        fieldName: fieldName);
   }
 }
 
 _isCiclical(value, InstanceMirror im) => !isSimple(value) && new IsAnnotation<Cyclical>().onInstance(im);
+
+
+_getNextDepth(depth, String fieldName) {
+  if(fieldName != null) {
+    if (depth is List) {
+      depth = depth.firstWhere((e) =>
+          e == fieldName || e is Map && e.keys.contains(fieldName), orElse: () => null);
+    }
+    
+    if(depth is Map) return depth[fieldName];
+    
+    if(depth is String && depth == fieldName) return depth;
+  } else {
+    return depth;
+  }
+}
+
+_getNextExclude(exclude, fieldName) {
+  if (exclude is List) {
+    return exclude.firstWhere((e) => //
+        e == fieldName || e is Map && e.keys.contains(fieldName), orElse: () => null);
+  }
+  
+  if(exclude is Map) return exclude[fieldName];
+  
+  if(exclude is String) return null;
+}
