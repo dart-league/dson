@@ -32,7 +32,7 @@ Object objectToSerializable(obj, {depth, exclude, String fieldName}) {
     return obj.toIso8601String();
   } else if (obj is List) {
     _serLog.fine("Found list: $obj");
-    return _serializeList(obj, depth, fieldName);
+    return _serializeList(obj, depth, exclude, fieldName);
   } else if (obj is Map) {
     _serLog.fine("Found map: $obj");
     return _serializeMap(obj);
@@ -42,11 +42,11 @@ Object objectToSerializable(obj, {depth, exclude, String fieldName}) {
   }
 }
 
-List _serializeList(List list, depth, String fieldName) {
+List _serializeList(List list, depth, exclude, String fieldName) {
   List newList = [];
 
   list.forEach((item) {
-    newList.add(objectToSerializable(item, depth: depth, fieldName: fieldName));
+    newList.add(objectToSerializable(item, depth: depth, exclude: exclude, fieldName: fieldName));
   });
 
   return newList;
@@ -128,17 +128,21 @@ void _pushField(Symbol symbol, DeclarationMirror variable, InstanceMirror instMi
   _serLog.finer("depth: $depth");
 
   //If the value is not null and the annotation @ignore is not on variable declaration
-  if (value != null && !new IsAnnotation<_Ignore>().onDeclaration(variable) && 
-      (exclude == null
-      || exclude is Map
-      || exclude is String && fieldName != exclude 
-      || exclude is List && !exclude.contains(fieldName))) {
+  if (value != null && !new IsAnnotation<_Ignore>().onDeclaration(variable)
+      // And exclude is pressent
+      && (exclude == null
+        // or exclude is Map (we are excluding nested attribute)
+        || exclude is Map
+        // or exclude is String and fieldName distinct of exclude (we exclude this attribute)
+        || exclude is String && fieldName != exclude
+        // or exclude is List and exclude contains this fieldName (we exclude this attribute)
+        || exclude is List && !exclude.contains(fieldName))) {
 
     _serLog.finer("Serializing field: ${fieldName}");
 
     result[fieldName] = objectToSerializable(value,
         depth: depth,
-        exclude: _getNextExclude(exclude, fieldName),
+        exclude: _getNext(exclude, fieldName),
         fieldName: fieldName);
   }
 }
@@ -148,26 +152,19 @@ _isCiclical(value, InstanceMirror im) => !isSimple(value) && new IsAnnotation<Cy
 
 _getNextDepth(depth, String fieldName) {
   if(fieldName != null) {
-    if (depth is List) {
-      depth = depth.firstWhere((e) =>
-          e == fieldName || e is Map && e.keys.contains(fieldName), orElse: () => null);
-    }
-    
-    if(depth is Map) return depth[fieldName];
-    
-    if(depth is String && depth == fieldName) return depth;
+    return _getNext(depth, fieldName);
   } else {
     return depth;
   }
 }
 
-_getNextExclude(exclude, fieldName) {
-  if (exclude is List) {
-    return exclude.firstWhere((e) => //
+_getNext(excludeOrDepth, String fieldName) {
+  if (excludeOrDepth is List) {
+    excludeOrDepth = excludeOrDepth.firstWhere((e) => //
         e == fieldName || e is Map && e.keys.contains(fieldName), orElse: () => null);
   }
   
-  if(exclude is Map) return exclude[fieldName];
+  if(excludeOrDepth is Map) return excludeOrDepth[fieldName];
   
-  if(exclude is String) return null;
+  if(excludeOrDepth is String && excludeOrDepth == fieldName) return excludeOrDepth;
 }

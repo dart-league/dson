@@ -136,7 +136,7 @@ To serialize objects that contains Cyclical References it would be needed to use
     }
 ```
 
-as you can see employee has an address and the address has the employee as owner. If the property `id` is not present in the object then it is going to take the `hashcode` value from the object as reference. And finally, the `depth` parameter passed to serialize function tells serializer how deep you want to go throw the reference. This help us not only to avoid cyclical reference, but to determine what referenced objects should be serialized.
+as you can see employee has an address, and the address has the employee as owner. If the property `id` is not present in the object then it is going to take the `hashcode` value from the object as reference. And finally, the `depth` parameter passed to serialize function tells serializer how deep you want to go throw the reference. This help us not only to avoid cyclical reference, but to determine what referenced objects should be serialized.
 
 The same applies for lists:
 
