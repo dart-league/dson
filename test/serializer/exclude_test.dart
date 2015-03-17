@@ -32,11 +32,8 @@ exclude_test() {
       expect(serialize(manager, exclude: {'address': ['street', 'city']}, depth: 'address'), '{"id":1,"firstName":"Jhon","lastName":"Doe","address":{"id":1,"country":"USA","owner":{"id":1}}}');
     });
   });
-  
 
   group('exclude from list >', () {
-    
-    
     var student1 = new Student()
         ..id = 1
         ..name = 'student1',

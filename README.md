@@ -1,12 +1,17 @@
-# dson
+# DSON
 
 [![Build Status](https://drone.io/github.com/luisvt/dson/status.png)](https://drone.io/github.com/luisvt/dson/latest)
 
-dson is a dart library which converts Dart Objects into their JSON representation. It helps you keep your code clean of `fromJSON` and `toJSON` functions by using dart:mirrors reflection. **It works after dart2js compiling.**
+DSON is a dart library which converts Dart Objects into their JSON representation. It helps you keep your code clean of `fromJSON` and `toJSON` functions by using dart:mirrors reflection. **It works after dart2js compiling.**
 
-This library is a fork from [dartson](https://github.com/eredo/dartson). I removed transformers and add datetime parsing and other minor changes.
+This library was initially a fork from [Dartson](https://github.com/eredo/dartson). Now it contains some differences:
+ * Dartson uses transformers to convert objects to JSON. This produce faster and smaller code after dart2Js. This is a feature that I also would like to add to DSON.
+ * DSON has the ability to serialize cyclical objects by mean of `depth` parameter, which allows user to specify how deep in the object graph he wants to serialize.
+ * DSON has the ability to exclude attributes for serialziation in a more flexible way. I mean, not using `@ignore` over every attribute. This make excluding attributes two global and hardcoded, so users can only specify one exclusing schema.
+ 
+## Serialization
 
-## Serializing objects
+To serialize objects (convert objects to JSON strings) you only need to use the `serialize` function and pass the `object` to serialize as parameter:
 
 ```dart
 library example;
@@ -52,88 +57,135 @@ void main() {
 }
 ```
 
-## Serializing Cyclical Objects
+### Converting objects to Maps
+
+
+To convert objects to Maps you only need to use the `objectToSerializable` function and pass the `object` to serialize as parameter:
+
+```dart
+library example;
+
+import 'package:dson/dson.dart';
+
+@MirrorsUsed(targets:const['example'],override:'*')
+import 'dart:mirrors';
+
+class Person {
+  int id;
+  String firstName;
+  var lastName; //This is a dynamic attribute could be String, int, duble, num, date or another type
+  double height;
+  DateTime dateOfBirth;
+
+  @Property("renamed")
+  String otherName;
+  
+
+  @ignore
+  String notVisible;
+
+  // private members are never serialized
+  String _private = "name";
+
+  String get doGetter => _private;
+}
+
+void main() {
+  Person object = new Person()
+    ..id = 1
+    ..firstName = "Jhon"
+    ..lastName = "Doe"
+    ..height = 1.8
+    ..dateOfBirth = new DateTime(1988, 4, 1, 6, 31)
+    ..otherName = "Juan"
+    ..notVisible = "hallo";
+
+  Map map = objectToSerializable(object);
+  print(map);
+  // will print: '{id:1, firstName: Jhon, lastName: Doe, height: 1.8, dateOfBirth: 1988-04-01T06:31:00.000, renamed: Juan, doGetter: name}'
+}
+```
+
+### Serializing Cyclical Objects
 
 To serialize objects that contains Cyclical References it would be needed to use the annotation `@cyclical`. If this annotation is present and the `depth` variable is not set then the non-primitive objects are not going to be parsed and only the id or hashmap is going to be present. Let's see next to objects:
 
 ```dart
+library example;
 
-    library example;
-    
-    import 'package:dson/dson.dart';
-    
-    @MirrorsUsed(targets:const['example'],override:'*')
-    import 'dart:mirrors';
-    
-    @cyclical
-    class Employee {
-      int id;
-      String firstName;
-      String lastName;
-      
-      Address address;
-      
-      Employee manager;
-    }
-    
-    @cyclical
-    class Address {
-      int id;
-      String street;
-      String city;
-      String country;
-      String postalCode;
-      
-      Employee owner;
-    }
-    
-    
-    void main() {
+import 'package:dson/dson.dart';
+
+@MirrorsUsed(targets:const['example'],override:'*')
+import 'dart:mirrors';
+
+@cyclical
+class Employee {
+  int id;
+  String firstName;
+  String lastName;
   
-      var manager = new Employee()
-        ..id = 1
-        ..firstName = 'Jhon'
-        ..lastName = 'Doe';
-      manager.address = new Address()
-          ..id = 1
-          ..street = 'some street'
-          ..city = 'Miami'
-          ..country = 'USA'
-          ..owner = manager;
+  Address address;
+  
+  Employee manager;
+}
+
+@cyclical
+class Address {
+  int id;
+  String street;
+  String city;
+  String country;
+  String postalCode;
+  
+  Employee owner;
+}
+
+
+void main() {
+  var manager = new Employee()
+    ..id = 1
+    ..firstName = 'Jhon'
+    ..lastName = 'Doe';
+  manager.address = new Address()
+      ..id = 1
+      ..street = 'some street'
+      ..city = 'Miami'
+      ..country = 'USA'
+      ..owner = manager;
+
+  var employee = new Employee()
+    ..id = 2
+    ..firstName = 'Luis'
+    ..lastName = 'Vargas'
+    ..manager = manager;
+  employee.address = new Address()
+    ..id = 2
+    ..street = 'some street'
+    ..city = 'Miami'
+    ..country = 'USA'
+    ..owner = employee;
     
-      var employee = new Employee()
-        ..id = 2
-        ..firstName = 'Luis'
-        ..lastName = 'Vargas'
-        ..manager = manager;
-      employee.address = new Address()
-        ..id = 2
-        ..street = 'some street'
-        ..city = 'Miami'
-        ..country = 'USA'
-        ..owner = employee;
-        
-      print(serialize(employee)); //will print: '{"id":2,"firstName":"Luis","lastName":"Vargas","address":{"id":2},"manager":{"id":1}}'
-      
-      print(serialize(employee.address)); // will print: '{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}}'
-      
-      // depth is a optional parameter that could be a list that should contains strings or Maps<String, Map>
-      print(serialize(employee, depth: ['address']));
-      /* will print:
-               '{"id":2,"firstName":"Luis","lastName":"Vargas",'
-                  '"address":{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}},'
-                  '"manager":{"id":1}}'
-      */
-      
-      print(serialize(employee, depth: [{'manager': ['address']}, 'address']));
-      /* will print:
-             '{"id":2,"firstName":"Luis","lastName":"Vargas",'
-                '"address":{"id":2,"street":"some street","city":"Miami","country":"USA",'
-                  '"owner":{"id":2}},'
-                '"manager":{"id":1,"firstName":"Jhon","lastName":"Doe",'
-                  '"address":{"id":1,"street":"some street","city":"Miami","country":"USA","owner":{"id":1}}}}');
-      */
-    }
+  print(serialize(employee)); //will print: '{"id":2,"firstName":"Luis","lastName":"Vargas","address":{"id":2},"manager":{"id":1}}'
+  
+  print(serialize(employee.address)); // will print: '{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}}'
+  
+  // depth is a optional parameter that could be a list that should contains strings or Maps<String, Map>
+  print(serialize(employee, depth: ['address']));
+  /* will print:
+           '{"id":2,"firstName":"Luis","lastName":"Vargas",'
+              '"address":{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}},'
+              '"manager":{"id":1}}'
+  */
+  
+  print(serialize(employee, depth: [{'manager': ['address']}, 'address']));
+  /* will print:
+         '{"id":2,"firstName":"Luis","lastName":"Vargas",'
+            '"address":{"id":2,"street":"some street","city":"Miami","country":"USA",'
+              '"owner":{"id":2}},'
+            '"manager":{"id":1,"firstName":"Jhon","lastName":"Doe",'
+              '"address":{"id":1,"street":"some street","city":"Miami","country":"USA","owner":{"id":1}}}}');
+  */
+}
 ```
 
 as you can see employee has an address, and the address has the employee as owner. If the property `id` is not present in the object then it is going to take the `hashcode` value from the object as reference. And finally, the `depth` parameter passed to serialize function tells serializer how deep you want to go throw the reference. This help us not only to avoid cyclical reference, but to determine what referenced objects should be serialized.
@@ -141,158 +193,215 @@ as you can see employee has an address, and the address has the employee as owne
 The same applies for lists:
 
 ```dart
+library example;
 
-    library example;
+import 'package:dson/dson.dart';
 
-    import 'package:dson/dson.dart';
-    
-    @MirrorsUsed(targets:const['example'],override:'*')
-    import 'dart:mirrors';
-    
-    @cyclical
-    class Student {
-      int id;
-      String name;
-      
-      List<Course> courses;
-    }
-    
-    @cyclical
-    class Course {
-      int id;
-      
-      DateTime beginDate;
-      
-      List<Student> students;
-    }
-    
-    void main() {
-    
-      print(serialize(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
-    
-      print(serialize(student1, depth: ['courses']));
-      /* will print:
-          '{'
-            '"id":1,'
-            '"name":"student1",'
-            '"courses":['
-              '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":[{"id":1},{"id":2}]},'
-              '{"id":3,"beginDate":"2015-01-03T00:00:00.000Z","students":[{"id":1},{"id":3}]}'
-            ']'
-          '}');
-       */
-    
-      print(serialize(student1.courses)); 
-      /* will print:
-          '['
-            '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":[{"id":1},{"id":2}]},'
-            '{"id":3,"beginDate":"2015-01-03T00:00:00.000Z","students":[{"id":1},{"id":3}]}'
-          ']');
-      */
-      
-      print(serialize(student2.courses, depth: ['students']));
-      /* will print: 
-          '['
-            '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":['
-              '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]},'
-              '{"id":2,"name":"student2","courses":[{"id":1},{"id":2}]}'
-            ']},'
-            '{"id":2,"beginDate":"2015-01-02T00:00:00.000Z","students":['
-              '{"id":2,"name":"student2","courses":[{"id":1},{"id":2}]},'
-              '{"id":3,"name":"student3","courses":[{"id":2},{"id":3}]}'
-            ']}'
-          ']'
-       */
-   }
+@MirrorsUsed(targets:const['example'],override:'*')
+import 'dart:mirrors';
+
+@cyclical
+class Student {
+  int id;
+  String name;
+  
+  List<Course> courses;
+}
+
+@cyclical
+class Course {
+  int id;
+  
+  DateTime beginDate;
+  
+  List<Student> students;
+}
+
+void main() {
+  
+  var student1 = new Student()
+      ..id = 1
+      ..name = 'student1',
+    student2 = new Student()
+      ..id = 2
+      ..name = 'student2',
+    student3 = new Student()
+      ..id = 3
+      ..name = 'student3',
+    course1 = new Course()
+      ..id = 1
+      ..beginDate = new DateTime.utc(2015, 1, 1)
+      ..students = [student1, student2],
+    course2 = new Course()
+      ..id = 2
+      ..beginDate = new DateTime.utc(2015, 1, 2)
+      ..students = [student2, student3],
+    course3 = new Course()
+      ..id = 3
+      ..beginDate = new DateTime.utc(2015, 1, 3)
+      ..students = [student1, student3];
+  
+  student1.courses = [course1, course3];
+  student2.courses = [course1, course2];
+  student3.courses = [course2, course3];
+  
+  var students = [student1, student2, student3]; 
+  
+  print(serialize(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
+
+  print(serialize(student1, depth: ['courses']));
+  /* will print:
+      '{'
+        '"id":1,'
+        '"name":"student1",'
+        '"courses":['
+          '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":[{"id":1},{"id":2}]},'
+          '{"id":3,"beginDate":"2015-01-03T00:00:00.000Z","students":[{"id":1},{"id":3}]}'
+        ']'
+      '}');
+   */
+
+  print(serialize(student1.courses)); 
+  /* will print:
+      '['
+        '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":[{"id":1},{"id":2}]},'
+        '{"id":3,"beginDate":"2015-01-03T00:00:00.000Z","students":[{"id":1},{"id":3}]}'
+      ']');
+  */
+  
+  print(serialize(student2.courses, depth: ['students']));
+  /* will print: 
+      '['
+        '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":['
+          '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]},'
+          '{"id":2,"name":"student2","courses":[{"id":1},{"id":2}]}'
+        ']},'
+        '{"id":2,"beginDate":"2015-01-02T00:00:00.000Z","students":['
+          '{"id":2,"name":"student2","courses":[{"id":1},{"id":2}]},'
+          '{"id":3,"name":"student3","courses":[{"id":2},{"id":3}]}'
+        ']}'
+      ']'
+   */
+}
 ```
     
 Without the annotation `@cyclical` the program is going to throw a stack overflow error caused by the serializing of cyclical objects.
 
-## Excluding attributes from being serialized
+### Excluding attributes from being serialized
+
 To exclude parameter from being serialized we have two options the first option is using `@ignore` over the attribute to ignore. However this approach is too global. What I want to say with this is that the attribute is going to be ignored always.
 
 Another way to exclude attributes is adding the parameter `exclude` to `serialize` function. In this way we only exclude those attributes during that serialization.
 
 ```dart
+library example;
 
-    library example;
+import 'package:dson/dson.dart';
 
-    import 'package:dson/dson.dart';
-    
-    @MirrorsUsed(targets:const['example'],override:'*')
-    import 'dart:mirrors';
-    
-    @cyclical
-    class Student {
-      int id;
-      String name;
-      
-      List<Course> courses;
-    }
-    
-    @cyclical
-    class Course {
-      int id;
-      
-      DateTime beginDate;
-      
-      List<Student> students;
-    }
-    
-    void main() {
-    
-      print(serialize(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
-    
-      print(serialize(student1, depth: 'courses', exclude: 'name'));
-      /* will print:
-          '{'
-            '"id":1,'
-            '"courses":['
-              '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":[{"id":1},{"id":2}]},'
-              '{"id":3,"beginDate":"2015-01-03T00:00:00.000Z","students":[{"id":1},{"id":3}]}'
-            ']'
-          '}');
-       */
-    
-      print(serialize(student1.courses, exclude: 'beginDate')); 
-      /* will print:
-          '['
-            '{"id":1,"students":[{"id":1},{"id":2}]},'
-            '{"id":3,"students":[{"id":1},{"id":3}]}'
-          ']');
-      */
-      
-      print(serialize(student2.courses, depth: 'students', exclude: {'students': 'name'}));
-      /* will print: 
-          '['
-            '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":['
-              '{"id":1,"courses":[{"id":1},{"id":3}]},'
-              '{"id":2,"courses":[{"id":1},{"id":2}]}'
-            ']},'
-            '{"id":2,"beginDate":"2015-01-02T00:00:00.000Z","students":['
-              '{"id":2,"name":"student2","courses":[{"id":1},{"id":2}]},'
-              '{"id":3,"name":"student3","courses":[{"id":2},{"id":3}]}'
-            ']}'
-          ']'
-       */
-       
-       print(serialize(student2.courses, depth: 'students', exclude: ['beginDate', {'students': 'name'}]));
-      /* will print: 
-          '['
-            '{"id":1,"students":['
-              '{"id":1,"courses":[{"id":1},{"id":3}]},'
-              '{"id":2,"courses":[{"id":1},{"id":2}]}'
-            ']},'
-            '{"id":2,"students":['
-              '{"id":2,"name":"student2","courses":[{"id":1},{"id":2}]},'
-              '{"id":3,"name":"student3","courses":[{"id":2},{"id":3}]}'
-            ']}'
-          ']'
-       */
-   }
+@MirrorsUsed(targets:const['example'],override:'*')
+import 'dart:mirrors';
+
+@cyclical
+class Student {
+  int id;
+  String name;
+  
+  List<Course> courses;
+}
+
+@cyclical
+class Course {
+  int id;
+  
+  DateTime beginDate;
+  
+  List<Student> students;
+}
+
+void main() {
+  
+  var student1 = new Student()
+      ..id = 1
+      ..name = 'student1',
+    student2 = new Student()
+      ..id = 2
+      ..name = 'student2',
+    student3 = new Student()
+      ..id = 3
+      ..name = 'student3',
+    course1 = new Course()
+      ..id = 1
+      ..beginDate = new DateTime.utc(2015, 1, 1)
+      ..students = [student1, student2],
+    course2 = new Course()
+      ..id = 2
+      ..beginDate = new DateTime.utc(2015, 1, 2)
+      ..students = [student2, student3],
+    course3 = new Course()
+      ..id = 3
+      ..beginDate = new DateTime.utc(2015, 1, 3)
+      ..students = [student1, student3];
+  
+  student1.courses = [course1, course3];
+  student2.courses = [course1, course2];
+  student3.courses = [course2, course3];
+  
+  var students = [student1, student2, student3]; 
+  
+  print(serialize(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
+
+  print(serialize(student1, depth: 'courses', exclude: 'name'));
+  /* will print:
+      '{'
+        '"id":1,'
+        '"courses":['
+          '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":[{"id":1},{"id":2}]},'
+          '{"id":3,"beginDate":"2015-01-03T00:00:00.000Z","students":[{"id":1},{"id":3}]}'
+        ']'
+      '}');
+   */
+
+  print(serialize(student1.courses, exclude: 'beginDate')); 
+  /* will print:
+      '['
+        '{"id":1,"students":[{"id":1},{"id":2}]},'
+        '{"id":3,"students":[{"id":1},{"id":3}]}'
+      ']');
+  */
+  
+  print(serialize(student2.courses, depth: 'students', exclude: {'students': 'name'}));
+  /* will print: 
+      '['
+        '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":['
+          '{"id":1,"courses":[{"id":1},{"id":3}]},'
+          '{"id":2,"courses":[{"id":1},{"id":2}]}'
+        ']},'
+        '{"id":2,"beginDate":"2015-01-02T00:00:00.000Z","students":['
+          '{"id":2,"name":"student2","courses":[{"id":1},{"id":2}]},'
+          '{"id":3,"name":"student3","courses":[{"id":2},{"id":3}]}'
+        ']}'
+      ']'
+   */
+   
+   print(serialize(student2.courses, depth: 'students', exclude: ['beginDate', {'students': 'name'}]));
+  /* will print: 
+      '['
+        '{"id":1,"students":['
+          '{"id":1,"courses":[{"id":1},{"id":3}]},'
+          '{"id":2,"courses":[{"id":1},{"id":2}]}'
+        ']},'
+        '{"id":2,"students":['
+          '{"id":2,"name":"student2","courses":[{"id":1},{"id":2}]},'
+          '{"id":3,"name":"student3","courses":[{"id":2},{"id":3}]}'
+        ']}'
+      ']'
+   */
+}
 ```
 
-## Parsing json to dart object
+## Deserialization
+
+To deserialize objects (convert JSON strings to objects) you only need to use the `parse` and `parseList` function and pass the `json` string to deserialize and the `Type` of the object as parameters:
 
 ```dart
 library example;
@@ -334,7 +443,8 @@ void main() {
 }
 ```
 
-## Converting `Maps` and `Lists<Map>` to dart objects
+### Converting `Maps` and `Lists<Map>` to dart objects
+
 Frameworks like Angular.dart come with several HTTP services which already transform the HTTP response to a map using JSON.encode. To use those encoded Maps or Lists use `map` and `mapList`.
 
 ```dart

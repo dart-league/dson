@@ -2,15 +2,22 @@ part of dson;
 
 Logger _serLog = new Logger('object_mapper_serializer');
 
+/// Variable that save all the serialized objects. If an object 
+/// has been serilized in the past is going to be saved by this variable
+/// and is not going to be serialized again.
 Map<Object, Map> _serializedStack = {};
 
-bool isPrimitive(var value) => value is String || value is num || value is bool || value == null;
+/// Checks if the [value] is primitive (String, number, boolean or null)
+bool isPrimitive(value) => value is String || value is num || value is bool || value == null;
 
-bool isSimple(var value) => isPrimitive(value) || value is DateTime || value is List || value is Map;
+/// Checks if the [value] is primitive, [DateTime], [List], or [Map]
+bool isSimple(value) => isPrimitive(value) || value is DateTime || value is List || value is Map;
 
-/**
- * Serializes the [object] to a JSON string.
- */
+/// Serializes the [object] to a JSON string.
+/// 
+/// [depth] :  determines how deep is going to be the serialization 
+///                 and to avoid cyclical object reference stack overflow. 
+/// [exclude] : exclude some attributes. It could be [String], [Map], or [List]
 String serialize(object, {bool parseString: false, depth, exclude}) {
   _serLog.fine("Start serializing");
 
@@ -23,25 +30,31 @@ String serialize(object, {bool parseString: false, depth, exclude}) {
   return result;
 }
 
-Object objectToSerializable(obj, {depth, exclude, String fieldName}) {
-  if (isPrimitive(obj)) {
-    _serLog.fine("Found primetive: $obj");
-    return obj;
-  } else if (obj is DateTime) {
-    _serLog.fine("Found DateTime: $obj");
-    return obj.toIso8601String();
-  } else if (obj is List) {
-    _serLog.fine("Found list: $obj");
-    return _serializeList(obj, depth, exclude, fieldName);
-  } else if (obj is Map) {
-    _serLog.fine("Found map: $obj");
-    return _serializeMap(obj);
+/// Converts the [object] to a serializable [Map]. 
+/// 
+/// [depth] :  determines how deep is going to be the serialization 
+///                 and to avoid cyclical object reference stack overflow. 
+/// [exclude] : exclude some attributes. It could be [String], [Map], or [List]
+Object objectToSerializable(object, {depth, exclude, String fieldName}) {
+  if (isPrimitive(object)) {
+    _serLog.fine("Found primetive: $object");
+    return object;
+  } else if (object is DateTime) {
+    _serLog.fine("Found DateTime: $object");
+    return object.toIso8601String();
+  } else if (object is List) {
+    _serLog.fine("Found list: $object");
+    return _serializeList(object, depth, exclude, fieldName);
+  } else if (object is Map) {
+    _serLog.fine("Found map: $object");
+    return _serializeMap(object);
   } else {
-    _serLog.fine("Found object: $obj");
-    return _serializeObject(obj, depth, exclude, fieldName);
+    _serLog.fine("Found object: $object");
+    return _serializeObject(object, depth, exclude, fieldName);
   }
 }
 
+/// Converts a List into a serializable [List]
 List _serializeList(List list, depth, exclude, String fieldName) {
   List newList = [];
 
@@ -52,6 +65,7 @@ List _serializeList(List list, depth, exclude, String fieldName) {
   return newList;
 }
 
+/// Converts a [Map] into a serializable [Map]
 Map _serializeMap(Map map) {
   Map newMap = new Map<String, Object>();
   map.forEach((key, val) {
@@ -63,9 +77,7 @@ Map _serializeMap(Map map) {
   return newMap;
 }
 
-/**
- * Runs through the Object keys by using a ClassMirror.
- */
+/// Runs through the Object keys by using a ClassMirror.
 Object _serializeObject(obj, depth, exclude, fieldName) {
   InstanceMirror instMirror = reflect(obj);
   ClassMirror classMirror = instMirror.type;
@@ -101,11 +113,9 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
   return result;
 }
 
-/**
- * Checks the DeclarationMirror [variable] for annotations and adds
- * the value to the [result] map. If there's no [Property] annotation 
- * with a different name set it will use the name of [symbol].
- */
+/// Checks the DeclarationMirror [variable] for annotations and adds
+/// the value to the [result] map. If there's no [Property] annotation 
+/// with a different name set it will use the name of [symbol].
 void _pushField(Symbol symbol, DeclarationMirror variable, InstanceMirror instMirror, Map<String, dynamic> result, depth, exclude) {
 
   String fieldName = _getName(symbol);
@@ -147,9 +157,11 @@ void _pushField(Symbol symbol, DeclarationMirror variable, InstanceMirror instMi
   }
 }
 
+/// Cheks if the value is not Simple (primitive, datetime, List, or Map)
+///  and if the annotation [Cyclical] is not over the class of the object
 _isCiclical(value, InstanceMirror im) => !isSimple(value) && new IsAnnotation<Cyclical>().onInstance(im);
 
-
+/// Gets the next depth from the actual depth for the nested attribute with name [fieldName]
 _getNextDepth(depth, String fieldName) {
   if(fieldName != null) {
     return _getNext(depth, fieldName);
@@ -158,6 +170,7 @@ _getNextDepth(depth, String fieldName) {
   }
 }
 
+/// Gets the next [excludeOrDepth] for the nested attribute with name [fieldName]
 _getNext(excludeOrDepth, String fieldName) {
   if (excludeOrDepth is List) {
     excludeOrDepth = excludeOrDepth.firstWhere((e) => //
