@@ -13,6 +13,8 @@ This library was initially a fork from [Dartson](https://github.com/eredo/dartso
 
 To serialize objects (convert objects to JSON strings) you only need to use the `serialize` function and pass the `object` to serialize as parameter:
 
+To serialize objects you only need to use the `serialize` function and pass the `object` to serialize as parameter:
+
 ```dart
 library example;
 
