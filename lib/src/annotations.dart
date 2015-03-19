@@ -34,8 +34,8 @@ class Property {
 }
 
 ///this annotation describes if the objects contains ciclical reference to other objects
-const cyclical = const Cyclical();
+const cyclical = const _Cyclical();
 
-class Cyclical {
-  const Cyclical();
+class _Cyclical {
+  const _Cyclical();
 }

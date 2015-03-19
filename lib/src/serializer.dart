@@ -15,8 +15,9 @@ bool isSimple(value) => isPrimitive(value) || value is DateTime || value is List
 
 /// Serializes the [object] to a JSON string.
 /// 
-/// [depth] :  determines how deep is going to be the serialization 
-///                 and to avoid cyclical object reference stack overflow. 
+/// Parameters:
+/// 
+/// [depth] :  determines how deep is going to be the serialization and to avoid cyclical object reference stack overflow. 
 /// [exclude] : exclude some attributes. It could be [String], [Map], or [List]
 String serialize(object, {bool parseString: false, depth, exclude}) {
   _serLog.fine("Start serializing");
@@ -32,9 +33,10 @@ String serialize(object, {bool parseString: false, depth, exclude}) {
 
 /// Converts the [object] to a serializable [Map]. 
 /// 
-/// [depth] :  determines how deep is going to be the serialization 
-///                 and to avoid cyclical object reference stack overflow. 
-/// [exclude] : exclude some attributes. It could be [String], [Map], or [List]
+/// Parameters:
+/// 
+/// * [depth] :  determines how deep is going to be the serialization and to avoid cyclical object reference stack overflow. 
+/// * [exclude] : exclude some attributes. It could be [String], [Map], or [List]
 Object objectToSerializable(object, {depth, exclude, String fieldName}) {
   if (isPrimitive(object)) {
     _serLog.fine("Found primetive: $object");
@@ -158,8 +160,8 @@ void _pushField(Symbol symbol, DeclarationMirror variable, InstanceMirror instMi
 }
 
 /// Cheks if the value is not Simple (primitive, datetime, List, or Map)
-///  and if the annotation [Cyclical] is not over the class of the object
-_isCiclical(value, InstanceMirror im) => !isSimple(value) && new IsAnnotation<Cyclical>().onInstance(im);
+/// and if the annotation [Cyclical] is not over the class of the object
+_isCiclical(value, InstanceMirror im) => !isSimple(value) && new IsAnnotation<_Cyclical>().onInstance(im);
 
 /// Gets the next depth from the actual depth for the nested attribute with name [fieldName]
 _getNextDepth(depth, String fieldName) {
