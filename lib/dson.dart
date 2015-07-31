@@ -1,6 +1,6 @@
 library dson;
 
-import "dart:mirrors";
+import 'package:reflectable/reflectable.dart';
 import "dart:convert";
 import "package:logging/logging.dart";
 import "package:drails_commons/drails_commons.dart";

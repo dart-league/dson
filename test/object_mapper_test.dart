@@ -7,9 +7,9 @@ import 'package:unittest/unittest.dart';
 import 'dart:mirrors';
 import 'package:logging/logging.dart';
 
-part 'serializer/cyclic_reference_test.dart';
-part 'serializer/simple_test.dart';
-part 'serializer/exclude_test.dart';
+import 'serializer/cyclic_reference_test.dart';
+import 'serializer/simple_test.dart';
+import 'serializer/exclude_test.dart';
 
 void main() {
 //  Logger.root.level = Level.ALL;

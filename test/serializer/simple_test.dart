@@ -1,6 +1,51 @@
-part of test_dson;
+library simple_serialize_test;
 
-simple_serilize() {
+import 'package:dson/dson.dart';
+import 'package:unittest/unittest.dart';
+
+@serializable
+class JustObject {
+  Object object;
+}
+
+@serializable
+class TestGetter {
+  String _name;
+
+  TestGetter([this._name]);
+
+  String get name => _name;
+}
+
+@serializable
+class NestedClass {
+  String name;
+  List list;
+  TestGetter getter;
+
+  NestedClass(this.name, this.list, this.getter);
+}
+
+@serializable
+class TestClass1 {
+  String name;
+  bool matter;
+  num number;
+  List list;
+  Map map;
+  TestClass1 child;
+  int intNumber;
+
+  @ignore
+  bool ignored;
+
+  @Property("the_renamed")
+  String renamed;
+
+  TestClass1();
+}
+
+main() {
 
   group('simple serialize >', () {
     test('serialize: simple String array test', () {

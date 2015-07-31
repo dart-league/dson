@@ -1,6 +1,74 @@
-part of test_dson;
+library simple_serialize_test;
 
-exclude_test() {
+import 'package:dson/dson.dart';
+import 'package:unittest/unittest.dart';
+
+@cyclical
+@serializable
+class Employee {
+  int id;
+  String firstName;
+  String lastName;
+
+  Address address;
+
+  Employee manager;
+}
+
+@cyclical
+@serializable
+class Address {
+  int id;
+  String street;
+  String city;
+  String country;
+  String postalCode;
+
+  Employee owner;
+}
+
+@cyclical
+@serializable
+class Employee2 {
+  String firstName;
+  String lastName;
+
+  Address2 address;
+
+  Employee2 manager;
+}
+
+@cyclical
+@serializable
+class Address2 {
+  String street;
+  String city;
+  String country;
+  String postalCode;
+
+  Employee2 owner;
+}
+
+@cyclical
+@serializable
+class Student {
+  int id;
+  String name;
+
+  List<Course> courses;
+}
+
+@cyclical
+@serializable
+class Course {
+  int id;
+
+  DateTime beginDate;
+
+  List<Student> students;
+}
+
+main() {
   group('exclude', () {
     var manager = new Employee()
           ..id = 1

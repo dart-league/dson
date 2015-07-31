@@ -1,6 +1,9 @@
-part of test_dson;
+library cyclic_reference_serialize;
 
-void cyclic_reference_serialize() {
+import 'package:dson/dson.dart';
+import 'package:unittest/unittest.dart';
+
+main() {
   group('ciclical test with id >', () {
   
     var manager = new Employee()
@@ -201,6 +204,7 @@ void cyclic_reference_serialize() {
 }
 
 @cyclical
+@serializable
 class Employee {
   int id;
   String firstName;
@@ -212,6 +216,7 @@ class Employee {
 }
 
 @cyclical
+@serializable
 class Address {
   int id;
   String street;
@@ -223,6 +228,7 @@ class Address {
 }
 
 @cyclical
+@serializable
 class Employee2 {
   String firstName;
   String lastName;
@@ -233,6 +239,7 @@ class Employee2 {
 }
 
 @cyclical
+@serializable
 class Address2 {
   String street;
   String city;
@@ -243,6 +250,7 @@ class Address2 {
 }
 
 @cyclical
+@serializable
 class Student {
   int id;
   String name;
@@ -251,6 +259,7 @@ class Student {
 }
 
 @cyclical
+@serializable
 class Course {
   int id;
   

@@ -39,3 +39,6 @@ const cyclical = const _Cyclical();
 class _Cyclical {
   const _Cyclical();
 }
+
+/// This annotation specify that te object can be serialized
+const serializable = const Reflectable(invokingCapability, metadataCapability, const NewInstanceCapability(r"^$"));

@@ -81,26 +81,26 @@ Map _serializeMap(Map map) {
 
 /// Runs through the Object keys by using a ClassMirror.
 Object _serializeObject(obj, depth, exclude, fieldName) {
-  InstanceMirror instMirror = reflect(obj);
+  InstanceMirror instMirror = serializable.reflect(obj);
   ClassMirror classMirror = instMirror.type;
-  _serLog.fine("Serializing class: ${_getName(classMirror.qualifiedName)}");
+  _serLog.fine("Serializing class: ${classMirror.qualifiedName}");
 
   Map result = new Map<String, dynamic>();
 
   if (_serializedStack[obj] == null) {
 
-    var publicVariables = getPublicVariablesAndGettersFromClass(classMirror);
+    var publicVariables = getPublicVariablesAndGettersFromClass(classMirror, serializable);
     depth = _getNextDepth(depth, fieldName);
     if (depth != null || !_isCiclical(obj, instMirror) || fieldName == null) {
-      publicVariables.forEach((sym, decl) {
-        _pushField(sym, decl, instMirror, result, depth, exclude);
+      publicVariables.forEach((fieldName, decl) {
+        _pushField(fieldName, decl, instMirror, result, depth, exclude);
       });
 
       _serializedStack[obj] = result;
     }
     
     if (_isCiclical(obj, instMirror)) {
-      if (publicVariables[#id] == null) {
+      if (publicVariables['id'] == null) {
         result['hashcode'] = obj.hashCode;
       } else {
         result['id'] = obj.id;
@@ -118,13 +118,12 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
 /// Checks the DeclarationMirror [variable] for annotations and adds
 /// the value to the [result] map. If there's no [Property] annotation 
 /// with a different name set it will use the name of [symbol].
-void _pushField(Symbol symbol, DeclarationMirror variable, InstanceMirror instMirror, Map<String, dynamic> result, depth, exclude) {
+void _pushField(String fieldName, DeclarationMirror variable, InstanceMirror instMirror, Map<String, dynamic> result, depth, exclude) {
 
-  String fieldName = _getName(symbol);
   if (fieldName.isEmpty) return;
 
-  InstanceMirror field = instMirror.getField(symbol);
-  Object value = field.reflectee;
+//  InstanceMirror field = instMirror.invokeGetter(fieldName);
+  Object value = instMirror.invokeGetter(fieldName);
   _serLog.finer("Start serializing field: ${fieldName}");
 
   // check if there is a DartsonProperty annotation
@@ -161,7 +160,8 @@ void _pushField(Symbol symbol, DeclarationMirror variable, InstanceMirror instMi
 
 /// Cheks if the value is not Simple (primitive, datetime, List, or Map)
 /// and if the annotation [Cyclical] is not over the class of the object
-_isCiclical(value, InstanceMirror im) => !isSimple(value) && new IsAnnotation<_Cyclical>().onInstance(im);
+_isCiclical(value, InstanceMirror im) =>
+  !isSimple(value) && new IsAnnotation<_Cyclical>().onInstance(im);
 
 /// Gets the next depth from the actual depth for the nested attribute with name [fieldName]
 _getNextDepth(depth, String fieldName) {

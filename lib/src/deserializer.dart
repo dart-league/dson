@@ -2,7 +2,7 @@ part of dson;
 
 final _desLog = new Logger('object_mapper_deserializer');
 
-const _getName = MirrorSystem.getName;
+//const _getName = MirrorSystem.getName;
 
 final Symbol QN_STRING = reflectClass(String).qualifiedName;
 final Symbol QN_NUM = reflectClass(num).qualifiedName;
