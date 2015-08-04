@@ -1,4 +1,4 @@
-library simple_serialize_test;
+library exclude_test;
 
 import 'package:dson/dson.dart';
 import 'package:unittest/unittest.dart';

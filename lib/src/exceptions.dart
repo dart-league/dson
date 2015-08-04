@@ -12,8 +12,7 @@ class IncorrectTypeTransform extends Error {
   IncorrectTypeTransform(Object value, String type, [String key = "unknown"]) :
     _type = type,
     _field = key,
-    _foundType = MirrorSystem
-        .getName(reflect(value).type.qualifiedName); 
+    _foundType = serializable.reflect(value).type.qualifiedName;
 
   
   String toString() => "IncorrectTypeTransform: Cannot transform field \"${_field}\" incorrect " +
@@ -28,7 +27,7 @@ class NoConstructorError extends Error {
   final String _clazz;
   
   NoConstructorError(ClassMirror mirr) :
-    _clazz = MirrorSystem.getName(mirr.qualifiedName);
+    _clazz = mirr.qualifiedName;
   
   String toString() => "No constructor found: Class [${_clazz}] doesn't have a constructor " +
         "without arguments.";
@@ -42,7 +41,7 @@ class EntityDescriptionMissing extends Error {
   final String _clazz;
   
   EntityDescriptionMissing(ClassMirror mirr) :
-    _clazz = MirrorSystem.getName(mirr.qualifiedName);
+    _clazz = mirr.qualifiedName;
   
   String toString() => "EntityDescription missing: Entity ${_clazz} is not descriped in ENTITY_MAP.";
 }
