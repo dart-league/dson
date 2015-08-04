@@ -2,25 +2,25 @@
 
 [![Build Status](https://drone.io/github.com/luisvt/dson/status.png)](https://drone.io/github.com/luisvt/dson/latest)
 
-DSON is a dart library which converts Dart Objects into their JSON representation. It helps you keep your code clean of `fromJSON` and `toJSON` functions by using dart:mirrors reflection. **It works after dart2js compiling** using `@MirrorUsed` annotation.
+DSON is a dart library which converts Dart Objects into their JSON representation. It helps you keep your code clean of `fromJSON` and `toJSON` functions by using `reflectable` library which makes it work after dart2js compiling*.
 
 This library was initially a fork from [Dartson](https://github.com/eredo/dartson). Now it contains some differences:
- * Dartson uses transformers to convert objects to JSON. This produce faster and smaller code after dart2Js. This is a feature that I also would like to add to DSON.
+
+ * Dartson uses custom transformers to convert objects to JSON. This produce faster and smaller code after dart2Js. Instead DSON uses reflectable library and transformer. This should produce code as fast and small as Dartson transformer.
  * DSON has the ability to serialize cyclical objects by mean of `depth` parameter, which allows user to specify how deep in the object graph he wants to serialize.
- * DSON has the ability to exclude attributes for serialziation in a more flexible way. I mean, not using `@ignore` over every attribute. This make excluding attributes two global and hardcoded, so users can only specify one exclusing schema.
+ * DSON has the ability to exclude attributes for serialziation in a more flexible way. I mean, using `@ignore` over every attribute. This make excluding attributes two global and hardcoded, so users can only specify one exclusing schema.
+ * DSON uses the annotation `@serializable` instead `@entity` which is used by Dartson.
 
 ## Serialization
 
-To serialize objects (convert objects to JSON strings) you only need to use the `serialize` function and pass the `object` to serialize as parameter:
+To serialize objects (convert objects to JSON strings) you only need to use the `serialize` function, annotate the object with `@serializable` and pass the `object` to `serialize` method as parameter:
 
 ```dart
 library example;
 
 import 'package:dson/dson.dart';
 
-@MirrorsUsed(targets:const['example'],override:'*')
-import 'dart:mirrors';
-
+@serializable
 class Person {
   int id;
   String firstName;
@@ -59,17 +59,14 @@ void main() {
 
 ### Converting objects to Maps
 
-
-To convert objects to Maps you only need to use the `objectToSerializable` function and pass the `object` to serialize as parameter:
+To convert objects to Maps you only need to use the `objectToSerializable` function, annotate the object with `@serializable` and pass the `object` to `objectToSerializable` function as parameter:
 
 ```dart
 library example;
 
 import 'package:dson/dson.dart';
 
-@MirrorsUsed(targets:const['example'],override:'*')
-import 'dart:mirrors';
-
+@serializable
 class Person {
   int id;
   String firstName;
@@ -108,16 +105,14 @@ void main() {
 
 ### Serializing Cyclical Objects
 
-To serialize objects that contains Cyclical References it would be needed to use the annotation `@cyclical`. If this annotation is present and the `depth` variable is not set then the non-primitive objects are not going to be parsed and only the id or hashmap is going to be present. Let's see next example:
+To serialize objects that contains Cyclical References it would be needed to use the annotation `@cyclical`. If this annotation is present and the `depth` variable is not set then the non-primitive objects are not going to be parsed and only the id (or hashmap if the object does not contains id) is going to be present. Let's see next example:
 
 ```dart
 library example;
 
 import 'package:dson/dson.dart';
 
-@MirrorsUsed(targets:const['example'],override:'*')
-import 'dart:mirrors';
-
+@serializable
 @cyclical
 class Employee {
   int id;
@@ -129,6 +124,7 @@ class Employee {
   Employee manager;
 }
 
+@serializable
 @cyclical
 class Address {
   int id;
@@ -197,9 +193,7 @@ library example;
 
 import 'package:dson/dson.dart';
 
-@MirrorsUsed(targets:const['example'],override:'*')
-import 'dart:mirrors';
-
+@serializable
 @cyclical
 class Student {
   int id;
@@ -208,6 +202,7 @@ class Student {
   List<Course> courses;
 }
 
+@serializable
 @cyclical
 class Course {
   int id;
@@ -298,9 +293,7 @@ library example;
 
 import 'package:dson/dson.dart';
 
-@MirrorsUsed(targets:const['example'],override:'*')
-import 'dart:mirrors';
-
+@serializable
 @cyclical
 class Student {
   int id;
@@ -309,6 +302,7 @@ class Student {
   List<Course> courses;
 }
 
+@serializable
 @cyclical
 class Course {
   int id;
@@ -408,9 +402,7 @@ library example;
 
 import 'package:dson/dson.dart';
 
-@MirrorsUsed(targets:const['example'],override:'*')
-import 'dart:mirrors';
-
+@serializable
 class EntityClass {
   String name;
   String _setted;
@@ -452,9 +444,7 @@ library example;
 
 import 'package:dson/dson.dart';
 
-@MirrorsUsed(targets:const['example'],override:'*')
-import 'dart:mirrors';
-
+@serializable
 class EntityClass {
   String name;
   String _setted;
