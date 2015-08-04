@@ -8,7 +8,9 @@ This library was initially a fork from [Dartson](https://github.com/eredo/dartso
 
  * Dartson uses custom transformers to convert objects to JSON. This produce faster and smaller code after dart2Js. Instead DSON uses reflectable library and transformer. This should produce code as fast and small as Dartson transformer.
  * DSON has the ability to serialize cyclical objects by mean of `depth` parameter, which allows user to specify how deep in the object graph he wants to serialize.
- * DSON has the ability to exclude attributes for serialziation in a more flexible way. I mean, using `@ignore` over every attribute. This make excluding attributes two global and hardcoded, so users can only specify one exclusing schema.
+ * DSON has the ability to exclude attributes for serialziation in two ways. 
+  * Using `@ignore` over every attribute. This make excluding attributes two global and hardcoded, so users can only specify one exclusion schema.
+  * Using `exclude` map as parameter for `serialize` method. This is more flexible, since it allows to have many exclusion schemas for serialization.
  * DSON uses the annotation `@serializable` instead `@entity` which is used by Dartson.
 
 ## Serialization
