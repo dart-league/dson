@@ -13,5 +13,10 @@ dev_dependencies:
   unittest: '>=0.12.0'
 transformers:
 - reflectable:
+    $include: ["test/*.dart", "test/serializer/*.dart", "test/deserializer/*.dart"]
     entry_points:
       - test/object_mapper_test.dart
+      - test/serializer/cyclic_reference_test.dart
+      - test/serializer/exclude_test.dart
+      - test/serializer/simple_test.dart
+      - test/deserializer/deserializer_test.dart
