@@ -10,7 +10,7 @@ dependencies:
 #    path: ../drails_commons
   reflectable: '^0.1.0'
 dev_dependencies:
-  unittest: '>=0.12.0'
+  test: '>=0.12.0'
 transformers:
 - reflectable:
     $include: ["test/*.dart", "test/serializer/*.dart", "test/deserializer/*.dart"]

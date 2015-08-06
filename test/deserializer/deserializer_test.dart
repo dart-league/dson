@@ -2,7 +2,7 @@ library deserializer_test;
 
 
 import 'package:dson/dson.dart';
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 
 @serializable
 class SimpleDateContainer {

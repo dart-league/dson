@@ -1,7 +1,7 @@
 library cyclic_reference_serialize;
 
 import 'package:dson/dson.dart';
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 
 main() {
   group('ciclical test with id >', () {
