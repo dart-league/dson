@@ -2,22 +2,19 @@ part of dson;
 
 final _desLog = new Logger('object_mapper_deserializer');
 
-/**
- * Creates a new instance of [clazz], parses the json in [jsonStr] and puts
- * the data into the new instance.
- *  Returns new instance of [clazz]
- *  Throws [NoConstructorError] if [clazz] or Classes used inside [clazz] do not
- *    have a constructor without or only optional arguments.
- *  Throws [IncorrectTypeTransform] if json data types doesn't match.
- *  Throws [FormatException] if the [jsonStr] is not valid JSON text.
- */
+/// Creates a new instance of [clazz], parses the json in [jsonStr] and puts
+/// the data into the new instance.
+///  Returns new instance of [clazz]
+///  Throws [NoConstructorError] if [clazz] or Classes used inside [clazz] do not
+///    have a constructor without or only optional arguments.
+///  Throws [IncorrectTypeTransform] if json data types doesn't match.
+///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
 dynamic deserialize(String jsonStr, Type clazz) {
   Map filler = JSON.decode(jsonStr);
-  var cm = serializable.reflectType(clazz);
-  //TODO: add unit test for this block. Most likely it does not work with reflectable
-  if([SN_INT, SN_NUM, SN_BOOL, SN_STRING].any((v) => v == cm.simpleName)) {
+  //TODO: add unit test for this block.
+  if([SN_INT, SN_NUM, SN_BOOL, SN_STRING].any((v) => v == clazz.toString())) {
     return filler;
-  } else if(cm.simpleName == SN_MAP) {
+  } else if(clazz.toString() == SN_MAP) {
     //TODO: check if the map contains complex objects
     return filler;
   }
@@ -28,19 +25,17 @@ dynamic deserialize(String jsonStr, Type clazz) {
   return obj;
 }
 
-/**
- * Creates a list with instances of [clazz] and puts the data of the parsed json
- * of [jsonStr] into the instances.
- *   Returns A list of objects of [clazz].
- *  Throws [NoConstructorError] if [clazz] or Classes used inside [clazz] do not
- *    have a constructor without or only optional arguments.
- *  Throws [IncorrectTypeTransform] if json data types doesn't match.
- *  Throws [FormatException] if the [jsonStr] is not valid JSON text.
- */
+/// Creates a list with instances of [clazz] and puts the data of the parsed json
+/// of [jsonStr] into the instances.
+///   Returns A list of objects of [clazz].
+///  Throws [NoConstructorError] if [clazz] or Classes used inside [clazz] do not
+///    have a constructor without or only optional arguments.
+///  Throws [IncorrectTypeTransform] if json data types doesn't match.
+///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
 List deserializeList(String jsonStr, Type clazz) {
   List returnList = [];
   List filler = JSON.decode(jsonStr);
-  if([SN_INT, SN_NUM, SN_BOOL, SN_STRING].any((v) => v == serializable.reflectType(clazz).simpleName)) {
+  if([SN_INT, SN_NUM, SN_BOOL, SN_STRING].any((v) => v == clazz.toString())) {
     return filler;
   }
   filler.forEach((item) {
@@ -52,14 +47,12 @@ List deserializeList(String jsonStr, Type clazz) {
   return returnList;
 }
 
-/**
- * Creates a new instance of [clazz] and maps the data of [dataObject] into it.
- *  Returns new instance of [clazz]
- *  Throws [NoConstructorError] if [clazz] or Classes used inside [clazz] do not
- *    have a constructor without or only optional arguments.
- *  Throws [IncorrectTypeTransform] if json data types doesn't match.
- *  Throws [FormatException] if the [jsonStr] is not valid JSON text.
- */
+/// Creates a new instance of [clazz] and maps the data of [dataObject] into it.
+///  Returns new instance of [clazz]
+///  Throws [NoConstructorError] if [clazz] or Classes used inside [clazz] do not
+///    have a constructor without or only optional arguments.
+///  Throws [IncorrectTypeTransform] if json data types doesn't match.
+///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
 dynamic map(Map dataObject, Type clazz) {
   Object obj = _initiateClass(serializable.reflectType(clazz));
   _fillObject(obj, dataObject);
@@ -67,15 +60,13 @@ dynamic map(Map dataObject, Type clazz) {
   return obj;
 }
 
-/**
- * Creates a list with instances of [clazz] and maps the data of [dataMap] into
- * each instance.
- *   Returns A list of objects of [clazz].
- *  Throws [NoConstructorError] if [clazz] or Classes used inside [clazz] do not
- *    have a constructor without or only optional arguments.
- *  Throws [IncorrectTypeTransform] if json data types doesn't match.
- *  Throws [FormatException] if the [jsonStr] is not valid JSON text.
- */
+/// Creates a list with instances of [clazz] and maps the data of [dataMap] into
+/// each instance.
+///   Returns A list of objects of [clazz].
+///  Throws [NoConstructorError] if [clazz] or Classes used inside [clazz] do not
+///    have a constructor without or only optional arguments.
+///  Throws [IncorrectTypeTransform] if json data types doesn't match.
+///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
 List mapList(List<Map> dataMap, Type clazz) {
   List returnList = [];
   dataMap.forEach((item) {
@@ -87,22 +78,18 @@ List mapList(List<Map> dataMap, Type clazz) {
   return returnList;
 }
 
-/**
- * Filles an [object] with the data of [dataObject] and returns the [object].
- *  Throws [NoConstructorError] if [clazz] or Classes used inside [clazz] do not
- *    have a constructor without or only optional arguments.
- *  Throws [IncorrectTypeTransform] if json data types doesn't match.
- *  Throws [FormatException] if the [jsonStr] is not valid JSON text.
- */
+/// Filles an [object] with the data of [dataObject] and returns the [object].
+///  Throws [NoConstructorError] if [clazz] or Classes used inside [clazz] do not
+///    have a constructor without or only optional arguments.
+///  Throws [IncorrectTypeTransform] if json data types doesn't match.
+///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
 dynamic fill(Map dataObject, Object object) {
   _fillObject(serializable.reflect(object), dataObject);
   return object;
 }
 
-/**
- * Puts the data of the [filler] into the object in [objMirror]
- *  Throws [IncorrectTypeTransform] if json data types doesn't match.
- */
+/// Puts the data of the [filler] into the object in [objMirror]
+///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 void _fillObject(Object obj, Map filler) {
   var objMirror = serializable.reflect(obj);
   var classMirror = objMirror.type;
@@ -162,9 +149,7 @@ bool _hasOnlySimpleTypeArguments(ClassMirror mirr) {
   return hasOnly;
 }
 
-/**
- * Converts a list of objects to a list with a Class.
- */
+/// Converts a list of objects to a list with a Class.
 List _convertGenericList(ClassMirror listMirror, List fillerList) {
   _desLog.fine('Converting generic list');
   ClassMirror itemMirror = listMirror.typeArguments[0];
@@ -195,12 +180,10 @@ Map _convertGenericMap(ClassMirror mapMirror, Map fillerMap) {
   return resultMap;
 }
 
-/**
- * Transforms the value of a field [key] to the correct value.
- *  returns Deserialized value
- *  Throws [IncorrectTypeTransform] if json data types doesn't match.
- *  Throws [NoConstructorError] 
- */
+/// Transforms the value of a field [key] to the correct value.
+///  returns Deserialized value
+///  Throws [IncorrectTypeTransform] if json data types doesn't match.
+///  Throws [NoConstructorError]
 Object _convertValue(TypeMirror valueType, Object value, String key) {
   _desLog.fine("Convert \"${key}\": $value to ${valueType.qualifiedName}");
   if (_desLog.isLoggable(Level.FINE)) {
@@ -225,37 +208,37 @@ Object _convertValue(TypeMirror valueType, Object value, String key) {
     if (value is String) {
       return value;
     } else {
-      throw new IncorrectTypeTransform(value, "String", key);
+      throw new IncorrectTypeTransform(value, SN_STRING, key);
     }
   } else if (valueType.simpleName == SN_NUM) {
     if (value is num || value is int) {
       return value;
     } else {
-      throw new IncorrectTypeTransform(value, "num", key);
+      throw new IncorrectTypeTransform(value, SN_NUM, key);
     }
   } else if (valueType.simpleName == SN_INT) {
     if (value is int || value is num) {
       return value;
     } else {
-      throw new IncorrectTypeTransform(value, "int", key);
+      throw new IncorrectTypeTransform(value, SN_INT, key);
     }
   } else if (valueType.simpleName == SN_BOOL) {
     if (value is bool) {
       return value;
     } else {
-      throw new IncorrectTypeTransform(value, "bool", key);
+      throw new IncorrectTypeTransform(value, SN_BOOL, key);
     }
   } else if (valueType.simpleName == SN_LIST) {
     if (value is List) {
       return value;
     } else {
-      throw new IncorrectTypeTransform(value, "List", key);
+      throw new IncorrectTypeTransform(value, SN_LIST, key);
     }
   } else if (valueType.simpleName == SN_MAP) {
     if (value is Map) {
       return value;
     } else {
-      throw new IncorrectTypeTransform(value, "Map", key);
+      throw new IncorrectTypeTransform(value, SN_MAP, key);
     }
   } else if (valueType.simpleName == SN_OBJECT) {
     return value;
@@ -276,19 +259,17 @@ Object _convertValue(TypeMirror valueType, Object value, String key) {
   return value;
 }
 
-/**
- * Initiates an instance of [classMirror] by using an empty constructor name.
- * Therefore the class needs to contain a simple constructor. For example:
- * <code>
- *  class TestClass {
- *    String name;
- *
- *    TestClass(); // or TestClass([this.name])
- *  }
- * </code>
- *  Throws [NoConstructorError] if the class doesn't have a constructor without or
- *    only with optional arguments.
- */
+/// Initiates an instance of [classMirror] by using an empty constructor name.
+/// Therefore the class needs to contain a simple constructor. For example:
+/// <code>
+///  class TestClass {
+///    String name;
+///
+///    TestClass(); // or TestClass([this.name])
+///  }
+/// </code>
+///  Throws [NoConstructorError] if the class doesn't have a constructor without or
+///    only with optional arguments.
 Object _initiateClass(ClassMirror classMirror) {
   _desLog.fine("Parsing to class: ${classMirror.qualifiedName}");
   String constrMethod = null;

@@ -1,21 +1,21 @@
 name: dson
-version: 0.1.6+1
+version: 0.1.7
 author: Luis Vargas <luisvargastijerino@gmail.com>
 description: Convert Objects to Json and Json to Objects
 homepage: https://github.com/luisvt/dson
 environment:
   sdk: '>=1.8.0'
 dependencies:
-  drails_commons: '^0.0.5'
-#    path: ../drails_commons
-  reflectable: '^0.1.0'
+  drails_commons: #'^0.0.5'
+    path: ../drails_commons
+  reflectable: #'^0.1.0'
+    path: /home/luis/Projects/reflectable/reflectable
 dev_dependencies:
   test: '>=0.12.0'
 transformers:
 - reflectable:
     $include: ["test/*.dart", "test/serializer/*.dart", "test/deserializer/*.dart"]
     entry_points:
-      - test/object_mapper_test.dart
       - test/serializer/cyclic_reference_test.dart
       - test/serializer/exclude_test.dart
       - test/serializer/simple_test.dart
