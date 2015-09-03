@@ -6,10 +6,10 @@ homepage: https://github.com/luisvt/dson
 environment:
   sdk: '>=1.8.0'
 dependencies:
-  drails_commons: #'^0.0.5'
-    path: ../drails_commons
-  reflectable: #'^0.1.0'
-    path: /home/luis/Projects/reflectable/reflectable
+  drails_commons: '^0.0.5'
+#    path: ../drails_commons
+  reflectable: '^0.1.0'
+#    path: ../reflectable/reflectable
 dev_dependencies:
   test: '>=0.12.0'
 transformers:

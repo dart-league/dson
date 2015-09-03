@@ -110,7 +110,7 @@ void _fillObject(Object obj, Map filler) {
         return;
       }
       
-      // check if the property is renamed by DartsonProperty
+      // check if the property is renamed by Property annotation
       Property prop = new GetValueOfAnnotation<Property>().fromDeclaration(decl);
       if (prop != null && prop.name != null) {
         fieldName = prop.name;
@@ -198,9 +198,9 @@ Object _convertValue(TypeMirror valueType, Object value, String key) {
 
     _desLog.fine('Handle generic');
     // handle generic lists
-    if (varMirror.originalDeclaration.simpleName == SN_LIST) {
+    if (varMirror.simpleName == SN_LIST) {
       return _convertGenericList(varMirror, value);
-    } else if (varMirror.originalDeclaration.simpleName == SN_MAP) {
+    } else if (varMirror.simpleName == SN_MAP) {
       // handle generic maps
       return _convertGenericMap(varMirror, value);
     }
@@ -274,7 +274,7 @@ Object _initiateClass(ClassMirror classMirror) {
   _desLog.fine("Parsing to class: ${classMirror.qualifiedName}");
   String constrMethod = null;
   
-  classMirror.declarations.forEach((sym, decl) {
+  classMirror.declarations.forEach((declName, decl) {
     if (decl is MethodMirror && decl.isConstructor) {
       _desLog.fine('Found constructor function: ${decl.qualifiedName}');
       if (decl.constructorName.isEmpty) {
@@ -283,7 +283,7 @@ Object _initiateClass(ClassMirror classMirror) {
         } else {
           bool onlyOptional = true;
           decl.parameters.forEach((p) => !p.isOptional && (onlyOptional = false));
-                  
+
           if (onlyOptional) {
             constrMethod = decl.constructorName;
           }

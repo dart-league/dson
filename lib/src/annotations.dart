@@ -33,12 +33,23 @@ class Property {
   String toString() => "DartsonProperty: Name: ${name}";
 }
 
-///this annotation describes if the objects contains ciclical reference to other objects
+///this annotation describes if the objects contains cyclical reference to other objects
 const cyclical = const _Cyclical();
 
 class _Cyclical {
   const _Cyclical();
 }
 
-/// This annotation specify that te object can be serialized
-const serializable = const Reflectable(invokingCapability, metadataCapability, const NewInstanceCapability(r"^$"));
+/// This annotation specifies the object can be serialized
+class Serializable extends Reflectable {
+  const Serializable() : super(
+      invokingCapability,
+      declarationsCapability,
+      metadataCapability,
+      newInstanceCapability,
+      typeRelationsCapability,
+      typeCapability);
+}
+
+/// This annotation specifies the object can be serialized
+const serializable = const Serializable();

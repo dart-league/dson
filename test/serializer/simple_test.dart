@@ -10,9 +10,9 @@ class JustObject {
 
 @serializable
 class TestGetter {
-  String _name;
-
   TestGetter([this._name]);
+
+  String _name;
 
   String get name => _name;
 }
