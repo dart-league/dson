@@ -18,8 +18,6 @@ This library was initially a fork from [Dartson](https://github.com/eredo/dartso
 To serialize objects (convert objects to JSON strings) you only need to use the `serialize` function, annotate the object with `@serializable` and pass the `object` to `serialize` method as parameter:
 
 ```dart
-library example;
-
 import 'package:dson/dson.dart';
 
 @serializable
@@ -64,8 +62,6 @@ void main() {
 To convert objects to Maps you only need to use the `objectToSerializable` function, annotate the object with `@serializable` and pass the `object` to `objectToSerializable` function as parameter:
 
 ```dart
-library example;
-
 import 'package:dson/dson.dart';
 
 @serializable
@@ -110,8 +106,6 @@ void main() {
 To serialize objects that contains Cyclical References it would be needed to use the annotation `@cyclical`. If this annotation is present and the `depth` variable is not set then the non-primitive objects are not going to be parsed and only the id (or hashmap if the object does not contains id) is going to be present. Let's see next example:
 
 ```dart
-library example;
-
 import 'package:dson/dson.dart';
 
 @serializable
@@ -191,8 +185,6 @@ as you can see employee has an address, and the address has an owner of type Emp
 The same applies for lists:
 
 ```dart
-library example;
-
 import 'package:dson/dson.dart';
 
 @serializable
@@ -397,7 +389,7 @@ void main() {
 
 ## Deserialization
 
-To deserialize objects (convert JSON strings to objects) you only need to use the `parse` and `parseList` function and pass the `json` string to deserialize and the `Type` of the object as parameters:
+To deserialize objects (convert JSON strings to objects) you only need to use the `deserialize` and `deserializeList` function and pass the `json` string to deserialize and the `Type` of the object as parameters:
 
 ```dart
 library example;
@@ -409,7 +401,7 @@ class EntityClass {
   String name;
   String _setted;
   
-  @Property(name:"renamed")
+  @Property("renamed")
   bool otherName;
   
   @ignore
@@ -422,15 +414,15 @@ class EntityClass {
 }
 
 void main() {
-  EntityClass object = parse('{"name":"test","renamed":"blub","notVisible":"it is", "setted": "awesome"}', EntityClass);
+  EntityClass object = deserialize('{"name":"test","renamed":true,"notVisible":"it is", "setted": "awesome"}', EntityClass);
   
   print(object.name); // > test
   print(object.otherName); // > blub
   print(object.notVisible); // > it is
   print(object.setted); // > awesome
   
-  // to parse a list of items use [parseList]
-  List<EntityClass> list = parseList('[{"name":"test", "children": [{"name":"child1"},{"name":"child2"}]},{"name":"test2"}]', EntityClass);
+  // to deserialize a list of items use [deserializeList]
+  List<EntityClass> list = deserializeList('[{"name":"test", "children": [{"name":"child1"},{"name":"child2"}]},{"name":"test2"}]', EntityClass);
   print(list.length); // > 2
   print(list[0].name); // > test
   print(list[0].children[0].name); // > child1
@@ -470,7 +462,7 @@ void main() {
   print(object.notVisible); // > it is
   print(object.setted); // > awesome
   
-  // to parse a list of items use [parseList]
+  // to deserialize a list of items use [deserializeList]
   List<EntityClass> list = mapList([{"name":"test", "children": [{"name":"child1"},{"name":"child2"}]},{"name":"test2"}], EntityClass);
   print(list.length); // > 2
   print(list[0].name); // > test
