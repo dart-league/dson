@@ -49,7 +49,7 @@ Object objectToSerializable(object, {depth, exclude, String fieldName}) {
     return _serializeList(object, depth, exclude, fieldName);
   } else if (object is Map) {
     _serLog.fine("Found map: $object");
-    return _serializeMap(object);
+    return _serializeMap(object, depth, exclude, fieldName);
   } else {
     _serLog.fine("Found object: $object");
     return _serializeObject(object, depth, exclude, fieldName);
@@ -68,11 +68,11 @@ List _serializeList(List list, depth, exclude, String fieldName) {
 }
 
 /// Converts a [Map] into a serializable [Map]
-Map _serializeMap(Map map) {
+Map _serializeMap(Map map, depth, exclude, String fieldName) {
   Map newMap = new Map<String, Object>();
   map.forEach((key, val) {
     if (val != null) {
-      newMap[key] = objectToSerializable(val);
+      newMap[key] = objectToSerializable(val, depth: depth, exclude: exclude, fieldName: fieldName);
     }
   });
 
