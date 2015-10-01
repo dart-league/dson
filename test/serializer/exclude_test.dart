@@ -103,43 +103,85 @@ main() {
 
   group('exclude from list >', () {
     var student1 = new Student()
-        ..id = 1
-        ..name = 'student1',
-      student2 = new Student()
-        ..id = 2
-        ..name = 'student2',
-      student3 = new Student()
-        ..id = 3
-        ..name = 'student3',
-      course1 = new Course()
-        ..id = 1
-        ..beginDate = new DateTime.utc(2015, 1, 1)
-        ..students = [student1, student2],
-      course2 = new Course()
-        ..id = 2
-        ..beginDate = new DateTime.utc(2015, 1, 2)
-        ..students = [student2, student3],
-      course3 = new Course()
-        ..id = 3
-        ..beginDate = new DateTime.utc(2015, 1, 3)
-        ..students = [student1, student3];
-    
+      ..id = 1
+      ..name = 'student1',
+    student2 = new Student()
+      ..id = 2
+      ..name = 'student2',
+    student3 = new Student()
+      ..id = 3
+      ..name = 'student3',
+    course1 = new Course()
+      ..id = 1
+      ..beginDate = new DateTime.utc(2015, 1, 1)
+      ..students = [student1, student2],
+    course2 = new Course()
+      ..id = 2
+      ..beginDate = new DateTime.utc(2015, 1, 2)
+      ..students = [student2, student3],
+    course3 = new Course()
+      ..id = 3
+      ..beginDate = new DateTime.utc(2015, 1, 3)
+      ..students = [student1, student3];
+
     student1.courses = [course1, course3];
     student2.courses = [course1, course2];
     student3.courses = [course2, course3];
-    
-    var students = [student1, student2, student3]; 
-    
+
+    var students = [student1, student2, student3];
+
     test('students name', () {
       expect(serialize(students, exclude: 'name'), '[{"id":1,"courses":[{"id":1},{"id":3}]},{"id":2,"courses":[{"id":1},{"id":2}]},{"id":3,"courses":[{"id":2},{"id":3}]}]');
     });
-    
+
     test('student.courses*.beginDate', () {
       expect(serialize(students, depth: 'courses', exclude: {'courses': 'beginDate'}), '[{"id":1,"name":"student1","courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":3,"students":[{"id":1},{"id":3}]}]},{"id":2,"name":"student2","courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":2,"students":[{"id":2},{"id":3}]}]},{"id":3,"name":"student3","courses":[{"id":2,"students":[{"id":2},{"id":3}]},{"id":3,"students":[{"id":1},{"id":3}]}]}]');
     });
-    
+
     test('students*.name and students*.courses*.beginDate', () {
       expect(serialize(students, depth: 'courses', exclude: ['name', {'courses': 'beginDate'}]), '[{"id":1,"courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":3,"students":[{"id":1},{"id":3}]}]},{"id":2,"courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":2,"students":[{"id":2},{"id":3}]}]},{"id":3,"courses":[{"id":2,"students":[{"id":2},{"id":3}]},{"id":3,"students":[{"id":1},{"id":3}]}]}]');
+    });
+  });
+
+  group('exclude from map >', () {
+    var student1 = new Student()
+      ..id = 1
+      ..name = 'student1',
+    student2 = new Student()
+      ..id = 2
+      ..name = 'student2',
+    student3 = new Student()
+      ..id = 3
+      ..name = 'student3',
+    course1 = new Course()
+      ..id = 1
+      ..beginDate = new DateTime.utc(2015, 1, 1)
+      ..students = [student1, student2],
+    course2 = new Course()
+      ..id = 2
+      ..beginDate = new DateTime.utc(2015, 1, 2)
+      ..students = [student2, student3],
+    course3 = new Course()
+      ..id = 3
+      ..beginDate = new DateTime.utc(2015, 1, 3)
+      ..students = [student1, student3];
+
+    student1.courses = [course1, course3];
+    student2.courses = [course1, course2];
+    student3.courses = [course2, course3];
+
+    var students = {"s1":student1, "s2":student2, "s3":student3};
+
+    test('students name', () {
+      expect(serialize(students, exclude: 'name'), '{"s1":{"id":1,"courses":[{"id":1},{"id":3}]},"s2":{"id":2,"courses":[{"id":1},{"id":2}]},"s3":{"id":3,"courses":[{"id":2},{"id":3}]}}');
+    });
+
+    test('student.courses*.beginDate', () {
+      expect(serialize(students, depth: 'courses', exclude: {'courses': 'beginDate'}), '{"s1":{"id":1,"name":"student1","courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":3,"students":[{"id":1},{"id":3}]}]},"s2":{"id":2,"name":"student2","courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":2,"students":[{"id":2},{"id":3}]}]},"s3":{"id":3,"name":"student3","courses":[{"id":2,"students":[{"id":2},{"id":3}]},{"id":3,"students":[{"id":1},{"id":3}]}]}}');
+    });
+
+    test('students*.name and students*.courses*.beginDate', () {
+      expect(serialize(students, depth: 'courses', exclude: ['name', {'courses': 'beginDate'}]), '{"s1":{"id":1,"courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":3,"students":[{"id":1},{"id":3}]}]},"s2":{"id":2,"courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":2,"students":[{"id":2},{"id":3}]}]},"s3":{"id":3,"courses":[{"id":2,"students":[{"id":2},{"id":3}]},{"id":3,"students":[{"id":1},{"id":3}]}]}}');
     });
   });
 }
