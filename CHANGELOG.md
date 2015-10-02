@@ -6,6 +6,9 @@ This file contains highlights of what changes on each version of the dson packag
 * Add include parameter to serialize function
 * Make exclude and depth parameter receive Symbols instead Strings (Not Sure about this)
 
+##Version 0.1.8+1
+* Extend version support for reflectable package
+
 ##Version 0.1.8
 * Add support for deserializing Maps of objects (in values)
 * Support for excludes, depth, and fieldName when serializing Maps of objects
