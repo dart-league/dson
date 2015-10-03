@@ -167,6 +167,12 @@ main() {
     expect(test[1].name, "test2");
   });
 
+  test('deserialize: map of simple class', () {
+    Map<String, SimpleClass> test = deserializeMap('{"key1":{"name":"test"},"key2":{"name":"test2"}}', SimpleClass);
+    expect(test["key1"].name, "test");
+    expect(test["key2"].name, "test2");
+  });
+
   test('deserialize: just object', () {
     JustObject obj = deserialize('{"object":"test"}', JustObject);
     expect(obj.object, 'test');

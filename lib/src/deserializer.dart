@@ -47,6 +47,29 @@ List deserializeList(String jsonStr, Type clazz) {
   return returnList;
 }
 
+/// Creates a map with instances of [clazz] in values and puts the data of the parsed json
+/// of [jsonStr] into the instances.
+///   Returns A map of objects of [clazz].
+///  Throws [NoConstructorError] if [clazz] or Classes used inside [clazz] do not
+///    have a constructor without or only optional arguments.
+///  Throws [IncorrectTypeTransform] if json data types doesn't match.
+///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
+Map deserializeMap(String jsonStr, Type clazz) {
+  Map returnMap = {};
+  Map filler = JSON.decode(jsonStr);
+  if ([SN_INT, SN_NUM, SN_BOOL, SN_STRING].any((v) => v == clazz.toString())) {
+    return filler;
+  }
+  filler.keys.forEach((key) {
+    Object obj = _initiateClass(serializable.reflectType(clazz));
+    _fillObject(obj, filler[key]);
+    returnMap[key] = obj;
+  });
+
+  return returnMap;
+}
+
+
 /// Creates a new instance of [clazz] and maps the data of [dataObject] into it.
 ///  Returns new instance of [clazz]
 ///  Throws [NoConstructorError] if [clazz] or Classes used inside [clazz] do not
