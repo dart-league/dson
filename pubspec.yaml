@@ -1,14 +1,14 @@
 name: dson
-version: 0.1.8+1
+version: 0.2.0
 author: Luis Vargas <luisvargastijerino@gmail.com>
 description: Convert Objects to Json and Json to Objects
 homepage: https://github.com/luisvt/dson
 environment:
   sdk: '>=1.8.0'
 dependencies:
-  drails_commons: '^0.0.5'
+  drails_commons: '>=0.0.6 <0.1.0'
 #    path: ../drails_commons
-  reflectable: '>=0.1.0 <0.3.0'
+  reflectable: '>=0.3.0 <0.4.0'
 #    path: ../reflectable/reflectable
 dev_dependencies:
   test: '>=0.12.0'
