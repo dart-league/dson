@@ -98,14 +98,14 @@ main() {
       String str = serialize(test);
       expect(str,'{"name":"test1"}');
     });
-    
+
     test('serialize: ignore in object', () {
       var test = new TestClass1();
       test.name = "test";
       test.ignored = true;
       expect(serialize(test), '{"name":"test"}');
     });
-    
+
     test('serialize: renamed property of object', () {
       var test = new TestClass1();
       test.renamed = "test";
