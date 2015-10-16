@@ -4,7 +4,6 @@ This file contains highlights of what changes on each version of the dson packag
 
 ##Todo
 * Add include parameter to serialize function
-* Make exclude and depth parameter receive Symbols instead Strings (Not Sure about this)
 
 ##Version 0.2.0
 * Breaking change: reflectable < 0.3.0 is not supported
