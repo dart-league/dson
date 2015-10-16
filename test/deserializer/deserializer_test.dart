@@ -201,10 +201,4 @@ main() {
     expect(ctg.testDate is DateTime, true);
     expect(ctg.testDate == date, true);
   });
-
-  test('serialize: DateTime', () {
-    var obj = new SimpleDateContainer()
-      ..testDate = new DateTime.now();
-    expect(serialize(obj), '{"testDate":"${obj.testDate.toIso8601String()}"}');
-  });
 }

@@ -6,9 +6,9 @@ homepage: https://github.com/luisvt/dson
 environment:
   sdk: '>=1.8.0'
 dependencies:
-#  drails_commons: '>=0.0.6 <0.1.0'
-  drails_commons:
-    path: ../drails_commons
+  drails_commons: '>=0.0.6 <0.1.0'
+#  drails_commons:
+#    path: ../drails_commons
   reflectable: '>=0.3.0 <0.4.0'
 #  reflectable:
 #    path: ../reflectable/reflectable

@@ -45,6 +45,12 @@ class TestClass1 {
   TestClass1();
 }
 
+@serializable
+class SimpleDateContainer {
+  DateTime testDate;
+}
+
+
 main() {
 
   group('simple serialize >', () {
@@ -119,6 +125,12 @@ main() {
     test('serialize: nested class', () {
       expect(serialize(new NestedClass("test", [1,2,3], new TestGetter("get it"))),
         '{"name":"test","list":[1,2,3],"getter":{"name":"get it"}}');
+    });
+
+    test('serialize: DateTime', () {
+      var obj = new SimpleDateContainer()
+        ..testDate = new DateTime.now();
+      expect(serialize(obj), '{"testDate":"${obj.testDate.toIso8601String()}"}');
     });
   });
 }
