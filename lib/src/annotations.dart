@@ -43,6 +43,8 @@ class _Cyclical {
 /// This annotation specifies the object can be serialized
 class Serializable extends Reflectable {
   const Serializable() : super(
+      typeAnnotationQuantifyCapability,
+      superclassQuantifyCapability,
       invokingCapability,
       declarationsCapability,
       metadataCapability,
