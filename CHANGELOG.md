@@ -4,6 +4,7 @@ This file contains highlights of what changes on each version of the dson packag
 
 ##Todo
 * Add include parameter to serialize function
+* Add uuid check over hashcode for cyclical references
 
 ##Version 0.2.0
 * Breaking change: reflectable < 0.3.0 is not supported
