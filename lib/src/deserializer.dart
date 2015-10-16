@@ -211,7 +211,11 @@ Object _convertValue(TypeMirror valueType, Object value, String key) {
   _desLog.fine("Convert \"${key}\": $value to ${valueType.qualifiedName}");
   if (_desLog.isLoggable(Level.FINE)) {
     if (valueType is ClassMirror) {
-      _desLog.fine("$key: original: ${valueType.isOriginalDeclaration} " + "reflected: ${valueType.hasReflectedType} symbol: ${valueType.qualifiedName} " + "original: ${valueType.reflectedType} is " + "simple ${_isSimpleType(valueType.reflectedType)}");
+      _desLog.fine(
+          "$key: original: ${valueType.isOriginalDeclaration} "
+          + "reflected: ${valueType.hasReflectedType} symbol: ${valueType.qualifiedName} "
+          + "original: ${valueType.reflectedType} is "
+          + "simple ${_isSimpleType(valueType.reflectedType)}");
     }
   }
 
