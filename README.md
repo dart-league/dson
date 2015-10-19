@@ -1,6 +1,6 @@
 # DSON
 
-[![Build Status](https://travis-ci.org/luisvt/dson.svg)](https://drone.io/github.com/luisvt/dson/latest)
+[![Build Status](https://travis-ci.org/luisvt/dson.svg)](https://travis-ci.org/luisvt/dson.svg)
 
 DSON is a dart library which converts Dart Objects into their JSON representation. It helps you keep your code clean of `fromJSON` and `toJSON` functions by using `reflectable` library which makes it work after dart2js compiling.
 
