@@ -51,12 +51,27 @@ class TestSetter {
 }
 
 @serializable
-class NestedClass {
-  String name;
-  List list;
-  TestGetter getter;
+class ImmutableClass {
+  final String name;
 
-  NestedClass(this.name, this.list, this.getter);
+  @Property("the_renamed")
+  final String renamed;
+
+  ImmutableClass(this.name, this.renamed);
+}
+
+@serializable
+class ImmutableClassInvalidParameter {
+  final String name;
+
+  const ImmutableClassInvalidParameter(String aName) : name = aName;
+}
+
+@serializable
+class InvalidConstructor {
+  String name;
+
+  InvalidConstructor(this.name);
 }
 
 @serializable
@@ -105,11 +120,28 @@ main() {
     expect(test.renamed, "test");
   });
 
+  test('deserialize: immutable class', () {
+    ImmutableClass test = deserialize('{"name":"test", "the_renamed": "test"}', ImmutableClass);
+    expect(test.name, equals("test"));
+    expect(test.renamed, equals("test"));
+  });
+
+  test('deserialize: immutable class with invalid parameter', () {
+    NoConstructorError err;
+    try {
+      deserialize('{"name":"failure"}', ImmutableClassInvalidParameter);
+    } catch(ex) {
+      err = ex;
+    }
+
+    expect(err != null, true);
+    expect(err is NoConstructorError, true);
+  });
+
   test('deserialize: no constructor found', () {
     NoConstructorError err;
     try {
-      NestedClass test = deserialize('{"name":"failure"}', NestedClass);
-      expect(test.name, equals("failure"));
+      deserialize('{"name":"failure"}', InvalidConstructor);
     } catch(ex) {
       err = ex;
     }
