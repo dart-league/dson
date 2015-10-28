@@ -13,9 +13,9 @@ This library was initially a fork from [Dartson](https://github.com/eredo/dartso
   * Using `exclude` map as parameter for `serialize` method. This is more flexible, since it allows to have many exclusion schemas for serialization.
  * DSON uses the annotation `@serializable` instead `@entity` which is used by Dartson.
 
-## Serialization
+## Convert objects to JSON strings
 
-To serialize objects (convert objects to JSON strings) you only need to use the `serialize` function, annotate the object with `@serializable` and pass the `object` to `serialize` method as parameter:
+To convert objects to JSON strings you only need to use the `toJson` function, annotate the object with `@serializable` and pass the `object` to `toJson` method as parameter:
 
 ```dart
 import 'package:dson/dson.dart';
@@ -51,15 +51,15 @@ void main() {
     ..otherName = "Juan"
     ..notVisible = "hallo";
 
-  String jsonString = serialize(object);
+  String jsonString = toJson(object);
   print(jsonString);
   // will print: '{"id":1,"firstName":"Jhon","lastName":"Doe","height":1.8,"dateOfBirth":"1988-04-01T06:31:00.000","renamed":"Juan","doGetter":"name"}'
 }
 ```
 
-### Converting objects to Maps
+## Converting objects to Maps
 
-To convert objects to Maps you only need to use the `objectToSerializable` function, annotate the object with `@serializable` and pass the `object` to `objectToSerializable` function as parameter:
+To convert objects to Maps you only need to use the `toMap` function, annotate the object with `@serializable` and pass the `object` to `toMap` function as parameter:
 
 ```dart
 import 'package:dson/dson.dart';
@@ -95,7 +95,7 @@ void main() {
     ..otherName = "Juan"
     ..notVisible = "hallo";
 
-  Map map = objectToSerializable(object);
+  Map map = toMap(object);
   print(map);
   // will print: '{id:1, firstName: Jhon, lastName: Doe, height: 1.8, dateOfBirth: 1988-04-01T06:31:00.000, renamed: Juan, doGetter: name}'
 }
@@ -157,19 +157,19 @@ void main() {
     ..country = 'USA'
     ..owner = employee;
     
-  print(serialize(employee)); //will print: '{"id":2,"firstName":"Luis","lastName":"Vargas","address":{"id":2},"manager":{"id":1}}'
+  print(toJson(employee)); //will print: '{"id":2,"firstName":"Luis","lastName":"Vargas","address":{"id":2},"manager":{"id":1}}'
   
-  print(serialize(employee.address)); // will print: '{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}}'
+  print(toJson(employee.address)); // will print: '{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}}'
   
   // depth is a optional parameter that could be a list that should contains strings or Maps<String, Map>
-  print(serialize(employee, depth: ['address']));
+  print(toJson(employee, depth: ['address']));
   /* will print:
            '{"id":2,"firstName":"Luis","lastName":"Vargas",'
               '"address":{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}},'
               '"manager":{"id":1}}'
   */
   
-  print(serialize(employee, depth: [{'manager': ['address']}, 'address']));
+  print(toJson(employee, depth: [{'manager': ['address']}, 'address']));
   /* will print:
          '{"id":2,"firstName":"Luis","lastName":"Vargas",'
             '"address":{"id":2,"street":"some street","city":"Miami","country":"USA",'
@@ -236,9 +236,9 @@ void main() {
   
   var students = [student1, student2, student3]; 
   
-  print(serialize(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
+  print(toJson(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
 
-  print(serialize(student1, depth: ['courses']));
+  print(toJson(student1, depth: ['courses']));
   /* will print:
       '{'
         '"id":1,'
@@ -250,7 +250,7 @@ void main() {
       '}');
    */
 
-  print(serialize(student1.courses)); 
+  print(toJson(student1.courses)); 
   /* will print:
       '['
         '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":[{"id":1},{"id":2}]},'
@@ -258,7 +258,7 @@ void main() {
       ']');
   */
   
-  print(serialize(student2.courses, depth: ['students']));
+  print(toJson(student2.courses, depth: ['students']));
   /* will print: 
       '['
         '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":['
@@ -336,9 +336,9 @@ void main() {
   
   var students = [student1, student2, student3]; 
   
-  print(serialize(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
+  print(toJson(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
 
-  print(serialize(student1, depth: 'courses', exclude: 'name'));
+  print(toJson(student1, depth: 'courses', exclude: 'name'));
   /* will print:
       '{'
         '"id":1,'
@@ -349,7 +349,7 @@ void main() {
       '}');
    */
 
-  print(serialize(student1.courses, exclude: 'beginDate')); 
+  print(toJson(student1.courses, exclude: 'beginDate')); 
   /* will print:
       '['
         '{"id":1,"students":[{"id":1},{"id":2}]},'
@@ -357,7 +357,7 @@ void main() {
       ']');
   */
   
-  print(serialize(student2.courses, depth: 'students', exclude: {'students': 'name'}));
+  print(toJson(student2.courses, depth: 'students', exclude: {'students': 'name'}));
   /* will print: 
       '['
         '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":['
@@ -371,7 +371,7 @@ void main() {
       ']'
    */
    
-   print(serialize(student2.courses, depth: 'students', exclude: ['beginDate', {'students': 'name'}]));
+   print(toJson(student2.courses, depth: 'students', exclude: ['beginDate', {'students': 'name'}]));
   /* will print: 
       '['
         '{"id":1,"students":['
@@ -387,9 +387,9 @@ void main() {
 }
 ```
 
-## Deserialization
+## Convert JSON strings to objects
 
-To deserialize objects (convert JSON strings to objects) you only need to use the `deserialize` and `deserializeList` function and pass the `json` string to deserialize and the `Type` of the object as parameters:
+To convert JSON strings to objects you only need to use the `fromJson` and `fromJsonList` function and pass the `json` string to deserialize and the `Type` of the object as parameters:
 
 ```dart
 library example;
@@ -414,15 +414,15 @@ class EntityClass {
 }
 
 void main() {
-  EntityClass object = deserialize('{"name":"test","renamed":true,"notVisible":"it is", "setted": "awesome"}', EntityClass);
+  EntityClass object = fromJson('{"name":"test","renamed":true,"notVisible":"it is", "setted": "awesome"}', EntityClass);
   
   print(object.name); // > test
   print(object.otherName); // > blub
   print(object.notVisible); // > it is
   print(object.setted); // > awesome
   
-  // to deserialize a list of items use [deserializeList]
-  List<EntityClass> list = deserializeList('[{"name":"test", "children": [{"name":"child1"},{"name":"child2"}]},{"name":"test2"}]', EntityClass);
+  // to deserialize a list of items use [fromJsonList]
+  List<EntityClass> list = fromJsonList('[{"name":"test", "children": [{"name":"child1"},{"name":"child2"}]},{"name":"test2"}]', EntityClass);
   print(list.length); // > 2
   print(list[0].name); // > test
   print(list[0].children[0].name); // > child1
@@ -462,7 +462,7 @@ void main() {
   print(object.notVisible); // > it is
   print(object.setted); // > awesome
   
-  // to deserialize a list of items use [deserializeList]
+  // to deserialize a list of items use [fromJsonList]
   List<EntityClass> list = mapList([{"name":"test", "children": [{"name":"child1"},{"name":"child2"}]},{"name":"test2"}], EntityClass);
   print(list.length); // > 2
   print(list[0].name); // > test
