@@ -118,7 +118,7 @@ void _fillObject(Object obj, Map filler) {
   var classMirror = objMirror.type;
 
   getPublicVariablesAndSettersFromClass(classMirror, serializable).forEach((varName, decl) {
-    if (!decl.isPrivate && (decl is VariableMirror || decl is MethodMirror)) {
+    if (!decl.isPrivate && (decl is VariableMirror && !decl.isFinal || decl is MethodMirror)) {
       String fieldName = varName;
       TypeMirror valueType;
 
