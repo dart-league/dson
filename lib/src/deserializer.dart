@@ -9,7 +9,7 @@ final _desLog = new Logger('object_mapper_deserializer');
 ///    have a constructor without or only optional arguments.
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
-dynamic deserialize(String jsonStr, Type clazz) {
+dynamic fromJson(String jsonStr, Type clazz) {
   Map filler = JSON.decode(jsonStr);
   //TODO: add unit test for this block.
   if([SN_INT, SN_NUM, SN_BOOL, SN_STRING].any((v) => v == clazz.toString())) {
@@ -32,7 +32,7 @@ dynamic deserialize(String jsonStr, Type clazz) {
 ///    have a constructor without or only optional arguments.
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
-List deserializeList(String jsonStr, Type clazz) {
+List fromJsonList(String jsonStr, Type clazz) {
   List returnList = [];
   List filler = JSON.decode(jsonStr);
   if([SN_INT, SN_NUM, SN_BOOL, SN_STRING].any((v) => v == clazz.toString())) {
@@ -54,7 +54,7 @@ List deserializeList(String jsonStr, Type clazz) {
 ///    have a constructor without or only optional arguments.
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
-Map deserializeMap(String jsonStr, Type clazz) {
+Map fromJsonMap(String jsonStr, Type clazz) {
   Map returnMap = {};
   Map filler = JSON.decode(jsonStr);
   if ([SN_INT, SN_NUM, SN_BOOL, SN_STRING].any((v) => v == clazz.toString())) {
@@ -76,7 +76,7 @@ Map deserializeMap(String jsonStr, Type clazz) {
 ///    have a constructor without or only optional arguments.
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
-dynamic map(Map dataObject, Type clazz) {
+dynamic fromMap(Map dataObject, Type clazz) {
   Object obj = _initiateClass(serializable.reflectType(clazz), dataObject);
   _fillObject(obj, dataObject);
 
@@ -90,7 +90,7 @@ dynamic map(Map dataObject, Type clazz) {
 ///    have a constructor without or only optional arguments.
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
-List mapList(List<Map> dataMap, Type clazz) {
+List fromMapList(List<Map> dataMap, Type clazz) {
   List returnList = [];
   dataMap.forEach((item) {
     Object obj = _initiateClass(serializable.reflectType(clazz), item);

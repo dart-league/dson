@@ -55,22 +55,22 @@ main() {
 
   group('simple serialize >', () {
     test('serialize: simple String array test', () {
-      String str = serialize(['test1', 'test2']);
+      String str = toJson(['test1', 'test2']);
       expect(str, '["test1","test2"]');
     });
 
     test('serialize: mixed nested arrays', () {
-      String str = serialize([[1,2,3],[3,4,5]]);
+      String str = toJson([[1,2,3],[3,4,5]]);
       expect(str, '[[1,2,3],[3,4,5]]');
 
-      str = serialize(["test1", ["a","b"], [1,2], 3]);
+      str = toJson(["test1", ["a","b"], [1,2], 3]);
       expect(str, '["test1",["a","b"],[1,2],3]');
     });
 
     test('serialize: simple map test', () {
       Map map = {"key1": "val1", "key2": 2};
 
-      String str = serialize(map);
+      String str = toJson(map);
       expect(str, '{"key1":"val1","key2":2}');
     });
 
@@ -84,7 +84,7 @@ main() {
         "keyk": "valo"
       };
 
-      String str = serialize(map);
+      String str = toJson(map);
       expect(str, '{"itsAmap":{"key1":1,"key2":"val"},"itsAarray":[1,2,3],"keyk":"valo"}');
     });
     
@@ -95,13 +95,13 @@ main() {
       JustObject test = new JustObject();
       test.object = obj;
       
-      expect(serialize(test), '{"object":{"test":"test"}}');
+      expect(toJson(test), '{"object":{"test":"test"}}');
     });
 
     test('serialize: simple class', () {
       var test = new TestClass1();
       test.name = "test1";
-      String str = serialize(test);
+      String str = toJson(test);
       expect(str,'{"name":"test1"}');
     });
 
@@ -109,28 +109,28 @@ main() {
       var test = new TestClass1();
       test.name = "test";
       test.ignored = true;
-      expect(serialize(test), '{"name":"test"}');
+      expect(toJson(test), '{"name":"test"}');
     });
 
     test('serialize: renamed property of object', () {
       var test = new TestClass1();
       test.renamed = "test";
-      expect(serialize(test), '{"the_renamed":"test"}');
+      expect(toJson(test), '{"the_renamed":"test"}');
     });
 
     test('serialize: simple getter class', () {
-      expect(serialize(new TestGetter("test2")), '{"name":"test2"}');
+      expect(toJson(new TestGetter("test2")), '{"name":"test2"}');
     });
 
     test('serialize: nested class', () {
-      expect(serialize(new NestedClass("test", [1,2,3], new TestGetter("get it"))),
+      expect(toJson(new NestedClass("test", [1,2,3], new TestGetter("get it"))),
         '{"name":"test","list":[1,2,3],"getter":{"name":"get it"}}');
     });
 
     test('serialize: DateTime', () {
       var obj = new SimpleDateContainer()
         ..testDate = new DateTime.now();
-      expect(serialize(obj), '{"testDate":"${obj.testDate.toIso8601String()}"}');
+      expect(toJson(obj), '{"testDate":"${obj.testDate.toIso8601String()}"}');
     });
   });
 }

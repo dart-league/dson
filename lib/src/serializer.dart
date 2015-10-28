@@ -19,7 +19,7 @@ bool isSimple(value) => isPrimitive(value) || value is DateTime || value is List
 /// 
 /// [depth] :  determines how deep is going to be the serialization and to avoid cyclical object reference stack overflow. 
 /// [exclude] : exclude some attributes. It could be [String], [Map], or [List]
-String serialize(object, {bool parseString: false, depth, exclude}) {
+String toJson(object, {bool parseString: false, depth, exclude}) {
   _serLog.fine("Start serializing");
 
   if (object is String && !parseString) return object;
@@ -31,7 +31,18 @@ String serialize(object, {bool parseString: false, depth, exclude}) {
   return result;
 }
 
-/// Converts the [object] to a serializable [Map]. 
+
+/// Converts the non-primitive [object] to a serializable [Map].
+///
+/// Parameters:
+///
+/// * [depth] :  determines how deep is going to be the serialization and to avoid cyclical object reference stack overflow.
+/// * [exclude] : exclude some attributes. It could be [String], [Map], or [List]
+Map toMap(object, {depth, exclude, String fieldName}) =>
+    objectToSerializable(object, depth: depth, exclude: exclude);
+
+/// Converts the [object] to a serializable [Map], [String], [int], [DateTime]
+/// or any other serializiable object.
 /// 
 /// Parameters:
 /// 

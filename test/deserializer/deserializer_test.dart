@@ -94,7 +94,7 @@ class SimpleMapString {
 main() {
 
   test('deserialize: simple', () {
-    TestClass1 test = deserialize('{"name":"test","matter":true,"intNumber":2,"number":5,"list":[1,2,3],"map":{"k":"o"},"the_renamed":"test"}', TestClass1);
+    TestClass1 test = fromJson('{"name":"test","matter":true,"intNumber":2,"number":5,"list":[1,2,3],"map":{"k":"o"},"the_renamed":"test"}', TestClass1);
     expect(test.name, 'test');
     expect(test.matter, true);
     expect(test.intNumber, 2);
@@ -108,7 +108,7 @@ main() {
   test('deserialize: no constructor found', () {
     NoConstructorError err;
     try {
-      NestedClass test = deserialize('{"name":"failure"}', NestedClass);
+      NestedClass test = fromJson('{"name":"failure"}', NestedClass);
       expect(test.name, equals("failure"));
     } catch(ex) {
       err = ex;
@@ -119,67 +119,67 @@ main() {
   });
 
   test('deserialize: nested parsing', () {
-    TestClass1 test = deserialize('{"name":"parent","child":{"name":"child"}}', TestClass1);
+    TestClass1 test = fromJson('{"name":"parent","child":{"name":"child"}}', TestClass1);
     expect(test.child.name, "child");
   });
 
   test('deserialize: using setter', () {
-    TestSetter test = deserialize('{"name":"test"}', TestSetter);
+    TestSetter test = fromJson('{"name":"test"}', TestSetter);
     expect(test.name, 'test');
   });
 
   test('deserialize: generics list', () {
-    ListClass test = deserialize('{"list": [{"name": "test1"}, {"name": "test2"}]}', ListClass);
+    ListClass test = fromJson('{"list": [{"name": "test1"}, {"name": "test2"}]}', ListClass);
 
     expect(test.list[0].name, 'test1');
     expect(test.list[1].name, 'test2');
   });
 
   test('deserialize: simple list', () {
-    SimpleList list = deserialize('{"list":[1,2,3]}', SimpleList);
+    SimpleList list = fromJson('{"list":[1,2,3]}', SimpleList);
     expect(list.list[0], 1);
   });
 
   test('deserialize: generic map', () {
-    MapClass test = deserialize('{"map": {"test": {"name": "test"}, "test2": {"name": "test2"}}}', MapClass);
+    MapClass test = fromJson('{"map": {"test": {"name": "test"}, "test2": {"name": "test2"}}}', MapClass);
 
     expect(test.map["test"].name, "test");
     expect(test.map["test2"].name, "test2");
   });
 
   test('deserialize: simple map', () {
-    SimpleMap test = deserialize('{"map": {"test": "test", "test2": "test2"}}', SimpleMap);
+    SimpleMap test = fromJson('{"map": {"test": "test", "test2": "test2"}}', SimpleMap);
 
     expect(test.map["test"], "test");
     expect(test.map["test2"], "test2");
   });
 
   test('deserialize: simple map with type declaration', () {
-    SimpleMapString test = deserialize('{"map": {"test": 1, "test2": 2}}', SimpleMapString);
+    SimpleMapString test = fromJson('{"map": {"test": 1, "test2": 2}}', SimpleMapString);
 
     expect(test.map["test"], 1);
     expect(test.map["test2"], 2);
   });
 
   test('deserialize: list of simple class', () {
-    List<SimpleClass> test = deserializeList('[{"name":"test"},{"name":"test2"}]', SimpleClass);
+    List<SimpleClass> test = fromJsonList('[{"name":"test"},{"name":"test2"}]', SimpleClass);
     expect(test[0].name, "test");
     expect(test[1].name, "test2");
   });
 
   test('deserialize: map of simple class', () {
-    Map<String, SimpleClass> test = deserializeMap('{"key1":{"name":"test"},"key2":{"name":"test2"}}', SimpleClass);
+    Map<String, SimpleClass> test = fromJsonMap('{"key1":{"name":"test"},"key2":{"name":"test2"}}', SimpleClass);
     expect(test["key1"].name, "test");
     expect(test["key2"].name, "test2");
   });
 
   test('deserialize: just object', () {
-    JustObject obj = deserialize('{"object":"test"}', JustObject);
+    JustObject obj = fromJson('{"object":"test"}', JustObject);
     expect(obj.object, 'test');
   });
 
   test('mapToObject: SimpleMapString', () {
-    SimpleMapString test = map({
+    SimpleMapString test = fromMap({
       "map": {"test": 1, "test2": 2}
     }, SimpleMapString);
 
@@ -188,7 +188,7 @@ main() {
   });
 
   test('mapListToObjectList: List of SimplemapString', () {
-    List<SimpleMapString> test = mapList([{"map": {"test": 1, "test2": 2}}, {"map": {"test": 3, "test2": 4}}], SimpleMapString);
+    List<SimpleMapString> test = fromMapList([{"map": {"test": 1, "test2": 2}}, {"map": {"test": 3, "test2": 4}}], SimpleMapString);
     expect(test[0].map["test"], 1);
     expect(test[0].map["test2"], 2);
     expect(test[1].map["test"], 3);
@@ -197,7 +197,7 @@ main() {
 
   test('deserialize: DateTime', () {
     var date = new DateTime.now();
-    var ctg = deserialize('{"testDate":"${date.toString()}"}', SimpleDateContainer);
+    var ctg = fromJson('{"testDate":"${date.toString()}"}', SimpleDateContainer);
     expect(ctg.testDate is DateTime, true);
     expect(ctg.testDate == date, true);
   });

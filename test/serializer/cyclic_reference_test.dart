@@ -30,21 +30,21 @@ main() {
         ..owner = employee;
        
     test('serialize Employee without address and manager', () {
-      expect(serialize(employee), '{"id":2,"firstName":"Luis","lastName":"Vargas","address":{"id":2},"manager":{"id":1}}');
+      expect(toJson(employee), '{"id":2,"firstName":"Luis","lastName":"Vargas","address":{"id":2},"manager":{"id":1}}');
     });
     test('serialize employee.address without owner', () {
-      expect(serialize(employee.address), '{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}}');
+      expect(toJson(employee.address), '{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}}');
     });
     
     test('serialize employee with address and no manager', () {
-      expect(serialize(employee, depth: 'address'),
+      expect(toJson(employee, depth: 'address'),
              '{"id":2,"firstName":"Luis","lastName":"Vargas",'
                 '"address":{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}},'
                 '"manager":{"id":1}}');
     });
     
     test('serialize employee with address, manager and manager address', () {
-      expect(serialize(employee, depth: [{'manager': 'address'}, 'address']),
+      expect(toJson(employee, depth: [{'manager': 'address'}, 'address']),
              '{"id":2,"firstName":"Luis","lastName":"Vargas",'
                 '"address":{"id":2,"street":"some street","city":"Miami","country":"USA",'
                   '"owner":{"id":2}},'
@@ -75,7 +75,7 @@ main() {
         ..owner = employee;
        
     test('serialize Employee without address and manager', () {
-      expect(serialize(employee), matches(
+      expect(toJson(employee), matches(
           r'\{'
               r'"firstName":"Luis",'
               r'"lastName":"Vargas",'
@@ -85,7 +85,7 @@ main() {
           '\}'));
     });
     test('serialize employee.address without owner', () {
-      expect(serialize(employee.address), matches(
+      expect(toJson(employee.address), matches(
           r'\{'
               r'"street":"some street",'
               r'"city":"Miami",'
@@ -95,7 +95,7 @@ main() {
     });
     
     test('serialize employee with address and no manager', () {
-      expect(serialize(employee, depth: ['address']),
+      expect(toJson(employee, depth: ['address']),
              matches(
                  r'\{"firstName":"Luis","lastName":"Vargas",'
                     r'"address":\{"street":"some street","city":"Miami","country":"USA","owner":\{"hashcode":\d+\},"hashcode":\d+\},'
@@ -104,7 +104,7 @@ main() {
     });
     
     test('serialize employee with address, manager and manager address', () {
-      expect(serialize(employee, depth: [{'manager': ['address']}, 'address']),
+      expect(toJson(employee, depth: [{'manager': ['address']}, 'address']),
              matches(
                  r'\{'
                     r'"firstName":"Luis",'
@@ -163,11 +163,11 @@ main() {
     student3.courses = [course2, course3];
     
     test('serializing student1 without courses', () {
-      expect(serialize(student1), '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}');
+      expect(toJson(student1), '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}');
     });
     
     test('serializing student1 with courses', () {
-      expect(serialize(student1, depth: ['courses']), 
+      expect(toJson(student1, depth: ['courses']),
           '{'
             '"id":1,'
             '"name":"student1",'
@@ -179,7 +179,7 @@ main() {
     });
     
     test('serializing student1.courses without students', () {
-      expect(serialize(student1.courses), 
+      expect(toJson(student1.courses),
           '['
             '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":[{"id":1},{"id":2}]},'
             '{"id":3,"beginDate":"2015-01-03T00:00:00.000Z","students":[{"id":1},{"id":3}]}'
@@ -187,7 +187,7 @@ main() {
     });
 
     test('serializing student1.courses with students', () {
-      expect(serialize(student2.courses, depth: ['students']), 
+      expect(toJson(student2.courses, depth: ['students']),
           '['
             '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":['
               '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]},'

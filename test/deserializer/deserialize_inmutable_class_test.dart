@@ -21,7 +21,7 @@ class ImmutableClassInvalidParameter {
 main() {
 
   test('deserialize: immutable class', () {
-    ImmutableClass test = deserialize('{"name":"test", "the_renamed": "test"}', ImmutableClass);
+    ImmutableClass test = fromJson('{"name":"test", "the_renamed": "test"}', ImmutableClass);
     expect(test.name, equals("test"));
     expect(test.renamed, equals("test"));
   });
@@ -29,7 +29,7 @@ main() {
   test('deserialize: immutable class with invalid parameter', () {
     NoConstructorError err;
     try {
-      deserialize('{"name":"failure"}', ImmutableClassInvalidParameter);
+      fromJson('{"name":"failure"}', ImmutableClassInvalidParameter);
     } catch(ex) {
       err = ex;
     }
