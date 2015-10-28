@@ -39,7 +39,7 @@ class TestClass1 {
   @ignore
   bool ignored;
 
-  @Property("the_renamed")
+  @SerializedName("the_renamed")
   String renamed;
 
   TestClass1();

@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 class ImmutableClass {
   final String name;
 
-  @Property("the_renamed")
+  @SerializedName("the_renamed")
   final String renamed;
 
   ImmutableClass(this.name, this.renamed);

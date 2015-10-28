@@ -25,10 +25,10 @@ class IgnoreIf {
 /**
  * Annotation class to describe properties of a class member.
  */
-class Property {
+class SerializedName {
   final String name;
   
-  const Property(this.name);
+  const SerializedName(this.name);
   
   String toString() => "DartsonProperty: Name: ${name}";
 }

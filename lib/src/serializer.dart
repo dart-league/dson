@@ -116,7 +116,7 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
 }
 
 /// Checks the DeclarationMirror [variable] for annotations and adds
-/// the value to the [result] map. If there's no [Property] annotation 
+/// the value to the [result] map. If there's no [SerializedName] annotation
 /// with a different name set it will use the name of [symbol].
 void _pushField(String fieldName, DeclarationMirror variable, InstanceMirror instMirror, Map<String, dynamic> result, depth, exclude) {
 
@@ -127,7 +127,7 @@ void _pushField(String fieldName, DeclarationMirror variable, InstanceMirror ins
   _serLog.finer("Start serializing field: ${fieldName}");
 
   // check if there is a DartsonProperty annotation
-  Property prop = new GetValueOfAnnotation<Property>().fromDeclaration(variable);
+  SerializedName prop = new GetValueOfAnnotation<SerializedName>().fromDeclaration(variable);
   _serLog.finest("Property Annotation: ${prop}");
 
   if (prop != null && prop.name != null) {

@@ -134,7 +134,7 @@ void _fillObject(Object obj, Map filler) {
       }
 
       // check if the property is renamed by Property annotation
-      Property prop = new GetValueOfAnnotation<Property>().fromDeclaration(decl);
+      SerializedName prop = new GetValueOfAnnotation<SerializedName>().fromDeclaration(decl);
       if (prop != null && prop.name != null) {
         fieldName = prop.name;
       }
@@ -328,7 +328,7 @@ Object _initiateClass(ClassMirror classMirror, [Map filler]) {
 
               if (fieldDecl is VariableMirror && fieldDecl.isFinal) {
                 // check if the property is renamed by Property annotation
-                Property prop = new GetValueOfAnnotation<Property>().fromDeclaration(fieldDecl);
+                SerializedName prop = new GetValueOfAnnotation<SerializedName>().fromDeclaration(fieldDecl);
                 if (prop != null && prop.name != null) {
                   parameterName = prop.name;
                 }
