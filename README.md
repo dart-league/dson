@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/luisvt/dson.svg)](https://travis-ci.org/luisvt/dson.svg)
 
-DSON is a dart library which converts Dart Objects into their JSON representation. It helps you keep your code clean of `fromJSON` and `toJSON` functions by using `reflectable` library which makes it work after dart2js compiling.
+DSON is a dart library which converts Dart Objects into their JSON representation.
 
 This library was initially a fork from [Dartson](https://github.com/eredo/dartson). Now it contains some differences:
 
@@ -15,7 +15,7 @@ This library was initially a fork from [Dartson](https://github.com/eredo/dartso
 
 ## Convert objects to JSON strings
 
-To convert objects to JSON strings you only need to use the `toJson` function, annotate the object with `@serializable` and pass the `object` to `toJson` method as parameter:
+To convert objects to JSON strings you only need to use the `toJson` function, annotate the object with `@serializable` and pass the `object` to the `toJson` function as parameter:
 
 ```dart
 import 'package:dson/dson.dart';
@@ -389,7 +389,7 @@ void main() {
 
 ## Convert JSON strings to objects
 
-To convert JSON strings to objects you only need to use the `fromJson` and `fromJsonList` function and pass the `json` string to deserialize and the `Type` of the object as parameters:
+To convert JSON strings to objects you only need to use the `fromJson` and `fromJsonList` functions and pass the `json` string to deserialize and the `Type` of the object as parameters:
 
 ```dart
 library example;
@@ -431,7 +431,7 @@ void main() {
 
 ### Converting `Maps` and `Lists<Map>` to dart objects
 
-Frameworks like Angular.dart come with several HTTP services which already transform the HTTP response to a map using JSON.encode. To use those encoded Maps or Lists use `map` and `mapList`.
+Frameworks like Angular.dart come with several HTTP services which already transform the HTTP response to a map using JSON.encode. To use those encoded Maps or Lists use `toMap` and `toMapList` functions.
 
 ```dart
 library example;
@@ -456,14 +456,14 @@ class EntityClass {
 }
 
 void main() {
-  EntityClass object = map({"name":"test","renamed":"blub","notVisible":"it is", "setted": "awesome"}, EntityClass);  
+  EntityClass object = toMap({"name":"test","renamed":"blub","notVisible":"it is", "setted": "awesome"}, EntityClass);  
   print(object.name); // > test
   print(object.otherName); // > blub
   print(object.notVisible); // > it is
   print(object.setted); // > awesome
   
   // to deserialize a list of items use [fromJsonList]
-  List<EntityClass> list = mapList([{"name":"test", "children": [{"name":"child1"},{"name":"child2"}]},{"name":"test2"}], EntityClass);
+  List<EntityClass> list = toMapList([{"name":"test", "children": [{"name":"child1"},{"name":"child2"}]},{"name":"test2"}], EntityClass);
   print(list.length); // > 2
   print(list[0].name); // > test
   print(list[0].children[0].name); // > child1
