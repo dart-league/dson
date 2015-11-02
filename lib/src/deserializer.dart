@@ -10,7 +10,7 @@ final _desLog = new Logger('object_mapper_deserializer');
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
 dynamic fromJson(String jsonStr, Type clazz) {
-  Map filler = JSON.decode(jsonStr);
+  var filler = JSON.decode(jsonStr);
   //TODO: add unit test for this block.
   if([SN_INT, SN_NUM, SN_BOOL, SN_STRING].any((v) => v == clazz.toString())) {
     return filler;
@@ -101,7 +101,7 @@ List fromMapList(List<Map> dataMap, Type clazz) {
   return returnList;
 }
 
-/// Filles an [object] with the data of [dataObject] and returns the [object].
+/// Fills an [object] with the data of [dataObject] and returns the [object].
 ///  Throws [NoConstructorError] if [clazz] or Classes used inside [clazz] do not
 ///    have a constructor without or only optional arguments.
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
@@ -113,9 +113,11 @@ dynamic fill(Map dataObject, Object object) {
 
 /// Puts the data of the [filler] into the object in [objMirror]
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
-void _fillObject(Object obj, Map filler) {
-  var objMirror = serializable.reflect(obj);
+void _fillObject(Object obj, filler) {
+  InstanceMirror objMirror = serializable.reflect(obj);
   var classMirror = objMirror.type;
+
+  if(classMirror.isEnum) return;
 
   getPublicVariablesAndSettersFromClass(classMirror, serializable).forEach((varName, decl) {
     if (!decl.isPrivate && (decl is VariableMirror && !decl.isFinal || decl is MethodMirror)) {
@@ -207,7 +209,7 @@ Map _convertGenericMap(ClassMirror mapMirror, Map fillerMap) {
 ///  returns Deserialized value
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [NoConstructorError]
-Object _convertValue(TypeMirror valueType, Object value, String key) {
+Object _convertValue(ClassMirror valueType, Object value, String key) {
   _desLog.fine("Convert \"${key}\": $value to ${valueType.qualifiedName}");
   if (_desLog.isLoggable(Level.FINE)) {
     if (valueType is ClassMirror) {
@@ -272,15 +274,8 @@ Object _convertValue(TypeMirror valueType, Object value, String key) {
   } else if (valueType.simpleName == SN_DATETIME) {
     return DateTime.parse(value);
   } else {
-    var obj;
-
-    if (!(value is String) && !(value is num)  && !(value is bool)) {
-      obj = _initiateClass(valueType, value);
-      _fillObject(obj, value);
-    } else {
-      throw new IncorrectTypeTransform(value, valueType.qualifiedName, key);
-    }
-
+    var obj = _initiateClass(valueType, value);
+    _fillObject(obj, value);
     return obj;
   }
 
@@ -306,8 +301,13 @@ Object _convertValue(TypeMirror valueType, Object value, String key) {
 /// </code>
 ///  Throws [NoConstructorError] if the class doesn't either have a constructor
 ///    without or only optional parameters, or parameters matching final fields.
-Object _initiateClass(ClassMirror classMirror, [Map filler]) {
+Object _initiateClass(ClassMirror classMirror, [filler]) {
   _desLog.fine("Parsing to class: ${classMirror.qualifiedName}");
+
+  if(classMirror.isEnum) {
+    return (classMirror.invokeGetter('values') as List)[filler];
+  }
+
   String constrMethod = null;
   List parameters = [];
 

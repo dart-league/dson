@@ -22,7 +22,7 @@ bool isSimple(value) => isPrimitive(value) || value is DateTime || value is List
 String toJson(object, {bool parseString: false, depth, exclude}) {
   _serLog.fine("Start serializing");
 
-  if (object is String && !parseString) return object;
+  if (!parseString && object is String) return object;
   
   var result = JSON.encode(objectToSerializable(object, depth: depth, exclude: exclude));
 
@@ -95,6 +95,11 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
   InstanceMirror instMirror = serializable.reflect(obj);
   ClassMirror classMirror = instMirror.type;
   _serLog.fine("Serializing class: ${classMirror.qualifiedName}");
+
+  if(classMirror.isEnum) {
+    return obj.index;
+//    return {'index': obj.index, 'name': obj.toString().split(".")[1]};
+  }
 
   Map result = new Map<String, dynamic>();
 
