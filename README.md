@@ -28,7 +28,7 @@ class Person {
   double height;
   DateTime dateOfBirth;
 
-  @Property("renamed")
+  @SerializedName("renamed")
   String otherName;
   
 
@@ -72,7 +72,7 @@ class Person {
   double height;
   DateTime dateOfBirth;
 
-  @Property("renamed")
+  @SerializedName("renamed")
   String otherName;
   
 
@@ -401,7 +401,7 @@ class EntityClass {
   String name;
   String _setted;
   
-  @Property("renamed")
+  @SerializedName("renamed")
   bool otherName;
   
   @ignore
@@ -443,7 +443,7 @@ class EntityClass {
   String name;
   String _setted;
   
-  @Property(name:"renamed")
+  @SerializedName(name:"renamed")
   bool otherName;
   
   @ignore
