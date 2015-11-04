@@ -1,6 +1,6 @@
 # DSON
 
-[![Build Status](https://travis-ci.org/luisvt/dson.svg)](https://travis-ci.org/luisvt/dson.svg)
+![Build Status](https://travis-ci.org/drails-dart/dson.svg?branch=master)
 
 DSON is a dart library which converts Dart Objects into their JSON representation.
 
