@@ -1,15 +1,15 @@
 # DSON
 
-[![Build Status](https://travis-ci.org/luisvt/dson.svg)](https://travis-ci.org/luisvt/dson.svg)
+![Build Status](https://travis-ci.org/drails-dart/dson.svg?branch=master)
 
 DSON is a dart library which converts Dart Objects into their JSON representation.
 
 This library was initially a fork from [Dartson](https://github.com/eredo/dartson). Now it contains some differences:
 
  * Dartson uses custom transformers to convert objects to JSON. This produce faster and smaller code after dart2Js. Instead DSON uses reflectable library and transformer. This should produce code as fast and small as Dartson transformer.
- * DSON has the ability to serialize cyclical objects by mean of `depth` parameter, which allows user to specify how deep in the object graph he wants to serialize.
+ * DSON has the ability to serialize cyclical objects by mean of `depth` parameter, which allows users to specify how deep in the object graph they want to serialize.
  * DSON has the ability to exclude attributes for serialziation in two ways. 
-  * Using `@ignore` over every attribute. This make excluding attributes two global and hardcoded, so users can only specify one exclusion schema.
+  * Using `@ignore` over every attribute. This make excluding attributes too global and hardcoded, so users can only specify one exclusion schema.
   * Using `exclude` map as parameter for `serialize` method. This is more flexible, since it allows to have many exclusion schemas for serialization.
  * DSON uses the annotation `@serializable` instead `@entity` which is used by Dartson.
 
@@ -28,7 +28,7 @@ class Person {
   double height;
   DateTime dateOfBirth;
 
-  @Property("renamed")
+  @SerializedName("renamed")
   String otherName;
   
 
@@ -72,7 +72,7 @@ class Person {
   double height;
   DateTime dateOfBirth;
 
-  @Property("renamed")
+  @SerializedName("renamed")
   String otherName;
   
 
@@ -401,7 +401,7 @@ class EntityClass {
   String name;
   String _setted;
   
-  @Property("renamed")
+  @SerializedName("renamed")
   bool otherName;
   
   @ignore
@@ -431,7 +431,7 @@ void main() {
 
 ### Converting `Maps` and `Lists<Map>` to dart objects
 
-Frameworks like Angular.dart come with several HTTP services which already transform the HTTP response to a map using JSON.encode. To use those encoded Maps or Lists use `toMap` and `toMapList` functions.
+Frameworks like Angular.dart come with several HTTP services which already transform the HTTP response to a map using `JSON.encode`. To use those encoded Maps or Lists use `fromMap` and `fromMapList` functions.
 
 ```dart
 library example;
@@ -442,28 +442,28 @@ import 'package:dson/dson.dart';
 class EntityClass {
   String name;
   String _setted;
-  
-  @Property(name:"renamed")
+
+  @SerializedName("renamed")
   bool otherName;
-  
+
   @ignore
   String notVisible;
-  
+
   List<EntityClass> children;
-  
+
   set setted(String s) => _setted = s;
   String get setted => _setted;
 }
 
 void main() {
-  EntityClass object = toMap({"name":"test","renamed":"blub","notVisible":"it is", "setted": "awesome"}, EntityClass);  
+  EntityClass object = fromMap({"name":"test","renamed":"blub","notVisible":"it is", "setted": "awesome"}, EntityClass);
   print(object.name); // > test
   print(object.otherName); // > blub
   print(object.notVisible); // > it is
   print(object.setted); // > awesome
-  
+
   // to deserialize a list of items use [fromJsonList]
-  List<EntityClass> list = toMapList([{"name":"test", "children": [{"name":"child1"},{"name":"child2"}]},{"name":"test2"}], EntityClass);
+  List<EntityClass> list = fromMapList([{"name":"test", "children": [{"name":"child1"},{"name":"child2"}]},{"name":"test2"}], EntityClass);
   print(list.length); // > 2
   print(list[0].name); // > test
   print(list[0].children[0].name); // > child1
