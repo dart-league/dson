@@ -7,9 +7,9 @@ environment:
   sdk: '>=1.8.0'
 dependencies:
   drails_commons: '>=0.0.6 <0.1.0'
+  reflectable: ^0.4.0
 #  drails_commons:
 #    path: ../drails_commons
-  reflectable: '>=0.3.4 <0.4.0'
 #  reflectable:
 #    path: ../reflectable/reflectable
 dev_dependencies:
