@@ -6,6 +6,24 @@ This file contains highlights of what changes on each version of the dson packag
 * Add include parameter to serialize function
 * Add uuid check over hashcode for cyclical references
 
+## Version 0.3.0+1
+
+* Update to reflectable 0.5.1
+
+## Version 0.3.0
+
+* Update to reflectable 0.4.0
+* add enum support
+* rename methods:
+    * `serialize` to `toJson`
+    * `deserialize` to `fromJson`
+    * `deserializeList` to `fromJsonList`
+    * `deserializeMap` to `fromJsonMap`
+    * `objectToSerializable` remains with the same name
+    * `toMap` method was created
+    * `map` to `fromMap`
+    * `mapList` to `fromMapList`
+
 ##Version 0.2.0
 * Breaking change: reflectable < 0.3.0 is not supported
 * Bump reflectable support to ^0.3.0
