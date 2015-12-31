@@ -24,18 +24,18 @@ This file contains highlights of what changes on each version of the dson packag
     * `map` to `fromMap`
     * `mapList` to `fromMapList`
 
-##Version 0.2.0
+## Version 0.2.0
 * Breaking change: reflectable < 0.3.0 is not supported
 * Bump reflectable support to ^0.3.0
 
-##Version 0.1.8+1
+## Version 0.1.8+1
 * Extend version support for reflectable package
 
-##Version 0.1.8
+## Version 0.1.8
 * Add support for deserializing Maps of objects (in values)
 * Support for excludes, depth, and fieldName when serializing Maps of objects
 
-##Version 0.1.5
+## Version 0.1.5
 * Add exclude parameter to serialize function
 
 ## Version 0.1.4
