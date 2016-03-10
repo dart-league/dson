@@ -2,9 +2,16 @@
 
 This file contains highlights of what changes on each version of the dson package.
 
-##Todo
+## Todo
+
 * Add include parameter to serialize function
 * Add uuid check over hashcode for cyclical references
+
+## Version 0.3.1
+
+* Add check for `double` on `deserializer._convertValue`
+* add check `if (valueType is DynamicMirrorImpl)` to `deserializer._convertValue`
+to convert `var` or `dynamic` attributes
 
 ## Version 0.3.0+1
 

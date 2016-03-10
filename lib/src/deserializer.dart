@@ -152,9 +152,8 @@ void _fillObject(Object obj, filler) {
   _desLog.fine("Filled object completly: ${filler}");
 }
 
-bool _isSimpleType(Type type) {
-  return type == List || type == bool || type == String || type == num || type == Map || type == dynamic;
-}
+bool _isSimpleType(Type type) =>
+    type == List || type == bool || type == String || type == num || type == Map || type == dynamic;
 
 bool _hasOnlySimpleTypeArguments(ClassMirror mirr) {
   bool hasOnly = true;
@@ -221,6 +220,7 @@ Object _convertValue(ClassMirror valueType, Object value, String key) {
     }
   }
 
+  // if valueType is `List<SomeClass> or Map<SomeClass> (List<List<Map<...>>> not supported)
   if (valueType is ClassMirror && !valueType.isOriginalDeclaration && valueType.hasReflectedType && !_hasOnlySimpleTypeArguments(valueType)) {
 
     ClassMirror varMirror = valueType;
@@ -240,16 +240,22 @@ Object _convertValue(ClassMirror valueType, Object value, String key) {
       throw new IncorrectTypeTransform(value, SN_STRING, key);
     }
   } else if (valueType.simpleName == SN_NUM) {
-    if (value is num || value is int) {
+    if (value is num) {
       return value;
     } else {
       throw new IncorrectTypeTransform(value, SN_NUM, key);
     }
   } else if (valueType.simpleName == SN_INT) {
-    if (value is int || value is num) {
+    if (value is int) {
       return value;
     } else {
       throw new IncorrectTypeTransform(value, SN_INT, key);
+    }
+  } else if (valueType.simpleName == SN_DOUBLE) {
+    if (value is double) {
+      return value;
+    } else {
+      throw new IncorrectTypeTransform(value, SN_DOUBLE, key);
     }
   } else if (valueType.simpleName == SN_BOOL) {
     if (value is bool) {
@@ -273,6 +279,8 @@ Object _convertValue(ClassMirror valueType, Object value, String key) {
     return value;
   } else if (valueType.simpleName == SN_DATETIME) {
     return DateTime.parse(value);
+  } else if (valueType is DynamicMirrorImpl) { // if valueType is `var` or `dynamic`
+    return value;
   } else {
     var obj = _initiateClass(valueType, value);
     _fillObject(obj, value);

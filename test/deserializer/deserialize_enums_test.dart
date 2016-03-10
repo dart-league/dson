@@ -19,7 +19,6 @@ main() {
   });
 
   test('deserialize object with enum', () {
-    ObjectWithEnum o ;
     expect(fromJson('{"color":0}', ObjectWithEnum).color, Color.BLUE);
     expect(fromJson('{"color":1}', ObjectWithEnum).color, Color.RED);
     expect(fromJson('{"color":2}', ObjectWithEnum).color, Color.GREEN);
