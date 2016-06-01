@@ -9,7 +9,7 @@ dependencies:
   drails_commons: ^0.0.7
 #  drails_commons:
 #    path: ../drails_commons
-  reflectable: ^0.5.3
+  reflectable: ^0.5.4
 #  reflectable:
 #    path: ../reflectable/reflectable
 dev_dependencies:
