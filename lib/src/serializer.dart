@@ -11,7 +11,7 @@ Map<Object, Map> _serializedStack = {};
 bool isPrimitive(value) => value is String || value is num || value is bool || value == null;
 
 /// Checks if the [value] is primitive, [DateTime], [List], or [Map]
-bool isSimple(value) => isPrimitive(value) || value is DateTime || value is List || value is Map;
+bool isSimple(value) => isPrimitive(value) || value is DateTime || value is List || value is Map || value is Set;
 
 /// Serializes the [object] to a JSON string.
 /// 
@@ -61,6 +61,9 @@ Object objectToSerializable(object, {depth, exclude, String fieldName}) {
   } else if (object is Map) {
     _serLog.fine("Found map: $object");
     return _serializeMap(object, depth, exclude, fieldName);
+  } else if (object is Set) {
+    _serLog.fine("Found set: $object");
+    return _serializeSet(object, depth, exclude, fieldName);
   } else {
     _serLog.fine("Found object: $object");
     return _serializeObject(object, depth, exclude, fieldName);
@@ -77,6 +80,18 @@ List _serializeList(List list, depth, exclude, String fieldName) {
 
   return newList;
 }
+
+/// Converts a List into a serializable [List]
+List _serializeSet(Set set, depth, exclude, String fieldName) {
+  List newList = [];
+
+  set.forEach((item) {
+    newList.add(objectToSerializable(item, depth: depth, exclude: exclude, fieldName: fieldName));
+  });
+
+  return newList;
+}
+
 
 /// Converts a [Map] into a serializable [Map]
 Map _serializeMap(Map map, depth, exclude, String fieldName) {

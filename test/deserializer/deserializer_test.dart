@@ -34,6 +34,13 @@ class JustObject {
 }
 
 @serializable
+class SetClass {
+  Set<String> names;
+  
+  SetClass();
+}
+
+@serializable
 class TestGetter {
   String _name;
 
@@ -166,6 +173,12 @@ main() {
     expect(test[0].name, "test");
     expect(test[1].name, "test2");
   });
+
+  test('deserialize: set class', () {
+    SetClass test = fromJson('{"names":["test"]}', SetClass);
+    expect(test.names.contains("test"), true);
+  });
+
 
   test('deserialize: map of simple class', () {
     Map<String, SimpleClass> test = fromJsonMap('{"key1":{"name":"test"},"key2":{"name":"test2"}}', SimpleClass);
