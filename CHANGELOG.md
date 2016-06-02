@@ -7,6 +7,10 @@ This file contains highlights of what changes on each version of the dson packag
 * Add include parameter to serialize function
 * Add uuid check over hashcode for cyclical references
 
+## Version 0.3.2
+
+* Add `Set` deserializer
+
 ## Version 0.3.1
 
 * Add check for `double` on `deserializer._convertValue`
