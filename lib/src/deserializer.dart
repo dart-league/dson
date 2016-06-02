@@ -237,10 +237,13 @@ Object _convertValue(ClassMirror valueType, Object value, String key) {
   bool isSet = valueType.simpleName == "Set";
 
   // if valueType is `List<SomeClass> or Map<SomeClass> (List<List<Map<...>>> not supported)
-  if (valueType is ClassMirror && !valueType.isOriginalDeclaration && valueType.hasReflectedType && (!_hasOnlySimpleTypeArguments(valueType) || isSet)) {
+  if (valueType is ClassMirror
+      && !valueType.isOriginalDeclaration
+      && valueType.hasReflectedType
+      && (!_hasOnlySimpleTypeArguments(valueType) || isSet)) {
 
     ClassMirror varMirror = valueType;
-    _desLog.fine('Handle generic ');
+    _desLog.fine('Handle generic');
     // handle generic lists
     if (varMirror.simpleName == SN_LIST) {
       return _convertGenericList(varMirror, value);

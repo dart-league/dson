@@ -10,7 +10,7 @@ This library was initially a fork from [Dartson](https://github.com/eredo/dartso
  * DSON has the ability to serialize cyclical objects by mean of `depth` parameter, which allows users to specify how deep in the object graph they want to serialize.
  * DSON has the ability to exclude attributes for serialziation in two ways. 
   * Using `@ignore` over every attribute. This make excluding attributes too global and hardcoded, so users can only specify one exclusion schema.
-  * Using `exclude` map as parameter for `serialize` method. This is more flexible, since it allows to have many exclusion schemas for serialization.
+  * Using `exclude` map as parameter for `toJson` method. This is more flexible, since it allows to have many exclusion schemas for serialization.
  * DSON uses the annotation `@serializable` instead `@entity` which is used by Dartson.
 
 ## Convert objects to JSON strings
