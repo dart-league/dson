@@ -27,6 +27,13 @@ class NestedClass {
 }
 
 @serializable
+class SetClass {
+  Set names;
+  
+  SetClass(this.names);
+}
+
+@serializable
 class TestClass1 {
   String name;
   bool matter;
@@ -125,6 +132,11 @@ main() {
     test('serialize: nested class', () {
       expect(toJson(new NestedClass("test", [1,2,3], new TestGetter("get it"))),
         '{"name":"test","list":[1,2,3],"getter":{"name":"get it"}}');
+    });
+
+    test('serialize: Set class', () {
+      expect(toJson(new SetClass(new Set()..add("a"))),
+        '{"names":["a"]}');
     });
 
     test('serialize: DateTime', () {

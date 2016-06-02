@@ -153,7 +153,7 @@ void _fillObject(Object obj, filler) {
 }
 
 bool _isSimpleType(Type type) =>
-    type == List || type == bool || type == String || type == num || type == Map || type == dynamic;
+    type == List || type == bool || type == String || type == num || type == Map || type == dynamic || type == Set;
 
 bool _hasOnlySimpleTypeArguments(ClassMirror mirr) {
   bool hasOnly = true;
@@ -185,6 +185,20 @@ List _convertGenericList(ClassMirror listMirror, List fillerList) {
 
   _desLog.fine("Created generic list: ${resultList}");
   return resultList;
+}
+
+/// Converts a list of objects to a list with a Class.
+Set _convertGenericSet(ClassMirror setMirror, List fillerList) {
+  _desLog.fine('Converting generic set with type argument ${setMirror.typeArguments[0]}');
+  ClassMirror itemMirror = setMirror.typeArguments[0];
+  Object resultSet = _initiateClass(setMirror);
+
+  fillerList.forEach((item) {
+    (resultSet as Set).add(_convertValue(itemMirror, item, "@LIST_ITEM"));
+  });
+
+  _desLog.fine("Created generic set: ${resultSet}");
+  return resultSet;
 }
 
 Map _convertGenericMap(ClassMirror mapMirror, Map fillerMap) {
@@ -220,15 +234,19 @@ Object _convertValue(ClassMirror valueType, Object value, String key) {
     }
   }
 
+  bool isSet = valueType.simpleName == "Set";
+
   // if valueType is `List<SomeClass> or Map<SomeClass> (List<List<Map<...>>> not supported)
-  if (valueType is ClassMirror && !valueType.isOriginalDeclaration && valueType.hasReflectedType && !_hasOnlySimpleTypeArguments(valueType)) {
+  if (valueType is ClassMirror && !valueType.isOriginalDeclaration && valueType.hasReflectedType && (!_hasOnlySimpleTypeArguments(valueType) || isSet)) {
 
     ClassMirror varMirror = valueType;
-
-    _desLog.fine('Handle generic');
+    _desLog.fine('Handle generic ');
     // handle generic lists
     if (varMirror.simpleName == SN_LIST) {
       return _convertGenericList(varMirror, value);
+    }
+    else if (isSet) {
+      return _convertGenericSet(varMirror, value);
     } else if (varMirror.simpleName == SN_MAP) {
       // handle generic maps
       return _convertGenericMap(varMirror, value);
