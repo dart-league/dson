@@ -35,6 +35,7 @@ class JustObject {
 
 @serializable
 class SetClass {
+  @DsonType(String)
   Set<String> names;
   
   SetClass();
@@ -75,11 +76,13 @@ class SimpleClass {
 
 @serializable
 class ListClass {
+  @DsonType(SimpleClass)
   List<SimpleClass> list;
 }
 
 @serializable
 class MapClass {
+  @DsonTypes(String, SimpleClass)
   Map<String, SimpleClass> map;
 }
 
@@ -96,6 +99,11 @@ class SimpleMap {
 @serializable
 class SimpleMapString {
   Map<String,num> map;
+}
+
+@serializable
+class SimpleVarContainer {
+  var someVar;
 }
 
 main() {
@@ -135,7 +143,7 @@ main() {
     expect(test.name, 'test');
   });
 
-  test('deserialize: generics list', () {
+  test('deserialize: generic list', () {
     ListClass test = fromJson('{"list": [{"name": "test1"}, {"name": "test2"}]}', ListClass);
 
     expect(test.list[0].name, 'test1');
@@ -174,7 +182,7 @@ main() {
     expect(test[1].name, "test2");
   });
 
-  test('deserialize: set class', () {
+  test('deserialize: generic set', () {
     SetClass test = fromJson('{"names":["test"]}', SetClass);
     expect(test.names.contains("test"), true);
   });
@@ -213,5 +221,10 @@ main() {
     var ctg = fromJson('{"testDate":"${date.toString()}"}', SimpleDateContainer);
     expect(ctg.testDate is DateTime, true);
     expect(ctg.testDate == date, true);
+  });
+
+  test('deserialize: SimpleVarContainer', () {
+    SimpleVarContainer simpleVarContainer = fromJson('{"someVar": "hello"}', SimpleVarContainer);
+    expect(simpleVarContainer.someVar, 'hello');
   });
 }
