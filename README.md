@@ -12,6 +12,28 @@ This library was initially a fork from [Dartson](https://github.com/eredo/dartso
   * Using `@ignore` over every attribute. This make excluding attributes too global and hardcoded, so users can only specify one exclusion schema.
   * Using `exclude` map as parameter for `toJson` method. This is more flexible, since it allows to have many exclusion schemas for serialization.
  * DSON uses the annotation `@serializable` instead `@entity` which is used by Dartson.
+ 
+## Configuration
+
+1\. Add dependencies to `pubspec.yaml`
+
+```yaml
+...
+dependencies:
+  ...
+  dson: ^0.3.3
+  reflectable: ^0.5.4           # this one is only needed for client/browser side apps
+  ...
+transformers:
+- reflectable:                  # this transformer is also only needed for client/browser apps
+    entry_points:
+      - web/main.dart
+...
+```
+
+To be able to use `DSON` on client side applications it is needed to add both: `reflectable` dependency and its transformer.
+If you don't add them you will not be able to run the app in the browser and the `dart2js` compiler will fail or
+throws some warnings about annotation `@MirrorUsed`.
 
 ## Convert objects to JSON strings
 
@@ -293,6 +315,7 @@ class Student {
   int id;
   String name;
   
+  @DsonType(Course) // This annotation is only neede for client side applications
   List<Course> courses;
 }
 
@@ -303,6 +326,7 @@ class Course {
   
   DateTime beginDate;
   
+  @DsonType(Student) // This annotation is only neede for client side applications
   List<Student> students;
 }
 
@@ -365,8 +389,8 @@ void main() {
           '{"id":2,"courses":[{"id":1},{"id":2}]}'
         ']},'
         '{"id":2,"beginDate":"2015-01-02T00:00:00.000Z","students":['
-          '{"id":2,"name":"student2","courses":[{"id":1},{"id":2}]},'
-          '{"id":3,"name":"student3","courses":[{"id":2},{"id":3}]}'
+          '{"id":2,"courses":[{"id":1},{"id":2}]},'
+          '{"id":3,"courses":[{"id":2},{"id":3}]}'
         ']}'
       ']'
    */
@@ -407,6 +431,7 @@ class EntityClass {
   @ignore
   String notVisible;
   
+  @DsonType(EntityClass) // This annotation is only neede for client side applications
   List<EntityClass> children;
   
   set setted(String s) => _setted = s;
@@ -449,6 +474,7 @@ class EntityClass {
   @ignore
   String notVisible;
 
+  @DsonType(EntityClass) // This annotation is only neede for client side applications
   List<EntityClass> children;
 
   set setted(String s) => _setted = s;

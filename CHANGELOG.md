@@ -5,7 +5,12 @@ This file contains highlights of what changes on each version of the dson packag
 ## Todo
 
 * Add include parameter to serialize function
-* Add uuid check over hashcode for cyclical references
+* Add uuid check over hashCode for cyclical references
+
+## Version 0.3.3
+
+* Correct bug about deserializing `var` types
+* Add support for deserializing generic types in the browser
 
 ## Version 0.3.2
 
