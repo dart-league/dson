@@ -59,17 +59,7 @@ const serializable = const Serializable();
 /// This annotation is needed for client side applications to handle attributes with generic type
 /// for example: `List<Person>` or `Set<String>`
 class DsonType {
-  final Type type;
+  final /*Type | List<Type> | Map<Type, Type>*/ type;
 
   const DsonType(this.type);
-}
-
-
-/// This annotation is needed for client side applications to handle attributes with generic type
-/// for example: `List<Person>` or `Set<String>`
-class DsonTypes {
-  final Type type0;
-  final Type type1;
-
-  const DsonTypes(this.type0, this.type1);
 }
