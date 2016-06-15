@@ -27,3 +27,4 @@ transformers:
       - test/deserializer/deserialize_enums_test.dart
       - test/deserializer/deserialize_inmutable_class_test.dart
       - test/deserializer/deserializer_test.dart
+      - test/deserializer/deserializer_generic_test.dart

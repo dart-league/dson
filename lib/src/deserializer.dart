@@ -140,11 +140,14 @@ void _fillObject(Object obj, filler) {
       if (prop != null && prop.name != null) {
         fieldName = prop.name;
       }
+      DsonType dsonType;
+      if(decl != null)
+        dsonType = new GetValueOfAnnotation<DsonType>().fromDeclaration(decl);
 
       _desLog.fine('Try to fill object with: ${fieldName}: ${filler[fieldName]}');
 
       if (filler[fieldName] != null) {
-        objMirror.invokeSetter(varName, _convertValue(valueType, filler[fieldName], varName, decl));
+        objMirror.invokeSetter(varName, _convertValue(valueType, filler[fieldName], varName, dsonType));
       }
     }
   });
@@ -176,21 +179,29 @@ bool _hasOnlySimpleTypeArguments(ClassMirror mirr) {
 /// Converts a list of objects to a list with a Class.
 /* List | Set */ _convertGenericListOrSet(ClassMirror listMirror, List fillerList, [DsonType dsonType]) {
   _desLog.fine('Converting generic list');
-  ClassMirror itemMirror = dsonType != null ? serializable.reflectType(dsonType.type) : listMirror.typeArguments[0];
+  var type = dsonType?.type,
+      subType;
+  if(type is List) {
+    var subTypes = type.length > 2 ? type.getRange(1, dsonType.type.length).toList() : type[1];
+    subType = new DsonType(subTypes);
+    type = type[0];
+  }
+  ClassMirror itemMirror = dsonType != null ? serializable.reflectType(type) : listMirror.typeArguments[0];
   var resultList = _initiateClass(listMirror);
 
   fillerList.forEach((item) {
-    resultList.add(_convertValue(itemMirror, item, "@LIST_ITEM"));
+    resultList.add(_convertValue(itemMirror, item, "@LIST_ITEM", subType));
   });
 
   _desLog.fine("Created generic list: ${resultList}");
   return resultList;
 }
 
-Map _convertGenericMap(ClassMirror mapMirror, Map fillerMap, [DsonTypes dsonTypes]) {
+Map _convertGenericMap(ClassMirror mapMirror, Map fillerMap, [DsonType dsonType]) {
   _desLog.fine('Converting generic map');
-  ClassMirror itemMirror = dsonTypes != null ? serializable.reflectType(dsonTypes.type1) : mapMirror.typeArguments[1];
-  ClassMirror keyMirror = dsonTypes != null ? serializable.reflectType(dsonTypes.type0) : mapMirror.typeArguments[0];
+  Map type = dsonType?.type;
+  ClassMirror itemMirror = dsonType != null ? serializable.reflectType(type.values.elementAt(0)) : mapMirror.typeArguments[1];
+  ClassMirror keyMirror = dsonType != null ? serializable.reflectType(type.keys.elementAt(0)) : mapMirror.typeArguments[0];
   Map resultMap = _initiateClass(mapMirror);
 
   fillerMap.forEach((key, value) {
@@ -208,7 +219,7 @@ Map _convertGenericMap(ClassMirror mapMirror, Map fillerMap, [DsonTypes dsonType
 ///  returns Deserialized value
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [NoConstructorError]
-Object _convertValue(Mirror valueType, Object value, String key, [DeclarationMirror decl]) {
+Object _convertValue(Mirror valueType, Object value, String key, [DsonType dsonType]) {
   if (valueType is ClassMirror) {
     _desLog.fine("Convert \"${key}\": $value to ${valueType.qualifiedName}");
     if (_desLog.isLoggable(Level.FINE)) {
@@ -219,28 +230,24 @@ Object _convertValue(Mirror valueType, Object value, String key, [DeclarationMir
               + "simple ${_isSimpleType(valueType.reflectedType)}");
     }
 
-    // Todo: remove this block of code when reflectable add support for generics
-    var dsonType, dsonTypes;
-    if(decl != null) {
-      dsonType = new GetValueOfAnnotation<DsonType>().fromDeclaration(decl);
-      dsonTypes = new GetValueOfAnnotation<DsonTypes>().fromDeclaration(decl);
-    }
+//    // Todo: remove this block of code when reflectable add support for generics
+//    var dsonType, dsonTypes;
+//    if(decl != null) {
+//      dsonType = new GetValueOfAnnotation<DsonType>().fromDeclaration(decl);
+//      dsonTypes = new GetValueOfAnnotation<DsonTypes>().fromDeclaration(decl);
+//    }
 
     // if valueType is `List<SomeClass> or Map<SomeClass0, SomeClass1> (List<List<Map<...>>> not supported)
-    if (!valueType.isOriginalDeclaration
-        && (valueType.hasReflectedType && (!_hasOnlySimpleTypeArguments(valueType))
-            || dsonType != null
-            || dsonTypes != null)
+    if ((valueType.hasReflectedType && (!_hasOnlySimpleTypeArguments(valueType))
+            || dsonType != null)
         ) {
-      ClassMirror varMirror = valueType;
-      print(varMirror);
       _desLog.fine('Handle generic');
       // handle generic lists
-      if (varMirror.simpleName == SN_LIST || varMirror.simpleName == SN_SET) {
-        return _convertGenericListOrSet(varMirror, value, dsonType);
-      } else if (varMirror.simpleName == SN_MAP) {
+      if (valueType.simpleName == SN_LIST || valueType.simpleName == SN_SET) {
+        return _convertGenericListOrSet(valueType, value, dsonType);
+      } else if (valueType.simpleName == SN_MAP) {
         // handle generic maps
-        return _convertGenericMap(varMirror, value, dsonTypes);
+        return _convertGenericMap(valueType, value, dsonType);
       }
     } else if (valueType.simpleName == SN_STRING) {
       if (value is String) {

@@ -75,18 +75,6 @@ class SimpleClass {
 }
 
 @serializable
-class ListClass {
-  @DsonType(SimpleClass)
-  List<SimpleClass> list;
-}
-
-@serializable
-class MapClass {
-  @DsonTypes(String, SimpleClass)
-  Map<String, SimpleClass> map;
-}
-
-@serializable
 class SimpleList {
   List list;
 }
@@ -143,23 +131,9 @@ main() {
     expect(test.name, 'test');
   });
 
-  test('deserialize: generic list', () {
-    ListClass test = fromJson('{"list": [{"name": "test1"}, {"name": "test2"}]}', ListClass);
-
-    expect(test.list[0].name, 'test1');
-    expect(test.list[1].name, 'test2');
-  });
-
   test('deserialize: simple list', () {
     SimpleList list = fromJson('{"list":[1,2,3]}', SimpleList);
     expect(list.list[0], 1);
-  });
-
-  test('deserialize: generic map', () {
-    MapClass test = fromJson('{"map": {"test": {"name": "test"}, "test2": {"name": "test2"}}}', MapClass);
-
-    expect(test.map["test"].name, "test");
-    expect(test.map["test2"].name, "test2");
   });
 
   test('deserialize: simple map', () {
