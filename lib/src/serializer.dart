@@ -58,7 +58,7 @@ Object objectToSerializable(object, {depth, exclude, String fieldName}) {
   } else if (object is List) {
     _serLog.fine("Found list: $object");
     return _serializeList(object, depth, exclude, fieldName);
-  } else if (object is Map) {
+  } else if (object is! SerializableMap && object is Map) {
     _serLog.fine("Found map: $object");
     return _serializeMap(object, depth, exclude, fieldName);
   } else if (object is Set) {
@@ -107,9 +107,9 @@ Map _serializeMap(Map map, depth, exclude, String fieldName) {
 
 /// Runs through the Object keys by using a ClassMirror.
 Object _serializeObject(obj, depth, exclude, fieldName) {
-  InstanceMirror instMirror = serializable.reflect(obj);
-  ClassMirror classMirror = instMirror.type;
-  _serLog.fine("Serializing class: ${classMirror.qualifiedName}");
+//  InstanceMirror instMirror = serializable.reflect(obj);
+  ClassMirror classMirror = reflectType(obj.runtimeType);
+  _serLog.fine("Serializing class: ${classMirror.name}");
 
   if(classMirror.isEnum) {
     return obj.index;
@@ -120,17 +120,17 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
 
   if (_serializedStack[obj] == null) {
 
-    var publicVariables = getPublicVariablesAndGettersFromClass(classMirror, serializable);
+    var publicVariables = classMirror.fields;
     depth = _getNextDepth(depth, fieldName);
-    if (depth != null || !_isCiclical(obj, instMirror) || fieldName == null) {
+    if (depth != null || !_isCiclical(classMirror) || fieldName == null) {
       publicVariables.forEach((fieldName, decl) {
-        _pushField(fieldName, decl, instMirror, result, depth, exclude);
+        if(!fieldName.startsWith('_')) _pushField(fieldName, decl, obj, result, depth, exclude);
       });
 
       _serializedStack[obj] = result;
     }
     
-    if (_isCiclical(obj, instMirror)) {
+    if (_isCiclical(classMirror)) {
       if (publicVariables['id'] == null) {
         result['hashcode'] = obj.hashCode;
       } else {
@@ -149,19 +149,19 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
 /// Checks the DeclarationMirror [variable] for annotations and adds
 /// the value to the [result] map. If there's no [SerializedName] annotation
 /// with a different name set it will use the name of [symbol].
-void _pushField(String fieldName, DeclarationMirror variable, InstanceMirror instMirror, Map<String, dynamic> result, depth, exclude) {
+void _pushField(String fieldName, DeclarationMirror variable, SerializableMap obj, Map<String, dynamic> result, depth, exclude) {
 
   if (fieldName.isEmpty) return;
 
 //  InstanceMirror field = instMirror.invokeGetter(fieldName);
-  Object value = instMirror.invokeGetter(fieldName);
+  Object value = obj[fieldName];
   _serLog.finer("Start serializing field: ${fieldName}");
 
   // check if there is a DartsonProperty annotation
-  SerializedName prop = new GetValueOfAnnotation<SerializedName>().fromDeclaration(variable);
+  SerializedName prop = variable.annotations?.firstWhere((a) => a is SerializedName, orElse: () => null);
   _serLog.finest("Property Annotation: ${prop}");
 
-  if (prop != null && prop.name != null) {
+  if (prop?.name != null) {
     _serLog.finer("Field renamed to: ${prop.name}");
     fieldName = prop.name;
   }
@@ -170,7 +170,7 @@ void _pushField(String fieldName, DeclarationMirror variable, InstanceMirror ins
   _serLog.finer("depth: $depth");
 
   //If the value is not null and the annotation @ignore is not on variable declaration
-  if (value != null && !new IsAnnotation<_Ignore>().onDeclaration(variable)
+  if (value != null && !(variable.annotations?.any((a) => a is _Ignore) ?? false)
       // And exclude is pressent
       && (exclude == null
         // or exclude is Map (we are excluding nested attribute)
@@ -191,8 +191,8 @@ void _pushField(String fieldName, DeclarationMirror variable, InstanceMirror ins
 
 /// Cheks if the value is not Simple (primitive, datetime, List, or Map)
 /// and if the annotation [Cyclical] is not over the class of the object
-_isCiclical(value, InstanceMirror im) =>
-  !isSimple(value) && new IsAnnotation<_Cyclical>().onInstance(im);
+_isCiclical(ClassMirror cm) =>
+  cm.annotations?.any((a) => a is _Cyclical) ?? false;
 
 /// Gets the next depth from the actual depth for the nested attribute with name [fieldName]
 _getNextDepth(depth, String fieldName) {

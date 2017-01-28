@@ -1,16 +1,18 @@
 library deserializer_test;
 
-
 import 'package:dson/dson.dart';
+import 'package:serializable/serializable.dart';
 import 'package:test/test.dart';
 
+part 'deserializer_test.g.dart';
+
 @serializable
-class SimpleDateContainer {
+class SimpleDateContainer extends _$SimpleDateContainerSerializable {
   DateTime testDate;
 }
 
 @serializable
-class TestClass1 {
+class TestClass1 extends _$TestClass1Serializable {
   String name;
   bool matter;
   num number;
@@ -29,20 +31,19 @@ class TestClass1 {
 }
 
 @serializable
-class JustObject {
+class JustObject extends _$JustObjectSerializable {
   Object object;
 }
 
 @serializable
-class SetClass {
-  @DsonType(String)
+class SetClass extends _$SetClassSerializable {
   Set<String> names;
   
   SetClass();
 }
 
 @serializable
-class TestGetter {
+class TestGetter extends _$TestGetterSerializable {
   String _name;
 
   TestGetter([this._name]);
@@ -51,7 +52,7 @@ class TestGetter {
 }
 
 @serializable
-class TestSetter {
+class TestSetter extends _$TestSetterSerializable {
   String _name;
 
   String get name => _name;
@@ -59,7 +60,7 @@ class TestSetter {
 }
 
 @serializable
-class NestedClass {
+class NestedClass extends _$NestedClassSerializable {
   String name;
   List list;
   TestGetter getter;
@@ -68,33 +69,47 @@ class NestedClass {
 }
 
 @serializable
-class SimpleClass {
+class SimpleClass extends _$SimpleClassSerializable {
   String name;
 
   String toString() => "SimpleClass: name: ${name}";
 }
 
 @serializable
-class SimpleList {
+class SimpleList extends _$SimpleListSerializable {
   List list;
 }
 
 @serializable
-class SimpleMap {
+class SimpleMap extends _$SimpleMapSerializable {
   Map map;
 }
 
 @serializable
-class SimpleMapString {
+class SimpleMapString extends _$SimpleMapStringSerializable {
   Map<String,num> map;
 }
 
 @serializable
-class SimpleVarContainer {
+class SimpleVarContainer extends _$SimpleVarContainerSerializable {
   var someVar;
 }
 
 main() {
+  initClassMirrors(<Type, ClassMirror>{
+    SimpleDateContainer: SimpleDateContainerClassMirror,
+    TestClass1: TestClass1ClassMirror,
+    JustObject: JustObjectClassMirror,
+    SetClass: SetClassClassMirror,
+    TestGetter: TestGetterClassMirror,
+    TestSetter: TestSetterClassMirror,
+    NestedClass: NestedClassClassMirror,
+    SimpleClass: SimpleClassClassMirror,
+    SimpleList: SimpleListClassMirror,
+    SimpleMap: SimpleMapClassMirror,
+    SimpleMapString: SimpleMapStringClassMirror,
+    SimpleVarContainer: SimpleVarContainerClassMirror
+  });
 
   test('deserialize: simple', () {
     TestClass1 test = fromJson('{"name":"test","matter":true,"intNumber":2,"number":5,"list":[1,2,3],"map":{"k":"o"},"the_renamed":"test"}', TestClass1);
@@ -151,7 +166,7 @@ main() {
   });
 
   test('deserialize: list of simple class', () {
-    List<SimpleClass> test = fromJsonList('[{"name":"test"},{"name":"test2"}]', SimpleClass);
+    List<SimpleClass> test = fromJson('[{"name":"test"},{"name":"test2"}]', const [List, SimpleClass]);
     expect(test[0].name, "test");
     expect(test[1].name, "test2");
   });
@@ -163,7 +178,8 @@ main() {
 
 
   test('deserialize: map of simple class', () {
-    Map<String, SimpleClass> test = fromJsonMap('{"key1":{"name":"test"},"key2":{"name":"test2"}}', SimpleClass);
+    Map<String, SimpleClass> test = fromJson('{"key1":{"name":"test"},"key2":{"name":"test2"}}',
+        const [Map, const [String, SimpleClass]]);
     expect(test["key1"].name, "test");
     expect(test["key2"].name, "test2");
   });

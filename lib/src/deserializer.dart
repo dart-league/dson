@@ -1,30 +1,21 @@
 part of dson;
 
-final _desLog = new Logger('object_mapper_deserializer');
+final Logger _desLog = new Logger('object_mapper_deserializer');
 
-/// Creates a new instance of [clazz], parses the json in [jsonStr] and puts
+/// Creates a new instance of [type], parses the json in [jsonStr] and puts
 /// the data into the new instance.
-///  Returns new instance of [clazz]
-///  Throws [NoConstructorError] if [clazz] or Classes used inside [clazz] do not
+///  Returns new instance of [type]
+///  Throws [NoConstructorError] if [type] or Classes used inside [type] do not
 ///    have a constructor without or only optional arguments.
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
-dynamic fromJson(String jsonStr, Type clazz) {
+dynamic fromJson(String jsonStr, /*Type | List<Type>*/ type) {
   var filler = JSON.decode(jsonStr);
-  //TODO: add unit test for this block.
-  if ([SN_INT, SN_NUM, SN_BOOL, SN_STRING].any((v) => v == clazz.toString())) {
-    return filler;
-  } else if (clazz.toString() == SN_MAP) {
-    //TODO: check if the map contains complex objects
-    return filler;
-  }
-
-  Object obj = _initiateClass(serializable.reflectType(clazz), filler);
-  _fillObject(obj, filler);
-
-  return obj;
+  return _convertValue(type, filler);
 }
 
+/// This function is deprecated. Use `fromJson(jsonStr, [List, YorType])` instead.
+///
 /// Creates a list with instances of [clazz] and puts the data of the parsed json
 /// of [jsonStr] into the instances.
 ///   Returns A list of objects of [clazz].
@@ -32,15 +23,15 @@ dynamic fromJson(String jsonStr, Type clazz) {
 ///    have a constructor without or only optional arguments.
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
+@deprecated
 List fromJsonList(String jsonStr, Type clazz) {
   List returnList = [];
   List filler = JSON.decode(jsonStr);
-  if ([SN_INT, SN_NUM, SN_BOOL, SN_STRING].any((v) => v == clazz.toString())) {
+  if ([int, num, double, bool, String].any((v) => v == clazz)) {
     return filler;
   }
   filler.forEach((item) {
-    Object obj = _initiateClass(serializable.reflectType(clazz), item);
-    _fillObject(obj, item);
+    Object obj = _convertValue(clazz, item);
     returnList.add(obj);
   });
 
@@ -57,12 +48,11 @@ List fromJsonList(String jsonStr, Type clazz) {
 Map fromJsonMap(String jsonStr, Type clazz) {
   Map returnMap = {};
   Map filler = JSON.decode(jsonStr);
-  if ([SN_INT, SN_NUM, SN_BOOL, SN_STRING].any((v) => v == clazz.toString())) {
+  if ([int, num, double, bool, String].any((v) => v == clazz)) {
     return filler;
   }
   filler.keys.forEach((key) {
-    Object obj = _initiateClass(serializable.reflectType(clazz), filler[key]);
-    _fillObject(obj, filler[key]);
+    Object obj = _convertValue(clazz, filler[key]);
     returnMap[key] = obj;
   });
 
@@ -70,17 +60,14 @@ Map fromJsonMap(String jsonStr, Type clazz) {
 }
 
 
-/// Creates a new instance of [clazz] and maps the data of [dataObject] into it.
-///  Returns new instance of [clazz]
-///  Throws [NoConstructorError] if [clazz] or Classes used inside [clazz] do not
+/// Creates a new instance of [type] and maps the data of [dataObject] into it.
+///  Returns new instance of [type]
+///  Throws [NoConstructorError] if [type] or Classes used inside [type] do not
 ///    have a constructor without or only optional arguments.
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
-dynamic fromMap(Map dataObject, Type clazz) {
-  Object obj = _initiateClass(serializable.reflectType(clazz), dataObject);
-  _fillObject(obj, dataObject);
-
-  return obj;
+dynamic fromMap(Map dataObject, Type type) {
+  return _convertValue(type, dataObject);
 }
 
 /// Creates a list with instances of [clazz] and maps the data of [dataMap] into
@@ -93,8 +80,7 @@ dynamic fromMap(Map dataObject, Type clazz) {
 List fromMapList(List<Map> dataMap, Type clazz) {
   List returnList = [];
   dataMap.forEach((item) {
-    Object obj = _initiateClass(serializable.reflectType(clazz), item);
-    _fillObject(obj, item);
+    Object obj = _convertValue(clazz, item);
     returnList.add(obj);
   });
 
@@ -107,106 +93,68 @@ List fromMapList(List<Map> dataMap, Type clazz) {
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
 dynamic fill(Map dataObject, Object object) {
-  _fillObject(serializable.reflect(object), dataObject);
-  return object;
+  return _fillObject(object, dataObject);
 }
 
 /// Puts the data of the [filler] into the object in [objMirror]
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
-void _fillObject(Object obj, filler) {
-  InstanceMirror objMirror = serializable.reflect(obj);
-  var classMirror = objMirror.type;
+Object _fillObject(SerializableMap obj, filler) {
+  var classMirror = reflectType(obj.runtimeType);
 
-  if (classMirror.isEnum) return;
+  classMirror.setters.forEach((varName) {
+    DeclarationMirror decl = classMirror.fields[varName];
+    String fieldName = varName;
+    var valueType = decl.type;
 
-  getPublicVariablesAndSettersFromClass(classMirror, serializable).forEach((varName, decl) {
-    if (!decl.isPrivate && (decl is VariableMirror && !decl.isFinal || decl is MethodMirror)) {
-      String fieldName = varName;
-      TypeMirror valueType;
+    // check if the property is renamed by SerializedName annotation
+    SerializedName prop = decl.annotations?.firstWhere((a) => a is SerializedName, orElse: () => null);
+    if (prop?.name != null) {
+      fieldName = prop.name;
+    }
+    _desLog.fine('Try to fill object with: ${fieldName}: ${filler[fieldName]}');
 
-      // if it's a setter function we need to change the name
-      if (decl is MethodMirror && decl.isSetter) {
-        fieldName = varName = varName.substring(0, varName.length - 1);
-        _desLog.fine('Found setter function varName: ' + varName);
-        valueType = decl.parameters[0].type;
-      } else if (decl is VariableMirror) {
-        valueType = decl.type;
-      } else {
-        return;
-      }
-
-      // check if the property is renamed by SerializedName annotation
-      SerializedName prop = new GetValueOfAnnotation<SerializedName>().fromDeclaration(decl);
-      if (prop != null && prop.name != null) {
-        fieldName = prop.name;
-      }
-      DsonType dsonType;
-      if(decl != null)
-        dsonType = new GetValueOfAnnotation<DsonType>().fromDeclaration(decl);
-
-      _desLog.fine('Try to fill object with: ${fieldName}: ${filler[fieldName]}');
-
-      if (filler[fieldName] != null) {
-        objMirror.invokeSetter(varName, _convertValue(valueType, filler[fieldName], varName, dsonType));
-      }
+    if (filler[fieldName] != null) {
+      obj[varName] = _convertValue(valueType, filler[fieldName], varName);
     }
   });
 
   _desLog.fine("Filled object completly: ${filler}");
+  return obj;
 }
 
-bool _isSimpleType(Type type) =>
-    type == List || type == bool || type == String || type == num || type == Map || type == dynamic || type == Set;
+/// Checks if the [type] is either [bool], [String], [int], [num], [double], or [dynamic]
+bool isPrimitiveType(Type type) =>
+    type == bool || type == String || type == int || type == num || type == double || type == dynamic;
 
-bool _hasOnlySimpleTypeArguments(ClassMirror mirr) {
-  bool hasOnly = true;
-
-  try {
-    mirr.typeArguments.forEach((ta) {
-      if (ta is ClassMirror) {
-        if (!_isSimpleType(ta.reflectedType)) {
-          hasOnly = false;
-        }
-      }
-    });
-  } catch (e) {
-    _desLog.fine("${mirr.qualifiedName} contains dynamic arguments");
-  }
-
-  return hasOnly;
-}
+/// Checks if the [type] is either primitive (see [isPrimitiveType]), List, Set, or Map;
+bool isSimpleType(Type type) =>
+    isPrimitiveType(type) || type == List || type == Map || type == Set;
 
 /// Converts a list of objects to a list with a Class.
-/* List | Set */ _convertGenericListOrSet(ClassMirror listMirror, List fillerList, [DsonType dsonType]) {
+/* List | Set */
+_convertGenericListOrSet(types, List fillerList) {
   _desLog.fine('Converting generic list');
-  var type = dsonType?.type,
-      subType;
-  if(type is List) {
-    var subTypes = type.length > 2 ? type.getRange(1, dsonType.type.length).toList() : type[1];
-    subType = new DsonType(subTypes);
-    type = type[0];
-  }
-  ClassMirror itemMirror = dsonType != null ? serializable.reflectType(type) : listMirror.typeArguments[0];
-  var resultList = _initiateClass(listMirror);
+  var type = types[0],
+      subType = types[1];
+  var resultList = type == List ? [] : new Set();
 
   fillerList.forEach((item) {
-    resultList.add(_convertValue(itemMirror, item, "@LIST_ITEM", subType));
+    resultList.add(_convertValue(subType, item, "@LIST_ITEM"));
   });
 
   _desLog.fine("Created generic list: ${resultList}");
   return resultList;
 }
 
-Map _convertGenericMap(ClassMirror mapMirror, Map fillerMap, [DsonType dsonType]) {
+Map _convertGenericMap(List subTypes, Map fillerMap) {
   _desLog.fine('Converting generic map');
-  Map type = dsonType?.type;
-  ClassMirror itemMirror = dsonType != null ? serializable.reflectType(type.values.elementAt(0)) : mapMirror.typeArguments[1];
-  ClassMirror keyMirror = dsonType != null ? serializable.reflectType(type.keys.elementAt(0)) : mapMirror.typeArguments[0];
-  Map resultMap = _initiateClass(mapMirror);
+  var keyType = subTypes[0];
+  var itemType = subTypes[1];
+  Map resultMap = {};
 
   fillerMap.forEach((key, value) {
-    var keyItem = _convertValue(keyMirror, key, "@MAP_KEY");
-    var valueItem = _convertValue(itemMirror, value, "@MAP_VALUE");
+    var keyItem = _convertValue(keyType, key, "@MAP_KEY");
+    var valueItem = _convertValue(itemType, value, "@MAP_VALUE");
     resultMap[keyItem] = valueItem;
     _desLog.fine("Added item ${valueItem} to map key: ${keyItem}");
   });
@@ -219,92 +167,72 @@ Map _convertGenericMap(ClassMirror mapMirror, Map fillerMap, [DsonType dsonType]
 ///  returns Deserialized value
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [NoConstructorError]
-Object _convertValue(Mirror valueType, Object value, String key, [DsonType dsonType]) {
-  if (valueType is ClassMirror) {
-    _desLog.fine("Convert \"${key}\": $value to ${valueType.qualifiedName}");
-    if (_desLog.isLoggable(Level.FINE)) {
-      _desLog.fine(
-          "$key: original: ${valueType.isOriginalDeclaration} "
-              + "reflected: ${valueType.hasReflectedType} symbol: ${valueType.qualifiedName} "
-              + "original: ${valueType.reflectedType} is "
-              + "simple ${_isSimpleType(valueType.reflectedType)}");
+Object _convertValue(/*Type | List<Type>*/ valueType, Object value, [String key = '@OBJECT']) {
+  _desLog.fine(() => "Converting (\"${key}\": $value) to ${valueType}");
+
+  // if valueType is `List<SomeClass> or Map<SomeClass0, SomeClass1>`
+  if (valueType is List) {
+    _desLog.fine('Handle generic');
+    // handle generic lists
+    if (valueType[0] == List || valueType[0] == Set) {
+      return _convertGenericListOrSet(valueType, value);
+    } else if (valueType[0] == Map) {
+      // handle generic maps
+      return _convertGenericMap(valueType[1], value);
     }
-
-//    // Todo: remove this block of code when reflectable add support for generics
-//    var dsonType, dsonTypes;
-//    if(decl != null) {
-//      dsonType = new GetValueOfAnnotation<DsonType>().fromDeclaration(decl);
-//      dsonTypes = new GetValueOfAnnotation<DsonTypes>().fromDeclaration(decl);
-//    }
-
-    // if valueType is `List<SomeClass> or Map<SomeClass0, SomeClass1> (List<List<Map<...>>> not supported)
-    if ((valueType.hasReflectedType && (!_hasOnlySimpleTypeArguments(valueType))
-            || dsonType != null)
-        ) {
-      _desLog.fine('Handle generic');
-      // handle generic lists
-      if (valueType.simpleName == SN_LIST || valueType.simpleName == SN_SET) {
-        return _convertGenericListOrSet(valueType, value, dsonType);
-      } else if (valueType.simpleName == SN_MAP) {
-        // handle generic maps
-        return _convertGenericMap(valueType, value, dsonType);
-      }
-    } else if (valueType.simpleName == SN_STRING) {
-      if (value is String) {
-        return value;
-      } else {
-        throw new IncorrectTypeTransform(value, SN_STRING, key);
-      }
-    } else if (valueType.simpleName == SN_NUM) {
-      if (value is num) {
-        return value;
-      } else {
-        throw new IncorrectTypeTransform(value, SN_NUM, key);
-      }
-    } else if (valueType.simpleName == SN_INT) {
-      if (value is int) {
-        return value;
-      } else {
-        throw new IncorrectTypeTransform(value, SN_INT, key);
-      }
-    } else if (valueType.simpleName == SN_DOUBLE) {
-      if (value is double) {
-        return value;
-      } else {
-        throw new IncorrectTypeTransform(value, SN_DOUBLE, key);
-      }
-    } else if (valueType.simpleName == SN_BOOL) {
-      if (value is bool) {
-        return value;
-      } else {
-        throw new IncorrectTypeTransform(value, SN_BOOL, key);
-      }
-    } else if (valueType.simpleName == SN_LIST) {
-      if (value is List) {
-        return value;
-      } else {
-        throw new IncorrectTypeTransform(value, SN_LIST, key);
-      }
-    } else if (valueType.simpleName == SN_MAP) {
-      if (value is Map) {
-        return value;
-      } else {
-        throw new IncorrectTypeTransform(value, SN_MAP, key);
-      }
-    } else if (valueType.simpleName == SN_OBJECT) {
+    return null;
+  } else if (valueType == String) {
+    if (value is String) {
       return value;
-    } else if (valueType.simpleName == SN_DATETIME) {
-      return DateTime.parse(value);
     } else {
-      var obj = _initiateClass(valueType, value);
-      _fillObject(obj, value);
-      return obj;
+      throw new IncorrectTypeTransform(value, 'String', key);
     }
+  } else if (valueType == num) {
+    if (value is num) {
+      return value;
+    } else {
+      throw new IncorrectTypeTransform(value, 'num', key);
+    }
+  } else if (valueType == int) {
+    if (value is int) {
+      return value;
+    } else {
+      throw new IncorrectTypeTransform(value, 'int', key);
+    }
+  } else if (valueType == double) {
+    if (value is double) {
+      return value;
+    } else {
+      throw new IncorrectTypeTransform(value, 'double', key);
+    }
+  } else if (valueType == bool) {
+    if (value is bool) {
+      return value;
+    } else {
+      throw new IncorrectTypeTransform(value, 'bool', key);
+    }
+  } else if (valueType == 'list') {
+    if (value is List) {
+      return value;
+    } else {
+      throw new IncorrectTypeTransform(value, 'list', key);
+    }
+  } else if (valueType == Map) {
+    if (value is Map) {
+      return value;
+    } else {
+      throw new IncorrectTypeTransform(value, 'Map', key);
+    }
+  } else if (valueType == Object || valueType == dynamic) { // check this line
+    return value;
+  } else if (valueType == DateTime) {
+    return DateTime.parse(value);
+  } else {
+    return _initiateClass(valueType, value);
   }
-  return value;
 }
 
-/// Initiates an instance of [classMirror] by using an empty constructor name.
+/// Creates a new instance of [type] by using an empty constructor name.
 /// Therefore the class needs to contain a simple constructor. For example:
 /// <code>
 ///  class TestClass {
@@ -323,50 +251,49 @@ Object _convertValue(Mirror valueType, Object value, String key, [DsonType dsonT
 /// </code>
 ///  Throws [NoConstructorError] if the class doesn't either have a constructor
 ///    without or only optional parameters, or parameters matching final fields.
-Object _initiateClass(ClassMirror classMirror, [filler]) {
-  _desLog.fine("Parsing to class: ${classMirror.qualifiedName}");
+Object _initiateClass(Type type, [filler]) {
+  ClassMirror classMirror = reflectType(type);
+  _desLog.fine("Parsing to class: ${type}");
 
   if (classMirror.isEnum) {
-    return (classMirror.invokeGetter('values') as List)[filler];
+    return classMirror.values[filler];
   }
 
   String constrMethod = null;
-  List parameters = [];
+  Map<String, dynamic> parameters = {};
 
-  classMirror.declarations.forEach((declName, decl) {
-    if (decl is MethodMirror && decl.isConstructor) {
-      _desLog.fine('Found constructor function: ${decl.qualifiedName}');
-      if (decl.constructorName.isEmpty) {
-        if (decl.parameters.length == 0) {
-          constrMethod = decl.constructorName;
-        } else {
-          bool onlyOptionalOrImmutable = false;
-          decl.parameters.forEach((p) {
-            if (p.isOptional) {
-              onlyOptionalOrImmutable = true;
-            } else {
-              var fieldDecl = classMirror.declarations[p.simpleName];
-              var parameterName = p.simpleName;
+  classMirror.constructors.forEach((constructorName, constructor) {
+    _desLog.fine('Found constructor function: ${constructorName}');
+    if (constructorName.isEmpty) {
+      if (constructor.parameters.length == 0) {
+        constrMethod = constructorName;
+      } else {
+        bool onlyOptionalOrImmutable = false;
+        constructor.parameters.forEach((pName, p) {
+          if (p.isOptional) {
+            onlyOptionalOrImmutable = true;
+          } else {
+            var fieldDecl = classMirror.fields[pName];
+            var parameterName = pName;
 
-              if (fieldDecl is VariableMirror && fieldDecl.isFinal) {
-                // check if the property is renamed by Property annotation
-                SerializedName prop = new GetValueOfAnnotation<SerializedName>().fromDeclaration(fieldDecl);
-                if (prop != null && prop.name != null) {
-                  parameterName = prop.name;
-                }
-
-                _desLog.fine('Try to pass parameter: ${parameterName}: ${filler[parameterName]}');
-
-                parameters.add(filler[parameterName]);
-
-                onlyOptionalOrImmutable = true;
+            if (fieldDecl?.isFinal == true) {
+              // check if the property is renamed by Property annotation
+              SerializedName prop = fieldDecl.annotations?.firstWhere((a) => a is SerializedName, orElse: () => null);
+              if (prop?.name != null) {
+                parameterName = prop.name;
               }
-            }
-          });
 
-          if (onlyOptionalOrImmutable) {
-            constrMethod = decl.constructorName;
+              _desLog.fine('Try to pass parameter: ${parameterName}: ${filler[parameterName]}');
+
+              parameters[pName] = filler[parameterName];
+
+              onlyOptionalOrImmutable = true;
+            }
           }
+        });
+
+        if (onlyOptionalOrImmutable) {
+          constrMethod = constructorName;
         }
       }
     }
@@ -375,18 +302,13 @@ Object _initiateClass(ClassMirror classMirror, [filler]) {
   Object obj;
   if (constrMethod != null) {
     _desLog.fine("Found constructor: \"${constrMethod}\"");
-    obj = classMirror.newInstance("", parameters);
-    _desLog.fine("Created instance of type: ${classMirror.qualifiedName}");
-  } else if (classMirror.qualifiedName == SN_LIST) {
-    _desLog.fine('No constructor for list found, try to run empty one');
-    obj = [];
-  } else if (classMirror.qualifiedName == SN_MAP) {
-    _desLog.fine('No constructor for map found');
-    obj = {};
+    obj = classMirror.constructors[constrMethod].call(parameters);
+    if (classMirror.setters == null) return obj;
+    _desLog.fine("Created instance of type: ${classMirror.name}");
   } else {
     _desLog.fine("No constructor found.");
     throw new NoConstructorError(classMirror);
   }
 
-  return obj;
+  return _fillObject(obj, filler);
 }

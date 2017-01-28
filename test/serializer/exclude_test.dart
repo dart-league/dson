@@ -1,11 +1,14 @@
-library exclude_test;
+library serializer.exclude_test;
 
 import 'package:dson/dson.dart';
+import 'package:serializable/serializable.dart';
 import 'package:test/test.dart';
+
+part 'exclude_test.g.dart';
 
 @cyclical
 @serializable
-class Employee {
+class Employee extends _$EmployeeSerializable {
   int id;
   String firstName;
   String lastName;
@@ -17,7 +20,7 @@ class Employee {
 
 @cyclical
 @serializable
-class Address {
+class Address extends _$AddressSerializable {
   int id;
   String street;
   String city;
@@ -29,7 +32,7 @@ class Address {
 
 @cyclical
 @serializable
-class Employee2 {
+class Employee2 extends _$Employee2Serializable {
   String firstName;
   String lastName;
 
@@ -40,7 +43,7 @@ class Employee2 {
 
 @cyclical
 @serializable
-class Address2 {
+class Address2 extends _$Address2Serializable {
   String street;
   String city;
   String country;
@@ -51,7 +54,7 @@ class Address2 {
 
 @cyclical
 @serializable
-class Student {
+class Student extends _$StudentSerializable {
   int id;
   String name;
 
@@ -60,7 +63,7 @@ class Student {
 
 @cyclical
 @serializable
-class Course {
+class Course extends _$CourseSerializable {
   int id;
 
   DateTime beginDate;
@@ -69,6 +72,14 @@ class Course {
 }
 
 main() {
+  initClassMirrors(<Type, ClassMirror>{
+    Employee: EmployeeClassMirror,
+    Address: AddressClassMirror,
+    Employee2: Employee2ClassMirror,
+    Address2: Address2ClassMirror,
+    Student: StudentClassMirror,
+    Course: CourseClassMirror
+  });
   group('exclude', () {
     var manager = new Employee()
           ..id = 1
@@ -87,15 +98,15 @@ main() {
     test('firstName and lastName', () {
       expect(toJson(manager, exclude: ['firstName', 'lastName']), '{"id":1,"address":{"id":1}}');
     });
-    
+//
     test('address.street without depth', () {
       expect(toJson(manager, exclude: {'address': 'street'}), '{"id":1,"firstName":"Jhon","lastName":"Doe","address":{"id":1}}');
     });
-    
+
     test('address.street with depth', () {
       expect(toJson(manager, exclude: {'address': 'street'}, depth: 'address'), '{"id":1,"firstName":"Jhon","lastName":"Doe","address":{"id":1,"city":"Miami","country":"USA","owner":{"id":1}}}');
     });
-    
+
     test('address.street and address.city with depth', () {
       expect(toJson(manager, exclude: {'address': ['street', 'city']}, depth: 'address'), '{"id":1,"firstName":"Jhon","lastName":"Doe","address":{"id":1,"country":"USA","owner":{"id":1}}}');
     });

@@ -5,7 +5,7 @@ part of dson;
  */
 const ignore = const _Ignore();
 
-class _Ignore {
+class _Ignore extends Annotation {
   const _Ignore();
 }
 
@@ -17,7 +17,7 @@ typedef bool IgnoreIfFunction({var user, var orig_val, var current_val});
 /**
  * Annotation that tells parser to ignore the variable if the [ignoreIfFunction] returns true
  */
-class IgnoreIf {
+class IgnoreIf extends Annotation {
   final IgnoreIfFunction ignoreIfFunction;
   const IgnoreIf(this.ignoreIfFunction);
 }
@@ -25,7 +25,7 @@ class IgnoreIf {
 /**
  * Annotation class to describe properties of a class member.
  */
-class SerializedName {
+class SerializedName extends Annotation {
   final String name;
   
   const SerializedName(this.name);
@@ -36,30 +36,6 @@ class SerializedName {
 ///this annotation describes if the objects contains cyclical reference to other objects
 const cyclical = const _Cyclical();
 
-class _Cyclical {
+class _Cyclical extends Annotation {
   const _Cyclical();
-}
-
-/// This annotation specifies the object can be serialized
-class Serializable extends Reflectable {
-  const Serializable() : super(
-      typeAnnotationQuantifyCapability,
-      superclassQuantifyCapability,
-      invokingCapability,
-      declarationsCapability,
-      metadataCapability,
-      newInstanceCapability,
-      typeRelationsCapability,
-      typeCapability);
-}
-
-/// This annotation specifies the object can be serialized
-const serializable = const Serializable();
-
-/// This annotation is needed for client side applications to handle attributes with generic type
-/// for example: `List<Person>` or `Set<String>`
-class DsonType {
-  final /*Type | List<Type> | Map<Type, Type>*/ type;
-
-  const DsonType(this.type);
 }
