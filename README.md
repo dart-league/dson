@@ -6,7 +6,7 @@ DSON is a dart library which converts Dart Objects into their JSON representatio
 
 This library was initially a fork from [Dartson](https://github.com/eredo/dartson). Now it contains some differences:
 
- * Dartson uses custom transformers to convert objects to JSON. This produce faster and smaller code after dart2Js. Instead DSON uses reflectable library and transformer. This should produce code as fast and small as Dartson transformer.
+ * Dartson uses custom transformers to convert objects to JSON. This produce faster and smaller code after dart2Js. Instead DSON uses [serializable]() and [built_mirrors]() libraries. This should produce code as fast and small as Dartson transformer.
  * DSON has the ability to serialize cyclical objects by mean of `depth` parameter, which allows users to specify how deep in the object graph they want to serialize.
  * DSON has the ability to exclude attributes for serialziation in two ways. 
   * Using `@ignore` over every attribute. This make excluding attributes too global and hardcoded, so users can only specify one exclusion schema.
@@ -15,35 +15,55 @@ This library was initially a fork from [Dartson](https://github.com/eredo/dartso
  
 ## Configuration
 
-1\. Add dependencies to `pubspec.yaml`
+1. Create a new dart project.
+
+2. Add dependencies to `pubspec.yaml`
 
 ```yaml
 ...
 dependencies:
   ...
   dson: ^0.3.3
-  reflectable: ^0.5.4           # this one is only needed for client/browser side apps
   ...
-transformers:
-- reflectable:                  # this transformer is also only needed for client/browser apps
-    entry_points:
-      - web/main.dart
-...
 ```
 
-To be able to use `DSON` on client side applications it is needed to add both: `reflectable` dependency and its transformer.
-If you don't add them you will not be able to run the app in the browser and the `dart2js` compiler will fail or
-throws some warnings about annotation `@MirrorUsed`.
+3. Create/edit `tool/watch.dart` and add next code on it:
+
+```dart
+import 'package:build_runner/build_runner.dart';
+import 'package:dson/phase.dart';
+
+
+main() async {
+  await watch(new PhaseGroup()
+    ..addPhase(
+    // In next line replace `dson` for the name of your package
+    // and `test/*.dart` for the globs you want to use as input, for example `**/*.dart`
+    // to take all the dart files of the project as input.
+        dsonPhase('dson', const ['test/**.dart'])),
+      deleteFilesByDefault: true);
+}
+```
+
+4. Run `tool/watch.dart` to begin watching for changes in dart files
+
+5. Create/edit `bin/main.dart` or `web/main.dart` and add the code shown in any of the samples below.
 
 ## Convert objects to JSON strings
 
 To convert objects to JSON strings you only need to use the `toJson` function, annotate the object with `@serializable` and pass the `object` to the `toJson` function as parameter:
 
 ```dart
+// replace `example` for the name you want to give to your library
+library example; // this line is needed for the generator
+
 import 'package:dson/dson.dart';
 
+// replace `main` for the name of your file
+part 'main.g.dart';  // this line is needed for the generator
+
 @serializable
-class Person {
+class Person extends _$PersonSerializable {
   int id;
   String firstName;
   var lastName; //This is a dynamic attribute could be String, int, duble, num, date or another type
@@ -64,6 +84,11 @@ class Person {
 }
 
 void main() {
+  // by the moment is needed to initialize the mirrors manually
+  initClassMirrors({
+    Person: PersonClassMirror
+  });
+  
   Person object = new Person()
     ..id = 1
     ..firstName = "Jhon"
@@ -84,10 +109,16 @@ void main() {
 To convert objects to Maps you only need to use the `toMap` function, annotate the object with `@serializable` and pass the `object` to `toMap` function as parameter:
 
 ```dart
+// replace `example` for the name you want to give to your library
+library example; // this line is needed for the generator
+
 import 'package:dson/dson.dart';
 
+// replace `main` for the name of your file
+part 'main.g.dart';  // this line is needed for the generator
+
 @serializable
-class Person {
+class Person extends _$PersonClassMirror {
   int id;
   String firstName;
   var lastName; //This is a dynamic attribute could be String, int, duble, num, date or another type
@@ -108,6 +139,11 @@ class Person {
 }
 
 void main() {
+  // by the moment is needed to initialize the mirrors manually
+  initClassMirrors({
+    Person: PersonClassMirror
+  });
+  
   Person object = new Person()
     ..id = 1
     ..firstName = "Jhon"
@@ -128,11 +164,17 @@ void main() {
 To serialize objects that contains Cyclical References it would be needed to use the annotation `@cyclical`. If this annotation is present and the `depth` variable is not set then the non-primitive objects are not going to be parsed and only the id (or hashmap if the object does not contains id) is going to be present. Let's see next example:
 
 ```dart
+// replace `example` for the name you want to give to your library
+library example; // this line is needed for the generator
+
 import 'package:dson/dson.dart';
+
+// replace `main` for the name of your file
+part 'main.g.dart';  // this line is needed for the generator
 
 @serializable
 @cyclical
-class Employee {
+class Employee extends _$EmployeeClassMirror {
   int id;
   String firstName;
   String lastName;
@@ -144,7 +186,7 @@ class Employee {
 
 @serializable
 @cyclical
-class Address {
+class Address extends _$AddressClassMirror {
   int id;
   String street;
   String city;
@@ -156,6 +198,12 @@ class Address {
 
 
 void main() {
+  // by the moment is needed to initialize the mirrors manually
+  initClassMirrors({
+    Employee: EmployeeClassMirror,
+    Address: AddressClassMirror
+  });
+  
   var manager = new Employee()
     ..id = 1
     ..firstName = 'Jhon'
@@ -207,11 +255,17 @@ as you can see employee has an address, and the address has an owner of type Emp
 The same applies for lists:
 
 ```dart
+// replace `example` for the name you want to give to your library
+library example; // this line is needed for the generator
+
 import 'package:dson/dson.dart';
+
+// replace `main` for the name of your file
+part 'main.g.dart';  // this line is needed for the generator
 
 @serializable
 @cyclical
-class Student {
+class Student extends _$StudentClassMirror {
   int id;
   String name;
   
@@ -220,7 +274,7 @@ class Student {
 
 @serializable
 @cyclical
-class Course {
+class Course extends _$CourseClassMirror {
   int id;
   
   DateTime beginDate;
@@ -229,6 +283,11 @@ class Course {
 }
 
 void main() {
+  // by the moment is needed to initialize the mirrors manually
+  initClassMirrors({
+    Student: StudentClassMirror,
+    Course: CourseClassMirror
+  });
   
   var student1 = new Student()
       ..id = 1
@@ -305,13 +364,17 @@ To exclude parameter from being serialized we have two options the first option 
 Another way to exclude attributes is adding the parameter `exclude` to `serialize` function. In this way we only exclude those attributes during that serialization.
 
 ```dart
-library example;
+// replace `example` for the name you want to give to your library
+library example; // this line is needed for the generator
 
 import 'package:dson/dson.dart';
 
+// replace `main` for the name of your file
+part 'main.g.dart';  // this line is needed for the generator
+
 @serializable
 @cyclical
-class Student {
+class Student extends _$StudentClassMirror {
   int id;
   String name;
   
@@ -321,7 +384,7 @@ class Student {
 
 @serializable
 @cyclical
-class Course {
+class Course extends _$CourseClassMirror {
   int id;
   
   DateTime beginDate;
@@ -331,6 +394,11 @@ class Course {
 }
 
 void main() {
+  // by the moment is needed to initialize the mirrors manually
+  initClassMirrors({
+    Student: StudentClassMirror,
+    Course: CourseClassMirror
+  });
   
   var student1 = new Student()
       ..id = 1
@@ -416,12 +484,16 @@ void main() {
 To convert JSON strings to objects you only need to use the `fromJson` and `fromJsonList` functions and pass the `json` string to deserialize and the `Type` of the object as parameters:
 
 ```dart
-library example;
+// replace `example` for the name you want to give to your library
+library example; // this line is needed for the generator
 
 import 'package:dson/dson.dart';
 
+// replace `main` for the name of your file
+part 'main.g.dart';  // this line is needed for the generator
+
 @serializable
-class EntityClass {
+class EntityClass extends _$EntityClassClassMirror {
   String name;
   String _setted;
   
@@ -439,6 +511,11 @@ class EntityClass {
 }
 
 void main() {
+  // by the moment is needed to initialize the mirrors manually
+  initClassMirrors({
+    EntityClass: EntityClassClassMirror
+  });
+  
   EntityClass object = fromJson('{"name":"test","renamed":true,"notVisible":"it is", "setted": "awesome"}', EntityClass);
   
   print(object.name); // > test
@@ -459,12 +536,16 @@ void main() {
 Frameworks like Angular.dart come with several HTTP services which already transform the HTTP response to a map using `JSON.encode`. To use those encoded Maps or Lists use `fromMap` and `fromMapList` functions.
 
 ```dart
-library example;
+// replace `example` for the name you want to give to your library
+library example; // this line is needed for the generator
 
 import 'package:dson/dson.dart';
 
+// replace `main` for the name of your file
+part 'main.g.dart';  // this line is needed for the generator
+
 @serializable
-class EntityClass {
+class EntityClass extends _$EntityClassClassMirror {
   String name;
   String _setted;
 
