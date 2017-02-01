@@ -3,6 +3,20 @@
 part of serializer.cyclic_reference_serialize;
 
 // **************************************************************************
+// Generator: InitClassMirrorsGenerator
+// Target: library serializer.cyclic_reference_serialize
+// **************************************************************************
+
+_initClassMirrors() => initClassMirrors({
+      Employee: EmployeeClassMirror,
+      Address: AddressClassMirror,
+      Employee2: Employee2ClassMirror,
+      Address2: Address2ClassMirror,
+      Student: StudentClassMirror,
+      Course: CourseClassMirror
+    });
+
+// **************************************************************************
 // Generator: DsonGenerator
 // Target: class Employee
 // **************************************************************************

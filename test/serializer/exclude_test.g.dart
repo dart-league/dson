@@ -3,6 +3,20 @@
 part of serializer.exclude_test;
 
 // **************************************************************************
+// Generator: InitClassMirrorsGenerator
+// Target: library serializer.exclude_test
+// **************************************************************************
+
+_initClassMirrors() => initClassMirrors({
+      Employee: EmployeeClassMirror,
+      Address: AddressClassMirror,
+      Employee2: Employee2ClassMirror,
+      Address2: Address2ClassMirror,
+      Student: StudentClassMirror,
+      Course: CourseClassMirror
+    });
+
+// **************************************************************************
 // Generator: DsonGenerator
 // Target: class Employee
 // **************************************************************************

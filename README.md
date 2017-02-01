@@ -40,7 +40,7 @@ main() async {
     // In next line replace `dson` for the name of your package
     // and `test/*.dart` for the globs you want to use as input, for example `**/*.dart`
     // to take all the dart files of the project as input.
-        dsonPhase('dson', const ['test/**.dart'])),
+        dsonPhase('dson', const ['example/**.dart'])),
       deleteFilesByDefault: true);
 }
 ```
@@ -54,25 +54,22 @@ main() async {
 To convert objects to JSON strings you only need to use the `toJson` function, annotate the object with `@serializable` and pass the `object` to the `toJson` function as parameter:
 
 ```dart
-// replace `example` for the name you want to give to your library
-library example; // this line is needed for the generator
+library example.object_to_json; // this line is needed for the generator
 
 import 'package:dson/dson.dart';
 
-// replace `main` for the name of your file
-part 'main.g.dart';  // this line is needed for the generator
+part 'object_to_json.g.dart'; // this line is needed for the generator
 
 @serializable
 class Person extends _$PersonSerializable {
   int id;
   String firstName;
-  var lastName; //This is a dynamic attribute could be String, int, duble, num, date or another type
+  var lastName; //This is a dynamic attribute could be String, int, double, num, date or another type
   double height;
   DateTime dateOfBirth;
 
   @SerializedName("renamed")
   String otherName;
-  
 
   @ignore
   String notVisible;
@@ -84,11 +81,8 @@ class Person extends _$PersonSerializable {
 }
 
 void main() {
-  // by the moment is needed to initialize the mirrors manually
-  initClassMirrors({
-    Person: PersonClassMirror
-  });
-  
+  _initClassMirrors();
+
   Person object = new Person()
     ..id = 1
     ..firstName = "Jhon"
@@ -109,16 +103,14 @@ void main() {
 To convert objects to Maps you only need to use the `toMap` function, annotate the object with `@serializable` and pass the `object` to `toMap` function as parameter:
 
 ```dart
-// replace `example` for the name you want to give to your library
-library example; // this line is needed for the generator
+library example.object_to_map; // this line is needed for the generator
 
 import 'package:dson/dson.dart';
 
-// replace `main` for the name of your file
-part 'main.g.dart';  // this line is needed for the generator
+part 'object_to_map.g.dart';  // this line is needed for the generator
 
 @serializable
-class Person extends _$PersonClassMirror {
+class Person extends _$PersonSerializable {
   int id;
   String firstName;
   var lastName; //This is a dynamic attribute could be String, int, duble, num, date or another type
@@ -127,7 +119,6 @@ class Person extends _$PersonClassMirror {
 
   @SerializedName("renamed")
   String otherName;
-  
 
   @ignore
   String notVisible;
@@ -139,11 +130,8 @@ class Person extends _$PersonClassMirror {
 }
 
 void main() {
-  // by the moment is needed to initialize the mirrors manually
-  initClassMirrors({
-    Person: PersonClassMirror
-  });
-  
+  _initClassMirrors();
+
   Person object = new Person()
     ..id = 1
     ..firstName = "Jhon"
@@ -164,56 +152,50 @@ void main() {
 To serialize objects that contains Cyclical References it would be needed to use the annotation `@cyclical`. If this annotation is present and the `depth` variable is not set then the non-primitive objects are not going to be parsed and only the id (or hashmap if the object does not contains id) is going to be present. Let's see next example:
 
 ```dart
-// replace `example` for the name you want to give to your library
-library example; // this line is needed for the generator
+library example.serialize_cyclical; // this line is needed for the generator
 
 import 'package:dson/dson.dart';
 
-// replace `main` for the name of your file
-part 'main.g.dart';  // this line is needed for the generator
+part 'serialize_cyclical.g.dart';  // this line is needed for the generator
 
 @serializable
 @cyclical
-class Employee extends _$EmployeeClassMirror {
+class Employee extends _$EmployeeSerializable {
   int id;
   String firstName;
   String lastName;
-  
+
   Address address;
-  
+
   Employee manager;
 }
 
 @serializable
 @cyclical
-class Address extends _$AddressClassMirror {
+class Address extends _$AddressSerializable {
   int id;
   String street;
   String city;
   String country;
   String postalCode;
-  
+
   Employee owner;
 }
 
 
 void main() {
-  // by the moment is needed to initialize the mirrors manually
-  initClassMirrors({
-    Employee: EmployeeClassMirror,
-    Address: AddressClassMirror
-  });
-  
+  _initClassMirrors();
+
   var manager = new Employee()
     ..id = 1
     ..firstName = 'Jhon'
     ..lastName = 'Doe';
   manager.address = new Address()
-      ..id = 1
-      ..street = 'some street'
-      ..city = 'Miami'
-      ..country = 'USA'
-      ..owner = manager;
+    ..id = 1
+    ..street = 'some street'
+    ..city = 'Miami'
+    ..country = 'USA'
+    ..owner = manager;
 
   var employee = new Employee()
     ..id = 2
@@ -226,11 +208,11 @@ void main() {
     ..city = 'Miami'
     ..country = 'USA'
     ..owner = employee;
-    
+
   print(toJson(employee)); //will print: '{"id":2,"firstName":"Luis","lastName":"Vargas","address":{"id":2},"manager":{"id":1}}'
-  
+
   print(toJson(employee.address)); // will print: '{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}}'
-  
+
   // depth is a optional parameter that could be a list that should contains strings or Maps<String, Map>
   print(toJson(employee, depth: ['address']));
   /* will print:
@@ -238,7 +220,7 @@ void main() {
               '"address":{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}},'
               '"manager":{"id":1}}'
   */
-  
+
   print(toJson(employee, depth: [{'manager': ['address']}, 'address']));
   /* will print:
          '{"id":2,"firstName":"Luis","lastName":"Vargas",'
@@ -255,72 +237,68 @@ as you can see employee has an address, and the address has an owner of type Emp
 The same applies for lists:
 
 ```dart
-// replace `example` for the name you want to give to your library
-library example; // this line is needed for the generator
+library example.serialize_cyclical_list; // this line is needed for the generator
 
 import 'package:dson/dson.dart';
 
-// replace `main` for the name of your file
-part 'main.g.dart';  // this line is needed for the generator
+part 'serialize_cyclical_list.g.dart'; // this line is needed for the generator
 
 @serializable
 @cyclical
-class Student extends _$StudentClassMirror {
+class Student extends _$StudentSerializable {
   int id;
   String name;
-  
+
   List<Course> courses;
 }
 
 @serializable
 @cyclical
-class Course extends _$CourseClassMirror {
+class Course extends _$CourseSerializable {
   int id;
-  
+
   DateTime beginDate;
-  
+
   List<Student> students;
 }
 
 void main() {
-  // by the moment is needed to initialize the mirrors manually
-  initClassMirrors({
-    Student: StudentClassMirror,
-    Course: CourseClassMirror
-  });
-  
+// by the moment is needed to initialize the mirrors manually
+  _initClassMirrors();
+
   var student1 = new Student()
-      ..id = 1
-      ..name = 'student1',
-    student2 = new Student()
-      ..id = 2
-      ..name = 'student2',
-    student3 = new Student()
-      ..id = 3
-      ..name = 'student3',
-    course1 = new Course()
-      ..id = 1
-      ..beginDate = new DateTime.utc(2015, 1, 1)
-      ..students = [student1, student2],
-    course2 = new Course()
-      ..id = 2
-      ..beginDate = new DateTime.utc(2015, 1, 2)
-      ..students = [student2, student3],
-    course3 = new Course()
-      ..id = 3
-      ..beginDate = new DateTime.utc(2015, 1, 3)
-      ..students = [student1, student3];
-  
+    ..id = 1
+    ..name = 'student1',
+      student2 = new Student()
+        ..id = 2
+        ..name = 'student2',
+      student3 = new Student()
+        ..id = 3
+        ..name = 'student3',
+      course1 = new Course()
+        ..id = 1
+        ..beginDate = new DateTime.utc(2015, 1, 1)
+        ..students = [student1, student2],
+      course2 = new Course()
+        ..id = 2
+        ..beginDate = new DateTime.utc(2015, 1, 2)
+        ..students = [student2, student3],
+      course3 = new Course()
+        ..id = 3
+        ..beginDate = new DateTime.utc(2015, 1, 3)
+        ..students = [student1, student3];
+
   student1.courses = [course1, course3];
   student2.courses = [course1, course2];
   student3.courses = [course2, course3];
-  
-  var students = [student1, student2, student3]; 
-  
+
+  var students = [student1, student2, student3];
+  print(toJson(students));
+
   print(toJson(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
 
   print(toJson(student1, depth: ['courses']));
-  /* will print:
+/* will print:
       '{'
         '"id":1,'
         '"name":"student1",'
@@ -331,16 +309,16 @@ void main() {
       '}');
    */
 
-  print(toJson(student1.courses)); 
-  /* will print:
+  print(toJson(student1.courses));
+/* will print:
       '['
         '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":[{"id":1},{"id":2}]},'
         '{"id":3,"beginDate":"2015-01-03T00:00:00.000Z","students":[{"id":1},{"id":3}]}'
       ']');
   */
-  
+
   print(toJson(student2.courses, depth: ['students']));
-  /* will print: 
+/* will print:
       '['
         '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":['
           '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]},'
@@ -364,70 +342,63 @@ To exclude parameter from being serialized we have two options the first option 
 Another way to exclude attributes is adding the parameter `exclude` to `serialize` function. In this way we only exclude those attributes during that serialization.
 
 ```dart
-// replace `example` for the name you want to give to your library
-library example; // this line is needed for the generator
+library example.exclude_attributes; // this line is needed for the generator
 
 import 'package:dson/dson.dart';
 
 // replace `main` for the name of your file
-part 'main.g.dart';  // this line is needed for the generator
+part 'exclude_attributes.g.dart';  // this line is needed for the generator
 
 @serializable
 @cyclical
-class Student extends _$StudentClassMirror {
+class Student extends _$StudentSerializable {
   int id;
   String name;
-  
-  @DsonType(Course) // This annotation is only neede for client side applications
+
   List<Course> courses;
 }
 
 @serializable
 @cyclical
-class Course extends _$CourseClassMirror {
+class Course extends _$CourseSerializable {
   int id;
-  
+
   DateTime beginDate;
-  
-  @DsonType(Student) // This annotation is only neede for client side applications
+
   List<Student> students;
 }
 
 void main() {
-  // by the moment is needed to initialize the mirrors manually
-  initClassMirrors({
-    Student: StudentClassMirror,
-    Course: CourseClassMirror
-  });
-  
+  _initClassMirrors();
+
   var student1 = new Student()
-      ..id = 1
-      ..name = 'student1',
-    student2 = new Student()
-      ..id = 2
-      ..name = 'student2',
-    student3 = new Student()
-      ..id = 3
-      ..name = 'student3',
-    course1 = new Course()
-      ..id = 1
-      ..beginDate = new DateTime.utc(2015, 1, 1)
-      ..students = [student1, student2],
-    course2 = new Course()
-      ..id = 2
-      ..beginDate = new DateTime.utc(2015, 1, 2)
-      ..students = [student2, student3],
-    course3 = new Course()
-      ..id = 3
-      ..beginDate = new DateTime.utc(2015, 1, 3)
-      ..students = [student1, student3];
-  
+    ..id = 1
+    ..name = 'student1',
+      student2 = new Student()
+        ..id = 2
+        ..name = 'student2',
+      student3 = new Student()
+        ..id = 3
+        ..name = 'student3',
+      course1 = new Course()
+        ..id = 1
+        ..beginDate = new DateTime.utc(2015, 1, 1)
+        ..students = [student1, student2],
+      course2 = new Course()
+        ..id = 2
+        ..beginDate = new DateTime.utc(2015, 1, 2)
+        ..students = [student2, student3],
+      course3 = new Course()
+        ..id = 3
+        ..beginDate = new DateTime.utc(2015, 1, 3)
+        ..students = [student1, student3];
+
   student1.courses = [course1, course3];
   student2.courses = [course1, course2];
   student3.courses = [course2, course3];
-  
-  var students = [student1, student2, student3]; 
-  
+
+  var students = [student1, student2, student3];
+
   print(toJson(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
 
   print(toJson(student1, depth: 'courses', exclude: 'name'));
@@ -441,16 +412,16 @@ void main() {
       '}');
    */
 
-  print(toJson(student1.courses, exclude: 'beginDate')); 
+  print(toJson(student1.courses, exclude: 'beginDate'));
   /* will print:
       '['
         '{"id":1,"students":[{"id":1},{"id":2}]},'
         '{"id":3,"students":[{"id":1},{"id":3}]}'
       ']');
   */
-  
+
   print(toJson(student2.courses, depth: 'students', exclude: {'students': 'name'}));
-  /* will print: 
+  /* will print:
       '['
         '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":['
           '{"id":1,"courses":[{"id":1},{"id":3}]},'
@@ -462,9 +433,9 @@ void main() {
         ']}'
       ']'
    */
-   
-   print(toJson(student2.courses, depth: 'students', exclude: ['beginDate', {'students': 'name'}]));
-  /* will print: 
+
+  print(toJson(student2.courses, depth: 'students', exclude: ['beginDate', {'students': 'name'}]));
+  /* will print:
       '['
         '{"id":1,"students":['
           '{"id":1,"courses":[{"id":1},{"id":3}]},'
@@ -485,46 +456,43 @@ To convert JSON strings to objects you only need to use the `fromJson` and `from
 
 ```dart
 // replace `example` for the name you want to give to your library
-library example; // this line is needed for the generator
+library example.json_to_object; // this line is needed for the generator
 
 import 'package:dson/dson.dart';
 
 // replace `main` for the name of your file
-part 'main.g.dart';  // this line is needed for the generator
+part 'json_to_object.g.dart';  // this line is needed for the generator
 
 @serializable
-class EntityClass extends _$EntityClassClassMirror {
+class EntityClass extends _$EntityClassSerializable {
   String name;
   String _setted;
-  
+
   @SerializedName("renamed")
   bool otherName;
-  
+
   @ignore
   String notVisible;
-  
-  @DsonType(EntityClass) // This annotation is only neede for client side applications
+
   List<EntityClass> children;
-  
+
   set setted(String s) => _setted = s;
   String get setted => _setted;
 }
 
 void main() {
   // by the moment is needed to initialize the mirrors manually
-  initClassMirrors({
-    EntityClass: EntityClassClassMirror
-  });
-  
+  _initClassMirrors();
+
   EntityClass object = fromJson('{"name":"test","renamed":true,"notVisible":"it is", "setted": "awesome"}', EntityClass);
-  
+
   print(object.name); // > test
   print(object.otherName); // > blub
   print(object.notVisible); // > it is
   print(object.setted); // > awesome
-  
+
   // to deserialize a list of items use [fromJsonList]
-  List<EntityClass> list = fromJsonList('[{"name":"test", "children": [{"name":"child1"},{"name":"child2"}]},{"name":"test2"}]', EntityClass);
+  List<EntityClass> list = fromJson('[{"name":"test", "children": [{"name":"child1"},{"name":"child2"}]},{"name":"test2"}]', [List, EntityClass]);
   print(list.length); // > 2
   print(list[0].name); // > test
   print(list[0].children[0].name); // > child1
@@ -536,16 +504,15 @@ void main() {
 Frameworks like Angular.dart come with several HTTP services which already transform the HTTP response to a map using `JSON.encode`. To use those encoded Maps or Lists use `fromMap` and `fromMapList` functions.
 
 ```dart
-// replace `example` for the name you want to give to your library
-library example; // this line is needed for the generator
+library example.map_to_object; // this line is needed for the generator
 
 import 'package:dson/dson.dart';
 
 // replace `main` for the name of your file
-part 'main.g.dart';  // this line is needed for the generator
+part 'map_to_object.g.dart'; // this line is needed for the generator
 
 @serializable
-class EntityClass extends _$EntityClassClassMirror {
+class EntityClass extends _$EntityClassSerializable {
   String name;
   String _setted;
 
@@ -555,22 +522,35 @@ class EntityClass extends _$EntityClassClassMirror {
   @ignore
   String notVisible;
 
-  @DsonType(EntityClass) // This annotation is only neede for client side applications
   List<EntityClass> children;
 
   set setted(String s) => _setted = s;
+
   String get setted => _setted;
 }
 
 void main() {
-  EntityClass object = fromMap({"name":"test","renamed":"blub","notVisible":"it is", "setted": "awesome"}, EntityClass);
+  EntityClass object = fromMap({
+    "name": "test",
+    "renamed": "blub",
+    "notVisible": "it is",
+    "setted": "awesome"
+  }, EntityClass);
   print(object.name); // > test
   print(object.otherName); // > blub
   print(object.notVisible); // > it is
   print(object.setted); // > awesome
 
-  // to deserialize a list of items use [fromJsonList]
-  List<EntityClass> list = fromMapList([{"name":"test", "children": [{"name":"child1"},{"name":"child2"}]},{"name":"test2"}], EntityClass);
+// to deserialize a list of items use [fromJsonList]
+  List<EntityClass> list = fromMapList([
+    {"name": "test",
+      "children": [
+        {"name": "child1"},
+        {"name": "child2"}
+      ]
+    },
+    {"name": "test2"}
+  ], EntityClass);
   print(list.length); // > 2
   print(list[0].name); // > test
   print(list[0].children[0].name); // > child1

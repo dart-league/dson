@@ -44,15 +44,7 @@ class MapClass extends _$MapClassSerializable {
 }
 
 main() {
-  initClassMirrors(<Type,ClassMirror>{
-    SimpleClass: SimpleClassClassMirror,
-    ListClass: ListClassClassMirror,
-    ListListClass: ListListClassClassMirror,
-    ListListListClass: ListListListClassClassMirror,
-    ListMapClass: ListMapClassClassMirror,
-    ListListMapClass: ListListMapClassClassMirror,
-    MapClass: MapClassClassMirror
-  });
+  _initClassMirrors();
 
   test('deserialize: generic List<SimpleClass>', () {
     ListClass test = fromJson('{"list": [{"name": "test1"}, {"name": "test2"}]}', ListClass);

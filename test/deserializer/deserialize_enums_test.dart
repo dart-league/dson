@@ -20,10 +20,7 @@ class ObjectWithEnum extends _$ObjectWithEnumSerializable {
 
 main() {
 
-  initClassMirrors(<Type, ClassMirror>{
-    ObjectWithEnum: ObjectWithEnumClassMirror,
-    Color: ColorClassMirror
-  });
+  _initClassMirrors();
 
   test('deserialize enum', () {
     expect(fromJson('0', Color), Color.BLUE);

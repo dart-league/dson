@@ -3,6 +3,16 @@
 part of deserialiazer.deserialize_inmutable_class_test;
 
 // **************************************************************************
+// Generator: InitClassMirrorsGenerator
+// Target: library deserialiazer.deserialize_inmutable_class_test
+// **************************************************************************
+
+_initClassMirrors() => initClassMirrors({
+      ImmutableClass: ImmutableClassClassMirror,
+      ImmutableClassInvalidParameter: ImmutableClassInvalidParameterClassMirror
+    });
+
+// **************************************************************************
 // Generator: DsonGenerator
 // Target: class ImmutableClass
 // **************************************************************************

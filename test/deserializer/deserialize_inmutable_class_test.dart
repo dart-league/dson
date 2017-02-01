@@ -24,10 +24,7 @@ class ImmutableClassInvalidParameter extends _$ImmutableClassInvalidParameterSer
 }
 
 main() {
-  initClassMirrors(<Type, ClassMirror>{
-    ImmutableClass: ImmutableClassClassMirror,
-    ImmutableClassInvalidParameter: ImmutableClassInvalidParameterClassMirror
-  });
+  _initClassMirrors();
 
   test('deserialize: immutable class', () {
     ImmutableClass test = fromJson('{"name":"test", "the_renamed": "test"}', ImmutableClass);

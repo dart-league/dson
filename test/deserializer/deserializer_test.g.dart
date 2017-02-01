@@ -3,6 +3,26 @@
 part of deserializer_test;
 
 // **************************************************************************
+// Generator: InitClassMirrorsGenerator
+// Target: library deserializer_test
+// **************************************************************************
+
+_initClassMirrors() => initClassMirrors({
+      SimpleDateContainer: SimpleDateContainerClassMirror,
+      TestClass1: TestClass1ClassMirror,
+      JustObject: JustObjectClassMirror,
+      SetClass: SetClassClassMirror,
+      TestGetter: TestGetterClassMirror,
+      TestSetter: TestSetterClassMirror,
+      NestedClass: NestedClassClassMirror,
+      SimpleClass: SimpleClassClassMirror,
+      SimpleList: SimpleListClassMirror,
+      SimpleMap: SimpleMapClassMirror,
+      SimpleMapString: SimpleMapStringClassMirror,
+      SimpleVarContainer: SimpleVarContainerClassMirror
+    });
+
+// **************************************************************************
 // Generator: DsonGenerator
 // Target: class SimpleDateContainer
 // **************************************************************************

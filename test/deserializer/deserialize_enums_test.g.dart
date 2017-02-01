@@ -3,7 +3,15 @@
 part of deserialiazer.deserialize_enums_test;
 
 // **************************************************************************
-// Generator: BuiltMirrorsGenerator
+// Generator: InitClassMirrorsGenerator
+// Target: library deserialiazer.deserialize_enums_test
+// **************************************************************************
+
+_initClassMirrors() => initClassMirrors(
+    {Color: ColorClassMirror, ObjectWithEnum: ObjectWithEnumClassMirror});
+
+// **************************************************************************
+// Generator: ClassMirrorsGenerator
 // Target: class Color
 // **************************************************************************
 

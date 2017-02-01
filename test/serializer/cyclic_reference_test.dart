@@ -7,14 +7,7 @@ import 'package:test/test.dart';
 part 'cyclic_reference_test.g.dart';
 
 main() {
-  initClassMirrors(<Type, ClassMirror>{
-    Employee: EmployeeClassMirror,
-    Address: AddressClassMirror,
-    Employee2: Employee2ClassMirror,
-    Address2: Address2ClassMirror,
-    Student: StudentClassMirror,
-    Course: CourseClassMirror
-  });
+  _initClassMirrors();
 
   group('ciclical test with id >', () {
 

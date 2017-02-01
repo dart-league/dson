@@ -3,6 +3,21 @@
 part of deserialiazer.deserialize_generic_test;
 
 // **************************************************************************
+// Generator: InitClassMirrorsGenerator
+// Target: library deserialiazer.deserialize_generic_test
+// **************************************************************************
+
+_initClassMirrors() => initClassMirrors({
+      SimpleClass: SimpleClassClassMirror,
+      ListClass: ListClassClassMirror,
+      ListListClass: ListListClassClassMirror,
+      ListListListClass: ListListListClassClassMirror,
+      ListMapClass: ListMapClassClassMirror,
+      ListListMapClass: ListListMapClassClassMirror,
+      MapClass: MapClassClassMirror
+    });
+
+// **************************************************************************
 // Generator: DsonGenerator
 // Target: class SimpleClass
 // **************************************************************************

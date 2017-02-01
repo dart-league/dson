@@ -3,7 +3,15 @@
 part of serializar.serialize_enums_test;
 
 // **************************************************************************
-// Generator: BuiltMirrorsGenerator
+// Generator: InitClassMirrorsGenerator
+// Target: library serializar.serialize_enums_test
+// **************************************************************************
+
+_initClassMirrors() => initClassMirrors(
+    {Color: ColorClassMirror, ObjectWithEnum: ObjectWithEnumClassMirror});
+
+// **************************************************************************
+// Generator: ClassMirrorsGenerator
 // Target: class Color
 // **************************************************************************
 

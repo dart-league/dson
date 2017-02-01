@@ -96,20 +96,7 @@ class SimpleVarContainer extends _$SimpleVarContainerSerializable {
 }
 
 main() {
-  initClassMirrors(<Type, ClassMirror>{
-    SimpleDateContainer: SimpleDateContainerClassMirror,
-    TestClass1: TestClass1ClassMirror,
-    JustObject: JustObjectClassMirror,
-    SetClass: SetClassClassMirror,
-    TestGetter: TestGetterClassMirror,
-    TestSetter: TestSetterClassMirror,
-    NestedClass: NestedClassClassMirror,
-    SimpleClass: SimpleClassClassMirror,
-    SimpleList: SimpleListClassMirror,
-    SimpleMap: SimpleMapClassMirror,
-    SimpleMapString: SimpleMapStringClassMirror,
-    SimpleVarContainer: SimpleVarContainerClassMirror
-  });
+  _initClassMirrors();
 
   test('deserialize: simple', () {
     TestClass1 test = fromJson('{"name":"test","matter":true,"intNumber":2,"number":5,"list":[1,2,3],"map":{"k":"o"},"the_renamed":"test"}', TestClass1);

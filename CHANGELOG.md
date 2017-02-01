@@ -3,6 +3,12 @@
 * [ ] Add include parameter to serialize function
 * [ ] Add uuid check over hashCode for cyclical references
 
+## 0.4.1
+
+* use latest version of `serializable` and `built_mirrors`
+* change use of `BuiltMirrorsGenerator` to `ClassMirrorsGenerator`
+* add `InitClassMirrorsGenerator` to `phase.dart`
+
 ## 0.4.0
 
 * Migrate code to use [serializable](https://pub.dartlang.org/packages/serializable)

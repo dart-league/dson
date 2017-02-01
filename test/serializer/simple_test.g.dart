@@ -3,6 +3,20 @@
 part of serializer.simple_test;
 
 // **************************************************************************
+// Generator: InitClassMirrorsGenerator
+// Target: library serializer.simple_test
+// **************************************************************************
+
+_initClassMirrors() => initClassMirrors({
+      JustObject: JustObjectClassMirror,
+      TestGetter: TestGetterClassMirror,
+      NestedClass: NestedClassClassMirror,
+      SetClass: SetClassClassMirror,
+      TestClass1: TestClass1ClassMirror,
+      SimpleDateContainer: SimpleDateContainerClassMirror
+    });
+
+// **************************************************************************
 // Generator: DsonGenerator
 // Target: class JustObject
 // **************************************************************************
