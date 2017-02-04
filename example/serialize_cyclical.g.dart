@@ -3,12 +3,15 @@
 part of example.serialize_cyclical;
 
 // **************************************************************************
-// Generator: InitClassMirrorsGenerator
+// Generator: InitMirrorsGenerator
 // Target: library example.serialize_cyclical
 // **************************************************************************
 
-_initClassMirrors() => initClassMirrors(
-    {Employee: EmployeeClassMirror, Address: AddressClassMirror});
+_initMirrors() {
+  initClassMirrors(
+      {Employee: EmployeeClassMirror, Address: AddressClassMirror});
+  initFunctionMirrors({});
+}
 
 // **************************************************************************
 // Generator: DsonGenerator
@@ -40,7 +43,7 @@ abstract class _$EmployeeSerializable extends SerializableMap {
       case 'manager':
         return manager;
     }
-    throwFieldNotFoundException(key, "Employee");
+    throwFieldNotFoundException(key, 'Employee');
   }
 
   operator []=(String key, value) {
@@ -61,10 +64,10 @@ abstract class _$EmployeeSerializable extends SerializableMap {
         manager = value;
         return;
     }
-    throwFieldNotFoundException(key, "Employee");
+    throwFieldNotFoundException(key, 'Employee');
   }
 
-  get keys => const ['id', 'firstName', 'lastName', 'address', 'manager'];
+  get keys => EmployeeClassMirror.fields.keys;
 }
 
 _Employee__Constructor(params) => new Employee();
@@ -134,7 +137,7 @@ abstract class _$AddressSerializable extends SerializableMap {
       case 'owner':
         return owner;
     }
-    throwFieldNotFoundException(key, "Address");
+    throwFieldNotFoundException(key, 'Address');
   }
 
   operator []=(String key, value) {
@@ -158,10 +161,10 @@ abstract class _$AddressSerializable extends SerializableMap {
         owner = value;
         return;
     }
-    throwFieldNotFoundException(key, "Address");
+    throwFieldNotFoundException(key, 'Address');
   }
 
-  get keys => const ['id', 'street', 'city', 'country', 'postalCode', 'owner'];
+  get keys => AddressClassMirror.fields.keys;
 }
 
 _Address__Constructor(params) => new Address();

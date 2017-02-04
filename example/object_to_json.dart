@@ -25,7 +25,7 @@ class Person extends _$PersonSerializable {
 }
 
 void main() {
-  _initClassMirrors();
+  _initMirrors();
 
   Person object = new Person()
     ..id = 1

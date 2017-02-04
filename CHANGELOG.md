@@ -3,6 +3,11 @@
 * [ ] Add include parameter to serialize function
 * [ ] Add uuid check over hashCode for cyclical references
 
+## 0.5.0
+
+- upgrade to new version of `serializable`
+- change usage of `_initClassMirrors` to `_initMirrors`
+
 ## 0.4.1
 
 * use latest version of `serializable` and `built_mirrors`

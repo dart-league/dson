@@ -72,7 +72,7 @@ class Course extends _$CourseSerializable {
 }
 
 main() {
-  _initClassMirrors();
+  _initMirrors();
 
   group('exclude', () {
     var manager = new Employee()

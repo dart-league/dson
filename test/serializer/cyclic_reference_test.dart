@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 part 'cyclic_reference_test.g.dart';
 
 main() {
-  _initClassMirrors();
+  _initMirrors();
 
   group('ciclical test with id >', () {
 

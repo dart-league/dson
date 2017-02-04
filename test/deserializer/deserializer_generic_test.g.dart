@@ -3,19 +3,22 @@
 part of deserialiazer.deserialize_generic_test;
 
 // **************************************************************************
-// Generator: InitClassMirrorsGenerator
+// Generator: InitMirrorsGenerator
 // Target: library deserialiazer.deserialize_generic_test
 // **************************************************************************
 
-_initClassMirrors() => initClassMirrors({
-      SimpleClass: SimpleClassClassMirror,
-      ListClass: ListClassClassMirror,
-      ListListClass: ListListClassClassMirror,
-      ListListListClass: ListListListClassClassMirror,
-      ListMapClass: ListMapClassClassMirror,
-      ListListMapClass: ListListMapClassClassMirror,
-      MapClass: MapClassClassMirror
-    });
+_initMirrors() {
+  initClassMirrors({
+    SimpleClass: SimpleClassClassMirror,
+    ListClass: ListClassClassMirror,
+    ListListClass: ListListClassClassMirror,
+    ListListListClass: ListListListClassClassMirror,
+    ListMapClass: ListMapClassClassMirror,
+    ListListMapClass: ListListMapClassClassMirror,
+    MapClass: MapClassClassMirror
+  });
+  initFunctionMirrors({});
+}
 
 // **************************************************************************
 // Generator: DsonGenerator
@@ -30,8 +33,10 @@ abstract class _$SimpleClassSerializable extends SerializableMap {
     switch (key) {
       case 'name':
         return name;
+      case 'toString':
+        return toString;
     }
-    throwFieldNotFoundException(key, "SimpleClass");
+    throwFieldNotFoundException(key, 'SimpleClass');
   }
 
   operator []=(String key, value) {
@@ -40,10 +45,10 @@ abstract class _$SimpleClassSerializable extends SerializableMap {
         name = value;
         return;
     }
-    throwFieldNotFoundException(key, "SimpleClass");
+    throwFieldNotFoundException(key, 'SimpleClass');
   }
 
-  get keys => const ['name'];
+  get keys => SimpleClassClassMirror.fields.keys;
 }
 
 _SimpleClass__Constructor(params) => new SimpleClass();
@@ -64,7 +69,10 @@ const SimpleClassClassMirror = const ClassMirror(
     ],
     setters: const [
       'name'
-    ]);
+    ],
+    methods: const {
+      'toString': const FunctionMirror(name: 'toString', returnType: String)
+    });
 
 // **************************************************************************
 // Generator: DsonGenerator
@@ -80,7 +88,7 @@ abstract class _$ListClassSerializable extends SerializableMap {
       case 'list':
         return list;
     }
-    throwFieldNotFoundException(key, "ListClass");
+    throwFieldNotFoundException(key, 'ListClass');
   }
 
   operator []=(String key, value) {
@@ -89,10 +97,10 @@ abstract class _$ListClassSerializable extends SerializableMap {
         list = value;
         return;
     }
-    throwFieldNotFoundException(key, "ListClass");
+    throwFieldNotFoundException(key, 'ListClass');
   }
 
-  get keys => const ['list'];
+  get keys => ListClassClassMirror.fields.keys;
 }
 
 _ListClass__Constructor(params) => new ListClass();
@@ -125,7 +133,7 @@ abstract class _$ListListClassSerializable extends SerializableMap {
       case 'list':
         return list;
     }
-    throwFieldNotFoundException(key, "ListListClass");
+    throwFieldNotFoundException(key, 'ListListClass');
   }
 
   operator []=(String key, value) {
@@ -134,10 +142,10 @@ abstract class _$ListListClassSerializable extends SerializableMap {
         list = value;
         return;
     }
-    throwFieldNotFoundException(key, "ListListClass");
+    throwFieldNotFoundException(key, 'ListListClass');
   }
 
-  get keys => const ['list'];
+  get keys => ListListClassClassMirror.fields.keys;
 }
 
 _ListListClass__Constructor(params) => new ListListClass();
@@ -173,7 +181,7 @@ abstract class _$ListListListClassSerializable extends SerializableMap {
       case 'list':
         return list;
     }
-    throwFieldNotFoundException(key, "ListListListClass");
+    throwFieldNotFoundException(key, 'ListListListClass');
   }
 
   operator []=(String key, value) {
@@ -182,10 +190,10 @@ abstract class _$ListListListClassSerializable extends SerializableMap {
         list = value;
         return;
     }
-    throwFieldNotFoundException(key, "ListListListClass");
+    throwFieldNotFoundException(key, 'ListListListClass');
   }
 
-  get keys => const ['list'];
+  get keys => ListListListClassClassMirror.fields.keys;
 }
 
 _ListListListClass__Constructor(params) => new ListListListClass();
@@ -224,7 +232,7 @@ abstract class _$ListMapClassSerializable extends SerializableMap {
       case 'list':
         return list;
     }
-    throwFieldNotFoundException(key, "ListMapClass");
+    throwFieldNotFoundException(key, 'ListMapClass');
   }
 
   operator []=(String key, value) {
@@ -233,10 +241,10 @@ abstract class _$ListMapClassSerializable extends SerializableMap {
         list = value;
         return;
     }
-    throwFieldNotFoundException(key, "ListMapClass");
+    throwFieldNotFoundException(key, 'ListMapClass');
   }
 
-  get keys => const ['list'];
+  get keys => ListMapClassClassMirror.fields.keys;
 }
 
 _ListMapClass__Constructor(params) => new ListMapClass();
@@ -279,7 +287,7 @@ abstract class _$ListListMapClassSerializable extends SerializableMap {
       case 'list':
         return list;
     }
-    throwFieldNotFoundException(key, "ListListMapClass");
+    throwFieldNotFoundException(key, 'ListListMapClass');
   }
 
   operator []=(String key, value) {
@@ -288,10 +296,10 @@ abstract class _$ListListMapClassSerializable extends SerializableMap {
         list = value;
         return;
     }
-    throwFieldNotFoundException(key, "ListListMapClass");
+    throwFieldNotFoundException(key, 'ListListMapClass');
   }
 
-  get keys => const ['list'];
+  get keys => ListListMapClassClassMirror.fields.keys;
 }
 
 _ListListMapClass__Constructor(params) => new ListListMapClass();
@@ -333,7 +341,7 @@ abstract class _$MapClassSerializable extends SerializableMap {
       case 'map':
         return map;
     }
-    throwFieldNotFoundException(key, "MapClass");
+    throwFieldNotFoundException(key, 'MapClass');
   }
 
   operator []=(String key, value) {
@@ -342,10 +350,10 @@ abstract class _$MapClassSerializable extends SerializableMap {
         map = value;
         return;
     }
-    throwFieldNotFoundException(key, "MapClass");
+    throwFieldNotFoundException(key, 'MapClass');
   }
 
-  get keys => const ['map'];
+  get keys => MapClassClassMirror.fields.keys;
 }
 
 _MapClass__Constructor(params) => new MapClass();

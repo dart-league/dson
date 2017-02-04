@@ -30,7 +30,7 @@ class Address extends _$AddressSerializable {
 
 
 void main() {
-  _initClassMirrors();
+  _initMirrors();
 
   var manager = new Employee()
     ..id = 1

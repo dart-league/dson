@@ -25,7 +25,7 @@ class Course extends _$CourseSerializable {
 }
 
 void main() {
-  _initClassMirrors();
+  _initMirrors();
 
   var student1 = new Student()
     ..id = 1
@@ -55,6 +55,15 @@ void main() {
 
   var students = [student1, student2, student3];
 
+  print(toJson(students));
+  /*
+   will print:
+    '['
+      '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]},'
+      '{"id":2,"name":"student2","courses":[{"id":1},{"id":2}]},'
+      '{"id":3,"name":"student3","courses":[{"id":2},{"id":3}]}'
+    ']'
+  */
   print(toJson(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
 
   print(toJson(student1, depth: 'courses', exclude: 'name'));

@@ -25,7 +25,7 @@ class Course extends _$CourseSerializable {
 
 void main() {
 // by the moment is needed to initialize the mirrors manually
-  _initClassMirrors();
+  _initMirrors();
 
   var student1 = new Student()
     ..id = 1

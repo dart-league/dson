@@ -24,6 +24,8 @@ class EntityClass extends _$EntityClassSerializable {
 }
 
 void main() {
+  _initMirrors();
+
   EntityClass object = fromMap({
     "name": "test",
     "renamed": "blub",

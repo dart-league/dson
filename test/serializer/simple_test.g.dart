@@ -3,18 +3,21 @@
 part of serializer.simple_test;
 
 // **************************************************************************
-// Generator: InitClassMirrorsGenerator
+// Generator: InitMirrorsGenerator
 // Target: library serializer.simple_test
 // **************************************************************************
 
-_initClassMirrors() => initClassMirrors({
-      JustObject: JustObjectClassMirror,
-      TestGetter: TestGetterClassMirror,
-      NestedClass: NestedClassClassMirror,
-      SetClass: SetClassClassMirror,
-      TestClass1: TestClass1ClassMirror,
-      SimpleDateContainer: SimpleDateContainerClassMirror
-    });
+_initMirrors() {
+  initClassMirrors({
+    JustObject: JustObjectClassMirror,
+    TestGetter: TestGetterClassMirror,
+    NestedClass: NestedClassClassMirror,
+    SetClass: SetClassClassMirror,
+    TestClass1: TestClass1ClassMirror,
+    SimpleDateContainer: SimpleDateContainerClassMirror
+  });
+  initFunctionMirrors({});
+}
 
 // **************************************************************************
 // Generator: DsonGenerator
@@ -30,7 +33,7 @@ abstract class _$JustObjectSerializable extends SerializableMap {
       case 'object':
         return object;
     }
-    throwFieldNotFoundException(key, "JustObject");
+    throwFieldNotFoundException(key, 'JustObject');
   }
 
   operator []=(String key, value) {
@@ -39,10 +42,10 @@ abstract class _$JustObjectSerializable extends SerializableMap {
         object = value;
         return;
     }
-    throwFieldNotFoundException(key, "JustObject");
+    throwFieldNotFoundException(key, 'JustObject');
   }
 
-  get keys => const ['object'];
+  get keys => JustObjectClassMirror.fields.keys;
 }
 
 _JustObject__Constructor(params) => new JustObject();
@@ -77,7 +80,7 @@ abstract class _$TestGetterSerializable extends SerializableMap {
       case 'name':
         return name;
     }
-    throwFieldNotFoundException(key, "TestGetter");
+    throwFieldNotFoundException(key, 'TestGetter');
   }
 
   operator []=(String key, value) {
@@ -86,10 +89,10 @@ abstract class _$TestGetterSerializable extends SerializableMap {
         _name = value;
         return;
     }
-    throwFieldNotFoundException(key, "TestGetter");
+    throwFieldNotFoundException(key, 'TestGetter');
   }
 
-  get keys => const ['_name', 'name'];
+  get keys => TestGetterClassMirror.fields.keys;
 }
 
 _TestGetter__Constructor(params) => new TestGetter(params['_name']);
@@ -135,7 +138,7 @@ abstract class _$NestedClassSerializable extends SerializableMap {
       case 'getter':
         return getter;
     }
-    throwFieldNotFoundException(key, "NestedClass");
+    throwFieldNotFoundException(key, 'NestedClass');
   }
 
   operator []=(String key, value) {
@@ -150,10 +153,10 @@ abstract class _$NestedClassSerializable extends SerializableMap {
         getter = value;
         return;
     }
-    throwFieldNotFoundException(key, "NestedClass");
+    throwFieldNotFoundException(key, 'NestedClass');
   }
 
-  get keys => const ['name', 'list', 'getter'];
+  get keys => NestedClassClassMirror.fields.keys;
 }
 
 _NestedClass__Constructor(params) =>
@@ -199,7 +202,7 @@ abstract class _$SetClassSerializable extends SerializableMap {
       case 'names':
         return names;
     }
-    throwFieldNotFoundException(key, "SetClass");
+    throwFieldNotFoundException(key, 'SetClass');
   }
 
   operator []=(String key, value) {
@@ -208,10 +211,10 @@ abstract class _$SetClassSerializable extends SerializableMap {
         names = value;
         return;
     }
-    throwFieldNotFoundException(key, "SetClass");
+    throwFieldNotFoundException(key, 'SetClass');
   }
 
-  get keys => const ['names'];
+  get keys => SetClassClassMirror.fields.keys;
 }
 
 _SetClass__Constructor(params) => new SetClass(params['names']);
@@ -278,7 +281,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
       case 'renamed':
         return renamed;
     }
-    throwFieldNotFoundException(key, "TestClass1");
+    throwFieldNotFoundException(key, 'TestClass1');
   }
 
   operator []=(String key, value) {
@@ -311,20 +314,10 @@ abstract class _$TestClass1Serializable extends SerializableMap {
         renamed = value;
         return;
     }
-    throwFieldNotFoundException(key, "TestClass1");
+    throwFieldNotFoundException(key, 'TestClass1');
   }
 
-  get keys => const [
-        'name',
-        'matter',
-        'number',
-        'list',
-        'map',
-        'child',
-        'intNumber',
-        'ignored',
-        'renamed'
-      ];
+  get keys => TestClass1ClassMirror.fields.keys;
 }
 
 _TestClass1__Constructor(params) => new TestClass1();
@@ -394,7 +387,7 @@ abstract class _$SimpleDateContainerSerializable extends SerializableMap {
       case 'testDate':
         return testDate;
     }
-    throwFieldNotFoundException(key, "SimpleDateContainer");
+    throwFieldNotFoundException(key, 'SimpleDateContainer');
   }
 
   operator []=(String key, value) {
@@ -403,10 +396,10 @@ abstract class _$SimpleDateContainerSerializable extends SerializableMap {
         testDate = value;
         return;
     }
-    throwFieldNotFoundException(key, "SimpleDateContainer");
+    throwFieldNotFoundException(key, 'SimpleDateContainer');
   }
 
-  get keys => const ['testDate'];
+  get keys => SimpleDateContainerClassMirror.fields.keys;
 }
 
 _SimpleDateContainer__Constructor(params) => new SimpleDateContainer();

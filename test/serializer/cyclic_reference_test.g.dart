@@ -3,18 +3,21 @@
 part of serializer.cyclic_reference_serialize;
 
 // **************************************************************************
-// Generator: InitClassMirrorsGenerator
+// Generator: InitMirrorsGenerator
 // Target: library serializer.cyclic_reference_serialize
 // **************************************************************************
 
-_initClassMirrors() => initClassMirrors({
-      Employee: EmployeeClassMirror,
-      Address: AddressClassMirror,
-      Employee2: Employee2ClassMirror,
-      Address2: Address2ClassMirror,
-      Student: StudentClassMirror,
-      Course: CourseClassMirror
-    });
+_initMirrors() {
+  initClassMirrors({
+    Employee: EmployeeClassMirror,
+    Address: AddressClassMirror,
+    Employee2: Employee2ClassMirror,
+    Address2: Address2ClassMirror,
+    Student: StudentClassMirror,
+    Course: CourseClassMirror
+  });
+  initFunctionMirrors({});
+}
 
 // **************************************************************************
 // Generator: DsonGenerator
@@ -46,7 +49,7 @@ abstract class _$EmployeeSerializable extends SerializableMap {
       case 'manager':
         return manager;
     }
-    throwFieldNotFoundException(key, "Employee");
+    throwFieldNotFoundException(key, 'Employee');
   }
 
   operator []=(String key, value) {
@@ -67,10 +70,10 @@ abstract class _$EmployeeSerializable extends SerializableMap {
         manager = value;
         return;
     }
-    throwFieldNotFoundException(key, "Employee");
+    throwFieldNotFoundException(key, 'Employee');
   }
 
-  get keys => const ['id', 'firstName', 'lastName', 'address', 'manager'];
+  get keys => EmployeeClassMirror.fields.keys;
 }
 
 _Employee__Constructor(params) => new Employee();
@@ -140,7 +143,7 @@ abstract class _$AddressSerializable extends SerializableMap {
       case 'owner':
         return owner;
     }
-    throwFieldNotFoundException(key, "Address");
+    throwFieldNotFoundException(key, 'Address');
   }
 
   operator []=(String key, value) {
@@ -164,10 +167,10 @@ abstract class _$AddressSerializable extends SerializableMap {
         owner = value;
         return;
     }
-    throwFieldNotFoundException(key, "Address");
+    throwFieldNotFoundException(key, 'Address');
   }
 
-  get keys => const ['id', 'street', 'city', 'country', 'postalCode', 'owner'];
+  get keys => AddressClassMirror.fields.keys;
 }
 
 _Address__Constructor(params) => new Address();
@@ -233,7 +236,7 @@ abstract class _$Employee2Serializable extends SerializableMap {
       case 'manager':
         return manager;
     }
-    throwFieldNotFoundException(key, "Employee2");
+    throwFieldNotFoundException(key, 'Employee2');
   }
 
   operator []=(String key, value) {
@@ -251,10 +254,10 @@ abstract class _$Employee2Serializable extends SerializableMap {
         manager = value;
         return;
     }
-    throwFieldNotFoundException(key, "Employee2");
+    throwFieldNotFoundException(key, 'Employee2');
   }
 
-  get keys => const ['firstName', 'lastName', 'address', 'manager'];
+  get keys => Employee2ClassMirror.fields.keys;
 }
 
 _Employee2__Constructor(params) => new Employee2();
@@ -316,7 +319,7 @@ abstract class _$Address2Serializable extends SerializableMap {
       case 'owner':
         return owner;
     }
-    throwFieldNotFoundException(key, "Address2");
+    throwFieldNotFoundException(key, 'Address2');
   }
 
   operator []=(String key, value) {
@@ -337,10 +340,10 @@ abstract class _$Address2Serializable extends SerializableMap {
         owner = value;
         return;
     }
-    throwFieldNotFoundException(key, "Address2");
+    throwFieldNotFoundException(key, 'Address2');
   }
 
-  get keys => const ['street', 'city', 'country', 'postalCode', 'owner'];
+  get keys => Address2ClassMirror.fields.keys;
 }
 
 _Address2__Constructor(params) => new Address2();
@@ -398,7 +401,7 @@ abstract class _$StudentSerializable extends SerializableMap {
       case 'courses':
         return courses;
     }
-    throwFieldNotFoundException(key, "Student");
+    throwFieldNotFoundException(key, 'Student');
   }
 
   operator []=(String key, value) {
@@ -413,10 +416,10 @@ abstract class _$StudentSerializable extends SerializableMap {
         courses = value;
         return;
     }
-    throwFieldNotFoundException(key, "Student");
+    throwFieldNotFoundException(key, 'Student');
   }
 
-  get keys => const ['id', 'name', 'courses'];
+  get keys => StudentClassMirror.fields.keys;
 }
 
 _Student__Constructor(params) => new Student();
@@ -467,7 +470,7 @@ abstract class _$CourseSerializable extends SerializableMap {
       case 'students':
         return students;
     }
-    throwFieldNotFoundException(key, "Course");
+    throwFieldNotFoundException(key, 'Course');
   }
 
   operator []=(String key, value) {
@@ -482,10 +485,10 @@ abstract class _$CourseSerializable extends SerializableMap {
         students = value;
         return;
     }
-    throwFieldNotFoundException(key, "Course");
+    throwFieldNotFoundException(key, 'Course');
   }
 
-  get keys => const ['id', 'beginDate', 'students'];
+  get keys => CourseClassMirror.fields.keys;
 }
 
 _Course__Constructor(params) => new Course();

@@ -3,11 +3,14 @@
 part of example.object_to_json;
 
 // **************************************************************************
-// Generator: InitClassMirrorsGenerator
+// Generator: InitMirrorsGenerator
 // Target: library example.object_to_json
 // **************************************************************************
 
-_initClassMirrors() => initClassMirrors({Person: PersonClassMirror});
+_initMirrors() {
+  initClassMirrors({Person: PersonClassMirror});
+  initFunctionMirrors({});
+}
 
 // **************************************************************************
 // Generator: DsonGenerator
@@ -54,7 +57,7 @@ abstract class _$PersonSerializable extends SerializableMap {
       case 'doGetter':
         return doGetter;
     }
-    throwFieldNotFoundException(key, "Person");
+    throwFieldNotFoundException(key, 'Person');
   }
 
   operator []=(String key, value) {
@@ -84,20 +87,10 @@ abstract class _$PersonSerializable extends SerializableMap {
         _private = value;
         return;
     }
-    throwFieldNotFoundException(key, "Person");
+    throwFieldNotFoundException(key, 'Person');
   }
 
-  get keys => const [
-        'id',
-        'firstName',
-        'lastName',
-        'height',
-        'dateOfBirth',
-        'otherName',
-        'notVisible',
-        '_private',
-        'doGetter'
-      ];
+  get keys => PersonClassMirror.fields.keys;
 }
 
 _Person__Constructor(params) => new Person();

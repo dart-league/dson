@@ -3,14 +3,17 @@
 part of deserialiazer.deserialize_inmutable_class_test;
 
 // **************************************************************************
-// Generator: InitClassMirrorsGenerator
+// Generator: InitMirrorsGenerator
 // Target: library deserialiazer.deserialize_inmutable_class_test
 // **************************************************************************
 
-_initClassMirrors() => initClassMirrors({
-      ImmutableClass: ImmutableClassClassMirror,
-      ImmutableClassInvalidParameter: ImmutableClassInvalidParameterClassMirror
-    });
+_initMirrors() {
+  initClassMirrors({
+    ImmutableClass: ImmutableClassClassMirror,
+    ImmutableClassInvalidParameter: ImmutableClassInvalidParameterClassMirror
+  });
+  initFunctionMirrors({});
+}
 
 // **************************************************************************
 // Generator: DsonGenerator
@@ -28,16 +31,16 @@ abstract class _$ImmutableClassSerializable extends SerializableMap {
       case 'renamed':
         return renamed;
     }
-    throwFieldNotFoundException(key, "ImmutableClass");
+    throwFieldNotFoundException(key, 'ImmutableClass');
   }
 
   operator []=(String key, value) {
     switch (key) {
     }
-    throwFieldNotFoundException(key, "ImmutableClass");
+    throwFieldNotFoundException(key, 'ImmutableClass');
   }
 
-  get keys => const ['name', 'renamed'];
+  get keys => ImmutableClassClassMirror.fields.keys;
 }
 
 _ImmutableClass__Constructor(params) =>
@@ -79,16 +82,16 @@ abstract class _$ImmutableClassInvalidParameterSerializable
       case 'name':
         return name;
     }
-    throwFieldNotFoundException(key, "ImmutableClassInvalidParameter");
+    throwFieldNotFoundException(key, 'ImmutableClassInvalidParameter');
   }
 
   operator []=(String key, value) {
     switch (key) {
     }
-    throwFieldNotFoundException(key, "ImmutableClassInvalidParameter");
+    throwFieldNotFoundException(key, 'ImmutableClassInvalidParameter');
   }
 
-  get keys => const ['name'];
+  get keys => ImmutableClassInvalidParameterClassMirror.fields.keys;
 }
 
 _ImmutableClassInvalidParameter__Constructor(params) =>

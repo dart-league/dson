@@ -25,7 +25,7 @@ class EntityClass extends _$EntityClassSerializable {
 
 void main() {
   // by the moment is needed to initialize the mirrors manually
-  _initClassMirrors();
+  _initMirrors();
 
   EntityClass object = fromJson('{"name":"test","renamed":true,"notVisible":"it is", "setted": "awesome"}', EntityClass);
 

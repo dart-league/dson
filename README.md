@@ -81,7 +81,7 @@ class Person extends _$PersonSerializable {
 }
 
 void main() {
-  _initClassMirrors();
+  _initMirrors();
 
   Person object = new Person()
     ..id = 1
@@ -130,7 +130,7 @@ class Person extends _$PersonSerializable {
 }
 
 void main() {
-  _initClassMirrors();
+  _initMirrors();
 
   Person object = new Person()
     ..id = 1
@@ -184,7 +184,7 @@ class Address extends _$AddressSerializable {
 
 
 void main() {
-  _initClassMirrors();
+  _initMirrors();
 
   var manager = new Employee()
     ..id = 1
@@ -264,7 +264,7 @@ class Course extends _$CourseSerializable {
 
 void main() {
 // by the moment is needed to initialize the mirrors manually
-  _initClassMirrors();
+  _initMirrors();
 
   var student1 = new Student()
     ..id = 1
@@ -369,7 +369,7 @@ class Course extends _$CourseSerializable {
 }
 
 void main() {
-  _initClassMirrors();
+  _initMirrors();
 
   var student1 = new Student()
     ..id = 1
@@ -399,6 +399,15 @@ void main() {
 
   var students = [student1, student2, student3];
 
+  print(toJson(students));
+  /*
+   will print:
+    '['
+      '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]},'
+      '{"id":2,"name":"student2","courses":[{"id":1},{"id":2}]},'
+      '{"id":3,"name":"student3","courses":[{"id":2},{"id":3}]}'
+    ']'
+  */
   print(toJson(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
 
   print(toJson(student1, depth: 'courses', exclude: 'name'));
@@ -482,7 +491,7 @@ class EntityClass extends _$EntityClassSerializable {
 
 void main() {
   // by the moment is needed to initialize the mirrors manually
-  _initClassMirrors();
+  _initMirrors();
 
   EntityClass object = fromJson('{"name":"test","renamed":true,"notVisible":"it is", "setted": "awesome"}', EntityClass);
 
@@ -530,6 +539,8 @@ class EntityClass extends _$EntityClassSerializable {
 }
 
 void main() {
+  _initMirrors();
+
   EntityClass object = fromMap({
     "name": "test",
     "renamed": "blub",

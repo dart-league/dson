@@ -96,7 +96,7 @@ class SimpleVarContainer extends _$SimpleVarContainerSerializable {
 }
 
 main() {
-  _initClassMirrors();
+  _initMirrors();
 
   test('deserialize: simple', () {
     TestClass1 test = fromJson('{"name":"test","matter":true,"intNumber":2,"number":5,"list":[1,2,3],"map":{"k":"o"},"the_renamed":"test"}', TestClass1);

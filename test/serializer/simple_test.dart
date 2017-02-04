@@ -62,7 +62,7 @@ class SimpleDateContainer extends _$SimpleDateContainerSerializable {
 
 
 main() {
-  _initClassMirrors();
+  _initMirrors();
 
   group('simple serialize >', () {
     test('serialize: simple String array test', () {

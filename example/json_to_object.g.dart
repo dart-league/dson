@@ -3,11 +3,14 @@
 part of example.json_to_object;
 
 // **************************************************************************
-// Generator: InitClassMirrorsGenerator
+// Generator: InitMirrorsGenerator
 // Target: library example.json_to_object
 // **************************************************************************
 
-_initClassMirrors() => initClassMirrors({EntityClass: EntityClassClassMirror});
+_initMirrors() {
+  initClassMirrors({EntityClass: EntityClassClassMirror});
+  initFunctionMirrors({});
+}
 
 // **************************************************************************
 // Generator: DsonGenerator
@@ -43,7 +46,7 @@ abstract class _$EntityClassSerializable extends SerializableMap {
       case 'setted':
         return setted;
     }
-    throwFieldNotFoundException(key, "EntityClass");
+    throwFieldNotFoundException(key, 'EntityClass');
   }
 
   operator []=(String key, value) {
@@ -67,17 +70,10 @@ abstract class _$EntityClassSerializable extends SerializableMap {
         setted = value;
         return;
     }
-    throwFieldNotFoundException(key, "EntityClass");
+    throwFieldNotFoundException(key, 'EntityClass');
   }
 
-  get keys => const [
-        'name',
-        '_setted',
-        'otherName',
-        'notVisible',
-        'children',
-        'setted'
-      ];
+  get keys => EntityClassClassMirror.fields.keys;
 }
 
 _EntityClass__Constructor(params) => new EntityClass();

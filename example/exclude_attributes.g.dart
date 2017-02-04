@@ -3,12 +3,14 @@
 part of example.exclude_attributes;
 
 // **************************************************************************
-// Generator: InitClassMirrorsGenerator
+// Generator: InitMirrorsGenerator
 // Target: library example.exclude_attributes
 // **************************************************************************
 
-_initClassMirrors() =>
-    initClassMirrors({Student: StudentClassMirror, Course: CourseClassMirror});
+_initMirrors() {
+  initClassMirrors({Student: StudentClassMirror, Course: CourseClassMirror});
+  initFunctionMirrors({});
+}
 
 // **************************************************************************
 // Generator: DsonGenerator
@@ -32,7 +34,7 @@ abstract class _$StudentSerializable extends SerializableMap {
       case 'courses':
         return courses;
     }
-    throwFieldNotFoundException(key, "Student");
+    throwFieldNotFoundException(key, 'Student');
   }
 
   operator []=(String key, value) {
@@ -47,10 +49,10 @@ abstract class _$StudentSerializable extends SerializableMap {
         courses = value;
         return;
     }
-    throwFieldNotFoundException(key, "Student");
+    throwFieldNotFoundException(key, 'Student');
   }
 
-  get keys => const ['id', 'name', 'courses'];
+  get keys => StudentClassMirror.fields.keys;
 }
 
 _Student__Constructor(params) => new Student();
@@ -101,7 +103,7 @@ abstract class _$CourseSerializable extends SerializableMap {
       case 'students':
         return students;
     }
-    throwFieldNotFoundException(key, "Course");
+    throwFieldNotFoundException(key, 'Course');
   }
 
   operator []=(String key, value) {
@@ -116,10 +118,10 @@ abstract class _$CourseSerializable extends SerializableMap {
         students = value;
         return;
     }
-    throwFieldNotFoundException(key, "Course");
+    throwFieldNotFoundException(key, 'Course');
   }
 
-  get keys => const ['id', 'beginDate', 'students'];
+  get keys => CourseClassMirror.fields.keys;
 }
 
 _Course__Constructor(params) => new Course();
