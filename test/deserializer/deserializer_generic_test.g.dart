@@ -28,6 +28,7 @@ _initMirrors() {
 abstract class _$SimpleClassSerializable extends SerializableMap {
   get name;
   set name(v);
+  String toString();
 
   operator [](String key) {
     switch (key) {
@@ -55,24 +56,22 @@ _SimpleClass__Constructor(params) => new SimpleClass();
 
 const $$SimpleClass_fields_name = const DeclarationMirror(type: String);
 
-const SimpleClassClassMirror = const ClassMirror(
-    name: 'SimpleClass',
-    constructors: const {
-      '': const FunctionMirror(
-          parameters: const {}, call: _SimpleClass__Constructor)
-    },
-    fields: const {
-      'name': $$SimpleClass_fields_name
-    },
-    getters: const [
-      'name'
-    ],
-    setters: const [
-      'name'
-    ],
-    methods: const {
-      'toString': const FunctionMirror(name: 'toString', returnType: String)
-    });
+const SimpleClassClassMirror =
+    const ClassMirror(name: 'SimpleClass', constructors: const {
+  '': const FunctionMirror(
+      parameters: const {}, call: _SimpleClass__Constructor)
+}, fields: const {
+  'name': $$SimpleClass_fields_name
+}, getters: const [
+  'name'
+], setters: const [
+  'name'
+], methods: const {
+  'toString': const FunctionMirror(
+    name: 'toString',
+    returnType: String,
+  )
+});
 
 // **************************************************************************
 // Generator: DsonGenerator

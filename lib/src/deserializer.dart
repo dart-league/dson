@@ -138,9 +138,8 @@ _convertGenericListOrSet(types, List fillerList) {
       subType = types[1];
   var resultList = type == List ? [] : new Set();
 
-  fillerList.forEach((item) {
-    resultList.add(_convertValue(subType, item, "@LIST_ITEM"));
-  });
+  // ignore: undefined_method
+  fillerList.forEach((item) => resultList.add(_convertValue(subType, item, "@LIST_ITEM")));
 
   _desLog.fine("Created generic list: ${resultList}");
   return resultList;
