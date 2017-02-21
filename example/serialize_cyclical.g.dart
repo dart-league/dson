@@ -19,18 +19,18 @@ _initMirrors() {
 // **************************************************************************
 
 abstract class _$EmployeeSerializable extends SerializableMap {
-  get id;
-  get firstName;
-  get lastName;
-  get address;
-  get manager;
-  set id(v);
-  set firstName(v);
-  set lastName(v);
-  set address(v);
-  set manager(v);
+  int get id;
+  String get firstName;
+  String get lastName;
+  Address get address;
+  Employee get manager;
+  void set id(int v);
+  void set firstName(String v);
+  void set lastName(String v);
+  void set address(Address v);
+  void set manager(Employee v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'id':
         return id;
@@ -46,7 +46,7 @@ abstract class _$EmployeeSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Employee');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'id':
         id = value;
@@ -109,20 +109,20 @@ const EmployeeClassMirror =
 // **************************************************************************
 
 abstract class _$AddressSerializable extends SerializableMap {
-  get id;
-  get street;
-  get city;
-  get country;
-  get postalCode;
-  get owner;
-  set id(v);
-  set street(v);
-  set city(v);
-  set country(v);
-  set postalCode(v);
-  set owner(v);
+  int get id;
+  String get street;
+  String get city;
+  String get country;
+  String get postalCode;
+  Employee get owner;
+  void set id(int v);
+  void set street(String v);
+  void set city(String v);
+  void set country(String v);
+  void set postalCode(String v);
+  void set owner(Employee v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'id':
         return id;
@@ -140,7 +140,7 @@ abstract class _$AddressSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Address');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'id':
         id = value;

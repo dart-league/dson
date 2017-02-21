@@ -13,7 +13,7 @@ class DsonGenerator extends GeneratorForAnnotation<Serializable> {
   const DsonGenerator();
 
   @override
-  Future<String> generateForAnnotatedElement(ClassElement element, Serializable annotation,
+  Future<String> generateForAnnotatedElement(covariant ClassElement element, Serializable annotation,
       BuildStep buildStep) async =>
       await const SerializableGenerator(useClassMirrors: true).generateForAnnotatedElement(element, annotation, buildStep)
           + await const MirrorsGenerator().generateForAnnotatedElement(element, annotation, buildStep);

@@ -18,20 +18,20 @@ _initMirrors() {
 // **************************************************************************
 
 abstract class _$EntityClassSerializable extends SerializableMap {
-  get name;
-  get _setted;
-  get otherName;
-  get notVisible;
-  get children;
-  get setted;
-  set name(v);
-  set _setted(v);
-  set otherName(v);
-  set notVisible(v);
-  set children(v);
-  set setted(v);
+  String get name;
+  String get _setted;
+  bool get otherName;
+  String get notVisible;
+  List<EntityClass> get children;
+  String get setted;
+  void set name(String v);
+  void set _setted(String v);
+  void set otherName(bool v);
+  void set notVisible(String v);
+  void set children(List<EntityClass> v);
+  void set setted(String v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'name':
         return name;
@@ -49,7 +49,7 @@ abstract class _$EntityClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'EntityClass');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'name':
         name = value;

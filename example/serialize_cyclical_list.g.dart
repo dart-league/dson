@@ -18,14 +18,14 @@ _initMirrors() {
 // **************************************************************************
 
 abstract class _$StudentSerializable extends SerializableMap {
-  get id;
-  get name;
-  get courses;
-  set id(v);
-  set name(v);
-  set courses(v);
+  int get id;
+  String get name;
+  List<Course> get courses;
+  void set id(int v);
+  void set name(String v);
+  void set courses(List<Course> v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'id':
         return id;
@@ -37,7 +37,7 @@ abstract class _$StudentSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Student');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'id':
         id = value;
@@ -87,14 +87,14 @@ const StudentClassMirror =
 // **************************************************************************
 
 abstract class _$CourseSerializable extends SerializableMap {
-  get id;
-  get beginDate;
-  get students;
-  set id(v);
-  set beginDate(v);
-  set students(v);
+  int get id;
+  DateTime get beginDate;
+  List<Student> get students;
+  void set id(int v);
+  void set beginDate(DateTime v);
+  void set students(List<Student> v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'id':
         return id;
@@ -106,7 +106,7 @@ abstract class _$CourseSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Course');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'id':
         id = value;

@@ -77,10 +77,10 @@ dynamic fromMap(Map dataObject, Type type) {
 ///    have a constructor without or only optional arguments.
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
-List fromMapList(List<Map> dataMap, Type clazz) {
-  List returnList = [];
+List<T> fromMapList<T extends Object>(List<Map> dataMap, Type clazz) {
+  var returnList = <T>[];
   dataMap.forEach((item) {
-    Object obj = _convertValue(clazz, item);
+    T obj = _convertValue(clazz, item) as T;
     returnList.add(obj);
   });
 

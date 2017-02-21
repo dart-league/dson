@@ -25,18 +25,18 @@ _initMirrors() {
 // **************************************************************************
 
 abstract class _$EmployeeSerializable extends SerializableMap {
-  get id;
-  get firstName;
-  get lastName;
-  get address;
-  get manager;
-  set id(v);
-  set firstName(v);
-  set lastName(v);
-  set address(v);
-  set manager(v);
+  int get id;
+  String get firstName;
+  String get lastName;
+  Address get address;
+  Employee get manager;
+  void set id(int v);
+  void set firstName(String v);
+  void set lastName(String v);
+  void set address(Address v);
+  void set manager(Employee v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'id':
         return id;
@@ -52,7 +52,7 @@ abstract class _$EmployeeSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Employee');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'id':
         id = value;
@@ -115,20 +115,20 @@ const EmployeeClassMirror =
 // **************************************************************************
 
 abstract class _$AddressSerializable extends SerializableMap {
-  get id;
-  get street;
-  get city;
-  get country;
-  get postalCode;
-  get owner;
-  set id(v);
-  set street(v);
-  set city(v);
-  set country(v);
-  set postalCode(v);
-  set owner(v);
+  int get id;
+  String get street;
+  String get city;
+  String get country;
+  String get postalCode;
+  Employee get owner;
+  void set id(int v);
+  void set street(String v);
+  void set city(String v);
+  void set country(String v);
+  void set postalCode(String v);
+  void set owner(Employee v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'id':
         return id;
@@ -146,7 +146,7 @@ abstract class _$AddressSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Address');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'id':
         id = value;
@@ -216,16 +216,16 @@ const AddressClassMirror =
 // **************************************************************************
 
 abstract class _$Employee2Serializable extends SerializableMap {
-  get firstName;
-  get lastName;
-  get address;
-  get manager;
-  set firstName(v);
-  set lastName(v);
-  set address(v);
-  set manager(v);
+  String get firstName;
+  String get lastName;
+  Address2 get address;
+  Employee2 get manager;
+  void set firstName(String v);
+  void set lastName(String v);
+  void set address(Address2 v);
+  void set manager(Employee2 v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'firstName':
         return firstName;
@@ -239,7 +239,7 @@ abstract class _$Employee2Serializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Employee2');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'firstName':
         firstName = value;
@@ -295,18 +295,18 @@ const Employee2ClassMirror =
 // **************************************************************************
 
 abstract class _$Address2Serializable extends SerializableMap {
-  get street;
-  get city;
-  get country;
-  get postalCode;
-  get owner;
-  set street(v);
-  set city(v);
-  set country(v);
-  set postalCode(v);
-  set owner(v);
+  String get street;
+  String get city;
+  String get country;
+  String get postalCode;
+  Employee2 get owner;
+  void set street(String v);
+  void set city(String v);
+  void set country(String v);
+  void set postalCode(String v);
+  void set owner(Employee2 v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'street':
         return street;
@@ -322,7 +322,7 @@ abstract class _$Address2Serializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Address2');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'street':
         street = value;
@@ -385,14 +385,14 @@ const Address2ClassMirror =
 // **************************************************************************
 
 abstract class _$StudentSerializable extends SerializableMap {
-  get id;
-  get name;
-  get courses;
-  set id(v);
-  set name(v);
-  set courses(v);
+  int get id;
+  String get name;
+  List<Course> get courses;
+  void set id(int v);
+  void set name(String v);
+  void set courses(List<Course> v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'id':
         return id;
@@ -404,7 +404,7 @@ abstract class _$StudentSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Student');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'id':
         id = value;
@@ -454,14 +454,14 @@ const StudentClassMirror =
 // **************************************************************************
 
 abstract class _$CourseSerializable extends SerializableMap {
-  get id;
-  get beginDate;
-  get students;
-  set id(v);
-  set beginDate(v);
-  set students(v);
+  int get id;
+  DateTime get beginDate;
+  List<Student> get students;
+  void set id(int v);
+  void set beginDate(DateTime v);
+  void set students(List<Student> v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'id':
         return id;
@@ -473,7 +473,7 @@ abstract class _$CourseSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Course');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'id':
         id = value;

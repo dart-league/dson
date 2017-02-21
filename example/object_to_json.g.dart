@@ -18,25 +18,25 @@ _initMirrors() {
 // **************************************************************************
 
 abstract class _$PersonSerializable extends SerializableMap {
-  get id;
-  get firstName;
-  get lastName;
-  get height;
-  get dateOfBirth;
-  get otherName;
-  get notVisible;
-  get _private;
-  get doGetter;
-  set id(v);
-  set firstName(v);
-  set lastName(v);
-  set height(v);
-  set dateOfBirth(v);
-  set otherName(v);
-  set notVisible(v);
-  set _private(v);
+  int get id;
+  String get firstName;
+  dynamic get lastName;
+  double get height;
+  DateTime get dateOfBirth;
+  String get otherName;
+  String get notVisible;
+  String get _private;
+  String get doGetter;
+  void set id(int v);
+  void set firstName(String v);
+  void set lastName(dynamic v);
+  void set height(double v);
+  void set dateOfBirth(DateTime v);
+  void set otherName(String v);
+  void set notVisible(String v);
+  void set _private(String v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'id':
         return id;
@@ -60,7 +60,7 @@ abstract class _$PersonSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Person');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'id':
         id = value;

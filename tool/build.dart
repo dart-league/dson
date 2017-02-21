@@ -8,6 +8,6 @@ main() async {
     // In next line replace `dson` for the name of your package
     // and `test/*.dart` for the globs you want to use as input, for example `**/*.dart`
     // to take all the dart files of the project as input.
-        dsonPhase('dson', const ['test/**.dart'])),
+        dsonPhase('dson', const ['test/**.dart', 'example/**.dart'])),
       deleteFilesByDefault: true);
 }

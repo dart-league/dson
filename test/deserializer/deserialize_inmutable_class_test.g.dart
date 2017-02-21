@@ -21,10 +21,10 @@ _initMirrors() {
 // **************************************************************************
 
 abstract class _$ImmutableClassSerializable extends SerializableMap {
-  get name;
-  get renamed;
+  String get name;
+  String get renamed;
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'name':
         return name;
@@ -34,7 +34,7 @@ abstract class _$ImmutableClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'ImmutableClass');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
     }
     throwFieldNotFoundException(key, 'ImmutableClass');
@@ -75,9 +75,9 @@ const ImmutableClassClassMirror =
 abstract class _$ImmutableClassInvalidParameterSerializable
     extends SerializableMap {
   const _$ImmutableClassInvalidParameterSerializable();
-  get name;
+  String get name;
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'name':
         return name;
@@ -85,7 +85,7 @@ abstract class _$ImmutableClassInvalidParameterSerializable
     throwFieldNotFoundException(key, 'ImmutableClassInvalidParameter');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
     }
     throwFieldNotFoundException(key, 'ImmutableClassInvalidParameter');

@@ -27,10 +27,10 @@ const ColorClassMirror =
 // **************************************************************************
 
 abstract class _$ObjectWithEnumSerializable extends SerializableMap {
-  get color;
-  set color(v);
+  Color get color;
+  void set color(Color v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'color':
         return color;
@@ -38,7 +38,7 @@ abstract class _$ObjectWithEnumSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'ObjectWithEnum');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'color':
         color = value;

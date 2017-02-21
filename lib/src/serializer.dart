@@ -5,7 +5,7 @@ Logger _serLog = new Logger('object_mapper_serializer');
 /// Variable that save all the serialized objects. If an object 
 /// has been serilized in the past is going to be saved by this variable
 /// and is not going to be serialized again.
-Map<Object, Map> _serializedStack = {};
+var _serializedStack = <Object, Map>{};
 
 /// Checks if the [value] is primitive (String, number, boolean or null)
 bool isPrimitive(value) => value is String || value is num || value is bool || value == null;
@@ -116,7 +116,7 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
 //    return {'index': obj.index, 'name': obj.toString().split(".")[1]};
   }
 
-  Map result = new Map<String, dynamic>();
+  var result = <String, dynamic>{};
 
   if (_serializedStack[obj] == null) {
 
@@ -139,6 +139,7 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
     }
 
   } else {
+    // ignore: strong_mode_down_cast_composite
     result = _serializedStack[obj];
   }
 

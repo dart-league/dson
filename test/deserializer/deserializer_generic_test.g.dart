@@ -26,11 +26,11 @@ _initMirrors() {
 // **************************************************************************
 
 abstract class _$SimpleClassSerializable extends SerializableMap {
-  get name;
-  set name(v);
+  String get name;
+  void set name(String v);
   String toString();
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'name':
         return name;
@@ -40,7 +40,7 @@ abstract class _$SimpleClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'SimpleClass');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'name':
         name = value;
@@ -79,10 +79,10 @@ const SimpleClassClassMirror =
 // **************************************************************************
 
 abstract class _$ListClassSerializable extends SerializableMap {
-  get list;
-  set list(v);
+  List<SimpleClass> get list;
+  void set list(List<SimpleClass> v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'list':
         return list;
@@ -90,7 +90,7 @@ abstract class _$ListClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'ListClass');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'list':
         list = value;
@@ -124,10 +124,10 @@ const ListClassClassMirror =
 // **************************************************************************
 
 abstract class _$ListListClassSerializable extends SerializableMap {
-  get list;
-  set list(v);
+  List<List<SimpleClass>> get list;
+  void set list(List<List<SimpleClass>> v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'list':
         return list;
@@ -135,7 +135,7 @@ abstract class _$ListListClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'ListListClass');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'list':
         list = value;
@@ -172,10 +172,10 @@ const ListListClassClassMirror =
 // **************************************************************************
 
 abstract class _$ListListListClassSerializable extends SerializableMap {
-  get list;
-  set list(v);
+  List<List<List<SimpleClass>>> get list;
+  void set list(List<List<List<SimpleClass>>> v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'list':
         return list;
@@ -183,7 +183,7 @@ abstract class _$ListListListClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'ListListListClass');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'list':
         list = value;
@@ -223,10 +223,10 @@ const ListListListClassClassMirror =
 // **************************************************************************
 
 abstract class _$ListMapClassSerializable extends SerializableMap {
-  get list;
-  set list(v);
+  List<Map<String, SimpleClass>> get list;
+  void set list(List<Map<String, SimpleClass>> v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'list':
         return list;
@@ -234,7 +234,7 @@ abstract class _$ListMapClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'ListMapClass');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'list':
         list = value;
@@ -278,10 +278,10 @@ const ListMapClassClassMirror = const ClassMirror(
 // **************************************************************************
 
 abstract class _$ListListMapClassSerializable extends SerializableMap {
-  get list;
-  set list(v);
+  List<List<Map<String, SimpleClass>>> get list;
+  void set list(List<List<Map<String, SimpleClass>>> v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'list':
         return list;
@@ -289,7 +289,7 @@ abstract class _$ListListMapClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'ListListMapClass');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'list':
         list = value;
@@ -332,10 +332,10 @@ const ListListMapClassClassMirror =
 // **************************************************************************
 
 abstract class _$MapClassSerializable extends SerializableMap {
-  get map;
-  set map(v);
+  Map<String, SimpleClass> get map;
+  void set map(Map<String, SimpleClass> v);
 
-  operator [](String key) {
+  operator [](Object key) {
     switch (key) {
       case 'map':
         return map;
@@ -343,7 +343,7 @@ abstract class _$MapClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'MapClass');
   }
 
-  operator []=(String key, value) {
+  operator []=(Object key, value) {
     switch (key) {
       case 'map':
         map = value;
