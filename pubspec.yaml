@@ -1,12 +1,12 @@
 name: dson
-version: 0.5.0+2
+version: 0.6.0
 author: Luis Vargas <luisvargastijerino@gmail.com>
 description: Convert Objects to Json and Json to Objects
 homepage: https://github.com/luisvt/dson
 environment:
   sdk: '>=1.8.0'
 dependencies:
-  serializable: ^0.2.0
+  serializable: ^0.3.0
 #  serializable:
 #    path: ../serializable
 #  built_mirrors:
@@ -15,7 +15,7 @@ dependencies:
 #  built_mirrors:
 #    path: ../built_mirrors
 dev_dependencies:
-  test: '>=0.12.0'
+  test: ^0.12.0
 transformers:
 - test/pub_serve:
     $include: test/**_test.dart

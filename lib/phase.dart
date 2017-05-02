@@ -8,7 +8,7 @@ import 'package:source_gen/source_gen.dart';
 ///
 /// Example: {@example /tool/build.dart}
 /// Example: {@example /tool/watch.dart}
-dsonPhase(String packageName, Iterable<String> globs) =>
+dsonPhase([Iterable<String> globs = const ['bin/**.dart', 'web/**.dart', 'lib/**.dart']]) =>
     new Phase()
       ..addAction(
           new GeneratorBuilder(const [
@@ -16,4 +16,4 @@ dsonPhase(String packageName, Iterable<String> globs) =>
             const MirrorsGenerator(),
             const InitMirrorsGenerator()
           ]),
-          new InputSet(packageName, globs));
+          new InputSet(new PackageGraph.forThisPackage().root.name, globs));

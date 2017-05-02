@@ -12,7 +12,11 @@ This library was initially a fork from [Dartson](https://github.com/eredo/dartso
   * Using `@ignore` over every attribute. This make excluding attributes too global and hardcoded, so users can only specify one exclusion schema.
   * Using `exclude` map as parameter for `toJson` method. This is more flexible, since it allows to have many exclusion schemas for serialization.
  * DSON uses the annotation `@serializable` instead `@entity` which is used by Dartson.
- 
+
+## Tutorials
+
+[![DSON tutorials](http://img.youtube.com/vi/dZrCrCsw208/0.jpg)](https://www.youtube.com/watch?v=dZrCrCsw208&list=PLkMd51xTELZKV66oLUJLgnsFbOQy8irJ0 "01 Object to Json - DSON ")
+
 ## Configuration
 
 1. Create a new dart project.
@@ -37,10 +41,9 @@ import 'package:dson/phase.dart';
 main() async {
   await watch(new PhaseGroup()
     ..addPhase(
-    // In next line replace `dson` for the name of your package
-    // and `test/*.dart` for the globs you want to use as input, for example `**/*.dart`
+    // In next line replace `example/**.dart` for the globs you want to use as input, for example `**/*.dart`
     // to take all the dart files of the project as input.
-        dsonPhase('dson', const ['example/**.dart'])),
+        dsonPhase(const ['example/**.dart'])),
       deleteFilesByDefault: true);
 }
 ```

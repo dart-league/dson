@@ -3,6 +3,11 @@
 * [ ] Add include parameter to serialize function
 * [ ] Add uuid check over hashCode for cyclical references
 
+## 0.6.0
+
+- remove `packageName` parameter from `phase` and make `globs` parameter optional
+- upgrade `serializable` to version `^0.3.0`
+
 ## 0.5.0
 
 - upgrade to new version of `serializable`
