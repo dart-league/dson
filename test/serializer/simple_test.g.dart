@@ -45,7 +45,7 @@ abstract class _$JustObjectSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'JustObject');
   }
 
-  get keys => JustObjectClassMirror.fields.keys;
+  Iterable<String> get keys => JustObjectClassMirror.fields.keys;
 }
 
 _JustObject__Constructor(params) => new JustObject();
@@ -92,7 +92,7 @@ abstract class _$TestGetterSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'TestGetter');
   }
 
-  get keys => TestGetterClassMirror.fields.keys;
+  Iterable<String> get keys => TestGetterClassMirror.fields.keys;
 }
 
 _TestGetter__Constructor(params) => new TestGetter(params['_name']);
@@ -156,7 +156,7 @@ abstract class _$NestedClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'NestedClass');
   }
 
-  get keys => NestedClassClassMirror.fields.keys;
+  Iterable<String> get keys => NestedClassClassMirror.fields.keys;
 }
 
 _NestedClass__Constructor(params) =>
@@ -214,7 +214,7 @@ abstract class _$SetClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'SetClass');
   }
 
-  get keys => SetClassClassMirror.fields.keys;
+  Iterable<String> get keys => SetClassClassMirror.fields.keys;
 }
 
 _SetClass__Constructor(params) => new SetClass(params['names']);
@@ -317,7 +317,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
     throwFieldNotFoundException(key, 'TestClass1');
   }
 
-  get keys => TestClass1ClassMirror.fields.keys;
+  Iterable<String> get keys => TestClass1ClassMirror.fields.keys;
 }
 
 _TestClass1__Constructor(params) => new TestClass1();
@@ -336,7 +336,7 @@ const $$TestClass1_fields_intNumber = const DeclarationMirror(type: int);
 const $$TestClass1_fields_ignored =
     const DeclarationMirror(type: bool, annotations: const [ignore]);
 const $$TestClass1_fields_renamed = const DeclarationMirror(
-    type: String, annotations: const [const SerializedName('the_renamed')]);
+    type: String, annotations: const [const SerializedName(r'the_renamed')]);
 
 const TestClass1ClassMirror =
     const ClassMirror(name: 'TestClass1', constructors: const {
@@ -399,7 +399,7 @@ abstract class _$SimpleDateContainerSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'SimpleDateContainer');
   }
 
-  get keys => SimpleDateContainerClassMirror.fields.keys;
+  Iterable<String> get keys => SimpleDateContainerClassMirror.fields.keys;
 }
 
 _SimpleDateContainer__Constructor(params) => new SimpleDateContainer();

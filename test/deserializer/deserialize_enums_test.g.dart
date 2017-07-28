@@ -47,7 +47,7 @@ abstract class _$ObjectWithEnumSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'ObjectWithEnum');
   }
 
-  get keys => ObjectWithEnumClassMirror.fields.keys;
+  Iterable<String> get keys => ObjectWithEnumClassMirror.fields.keys;
 }
 
 _ObjectWithEnum__Constructor(params) => new ObjectWithEnum();

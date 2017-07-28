@@ -67,7 +67,7 @@ abstract class _$EmployeeSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Employee');
   }
 
-  get keys => EmployeeClassMirror.fields.keys;
+  Iterable<String> get keys => EmployeeClassMirror.fields.keys;
 }
 
 _Employee__Constructor(params) => new Employee();
@@ -164,7 +164,7 @@ abstract class _$AddressSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Address');
   }
 
-  get keys => AddressClassMirror.fields.keys;
+  Iterable<String> get keys => AddressClassMirror.fields.keys;
 }
 
 _Address__Constructor(params) => new Address();

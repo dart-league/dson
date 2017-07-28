@@ -40,7 +40,7 @@ abstract class _$ImmutableClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'ImmutableClass');
   }
 
-  get keys => ImmutableClassClassMirror.fields.keys;
+  Iterable<String> get keys => ImmutableClassClassMirror.fields.keys;
 }
 
 _ImmutableClass__Constructor(params) =>
@@ -51,7 +51,7 @@ const $$ImmutableClass_fields_name =
 const $$ImmutableClass_fields_renamed = const DeclarationMirror(
     type: String,
     isFinal: true,
-    annotations: const [const SerializedName('the_renamed')]);
+    annotations: const [const SerializedName(r'the_renamed')]);
 
 const ImmutableClassClassMirror =
     const ClassMirror(name: 'ImmutableClass', constructors: const {
@@ -91,7 +91,8 @@ abstract class _$ImmutableClassInvalidParameterSerializable
     throwFieldNotFoundException(key, 'ImmutableClassInvalidParameter');
   }
 
-  get keys => ImmutableClassInvalidParameterClassMirror.fields.keys;
+  Iterable<String> get keys =>
+      ImmutableClassInvalidParameterClassMirror.fields.keys;
 }
 
 _ImmutableClassInvalidParameter__Constructor(params) =>

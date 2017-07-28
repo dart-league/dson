@@ -73,7 +73,7 @@ abstract class _$EntityClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'EntityClass');
   }
 
-  get keys => EntityClassClassMirror.fields.keys;
+  Iterable<String> get keys => EntityClassClassMirror.fields.keys;
 }
 
 _EntityClass__Constructor(params) => new EntityClass();
@@ -81,7 +81,7 @@ _EntityClass__Constructor(params) => new EntityClass();
 const $$EntityClass_fields_name = const DeclarationMirror(type: String);
 const $$EntityClass_fields__setted = const DeclarationMirror(type: String);
 const $$EntityClass_fields_otherName = const DeclarationMirror(
-    type: bool, annotations: const [const SerializedName('renamed')]);
+    type: bool, annotations: const [const SerializedName(r'renamed')]);
 const $$EntityClass_fields_notVisible =
     const DeclarationMirror(type: String, annotations: const [ignore]);
 const $$EntityClass_fields_children =

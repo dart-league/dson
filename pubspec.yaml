@@ -1,12 +1,12 @@
 name: dson
-version: 0.6.0
+version: 0.7.0
 author: Luis Vargas <luisvargastijerino@gmail.com>
 description: Convert Objects to Json and Json to Objects
 homepage: https://github.com/luisvt/dson
 environment:
   sdk: '>=1.8.0'
 dependencies:
-  serializable: ^0.3.0
+  serializable: ^0.4.0
 #  serializable:
 #    path: ../serializable
 #  built_mirrors:

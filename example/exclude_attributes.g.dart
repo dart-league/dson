@@ -52,7 +52,7 @@ abstract class _$StudentSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Student');
   }
 
-  get keys => StudentClassMirror.fields.keys;
+  Iterable<String> get keys => StudentClassMirror.fields.keys;
 }
 
 _Student__Constructor(params) => new Student();
@@ -121,7 +121,7 @@ abstract class _$CourseSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Course');
   }
 
-  get keys => CourseClassMirror.fields.keys;
+  Iterable<String> get keys => CourseClassMirror.fields.keys;
 }
 
 _Course__Constructor(params) => new Course();

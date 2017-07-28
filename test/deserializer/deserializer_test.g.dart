@@ -51,7 +51,7 @@ abstract class _$SimpleDateContainerSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'SimpleDateContainer');
   }
 
-  get keys => SimpleDateContainerClassMirror.fields.keys;
+  Iterable<String> get keys => SimpleDateContainerClassMirror.fields.keys;
 }
 
 _SimpleDateContainer__Constructor(params) => new SimpleDateContainer();
@@ -153,7 +153,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
     throwFieldNotFoundException(key, 'TestClass1');
   }
 
-  get keys => TestClass1ClassMirror.fields.keys;
+  Iterable<String> get keys => TestClass1ClassMirror.fields.keys;
 }
 
 _TestClass1__Constructor(params) => new TestClass1();
@@ -172,7 +172,7 @@ const $$TestClass1_fields_intNumber = const DeclarationMirror(type: int);
 const $$TestClass1_fields_ignored =
     const DeclarationMirror(type: bool, annotations: const [ignore]);
 const $$TestClass1_fields_renamed = const DeclarationMirror(
-    type: String, annotations: const [const SerializedName('the_renamed')]);
+    type: String, annotations: const [const SerializedName(r'the_renamed')]);
 
 const TestClass1ClassMirror =
     const ClassMirror(name: 'TestClass1', constructors: const {
@@ -235,7 +235,7 @@ abstract class _$JustObjectSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'JustObject');
   }
 
-  get keys => JustObjectClassMirror.fields.keys;
+  Iterable<String> get keys => JustObjectClassMirror.fields.keys;
 }
 
 _JustObject__Constructor(params) => new JustObject();
@@ -279,7 +279,7 @@ abstract class _$SetClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'SetClass');
   }
 
-  get keys => SetClassClassMirror.fields.keys;
+  Iterable<String> get keys => SetClassClassMirror.fields.keys;
 }
 
 _SetClass__Constructor(params) => new SetClass();
@@ -327,7 +327,7 @@ abstract class _$TestGetterSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'TestGetter');
   }
 
-  get keys => TestGetterClassMirror.fields.keys;
+  Iterable<String> get keys => TestGetterClassMirror.fields.keys;
 }
 
 _TestGetter__Constructor(params) => new TestGetter(params['_name']);
@@ -384,7 +384,7 @@ abstract class _$TestSetterSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'TestSetter');
   }
 
-  get keys => TestSetterClassMirror.fields.keys;
+  Iterable<String> get keys => TestSetterClassMirror.fields.keys;
 }
 
 _TestSetter__Constructor(params) => new TestSetter();
@@ -446,7 +446,7 @@ abstract class _$NestedClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'NestedClass');
   }
 
-  get keys => NestedClassClassMirror.fields.keys;
+  Iterable<String> get keys => NestedClassClassMirror.fields.keys;
 }
 
 _NestedClass__Constructor(params) =>
@@ -507,7 +507,7 @@ abstract class _$SimpleClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'SimpleClass');
   }
 
-  get keys => SimpleClassClassMirror.fields.keys;
+  Iterable<String> get keys => SimpleClassClassMirror.fields.keys;
 }
 
 _SimpleClass__Constructor(params) => new SimpleClass();
@@ -557,7 +557,7 @@ abstract class _$SimpleListSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'SimpleList');
   }
 
-  get keys => SimpleListClassMirror.fields.keys;
+  Iterable<String> get keys => SimpleListClassMirror.fields.keys;
 }
 
 _SimpleList__Constructor(params) => new SimpleList();
@@ -602,7 +602,7 @@ abstract class _$SimpleMapSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'SimpleMap');
   }
 
-  get keys => SimpleMapClassMirror.fields.keys;
+  Iterable<String> get keys => SimpleMapClassMirror.fields.keys;
 }
 
 _SimpleMap__Constructor(params) => new SimpleMap();
@@ -649,7 +649,7 @@ abstract class _$SimpleMapStringSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'SimpleMapString');
   }
 
-  get keys => SimpleMapStringClassMirror.fields.keys;
+  Iterable<String> get keys => SimpleMapStringClassMirror.fields.keys;
 }
 
 _SimpleMapString__Constructor(params) => new SimpleMapString();
@@ -697,7 +697,7 @@ abstract class _$SimpleVarContainerSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'SimpleVarContainer');
   }
 
-  get keys => SimpleVarContainerClassMirror.fields.keys;
+  Iterable<String> get keys => SimpleVarContainerClassMirror.fields.keys;
 }
 
 _SimpleVarContainer__Constructor(params) => new SimpleVarContainer();

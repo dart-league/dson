@@ -73,7 +73,7 @@ abstract class _$EmployeeSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Employee');
   }
 
-  get keys => EmployeeClassMirror.fields.keys;
+  Iterable<String> get keys => EmployeeClassMirror.fields.keys;
 }
 
 _Employee__Constructor(params) => new Employee();
@@ -170,7 +170,7 @@ abstract class _$AddressSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Address');
   }
 
-  get keys => AddressClassMirror.fields.keys;
+  Iterable<String> get keys => AddressClassMirror.fields.keys;
 }
 
 _Address__Constructor(params) => new Address();
@@ -257,7 +257,7 @@ abstract class _$Employee2Serializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Employee2');
   }
 
-  get keys => Employee2ClassMirror.fields.keys;
+  Iterable<String> get keys => Employee2ClassMirror.fields.keys;
 }
 
 _Employee2__Constructor(params) => new Employee2();
@@ -343,7 +343,7 @@ abstract class _$Address2Serializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Address2');
   }
 
-  get keys => Address2ClassMirror.fields.keys;
+  Iterable<String> get keys => Address2ClassMirror.fields.keys;
 }
 
 _Address2__Constructor(params) => new Address2();
@@ -419,7 +419,7 @@ abstract class _$StudentSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Student');
   }
 
-  get keys => StudentClassMirror.fields.keys;
+  Iterable<String> get keys => StudentClassMirror.fields.keys;
 }
 
 _Student__Constructor(params) => new Student();
@@ -488,7 +488,7 @@ abstract class _$CourseSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Course');
   }
 
-  get keys => CourseClassMirror.fields.keys;
+  Iterable<String> get keys => CourseClassMirror.fields.keys;
 }
 
 _Course__Constructor(params) => new Course();

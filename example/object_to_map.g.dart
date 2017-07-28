@@ -90,7 +90,7 @@ abstract class _$PersonSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'Person');
   }
 
-  get keys => PersonClassMirror.fields.keys;
+  Iterable<String> get keys => PersonClassMirror.fields.keys;
 }
 
 _Person__Constructor(params) => new Person();
@@ -101,7 +101,7 @@ const $$Person_fields_lastName = const DeclarationMirror(type: dynamic);
 const $$Person_fields_height = const DeclarationMirror(type: double);
 const $$Person_fields_dateOfBirth = const DeclarationMirror(type: DateTime);
 const $$Person_fields_otherName = const DeclarationMirror(
-    type: String, annotations: const [const SerializedName('renamed')]);
+    type: String, annotations: const [const SerializedName(r'renamed')]);
 const $$Person_fields_notVisible =
     const DeclarationMirror(type: String, annotations: const [ignore]);
 const $$Person_fields__private = const DeclarationMirror(type: String);

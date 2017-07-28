@@ -49,7 +49,7 @@ abstract class _$SimpleClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'SimpleClass');
   }
 
-  get keys => SimpleClassClassMirror.fields.keys;
+  Iterable<String> get keys => SimpleClassClassMirror.fields.keys;
 }
 
 _SimpleClass__Constructor(params) => new SimpleClass();
@@ -99,7 +99,7 @@ abstract class _$ListClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'ListClass');
   }
 
-  get keys => ListClassClassMirror.fields.keys;
+  Iterable<String> get keys => ListClassClassMirror.fields.keys;
 }
 
 _ListClass__Constructor(params) => new ListClass();
@@ -144,7 +144,7 @@ abstract class _$ListListClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'ListListClass');
   }
 
-  get keys => ListListClassClassMirror.fields.keys;
+  Iterable<String> get keys => ListListClassClassMirror.fields.keys;
 }
 
 _ListListClass__Constructor(params) => new ListListClass();
@@ -192,7 +192,7 @@ abstract class _$ListListListClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'ListListListClass');
   }
 
-  get keys => ListListListClassClassMirror.fields.keys;
+  Iterable<String> get keys => ListListListClassClassMirror.fields.keys;
 }
 
 _ListListListClass__Constructor(params) => new ListListListClass();
@@ -243,7 +243,7 @@ abstract class _$ListMapClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'ListMapClass');
   }
 
-  get keys => ListMapClassClassMirror.fields.keys;
+  Iterable<String> get keys => ListMapClassClassMirror.fields.keys;
 }
 
 _ListMapClass__Constructor(params) => new ListMapClass();
@@ -298,7 +298,7 @@ abstract class _$ListListMapClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'ListListMapClass');
   }
 
-  get keys => ListListMapClassClassMirror.fields.keys;
+  Iterable<String> get keys => ListListMapClassClassMirror.fields.keys;
 }
 
 _ListListMapClass__Constructor(params) => new ListListMapClass();
@@ -352,7 +352,7 @@ abstract class _$MapClassSerializable extends SerializableMap {
     throwFieldNotFoundException(key, 'MapClass');
   }
 
-  get keys => MapClassClassMirror.fields.keys;
+  Iterable<String> get keys => MapClassClassMirror.fields.keys;
 }
 
 _MapClass__Constructor(params) => new MapClass();
