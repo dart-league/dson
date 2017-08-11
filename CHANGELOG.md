@@ -3,6 +3,11 @@
 * [ ] Add include parameter to serialize function
 * [ ] Add uuid check over hashCode for cyclical references
 
+## 0.8.0
+
+- upgrade `serializable` to version `0.5.0`
+- add other dependencies needed
+
 ## 0.7.0
 
 - upgrade `serializable` to version `0.4.0`

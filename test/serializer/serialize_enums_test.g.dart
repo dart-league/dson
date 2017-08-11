@@ -3,27 +3,7 @@
 part of serializar.serialize_enums_test;
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
-// Target: library serializar.serialize_enums_test
-// **************************************************************************
-
-_initMirrors() {
-  initClassMirrors(
-      {Color: ColorClassMirror, ObjectWithEnum: ObjectWithEnumClassMirror});
-  initFunctionMirrors({});
-}
-
-// **************************************************************************
-// Generator: MirrorsGenerator
-// Target: class Color
-// **************************************************************************
-
-const ColorClassMirror =
-    const ClassMirror(name: 'Color', isEnum: true, values: Color.values);
-
-// **************************************************************************
 // Generator: DsonGenerator
-// Target: class ObjectWithEnum
 // **************************************************************************
 
 abstract class _$ObjectWithEnumSerializable extends SerializableMap {
@@ -50,6 +30,12 @@ abstract class _$ObjectWithEnumSerializable extends SerializableMap {
   Iterable<String> get keys => ObjectWithEnumClassMirror.fields.keys;
 }
 
+// **************************************************************************
+// Generator: MirrorsGenerator
+// **************************************************************************
+
+const ColorClassMirror =
+    const ClassMirror(name: 'Color', isEnum: true, values: Color.values);
 _ObjectWithEnum__Constructor(params) => new ObjectWithEnum();
 
 const $$ObjectWithEnum_fields_color = const DeclarationMirror(type: Color);
@@ -65,3 +51,13 @@ const ObjectWithEnumClassMirror =
 ], setters: const [
   'color'
 ]);
+
+// **************************************************************************
+// Generator: InitMirrorsGenerator
+// **************************************************************************
+
+_initMirrors() {
+  initClassMirrors(
+      {Color: ColorClassMirror, ObjectWithEnum: ObjectWithEnumClassMirror});
+  initFunctionMirrors({});
+}

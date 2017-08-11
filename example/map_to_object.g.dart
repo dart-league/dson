@@ -3,18 +3,7 @@
 part of example.map_to_object;
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
-// Target: library example.map_to_object
-// **************************************************************************
-
-_initMirrors() {
-  initClassMirrors({EntityClass: EntityClassClassMirror});
-  initFunctionMirrors({});
-}
-
-// **************************************************************************
 // Generator: DsonGenerator
-// Target: class EntityClass
 // **************************************************************************
 
 abstract class _$EntityClassSerializable extends SerializableMap {
@@ -76,6 +65,10 @@ abstract class _$EntityClassSerializable extends SerializableMap {
   Iterable<String> get keys => EntityClassClassMirror.fields.keys;
 }
 
+// **************************************************************************
+// Generator: MirrorsGenerator
+// **************************************************************************
+
 _EntityClass__Constructor(params) => new EntityClass();
 
 const $$EntityClass_fields_name = const DeclarationMirror(type: String);
@@ -114,3 +107,12 @@ const EntityClassClassMirror =
   'children',
   'setted'
 ]);
+
+// **************************************************************************
+// Generator: InitMirrorsGenerator
+// **************************************************************************
+
+_initMirrors() {
+  initClassMirrors({EntityClass: EntityClassClassMirror});
+  initFunctionMirrors({});
+}

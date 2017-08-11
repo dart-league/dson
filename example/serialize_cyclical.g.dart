@@ -3,19 +3,7 @@
 part of example.serialize_cyclical;
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
-// Target: library example.serialize_cyclical
-// **************************************************************************
-
-_initMirrors() {
-  initClassMirrors(
-      {Employee: EmployeeClassMirror, Address: AddressClassMirror});
-  initFunctionMirrors({});
-}
-
-// **************************************************************************
 // Generator: DsonGenerator
-// Target: class Employee
 // **************************************************************************
 
 abstract class _$EmployeeSerializable extends SerializableMap {
@@ -69,44 +57,6 @@ abstract class _$EmployeeSerializable extends SerializableMap {
 
   Iterable<String> get keys => EmployeeClassMirror.fields.keys;
 }
-
-_Employee__Constructor(params) => new Employee();
-
-const $$Employee_fields_id = const DeclarationMirror(type: int);
-const $$Employee_fields_firstName = const DeclarationMirror(type: String);
-const $$Employee_fields_lastName = const DeclarationMirror(type: String);
-const $$Employee_fields_address = const DeclarationMirror(type: Address);
-const $$Employee_fields_manager = const DeclarationMirror(type: Employee);
-
-const EmployeeClassMirror =
-    const ClassMirror(name: 'Employee', constructors: const {
-  '': const FunctionMirror(parameters: const {}, call: _Employee__Constructor)
-}, annotations: const [
-  cyclical
-], fields: const {
-  'id': $$Employee_fields_id,
-  'firstName': $$Employee_fields_firstName,
-  'lastName': $$Employee_fields_lastName,
-  'address': $$Employee_fields_address,
-  'manager': $$Employee_fields_manager
-}, getters: const [
-  'id',
-  'firstName',
-  'lastName',
-  'address',
-  'manager'
-], setters: const [
-  'id',
-  'firstName',
-  'lastName',
-  'address',
-  'manager'
-]);
-
-// **************************************************************************
-// Generator: DsonGenerator
-// Target: class Address
-// **************************************************************************
 
 abstract class _$AddressSerializable extends SerializableMap {
   int get id;
@@ -167,6 +117,42 @@ abstract class _$AddressSerializable extends SerializableMap {
   Iterable<String> get keys => AddressClassMirror.fields.keys;
 }
 
+// **************************************************************************
+// Generator: MirrorsGenerator
+// **************************************************************************
+
+_Employee__Constructor(params) => new Employee();
+
+const $$Employee_fields_id = const DeclarationMirror(type: int);
+const $$Employee_fields_firstName = const DeclarationMirror(type: String);
+const $$Employee_fields_lastName = const DeclarationMirror(type: String);
+const $$Employee_fields_address = const DeclarationMirror(type: Address);
+const $$Employee_fields_manager = const DeclarationMirror(type: Employee);
+
+const EmployeeClassMirror =
+    const ClassMirror(name: 'Employee', constructors: const {
+  '': const FunctionMirror(parameters: const {}, call: _Employee__Constructor)
+}, annotations: const [
+  cyclical
+], fields: const {
+  'id': $$Employee_fields_id,
+  'firstName': $$Employee_fields_firstName,
+  'lastName': $$Employee_fields_lastName,
+  'address': $$Employee_fields_address,
+  'manager': $$Employee_fields_manager
+}, getters: const [
+  'id',
+  'firstName',
+  'lastName',
+  'address',
+  'manager'
+], setters: const [
+  'id',
+  'firstName',
+  'lastName',
+  'address',
+  'manager'
+]);
 _Address__Constructor(params) => new Address();
 
 const $$Address_fields_id = const DeclarationMirror(type: int);
@@ -203,3 +189,13 @@ const AddressClassMirror =
   'postalCode',
   'owner'
 ]);
+
+// **************************************************************************
+// Generator: InitMirrorsGenerator
+// **************************************************************************
+
+_initMirrors() {
+  initClassMirrors(
+      {Employee: EmployeeClassMirror, Address: AddressClassMirror});
+  initFunctionMirrors({});
+}

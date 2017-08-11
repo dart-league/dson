@@ -3,21 +3,7 @@
 part of deserialiazer.deserialize_inmutable_class_test;
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
-// Target: library deserialiazer.deserialize_inmutable_class_test
-// **************************************************************************
-
-_initMirrors() {
-  initClassMirrors({
-    ImmutableClass: ImmutableClassClassMirror,
-    ImmutableClassInvalidParameter: ImmutableClassInvalidParameterClassMirror
-  });
-  initFunctionMirrors({});
-}
-
-// **************************************************************************
 // Generator: DsonGenerator
-// Target: class ImmutableClass
 // **************************************************************************
 
 abstract class _$ImmutableClassSerializable extends SerializableMap {
@@ -43,35 +29,6 @@ abstract class _$ImmutableClassSerializable extends SerializableMap {
   Iterable<String> get keys => ImmutableClassClassMirror.fields.keys;
 }
 
-_ImmutableClass__Constructor(params) =>
-    new ImmutableClass(params['name'], params['renamed']);
-
-const $$ImmutableClass_fields_name =
-    const DeclarationMirror(type: String, isFinal: true);
-const $$ImmutableClass_fields_renamed = const DeclarationMirror(
-    type: String,
-    isFinal: true,
-    annotations: const [const SerializedName(r'the_renamed')]);
-
-const ImmutableClassClassMirror =
-    const ClassMirror(name: 'ImmutableClass', constructors: const {
-  '': const FunctionMirror(parameters: const {
-    'name': const DeclarationMirror(type: String),
-    'renamed': const DeclarationMirror(type: String)
-  }, call: _ImmutableClass__Constructor)
-}, fields: const {
-  'name': $$ImmutableClass_fields_name,
-  'renamed': $$ImmutableClass_fields_renamed
-}, getters: const [
-  'name',
-  'renamed'
-]);
-
-// **************************************************************************
-// Generator: DsonGenerator
-// Target: class ImmutableClassInvalidParameter
-// **************************************************************************
-
 abstract class _$ImmutableClassInvalidParameterSerializable
     extends SerializableMap {
   const _$ImmutableClassInvalidParameterSerializable();
@@ -95,6 +52,33 @@ abstract class _$ImmutableClassInvalidParameterSerializable
       ImmutableClassInvalidParameterClassMirror.fields.keys;
 }
 
+// **************************************************************************
+// Generator: MirrorsGenerator
+// **************************************************************************
+
+_ImmutableClass__Constructor(params) =>
+    new ImmutableClass(params['name'], params['renamed']);
+
+const $$ImmutableClass_fields_name =
+    const DeclarationMirror(type: String, isFinal: true);
+const $$ImmutableClass_fields_renamed = const DeclarationMirror(
+    type: String,
+    isFinal: true,
+    annotations: const [const SerializedName(r'the_renamed')]);
+
+const ImmutableClassClassMirror =
+    const ClassMirror(name: 'ImmutableClass', constructors: const {
+  '': const FunctionMirror(parameters: const {
+    'name': const DeclarationMirror(type: String),
+    'renamed': const DeclarationMirror(type: String)
+  }, call: _ImmutableClass__Constructor)
+}, fields: const {
+  'name': $$ImmutableClass_fields_name,
+  'renamed': $$ImmutableClass_fields_renamed
+}, getters: const [
+  'name',
+  'renamed'
+]);
 _ImmutableClassInvalidParameter__Constructor(params) =>
     new ImmutableClassInvalidParameter(params['aName']);
 
@@ -114,3 +98,15 @@ const ImmutableClassInvalidParameterClassMirror = const ClassMirror(
     getters: const [
       'name'
     ]);
+
+// **************************************************************************
+// Generator: InitMirrorsGenerator
+// **************************************************************************
+
+_initMirrors() {
+  initClassMirrors({
+    ImmutableClass: ImmutableClassClassMirror,
+    ImmutableClassInvalidParameter: ImmutableClassInvalidParameterClassMirror
+  });
+  initFunctionMirrors({});
+}

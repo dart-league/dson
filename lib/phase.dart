@@ -11,7 +11,7 @@ import 'package:source_gen/source_gen.dart';
 dsonPhase([Iterable<String> globs = const ['bin/**.dart', 'web/**.dart', 'lib/**.dart']]) =>
     new Phase()
       ..addAction(
-          new GeneratorBuilder(const [
+          new PartBuilder(const [
             const DsonGenerator(),
             const MirrorsGenerator(),
             const InitMirrorsGenerator()

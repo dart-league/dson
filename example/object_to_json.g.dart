@@ -3,18 +3,7 @@
 part of example.object_to_json;
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
-// Target: library example.object_to_json
-// **************************************************************************
-
-_initMirrors() {
-  initClassMirrors({Person: PersonClassMirror});
-  initFunctionMirrors({});
-}
-
-// **************************************************************************
 // Generator: DsonGenerator
-// Target: class Person
 // **************************************************************************
 
 abstract class _$PersonSerializable extends SerializableMap {
@@ -93,6 +82,10 @@ abstract class _$PersonSerializable extends SerializableMap {
   Iterable<String> get keys => PersonClassMirror.fields.keys;
 }
 
+// **************************************************************************
+// Generator: MirrorsGenerator
+// **************************************************************************
+
 _Person__Constructor(params) => new Person();
 
 const $$Person_fields_id = const DeclarationMirror(type: int);
@@ -141,3 +134,12 @@ const PersonClassMirror =
   'notVisible',
   '_private'
 ]);
+
+// **************************************************************************
+// Generator: InitMirrorsGenerator
+// **************************************************************************
+
+_initMirrors() {
+  initClassMirrors({Person: PersonClassMirror});
+  initFunctionMirrors({});
+}

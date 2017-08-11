@@ -3,18 +3,7 @@
 part of example.serialize_cyclical_list;
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
-// Target: library example.serialize_cyclical_list
-// **************************************************************************
-
-_initMirrors() {
-  initClassMirrors({Student: StudentClassMirror, Course: CourseClassMirror});
-  initFunctionMirrors({});
-}
-
-// **************************************************************************
 // Generator: DsonGenerator
-// Target: class Student
 // **************************************************************************
 
 abstract class _$StudentSerializable extends SerializableMap {
@@ -55,37 +44,6 @@ abstract class _$StudentSerializable extends SerializableMap {
   Iterable<String> get keys => StudentClassMirror.fields.keys;
 }
 
-_Student__Constructor(params) => new Student();
-
-const $$Student_fields_id = const DeclarationMirror(type: int);
-const $$Student_fields_name = const DeclarationMirror(type: String);
-const $$Student_fields_courses =
-    const DeclarationMirror(type: const [List, Course]);
-
-const StudentClassMirror =
-    const ClassMirror(name: 'Student', constructors: const {
-  '': const FunctionMirror(parameters: const {}, call: _Student__Constructor)
-}, annotations: const [
-  cyclical
-], fields: const {
-  'id': $$Student_fields_id,
-  'name': $$Student_fields_name,
-  'courses': $$Student_fields_courses
-}, getters: const [
-  'id',
-  'name',
-  'courses'
-], setters: const [
-  'id',
-  'name',
-  'courses'
-]);
-
-// **************************************************************************
-// Generator: DsonGenerator
-// Target: class Course
-// **************************************************************************
-
 abstract class _$CourseSerializable extends SerializableMap {
   int get id;
   DateTime get beginDate;
@@ -124,6 +82,35 @@ abstract class _$CourseSerializable extends SerializableMap {
   Iterable<String> get keys => CourseClassMirror.fields.keys;
 }
 
+// **************************************************************************
+// Generator: MirrorsGenerator
+// **************************************************************************
+
+_Student__Constructor(params) => new Student();
+
+const $$Student_fields_id = const DeclarationMirror(type: int);
+const $$Student_fields_name = const DeclarationMirror(type: String);
+const $$Student_fields_courses =
+    const DeclarationMirror(type: const [List, Course]);
+
+const StudentClassMirror =
+    const ClassMirror(name: 'Student', constructors: const {
+  '': const FunctionMirror(parameters: const {}, call: _Student__Constructor)
+}, annotations: const [
+  cyclical
+], fields: const {
+  'id': $$Student_fields_id,
+  'name': $$Student_fields_name,
+  'courses': $$Student_fields_courses
+}, getters: const [
+  'id',
+  'name',
+  'courses'
+], setters: const [
+  'id',
+  'name',
+  'courses'
+]);
 _Course__Constructor(params) => new Course();
 
 const $$Course_fields_id = const DeclarationMirror(type: int);
@@ -149,3 +136,12 @@ const CourseClassMirror =
   'beginDate',
   'students'
 ]);
+
+// **************************************************************************
+// Generator: InitMirrorsGenerator
+// **************************************************************************
+
+_initMirrors() {
+  initClassMirrors({Student: StudentClassMirror, Course: CourseClassMirror});
+  initFunctionMirrors({});
+}

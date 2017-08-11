@@ -3,25 +3,7 @@
 part of serializer.simple_test;
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
-// Target: library serializer.simple_test
-// **************************************************************************
-
-_initMirrors() {
-  initClassMirrors({
-    JustObject: JustObjectClassMirror,
-    TestGetter: TestGetterClassMirror,
-    NestedClass: NestedClassClassMirror,
-    SetClass: SetClassClassMirror,
-    TestClass1: TestClass1ClassMirror,
-    SimpleDateContainer: SimpleDateContainerClassMirror
-  });
-  initFunctionMirrors({});
-}
-
-// **************************************************************************
 // Generator: DsonGenerator
-// Target: class JustObject
 // **************************************************************************
 
 abstract class _$JustObjectSerializable extends SerializableMap {
@@ -47,26 +29,6 @@ abstract class _$JustObjectSerializable extends SerializableMap {
 
   Iterable<String> get keys => JustObjectClassMirror.fields.keys;
 }
-
-_JustObject__Constructor(params) => new JustObject();
-
-const $$JustObject_fields_object = const DeclarationMirror(type: Object);
-
-const JustObjectClassMirror =
-    const ClassMirror(name: 'JustObject', constructors: const {
-  '': const FunctionMirror(parameters: const {}, call: _JustObject__Constructor)
-}, fields: const {
-  'object': $$JustObject_fields_object
-}, getters: const [
-  'object'
-], setters: const [
-  'object'
-]);
-
-// **************************************************************************
-// Generator: DsonGenerator
-// Target: class TestGetter
-// **************************************************************************
 
 abstract class _$TestGetterSerializable extends SerializableMap {
   String get _name;
@@ -94,32 +56,6 @@ abstract class _$TestGetterSerializable extends SerializableMap {
 
   Iterable<String> get keys => TestGetterClassMirror.fields.keys;
 }
-
-_TestGetter__Constructor(params) => new TestGetter(params['_name']);
-
-const $$TestGetter_fields__name = const DeclarationMirror(type: String);
-const $$TestGetter_fields_name =
-    const DeclarationMirror(type: String, isFinal: true);
-
-const TestGetterClassMirror =
-    const ClassMirror(name: 'TestGetter', constructors: const {
-  '': const FunctionMirror(parameters: const {
-    '_name': const DeclarationMirror(type: String, isOptional: true)
-  }, call: _TestGetter__Constructor)
-}, fields: const {
-  '_name': $$TestGetter_fields__name,
-  'name': $$TestGetter_fields_name
-}, getters: const [
-  '_name',
-  'name'
-], setters: const [
-  '_name'
-]);
-
-// **************************************************************************
-// Generator: DsonGenerator
-// Target: class NestedClass
-// **************************************************************************
 
 abstract class _$NestedClassSerializable extends SerializableMap {
   String get name;
@@ -159,40 +95,6 @@ abstract class _$NestedClassSerializable extends SerializableMap {
   Iterable<String> get keys => NestedClassClassMirror.fields.keys;
 }
 
-_NestedClass__Constructor(params) =>
-    new NestedClass(params['name'], params['list'], params['getter']);
-
-const $$NestedClass_fields_name = const DeclarationMirror(type: String);
-const $$NestedClass_fields_list =
-    const DeclarationMirror(type: const [List, dynamic]);
-const $$NestedClass_fields_getter = const DeclarationMirror(type: TestGetter);
-
-const NestedClassClassMirror =
-    const ClassMirror(name: 'NestedClass', constructors: const {
-  '': const FunctionMirror(parameters: const {
-    'name': const DeclarationMirror(type: String),
-    'list': const DeclarationMirror(type: const [List, dynamic]),
-    'getter': const DeclarationMirror(type: TestGetter)
-  }, call: _NestedClass__Constructor)
-}, fields: const {
-  'name': $$NestedClass_fields_name,
-  'list': $$NestedClass_fields_list,
-  'getter': $$NestedClass_fields_getter
-}, getters: const [
-  'name',
-  'list',
-  'getter'
-], setters: const [
-  'name',
-  'list',
-  'getter'
-]);
-
-// **************************************************************************
-// Generator: DsonGenerator
-// Target: class SetClass
-// **************************************************************************
-
 abstract class _$SetClassSerializable extends SerializableMap {
   Set<dynamic> get names;
   void set names(Set<dynamic> v);
@@ -216,29 +118,6 @@ abstract class _$SetClassSerializable extends SerializableMap {
 
   Iterable<String> get keys => SetClassClassMirror.fields.keys;
 }
-
-_SetClass__Constructor(params) => new SetClass(params['names']);
-
-const $$SetClass_fields_names =
-    const DeclarationMirror(type: const [Set, dynamic]);
-
-const SetClassClassMirror =
-    const ClassMirror(name: 'SetClass', constructors: const {
-  '': const FunctionMirror(parameters: const {
-    'names': const DeclarationMirror(type: const [Set, dynamic])
-  }, call: _SetClass__Constructor)
-}, fields: const {
-  'names': $$SetClass_fields_names
-}, getters: const [
-  'names'
-], setters: const [
-  'names'
-]);
-
-// **************************************************************************
-// Generator: DsonGenerator
-// Target: class TestClass1
-// **************************************************************************
 
 abstract class _$TestClass1Serializable extends SerializableMap {
   String get name;
@@ -320,6 +199,113 @@ abstract class _$TestClass1Serializable extends SerializableMap {
   Iterable<String> get keys => TestClass1ClassMirror.fields.keys;
 }
 
+abstract class _$SimpleDateContainerSerializable extends SerializableMap {
+  DateTime get testDate;
+  void set testDate(DateTime v);
+
+  operator [](Object key) {
+    switch (key) {
+      case 'testDate':
+        return testDate;
+    }
+    throwFieldNotFoundException(key, 'SimpleDateContainer');
+  }
+
+  operator []=(Object key, value) {
+    switch (key) {
+      case 'testDate':
+        testDate = value;
+        return;
+    }
+    throwFieldNotFoundException(key, 'SimpleDateContainer');
+  }
+
+  Iterable<String> get keys => SimpleDateContainerClassMirror.fields.keys;
+}
+
+// **************************************************************************
+// Generator: MirrorsGenerator
+// **************************************************************************
+
+_JustObject__Constructor(params) => new JustObject();
+
+const $$JustObject_fields_object = const DeclarationMirror(type: Object);
+
+const JustObjectClassMirror =
+    const ClassMirror(name: 'JustObject', constructors: const {
+  '': const FunctionMirror(parameters: const {}, call: _JustObject__Constructor)
+}, fields: const {
+  'object': $$JustObject_fields_object
+}, getters: const [
+  'object'
+], setters: const [
+  'object'
+]);
+_TestGetter__Constructor(params) => new TestGetter(params['_name']);
+
+const $$TestGetter_fields__name = const DeclarationMirror(type: String);
+const $$TestGetter_fields_name =
+    const DeclarationMirror(type: String, isFinal: true);
+
+const TestGetterClassMirror =
+    const ClassMirror(name: 'TestGetter', constructors: const {
+  '': const FunctionMirror(parameters: const {
+    '_name': const DeclarationMirror(type: String, isOptional: true)
+  }, call: _TestGetter__Constructor)
+}, fields: const {
+  '_name': $$TestGetter_fields__name,
+  'name': $$TestGetter_fields_name
+}, getters: const [
+  '_name',
+  'name'
+], setters: const [
+  '_name'
+]);
+_NestedClass__Constructor(params) =>
+    new NestedClass(params['name'], params['list'], params['getter']);
+
+const $$NestedClass_fields_name = const DeclarationMirror(type: String);
+const $$NestedClass_fields_list =
+    const DeclarationMirror(type: const [List, dynamic]);
+const $$NestedClass_fields_getter = const DeclarationMirror(type: TestGetter);
+
+const NestedClassClassMirror =
+    const ClassMirror(name: 'NestedClass', constructors: const {
+  '': const FunctionMirror(parameters: const {
+    'name': const DeclarationMirror(type: String),
+    'list': const DeclarationMirror(type: const [List, dynamic]),
+    'getter': const DeclarationMirror(type: TestGetter)
+  }, call: _NestedClass__Constructor)
+}, fields: const {
+  'name': $$NestedClass_fields_name,
+  'list': $$NestedClass_fields_list,
+  'getter': $$NestedClass_fields_getter
+}, getters: const [
+  'name',
+  'list',
+  'getter'
+], setters: const [
+  'name',
+  'list',
+  'getter'
+]);
+_SetClass__Constructor(params) => new SetClass(params['names']);
+
+const $$SetClass_fields_names =
+    const DeclarationMirror(type: const [Set, dynamic]);
+
+const SetClassClassMirror =
+    const ClassMirror(name: 'SetClass', constructors: const {
+  '': const FunctionMirror(parameters: const {
+    'names': const DeclarationMirror(type: const [Set, dynamic])
+  }, call: _SetClass__Constructor)
+}, fields: const {
+  'names': $$SetClass_fields_names
+}, getters: const [
+  'names'
+], setters: const [
+  'names'
+]);
 _TestClass1__Constructor(params) => new TestClass1();
 
 const $$TestClass1_fields_name = const DeclarationMirror(type: String);
@@ -372,36 +358,6 @@ const TestClass1ClassMirror =
   'ignored',
   'renamed'
 ]);
-
-// **************************************************************************
-// Generator: DsonGenerator
-// Target: class SimpleDateContainer
-// **************************************************************************
-
-abstract class _$SimpleDateContainerSerializable extends SerializableMap {
-  DateTime get testDate;
-  void set testDate(DateTime v);
-
-  operator [](Object key) {
-    switch (key) {
-      case 'testDate':
-        return testDate;
-    }
-    throwFieldNotFoundException(key, 'SimpleDateContainer');
-  }
-
-  operator []=(Object key, value) {
-    switch (key) {
-      case 'testDate':
-        testDate = value;
-        return;
-    }
-    throwFieldNotFoundException(key, 'SimpleDateContainer');
-  }
-
-  Iterable<String> get keys => SimpleDateContainerClassMirror.fields.keys;
-}
-
 _SimpleDateContainer__Constructor(params) => new SimpleDateContainer();
 
 const $$SimpleDateContainer_fields_testDate =
@@ -418,3 +374,19 @@ const SimpleDateContainerClassMirror =
 ], setters: const [
   'testDate'
 ]);
+
+// **************************************************************************
+// Generator: InitMirrorsGenerator
+// **************************************************************************
+
+_initMirrors() {
+  initClassMirrors({
+    JustObject: JustObjectClassMirror,
+    TestGetter: TestGetterClassMirror,
+    NestedClass: NestedClassClassMirror,
+    SetClass: SetClassClassMirror,
+    TestClass1: TestClass1ClassMirror,
+    SimpleDateContainer: SimpleDateContainerClassMirror
+  });
+  initFunctionMirrors({});
+}
