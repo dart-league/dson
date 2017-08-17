@@ -3,6 +3,13 @@
 * [ ] Add include parameter to serialize function
 * [ ] Add uuid check over hashCode for cyclical references
 
+## 0.9.0
+
+- upgrade `serializable` to version `^0.6.0`
+- upgrade `buidl_mirrors` to version `^0.5.0`
+- upgrade `build_runner` to version `^0.4.0`
+- upgrade `build` to version `^0.10.0`
+
 ## 0.8.0
 
 - upgrade `serializable` to version `0.5.0`

@@ -8,12 +8,12 @@ import 'package:source_gen/source_gen.dart';
 ///
 /// Example: {@example /tool/build.dart}
 /// Example: {@example /tool/watch.dart}
-dsonPhase([Iterable<String> globs = const ['bin/**.dart', 'web/**.dart', 'lib/**.dart']]) =>
-    new Phase()
-      ..addAction(
-          new PartBuilder(const [
-            const DsonGenerator(),
-            const MirrorsGenerator(),
-            const InitMirrorsGenerator()
-          ]),
-          new InputSet(new PackageGraph.forThisPackage().root.name, globs));
+BuildAction dsonPhase([Iterable<String> globs = const ['bin/**.dart', 'web/**.dart', 'lib/**.dart']]) =>
+    new BuildAction(
+        new PartBuilder(const [
+          const DsonGenerator(),
+          const MirrorsGenerator(),
+          const InitMirrorsGenerator()
+        ]),
+        new PackageGraph.forThisPackage().root.name,
+        inputs: globs);
