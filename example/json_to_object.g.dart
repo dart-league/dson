@@ -20,8 +20,8 @@ abstract class _$EntityClassSerializable extends SerializableMap {
   void set children(List<EntityClass> v);
   void set setted(String v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'name':
         return name;
       case '_setted':
@@ -35,31 +35,31 @@ abstract class _$EntityClassSerializable extends SerializableMap {
       case 'setted':
         return setted;
     }
-    throwFieldNotFoundException(key, 'EntityClass');
+    throwFieldNotFoundException(__key, 'EntityClass');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'name':
-        name = value;
+        name = __value;
         return;
       case '_setted':
-        _setted = value;
+        _setted = __value;
         return;
       case 'otherName':
-        otherName = value;
+        otherName = __value;
         return;
       case 'notVisible':
-        notVisible = value;
+        notVisible = __value;
         return;
       case 'children':
-        children = value;
+        children = __value;
         return;
       case 'setted':
-        setted = value;
+        setted = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'EntityClass');
+    throwFieldNotFoundException(__key, 'EntityClass');
   }
 
   Iterable<String> get keys => EntityClassClassMirror.fields.keys;

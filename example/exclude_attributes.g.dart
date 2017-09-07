@@ -14,8 +14,8 @@ abstract class _$StudentSerializable extends SerializableMap {
   void set name(String v);
   void set courses(List<Course> v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'id':
         return id;
       case 'name':
@@ -23,22 +23,22 @@ abstract class _$StudentSerializable extends SerializableMap {
       case 'courses':
         return courses;
     }
-    throwFieldNotFoundException(key, 'Student');
+    throwFieldNotFoundException(__key, 'Student');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'id':
-        id = value;
+        id = __value;
         return;
       case 'name':
-        name = value;
+        name = __value;
         return;
       case 'courses':
-        courses = value;
+        courses = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'Student');
+    throwFieldNotFoundException(__key, 'Student');
   }
 
   Iterable<String> get keys => StudentClassMirror.fields.keys;
@@ -52,8 +52,8 @@ abstract class _$CourseSerializable extends SerializableMap {
   void set beginDate(DateTime v);
   void set students(List<Student> v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'id':
         return id;
       case 'beginDate':
@@ -61,22 +61,22 @@ abstract class _$CourseSerializable extends SerializableMap {
       case 'students':
         return students;
     }
-    throwFieldNotFoundException(key, 'Course');
+    throwFieldNotFoundException(__key, 'Course');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'id':
-        id = value;
+        id = __value;
         return;
       case 'beginDate':
-        beginDate = value;
+        beginDate = __value;
         return;
       case 'students':
-        students = value;
+        students = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'Course');
+    throwFieldNotFoundException(__key, 'Course');
   }
 
   Iterable<String> get keys => CourseClassMirror.fields.keys;

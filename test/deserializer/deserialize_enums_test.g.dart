@@ -10,21 +10,21 @@ abstract class _$ObjectWithEnumSerializable extends SerializableMap {
   Color get color;
   void set color(Color v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'color':
         return color;
     }
-    throwFieldNotFoundException(key, 'ObjectWithEnum');
+    throwFieldNotFoundException(__key, 'ObjectWithEnum');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'color':
-        color = value;
+        color = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'ObjectWithEnum');
+    throwFieldNotFoundException(__key, 'ObjectWithEnum');
   }
 
   Iterable<String> get keys => ObjectWithEnumClassMirror.fields.keys;

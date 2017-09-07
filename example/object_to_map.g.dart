@@ -25,8 +25,8 @@ abstract class _$PersonSerializable extends SerializableMap {
   void set notVisible(String v);
   void set _private(String v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'id':
         return id;
       case 'firstName':
@@ -46,37 +46,37 @@ abstract class _$PersonSerializable extends SerializableMap {
       case 'doGetter':
         return doGetter;
     }
-    throwFieldNotFoundException(key, 'Person');
+    throwFieldNotFoundException(__key, 'Person');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'id':
-        id = value;
+        id = __value;
         return;
       case 'firstName':
-        firstName = value;
+        firstName = __value;
         return;
       case 'lastName':
-        lastName = value;
+        lastName = __value;
         return;
       case 'height':
-        height = value;
+        height = __value;
         return;
       case 'dateOfBirth':
-        dateOfBirth = value;
+        dateOfBirth = __value;
         return;
       case 'otherName':
-        otherName = value;
+        otherName = __value;
         return;
       case 'notVisible':
-        notVisible = value;
+        notVisible = __value;
         return;
       case '_private':
-        _private = value;
+        _private = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'Person');
+    throwFieldNotFoundException(__key, 'Person');
   }
 
   Iterable<String> get keys => PersonClassMirror.fields.keys;

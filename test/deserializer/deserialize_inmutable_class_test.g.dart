@@ -10,20 +10,20 @@ abstract class _$ImmutableClassSerializable extends SerializableMap {
   String get name;
   String get renamed;
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'name':
         return name;
       case 'renamed':
         return renamed;
     }
-    throwFieldNotFoundException(key, 'ImmutableClass');
+    throwFieldNotFoundException(__key, 'ImmutableClass');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
     }
-    throwFieldNotFoundException(key, 'ImmutableClass');
+    throwFieldNotFoundException(__key, 'ImmutableClass');
   }
 
   Iterable<String> get keys => ImmutableClassClassMirror.fields.keys;
@@ -34,18 +34,18 @@ abstract class _$ImmutableClassInvalidParameterSerializable
   const _$ImmutableClassInvalidParameterSerializable();
   String get name;
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'name':
         return name;
     }
-    throwFieldNotFoundException(key, 'ImmutableClassInvalidParameter');
+    throwFieldNotFoundException(__key, 'ImmutableClassInvalidParameter');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
     }
-    throwFieldNotFoundException(key, 'ImmutableClassInvalidParameter');
+    throwFieldNotFoundException(__key, 'ImmutableClassInvalidParameter');
   }
 
   Iterable<String> get keys =>
@@ -69,8 +69,8 @@ const $$ImmutableClass_fields_renamed = const DeclarationMirror(
 const ImmutableClassClassMirror =
     const ClassMirror(name: 'ImmutableClass', constructors: const {
   '': const FunctionMirror(parameters: const {
-    'name': const DeclarationMirror(type: String),
-    'renamed': const DeclarationMirror(type: String)
+    'name': const DeclarationMirror(name: 'name', type: String),
+    'renamed': const DeclarationMirror(name: 'renamed', type: String)
   }, call: _ImmutableClass__Constructor)
 }, fields: const {
   'name': $$ImmutableClass_fields_name,
@@ -88,9 +88,9 @@ const $$ImmutableClassInvalidParameter_fields_name =
 const ImmutableClassInvalidParameterClassMirror = const ClassMirror(
     name: 'ImmutableClassInvalidParameter',
     constructors: const {
-      '': const FunctionMirror(
-          parameters: const {'aName': const DeclarationMirror(type: String)},
-          call: _ImmutableClassInvalidParameter__Constructor)
+      '': const FunctionMirror(parameters: const {
+        'aName': const DeclarationMirror(name: 'aName', type: String)
+      }, call: _ImmutableClassInvalidParameter__Constructor)
     },
     fields: const {
       'name': $$ImmutableClassInvalidParameter_fields_name

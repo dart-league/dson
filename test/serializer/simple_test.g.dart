@@ -10,21 +10,21 @@ abstract class _$JustObjectSerializable extends SerializableMap {
   Object get object;
   void set object(Object v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'object':
         return object;
     }
-    throwFieldNotFoundException(key, 'JustObject');
+    throwFieldNotFoundException(__key, 'JustObject');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'object':
-        object = value;
+        object = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'JustObject');
+    throwFieldNotFoundException(__key, 'JustObject');
   }
 
   Iterable<String> get keys => JustObjectClassMirror.fields.keys;
@@ -35,23 +35,23 @@ abstract class _$TestGetterSerializable extends SerializableMap {
   String get name;
   void set _name(String v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case '_name':
         return _name;
       case 'name':
         return name;
     }
-    throwFieldNotFoundException(key, 'TestGetter');
+    throwFieldNotFoundException(__key, 'TestGetter');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case '_name':
-        _name = value;
+        _name = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'TestGetter');
+    throwFieldNotFoundException(__key, 'TestGetter');
   }
 
   Iterable<String> get keys => TestGetterClassMirror.fields.keys;
@@ -65,8 +65,8 @@ abstract class _$NestedClassSerializable extends SerializableMap {
   void set list(List<dynamic> v);
   void set getter(TestGetter v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'name':
         return name;
       case 'list':
@@ -74,22 +74,22 @@ abstract class _$NestedClassSerializable extends SerializableMap {
       case 'getter':
         return getter;
     }
-    throwFieldNotFoundException(key, 'NestedClass');
+    throwFieldNotFoundException(__key, 'NestedClass');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'name':
-        name = value;
+        name = __value;
         return;
       case 'list':
-        list = value;
+        list = __value;
         return;
       case 'getter':
-        getter = value;
+        getter = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'NestedClass');
+    throwFieldNotFoundException(__key, 'NestedClass');
   }
 
   Iterable<String> get keys => NestedClassClassMirror.fields.keys;
@@ -99,21 +99,21 @@ abstract class _$SetClassSerializable extends SerializableMap {
   Set<dynamic> get names;
   void set names(Set<dynamic> v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'names':
         return names;
     }
-    throwFieldNotFoundException(key, 'SetClass');
+    throwFieldNotFoundException(__key, 'SetClass');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'names':
-        names = value;
+        names = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'SetClass');
+    throwFieldNotFoundException(__key, 'SetClass');
   }
 
   Iterable<String> get keys => SetClassClassMirror.fields.keys;
@@ -139,8 +139,8 @@ abstract class _$TestClass1Serializable extends SerializableMap {
   void set ignored(bool v);
   void set renamed(String v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'name':
         return name;
       case 'matter':
@@ -160,40 +160,40 @@ abstract class _$TestClass1Serializable extends SerializableMap {
       case 'renamed':
         return renamed;
     }
-    throwFieldNotFoundException(key, 'TestClass1');
+    throwFieldNotFoundException(__key, 'TestClass1');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'name':
-        name = value;
+        name = __value;
         return;
       case 'matter':
-        matter = value;
+        matter = __value;
         return;
       case 'number':
-        number = value;
+        number = __value;
         return;
       case 'list':
-        list = value;
+        list = __value;
         return;
       case 'map':
-        map = value;
+        map = __value;
         return;
       case 'child':
-        child = value;
+        child = __value;
         return;
       case 'intNumber':
-        intNumber = value;
+        intNumber = __value;
         return;
       case 'ignored':
-        ignored = value;
+        ignored = __value;
         return;
       case 'renamed':
-        renamed = value;
+        renamed = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'TestClass1');
+    throwFieldNotFoundException(__key, 'TestClass1');
   }
 
   Iterable<String> get keys => TestClass1ClassMirror.fields.keys;
@@ -203,21 +203,21 @@ abstract class _$SimpleDateContainerSerializable extends SerializableMap {
   DateTime get testDate;
   void set testDate(DateTime v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'testDate':
         return testDate;
     }
-    throwFieldNotFoundException(key, 'SimpleDateContainer');
+    throwFieldNotFoundException(__key, 'SimpleDateContainer');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'testDate':
-        testDate = value;
+        testDate = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'SimpleDateContainer');
+    throwFieldNotFoundException(__key, 'SimpleDateContainer');
   }
 
   Iterable<String> get keys => SimpleDateContainerClassMirror.fields.keys;
@@ -250,7 +250,8 @@ const $$TestGetter_fields_name =
 const TestGetterClassMirror =
     const ClassMirror(name: 'TestGetter', constructors: const {
   '': const FunctionMirror(parameters: const {
-    '_name': const DeclarationMirror(type: String, isOptional: true)
+    '_name':
+        const DeclarationMirror(name: '_name', type: String, isOptional: true)
   }, call: _TestGetter__Constructor)
 }, fields: const {
   '_name': $$TestGetter_fields__name,
@@ -272,9 +273,9 @@ const $$NestedClass_fields_getter = const DeclarationMirror(type: TestGetter);
 const NestedClassClassMirror =
     const ClassMirror(name: 'NestedClass', constructors: const {
   '': const FunctionMirror(parameters: const {
-    'name': const DeclarationMirror(type: String),
-    'list': const DeclarationMirror(type: const [List, dynamic]),
-    'getter': const DeclarationMirror(type: TestGetter)
+    'name': const DeclarationMirror(name: 'name', type: String),
+    'list': const DeclarationMirror(name: 'list', type: const [List, dynamic]),
+    'getter': const DeclarationMirror(name: 'getter', type: TestGetter)
   }, call: _NestedClass__Constructor)
 }, fields: const {
   'name': $$NestedClass_fields_name,
@@ -297,7 +298,7 @@ const $$SetClass_fields_names =
 const SetClassClassMirror =
     const ClassMirror(name: 'SetClass', constructors: const {
   '': const FunctionMirror(parameters: const {
-    'names': const DeclarationMirror(type: const [Set, dynamic])
+    'names': const DeclarationMirror(name: 'names', type: const [Set, dynamic])
   }, call: _SetClass__Constructor)
 }, fields: const {
   'names': $$SetClass_fields_names

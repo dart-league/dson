@@ -1,6 +1,6 @@
 part of dson;
 
-final Logger _desLog = new Logger('object_mapper_deserializer');
+//final Logger _desLog = new Logger('object_mapper_deserializer');
 
 /// Creates a new instance of [type], parses the json in [jsonStr] and puts
 /// the data into the new instance.
@@ -111,14 +111,14 @@ Object _fillObject(SerializableMap obj, filler) {
     if (prop?.name != null) {
       fieldName = prop.name;
     }
-    _desLog.fine('Try to fill object with: ${fieldName}: ${filler[fieldName]}');
+//    _desLog.fine('Try to fill object with: ${fieldName}: ${filler[fieldName]}');
 
     if (filler[fieldName] != null) {
       obj[varName] = _convertValue(valueType, filler[fieldName], varName);
     }
   });
 
-  _desLog.fine("Filled object completly: ${filler}");
+//  _desLog.fine("Filled object completly: ${filler}");
   return obj;
 }
 
@@ -133,7 +133,7 @@ bool isSimpleType(Type type) =>
 /// Converts a list of objects to a list with a Class.
 /* List | Set */
 _convertGenericListOrSet(types, List fillerList) {
-  _desLog.fine('Converting generic list');
+//  _desLog.fine('Converting generic list');
   var type = types[0],
       subType = types[1];
   var resultList = type == List ? [] : new Set();
@@ -141,12 +141,12 @@ _convertGenericListOrSet(types, List fillerList) {
   // ignore: undefined_method
   fillerList.forEach((item) => resultList.add(_convertValue(subType, item, "@LIST_ITEM")));
 
-  _desLog.fine("Created generic list: ${resultList}");
+//  _desLog.fine("Created generic list: ${resultList}");
   return resultList;
 }
 
 Map _convertGenericMap(List subTypes, Map fillerMap) {
-  _desLog.fine('Converting generic map');
+//  _desLog.fine('Converting generic map');
   var keyType = subTypes[0];
   var itemType = subTypes[1];
   Map resultMap = {};
@@ -155,10 +155,10 @@ Map _convertGenericMap(List subTypes, Map fillerMap) {
     var keyItem = _convertValue(keyType, key, "@MAP_KEY");
     var valueItem = _convertValue(itemType, value, "@MAP_VALUE");
     resultMap[keyItem] = valueItem;
-    _desLog.fine("Added item ${valueItem} to map key: ${keyItem}");
+//    _desLog.fine("Added item ${valueItem} to map key: ${keyItem}");
   });
 
-  _desLog.fine("Map converted completly");
+//  _desLog.fine("Map converted completly");
   return resultMap;
 }
 
@@ -167,11 +167,11 @@ Map _convertGenericMap(List subTypes, Map fillerMap) {
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [NoConstructorError]
 Object _convertValue(/*Type | List<Type>*/ valueType, Object value, [String key = '@OBJECT']) {
-  _desLog.fine(() => "Converting (\"${key}\": $value) to ${valueType}");
+//  _desLog.fine(() => "Converting (\"${key}\": $value) to ${valueType}");
 
   // if valueType is `List<SomeClass> or Map<SomeClass0, SomeClass1>`
   if (valueType is List) {
-    _desLog.fine('Handle generic');
+//    _desLog.fine('Handle generic');
     // handle generic lists
     if (valueType[0] == List || valueType[0] == Set) {
       return _convertGenericListOrSet(valueType, value);
@@ -252,7 +252,7 @@ Object _convertValue(/*Type | List<Type>*/ valueType, Object value, [String key 
 ///    without or only optional parameters, or parameters matching final fields.
 Object _initiateClass(Type type, [filler]) {
   ClassMirror classMirror = reflectType(type);
-  _desLog.fine("Parsing to class: ${type}");
+//  _desLog.fine("Parsing to class: ${type}");
 
   if (classMirror.isEnum) {
     return classMirror.values[filler];
@@ -262,7 +262,7 @@ Object _initiateClass(Type type, [filler]) {
   Map<String, dynamic> parameters = {};
 
   classMirror.constructors.forEach((constructorName, constructor) {
-    _desLog.fine('Found constructor function: ${constructorName}');
+//    _desLog.fine('Found constructor function: ${constructorName}');
     if (constructorName.isEmpty) {
       if (constructor.parameters.length == 0) {
         constrMethod = constructorName;
@@ -282,7 +282,7 @@ Object _initiateClass(Type type, [filler]) {
                 parameterName = prop.name;
               }
 
-              _desLog.fine('Try to pass parameter: ${parameterName}: ${filler[parameterName]}');
+//              _desLog.fine('Try to pass parameter: ${parameterName}: ${filler[parameterName]}');
 
               parameters[pName] = filler[parameterName];
 
@@ -300,12 +300,12 @@ Object _initiateClass(Type type, [filler]) {
 
   Object obj;
   if (constrMethod != null) {
-    _desLog.fine("Found constructor: \"${constrMethod}\"");
+//    _desLog.fine("Found constructor: \"${constrMethod}\"");
     obj = classMirror.constructors[constrMethod].call(parameters);
     if (classMirror.setters == null) return obj;
-    _desLog.fine("Created instance of type: ${classMirror.name}");
+//    _desLog.fine("Created instance of type: ${classMirror.name}");
   } else {
-    _desLog.fine("No constructor found.");
+//    _desLog.fine("No constructor found.");
     throw new NoConstructorError(classMirror);
   }
 

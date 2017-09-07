@@ -39,3 +39,10 @@ const cyclical = const _Cyclical();
 class _Cyclical extends Annotation {
   const _Cyclical();
 }
+
+/// sets which attribute will be used as unique identifier
+const uId = const _UId();
+
+class _UId extends Annotation {
+  const _UId();
+}

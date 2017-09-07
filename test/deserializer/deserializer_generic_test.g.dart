@@ -11,23 +11,23 @@ abstract class _$SimpleClassSerializable extends SerializableMap {
   void set name(String v);
   String toString();
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'name':
         return name;
       case 'toString':
         return toString;
     }
-    throwFieldNotFoundException(key, 'SimpleClass');
+    throwFieldNotFoundException(__key, 'SimpleClass');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'name':
-        name = value;
+        name = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'SimpleClass');
+    throwFieldNotFoundException(__key, 'SimpleClass');
   }
 
   Iterable<String> get keys => SimpleClassClassMirror.fields.keys;
@@ -37,21 +37,21 @@ abstract class _$ListClassSerializable extends SerializableMap {
   List<SimpleClass> get list;
   void set list(List<SimpleClass> v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'list':
         return list;
     }
-    throwFieldNotFoundException(key, 'ListClass');
+    throwFieldNotFoundException(__key, 'ListClass');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'list':
-        list = value;
+        list = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'ListClass');
+    throwFieldNotFoundException(__key, 'ListClass');
   }
 
   Iterable<String> get keys => ListClassClassMirror.fields.keys;
@@ -61,21 +61,21 @@ abstract class _$ListListClassSerializable extends SerializableMap {
   List<List<SimpleClass>> get list;
   void set list(List<List<SimpleClass>> v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'list':
         return list;
     }
-    throwFieldNotFoundException(key, 'ListListClass');
+    throwFieldNotFoundException(__key, 'ListListClass');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'list':
-        list = value;
+        list = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'ListListClass');
+    throwFieldNotFoundException(__key, 'ListListClass');
   }
 
   Iterable<String> get keys => ListListClassClassMirror.fields.keys;
@@ -85,21 +85,21 @@ abstract class _$ListListListClassSerializable extends SerializableMap {
   List<List<List<SimpleClass>>> get list;
   void set list(List<List<List<SimpleClass>>> v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'list':
         return list;
     }
-    throwFieldNotFoundException(key, 'ListListListClass');
+    throwFieldNotFoundException(__key, 'ListListListClass');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'list':
-        list = value;
+        list = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'ListListListClass');
+    throwFieldNotFoundException(__key, 'ListListListClass');
   }
 
   Iterable<String> get keys => ListListListClassClassMirror.fields.keys;
@@ -109,21 +109,21 @@ abstract class _$ListMapClassSerializable extends SerializableMap {
   List<Map<String, SimpleClass>> get list;
   void set list(List<Map<String, SimpleClass>> v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'list':
         return list;
     }
-    throwFieldNotFoundException(key, 'ListMapClass');
+    throwFieldNotFoundException(__key, 'ListMapClass');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'list':
-        list = value;
+        list = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'ListMapClass');
+    throwFieldNotFoundException(__key, 'ListMapClass');
   }
 
   Iterable<String> get keys => ListMapClassClassMirror.fields.keys;
@@ -133,21 +133,21 @@ abstract class _$ListListMapClassSerializable extends SerializableMap {
   List<List<Map<String, SimpleClass>>> get list;
   void set list(List<List<Map<String, SimpleClass>>> v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'list':
         return list;
     }
-    throwFieldNotFoundException(key, 'ListListMapClass');
+    throwFieldNotFoundException(__key, 'ListListMapClass');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'list':
-        list = value;
+        list = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'ListListMapClass');
+    throwFieldNotFoundException(__key, 'ListListMapClass');
   }
 
   Iterable<String> get keys => ListListMapClassClassMirror.fields.keys;
@@ -157,21 +157,21 @@ abstract class _$MapClassSerializable extends SerializableMap {
   Map<String, SimpleClass> get map;
   void set map(Map<String, SimpleClass> v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'map':
         return map;
     }
-    throwFieldNotFoundException(key, 'MapClass');
+    throwFieldNotFoundException(__key, 'MapClass');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'map':
-        map = value;
+        map = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'MapClass');
+    throwFieldNotFoundException(__key, 'MapClass');
   }
 
   Iterable<String> get keys => MapClassClassMirror.fields.keys;

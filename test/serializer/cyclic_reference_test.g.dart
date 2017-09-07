@@ -18,8 +18,8 @@ abstract class _$EmployeeSerializable extends SerializableMap {
   void set address(Address v);
   void set manager(Employee v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'id':
         return id;
       case 'firstName':
@@ -31,28 +31,28 @@ abstract class _$EmployeeSerializable extends SerializableMap {
       case 'manager':
         return manager;
     }
-    throwFieldNotFoundException(key, 'Employee');
+    throwFieldNotFoundException(__key, 'Employee');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'id':
-        id = value;
+        id = __value;
         return;
       case 'firstName':
-        firstName = value;
+        firstName = __value;
         return;
       case 'lastName':
-        lastName = value;
+        lastName = __value;
         return;
       case 'address':
-        address = value;
+        address = __value;
         return;
       case 'manager':
-        manager = value;
+        manager = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'Employee');
+    throwFieldNotFoundException(__key, 'Employee');
   }
 
   Iterable<String> get keys => EmployeeClassMirror.fields.keys;
@@ -72,8 +72,8 @@ abstract class _$AddressSerializable extends SerializableMap {
   void set postalCode(String v);
   void set owner(Employee v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'id':
         return id;
       case 'street':
@@ -87,31 +87,31 @@ abstract class _$AddressSerializable extends SerializableMap {
       case 'owner':
         return owner;
     }
-    throwFieldNotFoundException(key, 'Address');
+    throwFieldNotFoundException(__key, 'Address');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'id':
-        id = value;
+        id = __value;
         return;
       case 'street':
-        street = value;
+        street = __value;
         return;
       case 'city':
-        city = value;
+        city = __value;
         return;
       case 'country':
-        country = value;
+        country = __value;
         return;
       case 'postalCode':
-        postalCode = value;
+        postalCode = __value;
         return;
       case 'owner':
-        owner = value;
+        owner = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'Address');
+    throwFieldNotFoundException(__key, 'Address');
   }
 
   Iterable<String> get keys => AddressClassMirror.fields.keys;
@@ -127,8 +127,8 @@ abstract class _$Employee2Serializable extends SerializableMap {
   void set address(Address2 v);
   void set manager(Employee2 v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'firstName':
         return firstName;
       case 'lastName':
@@ -138,25 +138,25 @@ abstract class _$Employee2Serializable extends SerializableMap {
       case 'manager':
         return manager;
     }
-    throwFieldNotFoundException(key, 'Employee2');
+    throwFieldNotFoundException(__key, 'Employee2');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'firstName':
-        firstName = value;
+        firstName = __value;
         return;
       case 'lastName':
-        lastName = value;
+        lastName = __value;
         return;
       case 'address':
-        address = value;
+        address = __value;
         return;
       case 'manager':
-        manager = value;
+        manager = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'Employee2');
+    throwFieldNotFoundException(__key, 'Employee2');
   }
 
   Iterable<String> get keys => Employee2ClassMirror.fields.keys;
@@ -174,8 +174,8 @@ abstract class _$Address2Serializable extends SerializableMap {
   void set postalCode(String v);
   void set owner(Employee2 v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'street':
         return street;
       case 'city':
@@ -187,28 +187,28 @@ abstract class _$Address2Serializable extends SerializableMap {
       case 'owner':
         return owner;
     }
-    throwFieldNotFoundException(key, 'Address2');
+    throwFieldNotFoundException(__key, 'Address2');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'street':
-        street = value;
+        street = __value;
         return;
       case 'city':
-        city = value;
+        city = __value;
         return;
       case 'country':
-        country = value;
+        country = __value;
         return;
       case 'postalCode':
-        postalCode = value;
+        postalCode = __value;
         return;
       case 'owner':
-        owner = value;
+        owner = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'Address2');
+    throwFieldNotFoundException(__key, 'Address2');
   }
 
   Iterable<String> get keys => Address2ClassMirror.fields.keys;
@@ -222,8 +222,8 @@ abstract class _$StudentSerializable extends SerializableMap {
   void set name(String v);
   void set courses(List<Course> v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'id':
         return id;
       case 'name':
@@ -231,22 +231,22 @@ abstract class _$StudentSerializable extends SerializableMap {
       case 'courses':
         return courses;
     }
-    throwFieldNotFoundException(key, 'Student');
+    throwFieldNotFoundException(__key, 'Student');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'id':
-        id = value;
+        id = __value;
         return;
       case 'name':
-        name = value;
+        name = __value;
         return;
       case 'courses':
-        courses = value;
+        courses = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'Student');
+    throwFieldNotFoundException(__key, 'Student');
   }
 
   Iterable<String> get keys => StudentClassMirror.fields.keys;
@@ -260,8 +260,8 @@ abstract class _$CourseSerializable extends SerializableMap {
   void set beginDate(DateTime v);
   void set students(List<Student> v);
 
-  operator [](Object key) {
-    switch (key) {
+  operator [](Object __key) {
+    switch (__key) {
       case 'id':
         return id;
       case 'beginDate':
@@ -269,22 +269,22 @@ abstract class _$CourseSerializable extends SerializableMap {
       case 'students':
         return students;
     }
-    throwFieldNotFoundException(key, 'Course');
+    throwFieldNotFoundException(__key, 'Course');
   }
 
-  operator []=(Object key, value) {
-    switch (key) {
+  operator []=(Object __key, __value) {
+    switch (__key) {
       case 'id':
-        id = value;
+        id = __value;
         return;
       case 'beginDate':
-        beginDate = value;
+        beginDate = __value;
         return;
       case 'students':
-        students = value;
+        students = __value;
         return;
     }
-    throwFieldNotFoundException(key, 'Course');
+    throwFieldNotFoundException(__key, 'Course');
   }
 
   Iterable<String> get keys => CourseClassMirror.fields.keys;

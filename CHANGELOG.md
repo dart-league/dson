@@ -1,7 +1,11 @@
 ## Todo
 
 * [ ] Add include parameter to serialize function
-* [ ] Add uuid check over hashCode for cyclical references
+* [x] Add uuid check over hashCode for cyclical references
+
+## 0.9.1
+
+- Add `@uId` annotation
 
 ## 0.9.0
 

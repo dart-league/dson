@@ -7,7 +7,7 @@ part 'serialize_cyclical.g.dart';  // this line is needed for the generator
 @serializable
 @cyclical
 class Employee extends _$EmployeeSerializable {
-  int id;
+  @uId int key;
   String firstName;
   String lastName;
 
@@ -19,7 +19,7 @@ class Employee extends _$EmployeeSerializable {
 @serializable
 @cyclical
 class Address extends _$AddressSerializable {
-  int id;
+  @uId int key;
   String street;
   String city;
   String country;
@@ -33,23 +33,23 @@ void main() {
   _initMirrors();
 
   var manager = new Employee()
-    ..id = 1
+    ..key = 1
     ..firstName = 'Jhon'
     ..lastName = 'Doe';
   manager.address = new Address()
-    ..id = 1
+    ..key = 1
     ..street = 'some street'
     ..city = 'Miami'
     ..country = 'USA'
     ..owner = manager;
 
   var employee = new Employee()
-    ..id = 2
+    ..key = 2
     ..firstName = 'Luis'
     ..lastName = 'Vargas'
     ..manager = manager;
   employee.address = new Address()
-    ..id = 2
+    ..key = 2
     ..street = 'some street'
     ..city = 'Miami'
     ..country = 'USA'
