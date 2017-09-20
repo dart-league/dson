@@ -294,7 +294,7 @@ abstract class _$CourseSerializable extends SerializableMap {
 // Generator: MirrorsGenerator
 // **************************************************************************
 
-_Employee__Constructor(params) => new Employee();
+_Employee__Constructor([positionalParams, namedParams]) => new Employee();
 
 const $$Employee_fields_id = const DeclarationMirror(type: int);
 const $$Employee_fields_firstName = const DeclarationMirror(type: String);
@@ -304,7 +304,7 @@ const $$Employee_fields_manager = const DeclarationMirror(type: Employee);
 
 const EmployeeClassMirror =
     const ClassMirror(name: 'Employee', constructors: const {
-  '': const FunctionMirror(parameters: const {}, call: _Employee__Constructor)
+  '': const FunctionMirror($call: _Employee__Constructor)
 }, annotations: const [
   cyclical
 ], fields: const {
@@ -326,7 +326,7 @@ const EmployeeClassMirror =
   'address',
   'manager'
 ]);
-_Address__Constructor(params) => new Address();
+_Address__Constructor([positionalParams, namedParams]) => new Address();
 
 const $$Address_fields_id = const DeclarationMirror(type: int);
 const $$Address_fields_street = const DeclarationMirror(type: String);
@@ -337,7 +337,7 @@ const $$Address_fields_owner = const DeclarationMirror(type: Employee);
 
 const AddressClassMirror =
     const ClassMirror(name: 'Address', constructors: const {
-  '': const FunctionMirror(parameters: const {}, call: _Address__Constructor)
+  '': const FunctionMirror($call: _Address__Constructor)
 }, annotations: const [
   cyclical
 ], fields: const {
@@ -362,7 +362,7 @@ const AddressClassMirror =
   'postalCode',
   'owner'
 ]);
-_Employee2__Constructor(params) => new Employee2();
+_Employee2__Constructor([positionalParams, namedParams]) => new Employee2();
 
 const $$Employee2_fields_firstName = const DeclarationMirror(type: String);
 const $$Employee2_fields_lastName = const DeclarationMirror(type: String);
@@ -371,7 +371,7 @@ const $$Employee2_fields_manager = const DeclarationMirror(type: Employee2);
 
 const Employee2ClassMirror =
     const ClassMirror(name: 'Employee2', constructors: const {
-  '': const FunctionMirror(parameters: const {}, call: _Employee2__Constructor)
+  '': const FunctionMirror($call: _Employee2__Constructor)
 }, annotations: const [
   cyclical
 ], fields: const {
@@ -390,7 +390,7 @@ const Employee2ClassMirror =
   'address',
   'manager'
 ]);
-_Address2__Constructor(params) => new Address2();
+_Address2__Constructor([positionalParams, namedParams]) => new Address2();
 
 const $$Address2_fields_street = const DeclarationMirror(type: String);
 const $$Address2_fields_city = const DeclarationMirror(type: String);
@@ -400,7 +400,7 @@ const $$Address2_fields_owner = const DeclarationMirror(type: Employee2);
 
 const Address2ClassMirror =
     const ClassMirror(name: 'Address2', constructors: const {
-  '': const FunctionMirror(parameters: const {}, call: _Address2__Constructor)
+  '': const FunctionMirror($call: _Address2__Constructor)
 }, annotations: const [
   cyclical
 ], fields: const {
@@ -422,7 +422,7 @@ const Address2ClassMirror =
   'postalCode',
   'owner'
 ]);
-_Student__Constructor(params) => new Student();
+_Student__Constructor([positionalParams, namedParams]) => new Student();
 
 const $$Student_fields_id = const DeclarationMirror(type: int);
 const $$Student_fields_name = const DeclarationMirror(type: String);
@@ -431,7 +431,7 @@ const $$Student_fields_courses =
 
 const StudentClassMirror =
     const ClassMirror(name: 'Student', constructors: const {
-  '': const FunctionMirror(parameters: const {}, call: _Student__Constructor)
+  '': const FunctionMirror($call: _Student__Constructor)
 }, annotations: const [
   cyclical
 ], fields: const {
@@ -447,7 +447,7 @@ const StudentClassMirror =
   'name',
   'courses'
 ]);
-_Course__Constructor(params) => new Course();
+_Course__Constructor([positionalParams, namedParams]) => new Course();
 
 const $$Course_fields_id = const DeclarationMirror(type: int);
 const $$Course_fields_beginDate = const DeclarationMirror(type: DateTime);
@@ -456,7 +456,7 @@ const $$Course_fields_students =
 
 const CourseClassMirror =
     const ClassMirror(name: 'Course', constructors: const {
-  '': const FunctionMirror(parameters: const {}, call: _Course__Constructor)
+  '': const FunctionMirror($call: _Course__Constructor)
 }, annotations: const [
   cyclical
 ], fields: const {

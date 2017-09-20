@@ -56,8 +56,8 @@ abstract class _$ImmutableClassInvalidParameterSerializable
 // Generator: MirrorsGenerator
 // **************************************************************************
 
-_ImmutableClass__Constructor(params) =>
-    new ImmutableClass(params['name'], params['renamed']);
+_ImmutableClass__Constructor([positionalParams, namedParams]) =>
+    new ImmutableClass(positionalParams[0], positionalParams[1]);
 
 const $$ImmutableClass_fields_name =
     const DeclarationMirror(type: String, isFinal: true);
@@ -68,10 +68,10 @@ const $$ImmutableClass_fields_renamed = const DeclarationMirror(
 
 const ImmutableClassClassMirror =
     const ClassMirror(name: 'ImmutableClass', constructors: const {
-  '': const FunctionMirror(parameters: const {
-    'name': const DeclarationMirror(name: 'name', type: String),
-    'renamed': const DeclarationMirror(name: 'renamed', type: String)
-  }, call: _ImmutableClass__Constructor)
+  '': const FunctionMirror(positionalParameters: const [
+    const DeclarationMirror(name: 'name', type: String, isRequired: true),
+    const DeclarationMirror(name: 'renamed', type: String, isRequired: true)
+  ], $call: _ImmutableClass__Constructor)
 }, fields: const {
   'name': $$ImmutableClass_fields_name,
   'renamed': $$ImmutableClass_fields_renamed
@@ -79,8 +79,8 @@ const ImmutableClassClassMirror =
   'name',
   'renamed'
 ]);
-_ImmutableClassInvalidParameter__Constructor(params) =>
-    new ImmutableClassInvalidParameter(params['aName']);
+_ImmutableClassInvalidParameter__Constructor([positionalParams, namedParams]) =>
+    new ImmutableClassInvalidParameter(positionalParams[0]);
 
 const $$ImmutableClassInvalidParameter_fields_name =
     const DeclarationMirror(type: String, isFinal: true);
@@ -88,9 +88,9 @@ const $$ImmutableClassInvalidParameter_fields_name =
 const ImmutableClassInvalidParameterClassMirror = const ClassMirror(
     name: 'ImmutableClassInvalidParameter',
     constructors: const {
-      '': const FunctionMirror(parameters: const {
-        'aName': const DeclarationMirror(name: 'aName', type: String)
-      }, call: _ImmutableClassInvalidParameter__Constructor)
+      '': const FunctionMirror(positionalParameters: const [
+        const DeclarationMirror(name: 'aName', type: String, isRequired: true)
+      ], $call: _ImmutableClassInvalidParameter__Constructor)
     },
     fields: const {
       'name': $$ImmutableClassInvalidParameter_fields_name

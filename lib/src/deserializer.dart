@@ -4,17 +4,30 @@ part of dson;
 
 /// Creates a new instance of [type], parses the json in [jsonStr] and puts
 /// the data into the new instance.
-///  Returns new instance of [type]
-///  Throws [NoConstructorError] if [type] or Classes used inside [type] do not
-///    have a constructor without or only optional arguments.
-///  Throws [IncorrectTypeTransform] if json data types doesn't match.
-///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
-dynamic fromJson(String jsonStr, /*Type | List<Type>*/ type) {
+///
+/// example:
+///
+///     // Simple type conversion
+///     Person person = fromJson('{"id": 1, "name": "John Doe"}', Person);
+///
+///     // List conversion
+///     List<Person> persons = fromJson('[{"id": 1, "name": "John Doe"}]', [List, Person]);
+///
+///     // Map conversion
+///     Map<String, Person> personsMap = fromJson('{"person1": {"id": 1, "name": "John Doe"}}', [Map, [String, Person]]);
+///
+/// Throws [NoConstructorError] if [type] or Classes used inside [type] do not
+/// have a constructor without or only optional arguments.
+///
+/// Throws [IncorrectTypeTransform] if json data types doesn't match.
+///
+/// Throws [FormatException] if the [jsonStr] is not valid JSON text.
+dynamic fromJson(String jsonStr, /*Type | List<Type> | List<List<Type>>*/ type) {
   var filler = JSON.decode(jsonStr);
   return _convertValue(type, filler);
 }
 
-/// This function is deprecated. Use `fromJson(jsonStr, [List, YorType])` instead.
+/// This function is deprecated. Use `fromJson(jsonStr, [List, YourType])` instead.
 ///
 /// Creates a list with instances of [clazz] and puts the data of the parsed json
 /// of [jsonStr] into the instances.
@@ -38,6 +51,8 @@ List fromJsonList(String jsonStr, Type clazz) {
   return returnList;
 }
 
+/// This function is deprecated. Use `fromJson(jsonStr, [Map, [KeyType, ValueType]])` instead.
+///
 /// Creates a map with instances of [clazz] in values and puts the data of the parsed json
 /// of [jsonStr] into the instances.
 ///   Returns A map of objects of [clazz].
@@ -45,6 +60,7 @@ List fromJsonList(String jsonStr, Type clazz) {
 ///    have a constructor without or only optional arguments.
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
+@deprecated
 Map fromJsonMap(String jsonStr, Type clazz) {
   Map returnMap = {};
   Map filler = JSON.decode(jsonStr);
@@ -61,15 +77,28 @@ Map fromJsonMap(String jsonStr, Type clazz) {
 
 
 /// Creates a new instance of [type] and maps the data of [dataObject] into it.
-///  Returns new instance of [type]
-///  Throws [NoConstructorError] if [type] or Classes used inside [type] do not
-///    have a constructor without or only optional arguments.
-///  Throws [IncorrectTypeTransform] if json data types doesn't match.
-///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
-dynamic fromMap(Map dataObject, Type type) {
+///
+/// example:
+///
+///     // Simple type conversion
+///     Person person = fromMap({"id": 1, "name": "John Doe"}, Person);
+///
+///     // List conversion
+///     List<Person> persons = fromMap([{"id": 1, "name": "John Doe"}], [List, Person]);
+///
+///     // Map conversion
+///     Map<String, Person> personsMap = fromMap({"person1": {"id": 1, "name": "John Doe"}}, [Map, [String, Person]]);
+///
+/// Throws [NoConstructorError] if [type] or Classes used inside [type] do not
+/// have a constructor without or only optional arguments.
+/// Throws [IncorrectTypeTransform] if json data types doesn't match.
+/// Throws [FormatException] if the [jsonStr] is not valid JSON text.
+dynamic fromMap(Object dataObject, /*Type | List<Type> | List<List<Type>>*/ type) {
   return _convertValue(type, dataObject);
 }
 
+/// This function is deprecated. Use `fromMap(jsonStr, [List, YourType])` instead.
+///
 /// Creates a list with instances of [clazz] and maps the data of [dataMap] into
 /// each instance.
 ///   Returns A list of objects of [clazz].
@@ -77,6 +106,7 @@ dynamic fromMap(Map dataObject, Type type) {
 ///    have a constructor without or only optional arguments.
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [FormatException] if the [jsonStr] is not valid JSON text.
+@deprecated
 List<T> fromMapList<T extends Object>(List<Map> dataMap, Type clazz) {
   var returnList = <T>[];
   dataMap.forEach((item) {
@@ -259,7 +289,8 @@ Object _initiateClass(Type type, [filler]) {
   }
 
   String constrMethod = null;
-  Map<String, dynamic> parameters = {};
+  List positionalParams = [];
+  Map<String, dynamic> namedParameters = {};
 
   classMirror.constructors.forEach((constructorName, constructor) {
 //    _desLog.fine('Found constructor function: ${constructorName}');
@@ -268,24 +299,27 @@ Object _initiateClass(Type type, [filler]) {
         constrMethod = constructorName;
       } else {
         bool onlyOptionalOrImmutable = false;
-        constructor.parameters.forEach((pName, p) {
-          if (p.isOptional) {
+        constructor.parameters.forEach((p) {
+          if (!p.isRequired) {
             onlyOptionalOrImmutable = true;
           } else {
+            var pName = p.name;
             var fieldDecl = classMirror.fields[pName];
-            var parameterName = pName;
 
             if (fieldDecl?.isFinal == true) {
               // check if the property is renamed by Property annotation
               SerializedName prop = fieldDecl.annotations?.firstWhere((a) => a is SerializedName, orElse: () => null);
               if (prop?.name != null) {
-                parameterName = prop.name;
+                pName = prop.name;
               }
 
 //              _desLog.fine('Try to pass parameter: ${parameterName}: ${filler[parameterName]}');
 
-              parameters[pName] = filler[parameterName];
-
+              if (p.isNamed) {
+                namedParameters[p.name] = filler[pName];
+              } else {
+                positionalParams.add(filler[pName]);
+              }
               onlyOptionalOrImmutable = true;
             }
           }
@@ -301,7 +335,7 @@ Object _initiateClass(Type type, [filler]) {
   Object obj;
   if (constrMethod != null) {
 //    _desLog.fine("Found constructor: \"${constrMethod}\"");
-    obj = classMirror.constructors[constrMethod].call(parameters);
+    obj = classMirror.constructors[constrMethod](positionalParams, namedParameters);
     if (classMirror.setters == null) return obj;
 //    _desLog.fine("Created instance of type: ${classMirror.name}");
   } else {

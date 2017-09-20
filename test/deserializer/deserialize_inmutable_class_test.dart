@@ -26,7 +26,7 @@ class ImmutableClassInvalidParameter extends _$ImmutableClassInvalidParameterSer
 main() {
   _initMirrors();
 
-  test('deserialize: immutable class', () {
+  test('deserialize: immutable class 0', () {
     ImmutableClass test = fromJson('{"name":"test", "the_renamed": "test"}', ImmutableClass);
     expect(test.name, equals("test"));
     expect(test.renamed, equals("test"));

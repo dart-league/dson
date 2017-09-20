@@ -69,7 +69,7 @@ abstract class _$EntityClassSerializable extends SerializableMap {
 // Generator: MirrorsGenerator
 // **************************************************************************
 
-_EntityClass__Constructor(params) => new EntityClass();
+_EntityClass__Constructor([positionalParams, namedParams]) => new EntityClass();
 
 const $$EntityClass_fields_name = const DeclarationMirror(type: String);
 const $$EntityClass_fields__setted = const DeclarationMirror(type: String);
@@ -83,8 +83,7 @@ const $$EntityClass_fields_setted = const DeclarationMirror(type: String);
 
 const EntityClassClassMirror =
     const ClassMirror(name: 'EntityClass', constructors: const {
-  '': const FunctionMirror(
-      parameters: const {}, call: _EntityClass__Constructor)
+  '': const FunctionMirror($call: _EntityClass__Constructor)
 }, fields: const {
   'name': $$EntityClass_fields_name,
   '_setted': $$EntityClass_fields__setted,

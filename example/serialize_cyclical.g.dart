@@ -121,7 +121,7 @@ abstract class _$AddressSerializable extends SerializableMap {
 // Generator: MirrorsGenerator
 // **************************************************************************
 
-_Employee__Constructor(params) => new Employee();
+_Employee__Constructor([positionalParams, namedParams]) => new Employee();
 
 const $$Employee_fields_key =
     const DeclarationMirror(type: int, annotations: const [uId]);
@@ -132,7 +132,7 @@ const $$Employee_fields_manager = const DeclarationMirror(type: Employee);
 
 const EmployeeClassMirror =
     const ClassMirror(name: 'Employee', constructors: const {
-  '': const FunctionMirror(parameters: const {}, call: _Employee__Constructor)
+  '': const FunctionMirror($call: _Employee__Constructor)
 }, annotations: const [
   cyclical
 ], fields: const {
@@ -154,7 +154,7 @@ const EmployeeClassMirror =
   'address',
   'manager'
 ]);
-_Address__Constructor(params) => new Address();
+_Address__Constructor([positionalParams, namedParams]) => new Address();
 
 const $$Address_fields_key =
     const DeclarationMirror(type: int, annotations: const [uId]);
@@ -166,7 +166,7 @@ const $$Address_fields_owner = const DeclarationMirror(type: Employee);
 
 const AddressClassMirror =
     const ClassMirror(name: 'Address', constructors: const {
-  '': const FunctionMirror(parameters: const {}, call: _Address__Constructor)
+  '': const FunctionMirror($call: _Address__Constructor)
 }, annotations: const [
   cyclical
 ], fields: const {

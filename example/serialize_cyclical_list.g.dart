@@ -86,7 +86,7 @@ abstract class _$CourseSerializable extends SerializableMap {
 // Generator: MirrorsGenerator
 // **************************************************************************
 
-_Student__Constructor(params) => new Student();
+_Student__Constructor([positionalParams, namedParams]) => new Student();
 
 const $$Student_fields_id = const DeclarationMirror(type: int);
 const $$Student_fields_name = const DeclarationMirror(type: String);
@@ -95,7 +95,7 @@ const $$Student_fields_courses =
 
 const StudentClassMirror =
     const ClassMirror(name: 'Student', constructors: const {
-  '': const FunctionMirror(parameters: const {}, call: _Student__Constructor)
+  '': const FunctionMirror($call: _Student__Constructor)
 }, annotations: const [
   cyclical
 ], fields: const {
@@ -111,7 +111,7 @@ const StudentClassMirror =
   'name',
   'courses'
 ]);
-_Course__Constructor(params) => new Course();
+_Course__Constructor([positionalParams, namedParams]) => new Course();
 
 const $$Course_fields_id = const DeclarationMirror(type: int);
 const $$Course_fields_beginDate = const DeclarationMirror(type: DateTime);
@@ -120,7 +120,7 @@ const $$Course_fields_students =
 
 const CourseClassMirror =
     const ClassMirror(name: 'Course', constructors: const {
-  '': const FunctionMirror(parameters: const {}, call: _Course__Constructor)
+  '': const FunctionMirror($call: _Course__Constructor)
 }, annotations: const [
   cyclical
 ], fields: const {

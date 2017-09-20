@@ -3,6 +3,10 @@
 * [ ] Add include parameter to serialize function
 * [x] Add uuid check over hashCode for cyclical references
 
+## 0.10.1
+
+- Upgrade to `built_mirrors@^0.6.0` and `serializable@^0.7.0`
+
 ## 0.9.1
 
 - Add `@uId` annotation

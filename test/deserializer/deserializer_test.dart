@@ -38,7 +38,7 @@ class JustObject extends _$JustObjectSerializable {
 @serializable
 class SetClass extends _$SetClassSerializable {
   Set<String> names;
-  
+
   SetClass();
 }
 
@@ -98,7 +98,7 @@ class SimpleVarContainer extends _$SimpleVarContainerSerializable {
 main() {
   _initMirrors();
 
-  test('deserialize: simple', () {
+  test('deserialize: simple 1', () {
     TestClass1 test = fromJson('{"name":"test","matter":true,"intNumber":2,"number":5,"list":[1,2,3],"map":{"k":"o"},"the_renamed":"test"}', TestClass1);
     expect(test.name, 'test');
     expect(test.matter, true);

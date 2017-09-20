@@ -36,21 +36,25 @@ abstract class _$ObjectWithEnumSerializable extends SerializableMap {
 
 const ColorClassMirror =
     const ClassMirror(name: 'Color', isEnum: true, values: Color.values);
-_ObjectWithEnum__Constructor(params) => new ObjectWithEnum();
+_ObjectWithEnum__Constructor([positionalParams, namedParams]) =>
+    new ObjectWithEnum();
 
 const $$ObjectWithEnum_fields_color = const DeclarationMirror(type: Color);
 
-const ObjectWithEnumClassMirror =
-    const ClassMirror(name: 'ObjectWithEnum', constructors: const {
-  '': const FunctionMirror(
-      parameters: const {}, call: _ObjectWithEnum__Constructor)
-}, fields: const {
-  'color': $$ObjectWithEnum_fields_color
-}, getters: const [
-  'color'
-], setters: const [
-  'color'
-]);
+const ObjectWithEnumClassMirror = const ClassMirror(
+    name: 'ObjectWithEnum',
+    constructors: const {
+      '': const FunctionMirror($call: _ObjectWithEnum__Constructor)
+    },
+    fields: const {
+      'color': $$ObjectWithEnum_fields_color
+    },
+    getters: const [
+      'color'
+    ],
+    setters: const [
+      'color'
+    ]);
 
 // **************************************************************************
 // Generator: InitMirrorsGenerator

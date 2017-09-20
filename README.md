@@ -35,16 +35,17 @@ dependencies:
 
 ```dart
 import 'package:build_runner/build_runner.dart';
-import 'package:dson/phase.dart';
+import 'package:dson/action.dart';
 
 
 main() async {
   await watch(
     // In next line replace `example/**.dart` for the globs you want to use as input, for example `**/*.dart`
     // to take all the dart files of the project as input.
-      [dsonPhase(const ['example/**.dart'])],
+      [dsonAction(const ['example/**.dart'])],
       deleteFilesByDefault: true);
 }
+
 ```
 
 4. Run `tool/watch.dart` to begin watching for changes in dart files
@@ -163,7 +164,7 @@ part 'serialize_cyclical.g.dart';  // this line is needed for the generator
 @serializable
 @cyclical
 class Employee extends _$EmployeeSerializable {
-  int id;
+  @uId int key;
   String firstName;
   String lastName;
 
@@ -175,7 +176,7 @@ class Employee extends _$EmployeeSerializable {
 @serializable
 @cyclical
 class Address extends _$AddressSerializable {
-  int id;
+  @uId int key;
   String street;
   String city;
   String country;
@@ -189,23 +190,23 @@ void main() {
   _initMirrors();
 
   var manager = new Employee()
-    ..id = 1
+    ..key = 1
     ..firstName = 'Jhon'
     ..lastName = 'Doe';
   manager.address = new Address()
-    ..id = 1
+    ..key = 1
     ..street = 'some street'
     ..city = 'Miami'
     ..country = 'USA'
     ..owner = manager;
 
   var employee = new Employee()
-    ..id = 2
+    ..key = 2
     ..firstName = 'Luis'
     ..lastName = 'Vargas'
     ..manager = manager;
   employee.address = new Address()
-    ..id = 2
+    ..key = 2
     ..street = 'some street'
     ..city = 'Miami'
     ..country = 'USA'
@@ -545,7 +546,7 @@ void main() {
 
   EntityClass object = fromMap({
     "name": "test",
-    "renamed": "blub",
+    "renamed": true,
     "notVisible": "it is",
     "setted": "awesome"
   }, EntityClass);
@@ -555,7 +556,7 @@ void main() {
   print(object.setted); // > awesome
 
 // to deserialize a list of items use [fromJsonList]
-  List<EntityClass> list = fromMapList([
+  List<EntityClass> list = fromMap([
     {"name": "test",
       "children": [
         {"name": "child1"},
@@ -563,9 +564,10 @@ void main() {
       ]
     },
     {"name": "test2"}
-  ], EntityClass);
+  ], [List, EntityClass]);
   print(list.length); // > 2
   print(list[0].name); // > test
   print(list[0].children[0].name); // > child1
 }
+
 ```

@@ -28,7 +28,7 @@ void main() {
 
   EntityClass object = fromMap({
     "name": "test",
-    "renamed": "blub",
+    "renamed": true,
     "notVisible": "it is",
     "setted": "awesome"
   }, EntityClass);
@@ -38,7 +38,7 @@ void main() {
   print(object.setted); // > awesome
 
 // to deserialize a list of items use [fromJsonList]
-  List<EntityClass> list = fromMapList([
+  List<EntityClass> list = fromMap([
     {"name": "test",
       "children": [
         {"name": "child1"},
@@ -46,7 +46,7 @@ void main() {
       ]
     },
     {"name": "test2"}
-  ], EntityClass);
+  ], [List, EntityClass]);
   print(list.length); // > 2
   print(list[0].name); // > test
   print(list[0].children[0].name); // > child1

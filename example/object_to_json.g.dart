@@ -86,7 +86,7 @@ abstract class _$PersonSerializable extends SerializableMap {
 // Generator: MirrorsGenerator
 // **************************************************************************
 
-_Person__Constructor(params) => new Person();
+_Person__Constructor([positionalParams, namedParams]) => new Person();
 
 const $$Person_fields_id = const DeclarationMirror(type: int);
 const $$Person_fields_firstName = const DeclarationMirror(type: String);
@@ -103,7 +103,7 @@ const $$Person_fields_doGetter =
 
 const PersonClassMirror =
     const ClassMirror(name: 'Person', constructors: const {
-  '': const FunctionMirror(parameters: const {}, call: _Person__Constructor)
+  '': const FunctionMirror($call: _Person__Constructor)
 }, fields: const {
   'id': $$Person_fields_id,
   'firstName': $$Person_fields_firstName,

@@ -8,7 +8,7 @@ import 'package:source_gen/source_gen.dart';
 ///
 /// Example: {@example /tool/build.dart}
 /// Example: {@example /tool/watch.dart}
-BuildAction dsonPhase([Iterable<String> globs = const ['bin/**.dart', 'web/**.dart', 'lib/**.dart']]) =>
+BuildAction dsonAction([Iterable<String> globs = const ['bin/**.dart', 'web/**.dart', 'lib/**.dart']]) =>
     new BuildAction(
         new PartBuilder(const [
           const DsonGenerator(),
