@@ -204,4 +204,9 @@ main() {
     SimpleVarContainer simpleVarContainer = fromJson('{"someVar": "hello"}', SimpleVarContainer);
     expect(simpleVarContainer.someVar, 'hello');
   });
+  
+  test('deserialize: TestGetter', () {
+    TestGetter testGetter = fromJson('{"_name":"hello","name":"hello"}',TestGetter);
+    expect(testGetter.name,'hello');
+  });
 }
