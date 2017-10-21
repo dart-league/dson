@@ -110,19 +110,6 @@ main() {
     expect(test.renamed, "test");
   });
 
-  test('deserialize: no constructor found', () {
-    NoConstructorError err;
-    try {
-      NestedClass test = fromJson('{"name":"failure"}', NestedClass);
-      expect(test.name, equals("failure"));
-    } catch(ex) {
-      err = ex;
-    }
-
-    expect(err != null, true);
-    expect(err is NoConstructorError, true);
-  });
-
   test('deserialize: nested parsing', () {
     TestClass1 test = fromJson('{"name":"parent","child":{"name":"child"}}', TestClass1);
     expect(test.child.name, "child");
@@ -203,5 +190,10 @@ main() {
   test('deserialize: SimpleVarContainer', () {
     SimpleVarContainer simpleVarContainer = fromJson('{"someVar": "hello"}', SimpleVarContainer);
     expect(simpleVarContainer.someVar, 'hello');
+  });
+
+  test('deserialize: TestGetter', () {
+    TestGetter testGetter = fromJson('{"_name":"hello","name":"hello"}',TestGetter);
+    expect(testGetter.name,'hello');
   });
 }
