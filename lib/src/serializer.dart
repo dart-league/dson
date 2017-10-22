@@ -116,6 +116,10 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
 //    return {'index': obj.index, 'name': obj.toString().split(".")[1]};
   }
 
+  if (classMirror.annotations.any((x) => x is OnSerialize)) {
+    obj[(classMirror.annotations.firstWhere((x) => x is OnSerialize)) as OnSerialize).toRun]();
+  }
+
   var result = <String, dynamic>{};
 
   if (_serializedStack[obj] == null) {
