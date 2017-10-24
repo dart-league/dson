@@ -130,7 +130,7 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
     depth = _getNextDepth(depth, fieldName);
     if (depth != null || !_isCiclical(classMirror) || fieldName == null) {
       publicVariables.forEach((fieldName, decl) {
-        if(!fieldName.startsWith('_') && !classMirror.setters.contains(fieldName)) _pushField(fieldName, decl, obj, result, depth, exclude);
+        if(!fieldName.startsWith('_') && classMirror.setters.contains(fieldName)) _pushField(fieldName, decl, obj, result, depth, exclude);
       });
 
       _serializedStack[obj] = result;
