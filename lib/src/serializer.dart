@@ -110,7 +110,9 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
 //  InstanceMirror instMirror = serializable.reflect(obj);
   ClassMirror classMirror = reflectType(obj.runtimeType);
 //  _serLog.fine("Serializing class: ${classMirror.name}");
-
+  if (classMirror == null) {
+    return null;
+  }
   if(classMirror.isEnum) {
     return obj.index;
 //    return {'index': obj.index, 'name': obj.toString().split(".")[1]};
