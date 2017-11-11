@@ -131,7 +131,6 @@ dynamic fill(Map dataObject, Object object) {
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 Object _fillObject(SerializableMap obj, filler) {
   var classMirror = reflectType(obj.runtimeType);
-
   classMirror.setters.forEach((varName) {
     DeclarationMirror decl = classMirror.fields[varName];
     String fieldName = varName;
@@ -265,7 +264,7 @@ Object _convertValue(/*Type | List<Type>*/ valueType, Object value,
   } else if (valueType == DateTime) {
     return DateTime.parse(value);
   } else {
-    return _initiateClass(valueType, value);
+    return _initClassRewrite(valueType, value);
   }
 }
 
@@ -387,7 +386,6 @@ _complexInitiateClass(Type type, [Map filler]) {
   ClassMirror classMirror = reflectType(type);
 //  _desLog.fine("Parsing to class: ${type}");
 
-
   String constrMethod = null;
   List positionalParams = [];
   Map<String, dynamic> namedParameters = {};
@@ -432,3 +430,122 @@ _complexInitiateClass(Type type, [Map filler]) {
   return obj;
 //    _desLog.fine("Created instance of type: ${classMirror.name}");
 }
+
+_initClassRewrite(Type type, [fillet]) {
+  var classMirror = reflectType(type);
+  if (classMirror.isEnum) {
+    return classMirror.values[fillet];
+  }
+  Map filler = fillet;
+  //there is no filler
+  if (filler == null || filler.isEmpty) {
+    if (classMirror.constructors.keys.any(
+      (x) =>
+          (classMirror.constructors[x].positionalParameters ?? []).every(
+            (y) => !y.isRequired,
+          ) &&
+          (classMirror.constructors[x].namedParameters?.values?.every(
+                (y) => y.annotations?.any((z) => z is Required) != true,
+              ) ==
+              true),
+    )) {
+      return classMirror.constructors[classMirror.constructors.keys.firstWhere(
+        (x) =>
+            (classMirror.constructors[x].positionalParameters ?? []).every(
+              (y) => !y.isRequired,
+            ) &&
+            (classMirror.constructors[x].namedParameters?.values?.every(
+                  (y) => y.annotations?.any((z) => z is Required) != true,
+                ) ==
+                true),
+      )]();
+    } else {
+      throw new NoConstructorError(classMirror);
+    }
+  }
+  //use blank constructor
+  if (classMirror.constructors.keys.any((x) => x == "")) {
+    FunctionMirror func = classMirror
+        .constructors[classMirror.constructors.keys.firstWhere((x) => x == "")];
+    //all final (immutable) = no fill
+    if (classMirror.fields.values.every((x) => x.isFinal)) {
+      return func(_getPositionalParams(classMirror, func, filler),
+          _getNamedParams(classMirror, func, filler));
+    }
+    return _fillObject(
+        func(_getPositionalParams(classMirror, func, filler),
+            _getNamedParams(classMirror, func, filler)),
+        filler);
+  }
+  //last straw
+  if (classMirror.constructors.keys.any(
+    (x) =>
+        (classMirror.constructors[x].positionalParameters ?? []).every(
+          (y) => !y.isRequired,
+        ) &&
+        (classMirror.constructors[x].namedParameters?.values?.every(
+              (y) => y.annotations?.any((z) => z is Required) != true,
+            ) ==
+            true),
+  )) {
+    return _fillObject(
+        classMirror.constructors[classMirror.constructors.keys.firstWhere(
+          (x) =>
+              (classMirror.constructors[x].positionalParameters ?? []).every(
+                (y) => !y.isRequired,
+              ) &&
+              (classMirror.constructors[x].namedParameters?.values?.every(
+                    (y) => y.annotations?.any((z) => z is Required) != true,
+                  ) ==
+                  true),
+        )](),
+        filler);
+  }
+  throw new NoConstructorError(classMirror);
+}
+
+_getPositionalParams(
+    ClassMirror classMirror, FunctionMirror functionMirror, Map filler) {
+  List things = new List();
+  for (var x in functionMirror.positionalParameters ?? []) {
+    if (!filler.containsKey(_getFillerName(classMirror, x.name))) {
+      if (x.isRequired) {
+        throw "hey, ${x.name} has no filler, yet is required. something went wrong.";
+      } else
+        continue;
+    }
+    things.add(filler[_getFillerName(classMirror, x.name)]);
+  }
+  return things;
+}
+
+_getNamedParams(
+    ClassMirror classMirror, FunctionMirror functionMirror, Map filler) {
+  Map things = new Map();
+  for (var x in functionMirror.namedParameters?.values ?? []) {
+    if (!filler.containsKey(_getFillerName(classMirror, x.name))) {
+      if (x.annotations?.any((y) => y is Required) == true) {
+        throw "hey, ${x.name} has no filler, yet is required. something went wrong.";
+      } else
+        continue;
+    }
+    things[x.name] = filler[_getFillerName(classMirror, x.name)];
+  }
+  return things;
+}
+
+_getFillerName(ClassMirror classMirror, String valueName) {
+  if (!_isExistsName(classMirror, valueName))
+    throw new NoConstructorError(classMirror);
+  if (classMirror.fields[valueName].annotations
+          ?.any((x) => x is SerializedName) ==
+      true) {
+    return (classMirror.fields[valueName].annotations
+            .firstWhere((x) => x is SerializedName) as SerializedName)
+        .name;
+  }
+  return valueName;
+}
+
+_isExistsName(ClassMirror classMirror, String valueName) =>
+    classMirror.fields.containsKey(valueName);

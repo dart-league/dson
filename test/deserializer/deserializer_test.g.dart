@@ -377,6 +377,58 @@ abstract class _$SimpleVarContainerSerializable extends SerializableMap {
   Iterable<String> get keys => SimpleVarContainerClassMirror.fields.keys;
 }
 
+abstract class _$RealWorldClassSerializable extends SerializableMap {
+  String get name;
+  int get age;
+  num get radius;
+  List<String> get pimps;
+  dynamic get diameter;
+  void set name(String v);
+  void set age(int v);
+  void set radius(num v);
+  void set pimps(List<String> v);
+  void set diameter(num v);
+
+  operator [](Object __key) {
+    switch (__key) {
+      case 'name':
+        return name;
+      case 'age':
+        return age;
+      case 'radius':
+        return radius;
+      case 'pimps':
+        return pimps;
+      case 'diameter':
+        return diameter;
+    }
+    throwFieldNotFoundException(__key, 'RealWorldClass');
+  }
+
+  operator []=(Object __key, __value) {
+    switch (__key) {
+      case 'name':
+        name = __value;
+        return;
+      case 'age':
+        age = __value;
+        return;
+      case 'radius':
+        radius = __value;
+        return;
+      case 'pimps':
+        pimps = __value;
+        return;
+      case 'diameter':
+        diameter = __value;
+        return;
+    }
+    throwFieldNotFoundException(__key, 'RealWorldClass');
+  }
+
+  Iterable<String> get keys => RealWorldClassClassMirror.fields.keys;
+}
+
 // **************************************************************************
 // Generator: MirrorsGenerator
 // **************************************************************************
@@ -663,6 +715,46 @@ const SimpleVarContainerClassMirror = const ClassMirror(
     setters: const [
       'someVar'
     ]);
+_RealWorldClass__Constructor([positionalParams, namedParams]) =>
+    new RealWorldClass(positionalParams[0], positionalParams[1],
+        radius: namedParams['radius'], pimps: namedParams['pimps']);
+
+const $$RealWorldClass_fields_name = const DeclarationMirror(type: String);
+const $$RealWorldClass_fields_age = const DeclarationMirror(type: int);
+const $$RealWorldClass_fields_radius = const DeclarationMirror(type: num);
+const $$RealWorldClass_fields_pimps =
+    const DeclarationMirror(type: const [List, String]);
+const $$RealWorldClass_fields_diameter = const DeclarationMirror(type: dynamic);
+
+const RealWorldClassClassMirror =
+    const ClassMirror(name: 'RealWorldClass', constructors: const {
+  '': const FunctionMirror(positionalParameters: const [
+    const DeclarationMirror(name: 'name', type: String, isRequired: true),
+    const DeclarationMirror(name: 'age', type: int, isRequired: true)
+  ], namedParameters: const {
+    'radius': const DeclarationMirror(name: 'radius', type: num, isNamed: true),
+    'pimps': const DeclarationMirror(
+        name: 'pimps', type: const [List, String], isNamed: true)
+  }, $call: _RealWorldClass__Constructor)
+}, fields: const {
+  'name': $$RealWorldClass_fields_name,
+  'age': $$RealWorldClass_fields_age,
+  'radius': $$RealWorldClass_fields_radius,
+  'pimps': $$RealWorldClass_fields_pimps,
+  'diameter': $$RealWorldClass_fields_diameter
+}, getters: const [
+  'name',
+  'age',
+  'radius',
+  'pimps',
+  'diameter'
+], setters: const [
+  'name',
+  'age',
+  'radius',
+  'pimps',
+  'diameter'
+]);
 
 // **************************************************************************
 // Generator: InitMirrorsGenerator
@@ -681,7 +773,8 @@ _initMirrors() {
     SimpleList: SimpleListClassMirror,
     SimpleMap: SimpleMapClassMirror,
     SimpleMapString: SimpleMapStringClassMirror,
-    SimpleVarContainer: SimpleVarContainerClassMirror
+    SimpleVarContainer: SimpleVarContainerClassMirror,
+    RealWorldClass: RealWorldClassClassMirror
   });
   initFunctionMirrors({});
 }

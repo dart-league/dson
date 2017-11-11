@@ -4,7 +4,7 @@ author: Luis Vargas <luisvargastijerino@gmail.com>
 description: Convert Objects to Json and Json to Objects
 homepage: https://github.com/luisvt/dson
 environment:
-  sdk: '>=1.8.0 <2.0.0'
+  sdk: '>=1.8.0 <2.1.0'
 dependencies:
   build_runner: ^0.4.0
   source_gen: ^0.7.0
@@ -13,6 +13,7 @@ dependencies:
   logging: ^0.11.0
   built_mirrors: ^0.6.0
   serializable: ^0.7.0
+  meta: ^1.1.0
 #  serializable:
 #    path: ../serializable
 #  built_mirrors:
