@@ -197,6 +197,18 @@ Map _convertGenericMap(List subTypes, Map fillerMap) {
   return resultMap;
 }
 
+_convertDetectTransform(Object obj) => _convertValue("detect", obj);
+
+Map _convertDetectMap(Map filler) {
+  return new Map.fromIterables(filler.keys.map(_convertDetectTransform), filler.values.map(_convertDetectTransform));
+}
+
+List _convertDetectList(List filler) => filler.map(_convertDetectTransform);
+
+Type _typeFromString(String tpe) => classMirrors.keys.firstWhere((x) => x.toString() == tpe);
+
+bool _isTypeExist(String tpe) => classMirrors.keys.any((x) => x.toString() == tpe);
+
 /// Transforms the value of a field [key] to the correct value.
 ///  returns Deserialized value
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
@@ -204,6 +216,22 @@ Map _convertGenericMap(List subTypes, Map fillerMap) {
 Object _convertValue(/*Type | List<Type>*/ valueType, Object value,
     [String key = '@OBJECT']) {
 //  _desLog.fine(() => "Converting (\"${key}\": $value) to ${valueType}");
+
+  if (valueType == "detect") {
+    if (value is Map) {
+      if (value.containsKey("runtimeType") && _isTypeExist(value["runtimeType"])) {
+        //we can tell the object's type
+          return _initClassRewrite(_typeFromString(value["runtimeType"]),value);
+      }
+      return _convertDetectMap(value);
+    }
+    if (value is List) {
+      return _convertDetectList(value);
+    }
+    if (value is int || value is double || value is bool || value is String) {
+      return value;
+    }
+  }
 
   // if valueType is `List<SomeClass> or Map<SomeClass0, SomeClass1>`
   if (valueType is List) {
@@ -266,169 +294,6 @@ Object _convertValue(/*Type | List<Type>*/ valueType, Object value,
   } else {
     return _initClassRewrite(valueType, value);
   }
-}
-
-/// Creates a new instance of [type] by using an empty constructor name.
-/// Therefore the class needs to contain a simple constructor. For example:
-/// ```
-///  class TestClass {
-///    String name;
-///
-///    TestClass(); // or TestClass([this.name])
-///  }
-/// ```
-/// or
-/// ```dart
-///  class TestClass {
-///    final String name;
-///
-///    TestClass(this.name);
-///  }
-/// ```
-///  Throws [NoConstructorError] if the class doesn't either have a constructor
-///    without or only optional parameters, or parameters matching final fields.
-Object _initiateClass(Type type, [fillet]) {
-  ClassMirror classMirror = reflectType(type);
-//  _desLog.fine("Parsing to class: ${type}");
-
-  if (classMirror.isEnum) {
-    return classMirror.values[fillet];
-  }
-
-  Map filler = fillet;
-
-  String constrMethod = null;
-  List positionalParams = [];
-  Map<String, dynamic> namedParameters = {};
-  bool isComplex = false;
-  classMirror.constructors.forEach((constructorName, constructor) {
-    if (isComplex) {
-      return;
-    }
-//    _desLog.fine('Found constructor function: ${constructorName}');
-    if (constructorName.isEmpty) {
-      if (constructor.parameters.length == 0) {
-        constrMethod = constructorName;
-      } else {
-        if (!constructor.parameters.any((DeclarationMirror x) {
-          var theName = x.name;
-          SerializedName prop = x.annotations
-              ?.firstWhere((a) => a is SerializedName, orElse: () => null);
-          if (prop?.name != null) {
-            theName = prop.name;
-          }
-          return filler.containsKey(theName);
-        })) {
-          return;
-        }
-        if (constructor.parameters.any((DeclarationMirror x) =>
-            (x.isRequired && !x.isFinal) || (!x.isRequired))) {
-          isComplex = true;
-          constrMethod = constructorName;
-          return;
-        }
-        bool onlyOptionalOrImmutable = false;
-        constructor.parameters.forEach((p) {
-          if (!p.isRequired) {
-            onlyOptionalOrImmutable = true;
-          } else {
-            var pName = p.name;
-            var fieldDecl = classMirror.fields[pName];
-
-            if (fieldDecl?.isFinal == true) {
-              // check if the property is renamed by Property annotation
-              SerializedName prop = fieldDecl.annotations
-                  ?.firstWhere((a) => a is SerializedName, orElse: () => null);
-              if (prop?.name != null) {
-                pName = prop.name;
-              }
-
-//              _desLog.fine('Try to pass parameter: ${parameterName}: ${filler[parameterName]}');
-
-              if (p.isNamed) {
-                namedParameters[p.name] = filler[pName];
-              } else {
-                positionalParams.add(filler[pName]);
-              }
-              onlyOptionalOrImmutable = true;
-            }
-          }
-        });
-
-        if (onlyOptionalOrImmutable) {
-          constrMethod = constructorName;
-        }
-      }
-    }
-  });
-
-  if (isComplex) {
-    // well now... looks like a chunk of code needs to be here
-    return _complexInitiateClass(type, filler);
-  }
-
-  Object obj;
-  if (constrMethod != null) {
-//    _desLog.fine("Found constructor: \"${constrMethod}\"");
-    obj = classMirror.constructors[constrMethod](
-        positionalParams, namedParameters);
-    if (classMirror.setters == null) return obj;
-//    _desLog.fine("Created instance of type: ${classMirror.name}");
-  } else {
-//    _desLog.fine("No constructor found.");
-    throw new NoConstructorError(classMirror);
-  }
-
-  return _fillObject(obj, filler);
-}
-
-_complexInitiateClass(Type type, [Map filler]) {
-  ClassMirror classMirror = reflectType(type);
-//  _desLog.fine("Parsing to class: ${type}");
-
-  String constrMethod = null;
-  List positionalParams = [];
-  Map<String, dynamic> namedParameters = {};
-  classMirror.constructors.forEach((constructorName, constructor) {
-//    _desLog.fine('Found constructor function: ${constructorName}');
-    if (constructorName.isEmpty) {
-      if (constructor.parameters.length == 0) {
-        constrMethod = constructorName;
-      } else {
-        constructor.parameters.forEach((p) {
-          var pName = p.name;
-          var fieldDecl = classMirror.fields[pName];
-
-          // check if the property is renamed by Property annotation
-          SerializedName prop = fieldDecl.annotations
-              ?.firstWhere((a) => a is SerializedName, orElse: () => null);
-          if (prop?.name != null) {
-            pName = prop.name;
-          }
-
-//              _desLog.fine('Try to pass parameter: ${parameterName}: ${filler[parameterName]}');
-
-          if (p.isNamed) {
-            namedParameters[p.name] = filler[pName];
-          } else {
-            positionalParams.add(filler[pName]);
-          }
-        });
-        constrMethod = constructorName;
-      }
-    }
-  });
-
-//    _desLog.fine("Found constructor: \"${constrMethod}\"");
-  var obj =
-      classMirror.constructors[constrMethod](positionalParams, namedParameters);
-  for (var x in classMirror.fields.keys) {
-    if (obj[x] == null) {
-      obj[x] = filler[x];
-    }
-  }
-  return obj;
-//    _desLog.fine("Created instance of type: ${classMirror.name}");
 }
 
 _initClassRewrite(Type type, [fillet]) {

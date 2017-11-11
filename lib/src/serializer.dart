@@ -133,7 +133,8 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
   }
 
   var result = <String, dynamic>{};
-
+  //state what type this is.
+  result["runtimeType"] = obj.runtimeType.toString();
   if (_serializedStack[obj] == null) {
     var publicVariables = classMirror.fields;
     depth = _getNextDepth(depth, fieldName);
