@@ -262,12 +262,16 @@ Object _convertValue(/*Type | List<Type>*/ valueType, Object value,
   } else if (valueType == int) {
     if (value is int) {
       return value;
+    } else if (value is double) {
+      return value.toInt();
     } else {
       throw new IncorrectTypeTransform(value, 'int', key);
     }
   } else if (valueType == double) {
     if (value is double) {
       return value;
+    } else if (value is int) {
+      return value.toDouble();
     } else {
       throw new IncorrectTypeTransform(value, 'double', key);
     }
