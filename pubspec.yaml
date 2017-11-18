@@ -1,5 +1,5 @@
 name: dson
-version: 0.12.2
+version: 0.12.2+1
 author: Luis Vargas <luisvargastijerino@gmail.com>
 description: Convert Objects to Json and Json to Objects
 homepage: https://github.com/luisvt/dson
@@ -18,9 +18,11 @@ dependencies:
 #    path: ../serializable
 #  built_mirrors:
 #    path: ../built_mirrors
-#dependency_overrides:
+dependency_overrides:
 #  built_mirrors:
 #    path: ../built_mirrors
+  built_mirrors:
+    git: https://github.com/dwaindibbly/built_mirrors.git
 dev_dependencies:
   test: ^0.12.0
 transformers:
