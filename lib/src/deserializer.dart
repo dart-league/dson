@@ -203,7 +203,7 @@ Map _convertDetectMap(Map filler) {
   return new Map.fromIterables(filler.keys.map(_convertDetectTransform), filler.values.map(_convertDetectTransform));
 }
 
-List _convertDetectList(List filler) => filler.map(_convertDetectTransform);
+List _convertDetectList(Iterable filler) => filler.map(_convertDetectTransform).toList();
 
 Type _typeFromString(String tpe) => classMirrors.keys.firstWhere((x) => x.toString() == tpe);
 
@@ -217,7 +217,7 @@ Object _convertValue(/*Type | List<Type>*/ valueType, Object value,
     [String key = '@OBJECT']) {
 //  _desLog.fine(() => "Converting (\"${key}\": $value) to ${valueType}");
 
-  if (valueType == "detect") {
+  if (valueType == "detect" || valueType == dynamic || valueType == Object) {
     if (value is Map) {
       if (value.containsKey("runtimeType") && _isTypeExist(value["runtimeType"])) {
         //we can tell the object's type
@@ -226,9 +226,12 @@ Object _convertValue(/*Type | List<Type>*/ valueType, Object value,
       return _convertDetectMap(value);
     }
     if (value is List) {
-      return _convertDetectList(value);
+      try{
+      return _convertDetectList(value);} catch(e) {
+        print("something went wrong in the detectList, type was ${value.runtimeType}");rethrow;
+      }
     }
-    if (value is int || value is double || value is bool || value is String) {
+    if (value is num || value is bool || value is String) {
       return value;
     }
   }
@@ -286,9 +289,6 @@ Object _convertValue(/*Type | List<Type>*/ valueType, Object value,
     } else {
       throw new IncorrectTypeTransform(value, 'Map', key);
     }
-  } else if (valueType == Object || valueType == dynamic) {
-    // check this line
-    return value;
   } else if (valueType == DateTime) {
     return DateTime.parse(value);
   } else {

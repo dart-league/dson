@@ -13,6 +13,12 @@ class SmartClass extends _$SmartClassSerializable {
   SmartClass(this.name,this.age);
 }
 
+@serializable
+class SmartNSmart extends _$SmartNSmartSerializable {
+  Map whatever;
+  SmartNSmart(this.whatever);
+}
+
 main(){
   _initMirrors();
   group("smart deserialize > ", (){
@@ -24,6 +30,39 @@ main(){
           "runtimeType": "SmartClass",
         },"detect");
       expect(smrt.name,"cool");
+    });
+    test("SmartNSmart",(){
+      SmartNSmart sns = fromMap(
+        {
+          "whatever":{
+            "a": {
+              "name":"hello",
+              "age":62,
+              "runtimeType": "SmartClass",
+            },
+            "b": {
+              "c": {
+                "name":"there",
+                "age":63,
+                "runtimeType":"SmartClass",
+              }
+            },
+            "d": [
+              1,
+              2,
+              {
+                "name":"three",
+                "age":3,
+                "runtimeType":"SmartClass",
+              },
+            ],
+          },
+          "runtimeType":"SmartNSmart",
+        },dynamic
+      );
+      expect(sns.whatever["d"][2].name,"three");
+      expect(sns.whatever["d"][2].runtimeType,SmartClass);
+      expect(sns.whatever["a"].name,"hello");
     });
   });
 }

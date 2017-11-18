@@ -18,9 +18,9 @@ dependencies:
 #    path: ../serializable
 #  built_mirrors:
 #    path: ../built_mirrors
-#dependency_overrides:
-#  built_mirrors:
-#    path: ../built_mirrors
+dependency_overrides:
+  built_mirrors:
+    path: ../built_mirrors
 dev_dependencies:
   test: ^0.12.0
 transformers:
