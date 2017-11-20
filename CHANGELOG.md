@@ -2,6 +2,9 @@
 
 * [ ] Add include parameter to serialize function
 * [x] Add uuid check over hashCode for cyclical references
+## 0.10.2
+
+- fixes #23: The getter 'name' was called on null
 
 ## 0.10.1
 
