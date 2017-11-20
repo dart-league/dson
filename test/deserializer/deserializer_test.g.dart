@@ -38,6 +38,9 @@ abstract class _$TestClass1Serializable extends SerializableMap {
   Map<dynamic, dynamic> get map;
   TestClass1 get child;
   int get intNumber;
+  int get intNumber2;
+  double get doubleNumber;
+  double get doubleNumber2;
   bool get ignored;
   String get renamed;
   void set name(String v);
@@ -47,6 +50,9 @@ abstract class _$TestClass1Serializable extends SerializableMap {
   void set map(Map<dynamic, dynamic> v);
   void set child(TestClass1 v);
   void set intNumber(int v);
+  void set intNumber2(int v);
+  void set doubleNumber(double v);
+  void set doubleNumber2(double v);
   void set ignored(bool v);
   void set renamed(String v);
 
@@ -66,6 +72,12 @@ abstract class _$TestClass1Serializable extends SerializableMap {
         return child;
       case 'intNumber':
         return intNumber;
+      case 'intNumber2':
+        return intNumber2;
+      case 'doubleNumber':
+        return doubleNumber;
+      case 'doubleNumber2':
+        return doubleNumber2;
       case 'ignored':
         return ignored;
       case 'renamed':
@@ -96,6 +108,15 @@ abstract class _$TestClass1Serializable extends SerializableMap {
         return;
       case 'intNumber':
         intNumber = __value;
+        return;
+      case 'intNumber2':
+        intNumber2 = __value;
+        return;
+      case 'doubleNumber':
+        doubleNumber = __value;
+        return;
+      case 'doubleNumber2':
+        doubleNumber2 = __value;
         return;
       case 'ignored':
         ignored = __value;
@@ -414,6 +435,9 @@ const $$TestClass1_fields_map = const DeclarationMirror(type: const [
 ]);
 const $$TestClass1_fields_child = const DeclarationMirror(type: TestClass1);
 const $$TestClass1_fields_intNumber = const DeclarationMirror(type: int);
+const $$TestClass1_fields_intNumber2 = const DeclarationMirror(type: int);
+const $$TestClass1_fields_doubleNumber = const DeclarationMirror(type: double);
+const $$TestClass1_fields_doubleNumber2 = const DeclarationMirror(type: double);
 const $$TestClass1_fields_ignored =
     const DeclarationMirror(type: bool, annotations: const [ignore]);
 const $$TestClass1_fields_renamed = const DeclarationMirror(
@@ -430,6 +454,9 @@ const TestClass1ClassMirror =
   'map': $$TestClass1_fields_map,
   'child': $$TestClass1_fields_child,
   'intNumber': $$TestClass1_fields_intNumber,
+  'intNumber2': $$TestClass1_fields_intNumber2,
+  'doubleNumber': $$TestClass1_fields_doubleNumber,
+  'doubleNumber2': $$TestClass1_fields_doubleNumber2,
   'ignored': $$TestClass1_fields_ignored,
   'renamed': $$TestClass1_fields_renamed
 }, getters: const [
@@ -440,6 +467,9 @@ const TestClass1ClassMirror =
   'map',
   'child',
   'intNumber',
+  'intNumber2',
+  'doubleNumber',
+  'doubleNumber2',
   'ignored',
   'renamed'
 ], setters: const [
@@ -450,6 +480,9 @@ const TestClass1ClassMirror =
   'map',
   'child',
   'intNumber',
+  'intNumber2',
+  'doubleNumber',
+  'doubleNumber2',
   'ignored',
   'renamed'
 ]);

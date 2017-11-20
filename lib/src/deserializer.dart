@@ -225,12 +225,16 @@ Object _convertValue(/*Type | List<Type>*/ valueType, Object value, [String key 
   } else if (valueType == int) {
     if (value is int) {
       return value;
+    } else if (value is double) {
+      return value.toInt();
     } else {
       throw new IncorrectTypeTransform(value, 'int', key);
     }
   } else if (valueType == double) {
     if (value is double) {
       return value;
+    } else if (value is int) {
+      return value.toDouble();
     } else {
       throw new IncorrectTypeTransform(value, 'double', key);
     }
@@ -239,12 +243,6 @@ Object _convertValue(/*Type | List<Type>*/ valueType, Object value, [String key 
       return value;
     } else {
       throw new IncorrectTypeTransform(value, 'bool', key);
-    }
-  } else if (valueType == 'list') {
-    if (value is List) {
-      return value;
-    } else {
-      throw new IncorrectTypeTransform(value, 'list', key);
     }
   } else if (valueType == Map) {
     if (value is Map) {

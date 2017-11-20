@@ -1,5 +1,5 @@
 name: dson
-version: 0.10.0
+version: 0.10.1
 author: Luis Vargas <luisvargastijerino@gmail.com>
 description: Convert Objects to Json and Json to Objects
 homepage: https://github.com/luisvt/dson

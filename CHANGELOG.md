@@ -5,6 +5,10 @@
 
 ## 0.10.1
 
+- deserialize int to double if required (fixes #22)
+
+## 0.10.0
+
 - Upgrade to `built_mirrors@^0.6.0` and `serializable@^0.7.0`
 
 ## 0.9.1

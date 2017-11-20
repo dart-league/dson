@@ -20,6 +20,9 @@ class TestClass1 extends _$TestClass1Serializable {
   Map map;
   TestClass1 child;
   int intNumber;
+  int intNumber2;
+  double doubleNumber;
+  double doubleNumber2;
 
   @ignore
   bool ignored;
@@ -99,10 +102,13 @@ main() {
   _initMirrors();
 
   test('deserialize: simple 1', () {
-    TestClass1 test = fromJson('{"name":"test","matter":true,"intNumber":2,"number":5,"list":[1,2,3],"map":{"k":"o"},"the_renamed":"test"}', TestClass1);
+    TestClass1 test = fromJson('{"name":"test","matter":true,"intNumber":2, "intNumber2":2.0, "doubleNumber": 2, "doubleNumber2": 2.0, "number":5,"list":[1,2,3],"map":{"k":"o"},"the_renamed":"test"}', TestClass1);
     expect(test.name, 'test');
     expect(test.matter, true);
     expect(test.intNumber, 2);
+    expect(test.intNumber2, 2);
+    expect(test.doubleNumber, 2.0);
+    expect(test.doubleNumber2, 2.0);
     expect(test.number, 5);
     expect(test.list.length, 3);
     expect(test.list[1], 2);
