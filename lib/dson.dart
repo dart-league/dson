@@ -9,3 +9,4 @@ part "src/annotations.dart";
 part "src/deserializer.dart";
 part "src/exceptions.dart";
 part "src/serializer.dart";
+part 'src/caches.dart';

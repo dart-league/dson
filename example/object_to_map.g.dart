@@ -88,22 +88,29 @@ abstract class _$PersonSerializable extends SerializableMap {
 
 _Person__Constructor([positionalParams, namedParams]) => new Person();
 
-const $$Person_fields_id = const DeclarationMirror(type: int);
-const $$Person_fields_firstName = const DeclarationMirror(type: String);
-const $$Person_fields_lastName = const DeclarationMirror(type: dynamic);
-const $$Person_fields_height = const DeclarationMirror(type: double);
-const $$Person_fields_dateOfBirth = const DeclarationMirror(type: DateTime);
+const $$Person_fields_id = const DeclarationMirror(name: 'id', type: int);
+const $$Person_fields_firstName =
+    const DeclarationMirror(name: 'firstName', type: String);
+const $$Person_fields_lastName =
+    const DeclarationMirror(name: 'lastName', type: dynamic);
+const $$Person_fields_height =
+    const DeclarationMirror(name: 'height', type: double);
+const $$Person_fields_dateOfBirth =
+    const DeclarationMirror(name: 'dateOfBirth', type: DateTime);
 const $$Person_fields_otherName = const DeclarationMirror(
-    type: String, annotations: const [const SerializedName(r'renamed')]);
-const $$Person_fields_notVisible =
-    const DeclarationMirror(type: String, annotations: const [ignore]);
-const $$Person_fields__private = const DeclarationMirror(type: String);
+    name: 'otherName',
+    type: String,
+    annotations: const [const SerializedName(r'renamed')]);
+const $$Person_fields_notVisible = const DeclarationMirror(
+    name: 'notVisible', type: String, annotations: const [ignore]);
+const $$Person_fields__private =
+    const DeclarationMirror(name: '_private', type: String);
 const $$Person_fields_doGetter =
-    const DeclarationMirror(type: String, isFinal: true);
+    const DeclarationMirror(name: 'doGetter', type: String, isFinal: true);
 
 const PersonClassMirror =
     const ClassMirror(name: 'Person', constructors: const {
-  '': const FunctionMirror($call: _Person__Constructor)
+  '': const FunctionMirror(name: '', $call: _Person__Constructor)
 }, fields: const {
   'id': $$Person_fields_id,
   'firstName': $$Person_fields_firstName,

@@ -85,7 +85,7 @@ main() {
             ..city = 'Miami'
             ..country = 'USA'
             ..owner = manager;
-    test('firstName', () {
+    test('firstName.', () {
       expect(toJson(manager, exclude: 'firstName'), '{"id":1,"lastName":"Doe","address":{"id":1}}');
     });
     

@@ -101,7 +101,7 @@ class SimpleVarContainer extends _$SimpleVarContainerSerializable {
 main() {
   _initMirrors();
 
-  test('deserialize: simple 1', () {
+  test('deserialize: simple.', () {
     TestClass1 test = fromJson('{"name":"test","matter":true,"intNumber":2, "intNumber2":2.0, "doubleNumber": 2, "doubleNumber2": 2.0, "number":5,"list":[1,2,3],"map":{"k":"o"},"the_renamed":"test"}', TestClass1);
     expect(test.name, 'test');
     expect(test.matter, true);
@@ -116,7 +116,7 @@ main() {
     expect(test.renamed, "test");
   });
 
-  test('deserialize: no constructor found', () {
+  test('deserialize: no constructor found.', () {
     NoConstructorError err;
     try {
       NestedClass test = fromJson('{"name":"failure"}', NestedClass);
@@ -192,7 +192,7 @@ main() {
   });
 
   test('mapListToObjectList: List of SimplemapString', () {
-    List<SimpleMapString> test = fromMapList([{"map": {"test": 1, "test2": 2}}, {"map": {"test": 3, "test2": 4}}], SimpleMapString);
+    List<SimpleMapString> test = fromMap([{"map": {"test": 1, "test2": 2}}, {"map": {"test": 3, "test2": 4}}], [List, SimpleMapString]);
     expect(test[0].map["test"], 1);
     expect(test[0].map["test2"], 2);
     expect(test[1].map["test"], 3);

@@ -133,14 +133,9 @@ Object _fillObject(SerializableMap obj, filler) {
 
   classMirror.setters.forEach((varName) {
     DeclarationMirror decl = classMirror.fields[varName];
-    String fieldName = varName;
+    String fieldName = _getFieldNameFromDeclaration(decl);
     var valueType = decl.type;
 
-    // check if the property is renamed by SerializedName annotation
-    SerializedName prop = decl.annotations?.firstWhere((a) => a is SerializedName, orElse: () => null);
-    if (prop?.name != null) {
-      fieldName = prop.name;
-    }
 //    _desLog.fine('Try to fill object with: ${fieldName}: ${filler[fieldName]}');
 
     if (filler[fieldName] != null) {
@@ -286,60 +281,45 @@ Object _initiateClass(Type type, [filler]) {
     return classMirror.values[filler];
   }
 
-  String constrMethod = null;
-  List positionalParams = [];
-  Map<String, dynamic> namedParameters = {};
+  List positionalParams;
+  Map<String, dynamic> namedParameters;
 
-  classMirror.constructors.forEach((constructorName, constructor) {
-//    _desLog.fine('Found constructor function: ${constructorName}');
-    if (constructorName.isEmpty) {
-      if (constructor.parameters.length == 0) {
-        constrMethod = constructorName;
+  var constructor = classMirror.constructors[''];
+  if (constructor.parameters?.isNotEmpty == true) {
+    bool onlyOptionalOrImmutable = false;
+    positionalParams = [];
+    namedParameters = {};
+    for (var p in constructor.parameters) {
+      if (!p.isRequired) {
+        onlyOptionalOrImmutable = true;
       } else {
-        bool onlyOptionalOrImmutable = false;
-        constructor.parameters.forEach((p) {
-          if (!p.isRequired) {
-            onlyOptionalOrImmutable = true;
-          } else {
-            var pName = p.name;
-            var fieldDecl = classMirror.fields[pName];
+        var fieldDecl = classMirror.fields[p.name];
 
-            if (fieldDecl?.isFinal == true) {
-              // check if the property is renamed by Property annotation
-              SerializedName prop = fieldDecl.annotations?.firstWhere((a) => a is SerializedName, orElse: () => null);
-              if (prop?.name != null) {
-                pName = prop.name;
-              }
+        if (fieldDecl?.isFinal == true) {
+          var pName = _getFieldNameFromDeclaration(fieldDecl);
 
 //              _desLog.fine('Try to pass parameter: ${parameterName}: ${filler[parameterName]}');
 
-              if (p.isNamed) {
-                namedParameters[p.name] = filler[pName];
-              } else {
-                positionalParams.add(filler[pName]);
-              }
-              onlyOptionalOrImmutable = true;
-            }
+          if (p.isNamed) {
+            namedParameters[p.name] = filler[pName];
+          } else {
+            positionalParams.add(filler[pName]);
           }
-        });
-
-        if (onlyOptionalOrImmutable) {
-          constrMethod = constructorName;
+          onlyOptionalOrImmutable = true;
         }
       }
-    }
-  });
+    };
 
-  Object obj;
-  if (constrMethod != null) {
-//    _desLog.fine("Found constructor: \"${constrMethod}\"");
-    obj = classMirror.constructors[constrMethod](positionalParams, namedParameters);
-    if (classMirror.setters == null) return obj;
-//    _desLog.fine("Created instance of type: ${classMirror.name}");
-  } else {
+    if (!onlyOptionalOrImmutable) {
 //    _desLog.fine("No constructor found.");
-    throw new NoConstructorError(classMirror);
+      throw new NoConstructorError(classMirror);
+    }
   }
+
+//    _desLog.fine("Found constructor: \"${constrMethod}\"");
+  Object obj = constructor(positionalParams, namedParameters);
+  if (classMirror.setters == null) return obj;
+//    _desLog.fine("Created instance of type: ${classMirror.name}");
 
   return _fillObject(obj, filler);
 }
