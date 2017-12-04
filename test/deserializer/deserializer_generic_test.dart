@@ -1,50 +1,50 @@
+library deserialiazer.deserialize_generic_test;
+
+import 'package:serializable/serializable.dart';
 import 'package:test/test.dart';
 import 'package:dson/dson.dart';
 
+part 'deserializer_generic_test.g.dart';
+
 @serializable
-class SimpleClass {
+class SimpleClass extends _$SimpleClassSerializable {
   String name;
 
   String toString() => "SimpleClass: name: ${name}";
 }
 
 @serializable
-class ListClass {
-  @DsonType(SimpleClass)
+class ListClass extends _$ListClassSerializable {
   List<SimpleClass> list;
 }
 
 @serializable
-class ListListClass {
-  @DsonType(const [List, SimpleClass])
+class ListListClass extends _$ListListClassSerializable {
   List<List<SimpleClass>> list;
 }
 
 @serializable
-class ListListListClass {
-  @DsonType(const [List, List, SimpleClass])
+class ListListListClass extends _$ListListListClassSerializable {
   List<List<List<SimpleClass>>> list;
 }
 
 @serializable
-class ListMapClass {
-  @DsonType(const [Map, const {String: SimpleClass}])
+class ListMapClass extends _$ListMapClassSerializable {
   List<Map<String, SimpleClass>> list;
 }
 
 @serializable
-class ListListMapClass {
-  @DsonType(const [List, Map, const {String: SimpleClass}])
+class ListListMapClass extends _$ListListMapClassSerializable {
   List<List<Map<String, SimpleClass>>> list;
 }
 
 @serializable
-class MapClass {
-  @DsonType(const {String: SimpleClass})
+class MapClass extends _$MapClassSerializable {
   Map<String, SimpleClass> map;
 }
 
 main() {
+  _initMirrors();
 
   test('deserialize: generic List<SimpleClass>', () {
     ListClass test = fromJson('{"list": [{"name": "test1"}, {"name": "test2"}]}', ListClass);
@@ -68,14 +68,16 @@ main() {
   });
 
   test('deserialize: generic List<Map<String, SimpleClass>>', () {
-    ListMapClass test = fromJson('{"list": [{"simpleClass1": {"name": "test1"}, "simpleClass2": {"name": "test2"}}]}', ListMapClass);
+    ListMapClass test = fromJson(
+        '{"list": [{"simpleClass1": {"name": "test1"}, "simpleClass2": {"name": "test2"}}]}', ListMapClass);
 
     expect(test.list[0]['simpleClass1'].name, 'test1');
     expect(test.list[0]['simpleClass2'].name, 'test2');
   });
 
   test('deserialize: generic List<List<Map<String, SimpleClass>>>', () {
-    ListListMapClass test = fromJson('{"list": [[{"simpleClass1": {"name": "test1"}, "simpleClass2": {"name": "test2"}}]]}', ListListMapClass);
+    ListListMapClass test = fromJson(
+        '{"list": [[{"simpleClass1": {"name": "test1"}, "simpleClass2": {"name": "test2"}}]]}', ListListMapClass);
 
     expect(test.list[0][0]['simpleClass1'].name, 'test1');
     expect(test.list[0][0]['simpleClass2'].name, 'test2');
@@ -87,5 +89,4 @@ main() {
     expect(test.map["test"].name, "test");
     expect(test.map["test2"].name, "test2");
   });
-
 }

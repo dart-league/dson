@@ -1,32 +1,89 @@
-#Changelog
-
-This file contains highlights of what changes on each version of the dson package.
-
 ## Todo
 
-* Add include parameter to serialize function
-* Add uuid check over hashCode for cyclical references
+* [ ] Add include parameter to serialize function
+* [x] Add uuid check over hashCode for cyclical references
+* [ ] Add types to serialized values
 
-## Version 0.3.3
+## 0.11.0
+
+- add caches for `SerializedName` and `Ignored` annotations
+- upgrade to `serializable@0.8.0` and `built_mirrors@0.7.1`
+
+## 0.10.2
+
+- fixes #23: The getter 'name' was called on null
+
+## 0.10.1
+
+- deserialize int to double if required (fixes #22)
+
+## 0.10.0
+
+- Upgrade to `built_mirrors@^0.6.0` and `serializable@^0.7.0`
+
+## 0.9.1
+
+- Add `@uId` annotation
+
+## 0.9.0
+
+- upgrade `serializable` to version `^0.6.0`
+- upgrade `buidl_mirrors` to version `^0.5.0`
+- upgrade `build_runner` to version `^0.4.0`
+- upgrade `build` to version `^0.10.0`
+
+## 0.8.0
+
+- upgrade `serializable` to version `0.5.0`
+- add other dependencies needed
+
+## 0.7.0
+
+- upgrade `serializable` to version `0.4.0`
+
+## 0.6.0
+
+- remove `packageName` parameter from `phase` and make `globs` parameter optional
+- upgrade `serializable` to version `^0.3.0`
+
+## 0.5.0
+
+- upgrade to new version of `serializable`
+- change usage of `_initClassMirrors` to `_initMirrors`
+
+## 0.4.1
+
+* use latest version of `serializable` and `built_mirrors`
+* change use of `BuiltMirrorsGenerator` to `ClassMirrorsGenerator`
+* add `InitClassMirrorsGenerator` to `phase.dart`
+
+## 0.4.0
+
+* Migrate code to use [serializable](https://pub.dartlang.org/packages/serializable)
+and [built_mirros](https://pub.dartlang.org/packages/built_mirrors)
+instead [reflectable](https://pub.dartlang.org/packages/reflectable)
+* create `DsonGenerator` and `dsonPhase`
+
+## 0.3.3
 
 * Correct bug about deserializing `var` types
 * Add support for deserializing generic types in the browser
 
-## Version 0.3.2
+## 0.3.2
 
 * Add `Set` deserializer
 
-## Version 0.3.1
+## 0.3.1
 
 * Add check for `double` on `deserializer._convertValue`
 * add check `if (valueType is DynamicMirrorImpl)` to `deserializer._convertValue`
 to convert `var` or `dynamic` attributes
 
-## Version 0.3.0+1
+## 0.3.0+1
 
 * Update to reflectable 0.5.1
 
-## Version 0.3.0
+## 0.3.0
 
 * Update to reflectable 0.4.0
 * add enum support
@@ -40,25 +97,25 @@ to convert `var` or `dynamic` attributes
     * `map` to `fromMap`
     * `mapList` to `fromMapList`
 
-## Version 0.2.0
+## 0.2.0
 * Breaking change: reflectable < 0.3.0 is not supported
 * Bump reflectable support to ^0.3.0
 
-## Version 0.1.8+1
+## 0.1.8+1
 * Extend version support for reflectable package
 
-## Version 0.1.8
+## 0.1.8
 * Add support for deserializing Maps of objects (in values)
 * Support for excludes, depth, and fieldName when serializing Maps of objects
 
-## Version 0.1.5
+## 0.1.5
 * Add exclude parameter to serialize function
 
-## Version 0.1.4
+## 0.1.4
 * Create stack for deserializer to get objects previously deserialized from cyclical conversions.
 
-## Version 0.1.3
+## 0.1.3
 * Handle cyclical reference for serializing lists
 
-## Version 0.1.2
+## 0.1.2
 * Handle cyclical reference for serializing objects using annotation `@cyclical` and `depth` parameter to avoid cyclical reference errors and determine how deep the user wants to serialize the object.

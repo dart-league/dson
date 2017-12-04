@@ -1,8 +1,13 @@
+library deserialiazer.deserialize_inmutable_class_test;
+
 import 'package:dson/dson.dart';
+import 'package:serializable/serializable.dart';
 import 'package:test/test.dart';
 
+part 'deserialize_inmutable_class_test.g.dart';
+
 @serializable
-class ImmutableClass {
+class ImmutableClass extends _$ImmutableClassSerializable {
   final String name;
 
   @SerializedName("the_renamed")
@@ -12,15 +17,16 @@ class ImmutableClass {
 }
 
 @serializable
-class ImmutableClassInvalidParameter {
+class ImmutableClassInvalidParameter extends _$ImmutableClassInvalidParameterSerializable {
   final String name;
 
   const ImmutableClassInvalidParameter(String aName) : name = aName;
 }
 
 main() {
+  _initMirrors();
 
-  test('deserialize: immutable class', () {
+  test('deserialize: immutable class.', () {
     ImmutableClass test = fromJson('{"name":"test", "the_renamed": "test"}', ImmutableClass);
     expect(test.name, equals("test"));
     expect(test.renamed, equals("test"));
@@ -30,7 +36,7 @@ main() {
     NoConstructorError err;
     try {
       fromJson('{"name":"failure"}', ImmutableClassInvalidParameter);
-    } catch(ex) {
+    } catch (ex) {
       err = ex;
     }
 

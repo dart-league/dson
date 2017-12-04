@@ -1,15 +1,18 @@
-library simple_serialize_test;
+library serializer.simple_test;
 
 import 'package:dson/dson.dart';
+import 'package:serializable/serializable.dart';
 import 'package:test/test.dart';
 
+part 'simple_test.g.dart';
+
 @serializable
-class JustObject {
+class JustObject extends _$JustObjectSerializable {
   Object object;
 }
 
 @serializable
-class TestGetter {
+class TestGetter extends _$TestGetterSerializable {
   TestGetter([this._name]);
 
   String _name;
@@ -18,7 +21,7 @@ class TestGetter {
 }
 
 @serializable
-class NestedClass {
+class NestedClass extends _$NestedClassSerializable {
   String name;
   List list;
   TestGetter getter;
@@ -27,14 +30,14 @@ class NestedClass {
 }
 
 @serializable
-class SetClass {
+class SetClass extends _$SetClassSerializable {
   Set names;
-  
+
   SetClass(this.names);
 }
 
 @serializable
-class TestClass1 {
+class TestClass1 extends _$TestClass1Serializable {
   String name;
   bool matter;
   num number;
@@ -53,12 +56,13 @@ class TestClass1 {
 }
 
 @serializable
-class SimpleDateContainer {
+class SimpleDateContainer extends _$SimpleDateContainerSerializable {
   DateTime testDate;
 }
 
 
 main() {
+  _initMirrors();
 
   group('simple serialize >', () {
     test('serialize: simple String array test', () {
@@ -67,10 +71,10 @@ main() {
     });
 
     test('serialize: mixed nested arrays', () {
-      String str = toJson([[1,2,3],[3,4,5]]);
+      String str = toJson([[1, 2, 3], [3, 4, 5]]);
       expect(str, '[[1,2,3],[3,4,5]]');
 
-      str = toJson(["test1", ["a","b"], [1,2], 3]);
+      str = toJson(["test1", ["a", "b"], [1, 2], 3]);
       expect(str, '["test1",["a","b"],[1,2],3]');
     });
 
@@ -87,21 +91,21 @@ main() {
           "key1": 1,
           "key2": "val"
         },
-        "itsAarray": [1,2,3],
+        "itsAarray": [1, 2, 3],
         "keyk": "valo"
       };
 
       String str = toJson(map);
       expect(str, '{"itsAmap":{"key1":1,"key2":"val"},"itsAarray":[1,2,3],"keyk":"valo"}');
     });
-    
+
     test('serialize: simple object', () {
       var obj = {
         "test": "test"
       };
       JustObject test = new JustObject();
       test.object = obj;
-      
+
       expect(toJson(test), '{"object":{"test":"test"}}');
     });
 
@@ -109,7 +113,7 @@ main() {
       var test = new TestClass1();
       test.name = "test1";
       String str = toJson(test);
-      expect(str,'{"name":"test1"}');
+      expect(str, '{"name":"test1"}');
     });
 
     test('serialize: ignore in object', () {
@@ -130,13 +134,13 @@ main() {
     });
 
     test('serialize: nested class', () {
-      expect(toJson(new NestedClass("test", [1,2,3], new TestGetter("get it"))),
-        '{"name":"test","list":[1,2,3],"getter":{"name":"get it"}}');
+      expect(toJson(new NestedClass("test", [1, 2, 3], new TestGetter("get it"))),
+          '{"name":"test","list":[1,2,3],"getter":{"name":"get it"}}');
     });
 
     test('serialize: Set class', () {
       expect(toJson(new SetClass(new Set()..add("a"))),
-        '{"names":["a"]}');
+          '{"names":["a"]}');
     });
 
     test('serialize: DateTime', () {

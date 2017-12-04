@@ -1,11 +1,11 @@
 part of dson;
 
-Logger _serLog = new Logger('object_mapper_serializer');
+//Logger _serLog = new Logger('object_mapper_serializer');
 
 /// Variable that save all the serialized objects. If an object 
 /// has been serilized in the past is going to be saved by this variable
 /// and is not going to be serialized again.
-Map<Object, Map> _serializedStack = {};
+var _serializedStack = <Object, Map>{};
 
 /// Checks if the [value] is primitive (String, number, boolean or null)
 bool isPrimitive(value) => value is String || value is num || value is bool || value == null;
@@ -20,10 +20,10 @@ bool isSimple(value) => isPrimitive(value) || value is DateTime || value is List
 /// [depth] :  determines how deep is going to be the serialization and to avoid cyclical object reference stack overflow. 
 /// [exclude] : exclude some attributes. It could be [String], [Map], or [List]
 String toJson(object, {bool parseString: false, depth, exclude}) {
-  _serLog.fine("Start serializing");
+//  _serLog.fine("Start serializing");
 
   if (!parseString && object is String) return object;
-  
+
   var result = JSON.encode(objectToSerializable(object, depth: depth, exclude: exclude));
 
   _serializedStack.clear();
@@ -50,22 +50,22 @@ Map toMap(object, {depth, exclude, String fieldName}) =>
 /// * [exclude] : exclude some attributes. It could be [String], [Map], or [List]
 Object objectToSerializable(object, {depth, exclude, String fieldName}) {
   if (isPrimitive(object)) {
-    _serLog.fine("Found primetive: $object");
+//    _serLog.fine("Found primetive: $object");
     return object;
   } else if (object is DateTime) {
-    _serLog.fine("Found DateTime: $object");
+//    _serLog.fine("Found DateTime: $object");
     return object.toIso8601String();
   } else if (object is List) {
-    _serLog.fine("Found list: $object");
+//    _serLog.fine("Found list: $object");
     return _serializeList(object, depth, exclude, fieldName);
-  } else if (object is Map) {
-    _serLog.fine("Found map: $object");
+  } else if (object is! SerializableMap && object is Map) {
+//    _serLog.fine("Found map: $object");
     return _serializeMap(object, depth, exclude, fieldName);
   } else if (object is Set) {
-    _serLog.fine("Found set: $object");
+//    _serLog.fine("Found set: $object");
     return _serializeSet(object, depth, exclude, fieldName);
   } else {
-    _serLog.fine("Found object: $object");
+//    _serLog.fine("Found object: $object");
     return _serializeObject(object, depth, exclude, fieldName);
   }
 }
@@ -107,70 +107,65 @@ Map _serializeMap(Map map, depth, exclude, String fieldName) {
 
 /// Runs through the Object keys by using a ClassMirror.
 Object _serializeObject(obj, depth, exclude, fieldName) {
-  InstanceMirror instMirror = serializable.reflect(obj);
-  ClassMirror classMirror = instMirror.type;
-  _serLog.fine("Serializing class: ${classMirror.qualifiedName}");
+//  InstanceMirror instMirror = serializable.reflect(obj);
+  ClassMirror classMirror = reflectType(obj.runtimeType);
+//  _serLog.fine("Serializing class: ${classMirror.name}");
 
   if(classMirror.isEnum) {
     return obj.index;
 //    return {'index': obj.index, 'name': obj.toString().split(".")[1]};
   }
 
-  Map result = new Map<String, dynamic>();
+  var result = <String, dynamic>{};
 
   if (_serializedStack[obj] == null) {
 
-    var publicVariables = getPublicVariablesAndGettersFromClass(classMirror, serializable);
+    var publicVariables = classMirror.fields;
     depth = _getNextDepth(depth, fieldName);
-    if (depth != null || !_isCiclical(obj, instMirror) || fieldName == null) {
+    if (depth != null || !_isCiclical(classMirror) || fieldName == null) {
       publicVariables.forEach((fieldName, decl) {
-        _pushField(fieldName, decl, instMirror, result, depth, exclude);
+        if(!fieldName.startsWith('_')) _pushField(fieldName, decl, obj, result, depth, exclude);
       });
 
       _serializedStack[obj] = result;
     }
-    
-    if (_isCiclical(obj, instMirror)) {
-      if (publicVariables['id'] == null) {
+
+    if (_isCiclical(classMirror)) {
+      var uIdField = _getUIdAttrFromClass(classMirror);
+      if (publicVariables[uIdField] == null) {
         result['hashcode'] = obj.hashCode;
       } else {
-        result['id'] = obj.id;
+        result[uIdField] = obj[uIdField];
       }
     }
 
   } else {
+    // ignore: strong_mode_down_cast_composite
     result = _serializedStack[obj];
   }
 
-  _serLog.fine("Serialization completed.");
+//  _serLog.fine("Serialization completed.");
   return result;
 }
 
 /// Checks the DeclarationMirror [variable] for annotations and adds
 /// the value to the [result] map. If there's no [SerializedName] annotation
 /// with a different name set it will use the name of [symbol].
-void _pushField(String fieldName, DeclarationMirror variable, InstanceMirror instMirror, Map<String, dynamic> result, depth, exclude) {
+void _pushField(String fieldName, DeclarationMirror variable, SerializableMap obj, Map<String, dynamic> result, depth, exclude) {
 
   if (fieldName.isEmpty) return;
 
 //  InstanceMirror field = instMirror.invokeGetter(fieldName);
-  Object value = instMirror.invokeGetter(fieldName);
-  _serLog.finer("Start serializing field: ${fieldName}");
+  Object value = obj[fieldName];
+//  _serLog.finer("Start serializing field: ${fieldName}");
 
+  fieldName = _getFieldNameFromDeclaration(variable);
   // check if there is a DartsonProperty annotation
-  SerializedName prop = new GetValueOfAnnotation<SerializedName>().fromDeclaration(variable);
-  _serLog.finest("Property Annotation: ${prop}");
 
-  if (prop != null && prop.name != null) {
-    _serLog.finer("Field renamed to: ${prop.name}");
-    fieldName = prop.name;
-  }
-
-
-  _serLog.finer("depth: $depth");
+//  _serLog.finer("depth: $depth");
 
   //If the value is not null and the annotation @ignore is not on variable declaration
-  if (value != null && !new IsAnnotation<_Ignore>().onDeclaration(variable)
+  if (value != null && !_getIsIgnoredFromDeclaration(variable)
       // And exclude is pressent
       && (exclude == null
         // or exclude is Map (we are excluding nested attribute)
@@ -180,7 +175,7 @@ void _pushField(String fieldName, DeclarationMirror variable, InstanceMirror ins
         // or exclude is List and exclude contains this fieldName (we exclude this attribute)
         || exclude is List && !exclude.contains(fieldName))) {
 
-    _serLog.finer("Serializing field: ${fieldName}");
+//    _serLog.finer("Serializing field: ${fieldName}");
 
     result[fieldName] = objectToSerializable(value,
         depth: depth,
@@ -191,8 +186,8 @@ void _pushField(String fieldName, DeclarationMirror variable, InstanceMirror ins
 
 /// Cheks if the value is not Simple (primitive, datetime, List, or Map)
 /// and if the annotation [Cyclical] is not over the class of the object
-_isCiclical(value, InstanceMirror im) =>
-  !isSimple(value) && new IsAnnotation<_Cyclical>().onInstance(im);
+_isCiclical(ClassMirror cm) =>
+  cm.annotations?.any((a) => a is _Cyclical) ?? false;
 
 /// Gets the next depth from the actual depth for the nested attribute with name [fieldName]
 _getNextDepth(depth, String fieldName) {
@@ -209,8 +204,8 @@ _getNext(excludeOrDepth, String fieldName) {
     excludeOrDepth = excludeOrDepth.firstWhere((e) => //
         e == fieldName || e is Map && e.keys.contains(fieldName), orElse: () => null);
   }
-  
+
   if(excludeOrDepth is Map) return excludeOrDepth[fieldName];
-  
+
   if(excludeOrDepth is String && excludeOrDepth == fieldName) return excludeOrDepth;
 }

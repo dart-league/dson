@@ -1,30 +1,27 @@
 name: dson
-version: 0.3.4
+version: 0.11.0
 author: Luis Vargas <luisvargastijerino@gmail.com>
 description: Convert Objects to Json and Json to Objects
 homepage: https://github.com/luisvt/dson
 environment:
-  sdk: '>=1.8.0'
+  sdk: '>=1.8.0 <2.0.0'
 dependencies:
-  drails_commons: ^0.0.8
-#  drails_commons:
-#    path: ../drails_commons
-  reflectable: ^0.5.4
-#  reflectable:
-#    path: ../reflectable/reflectable
+  build_runner: ^0.6.0
+  source_gen: ^0.7.0
+  build: ^0.11.1
+  analyzer: ^0.30.0
+  logging: ^0.11.0
+  built_mirrors: ^0.7.1
+  serializable: ^0.8.0
+#  serializable:
+#    path: ../serializable
+#  built_mirrors:
+#    path: ../built_mirrors
+#dependency_overrides:
+#  built_mirrors:
+#    path: ../built_mirrors
 dev_dependencies:
-  test: '>=0.12.0'
+  test: ^0.12.0
 transformers:
 - test/pub_serve:
     $include: test/**_test.dart
-- reflectable:
-    $include: ["test/*.dart", "test/serializer/*.dart", "test/deserializer/*.dart"]
-    entry_points:
-      - test/serializer/cyclic_reference_test.dart
-      - test/serializer/exclude_test.dart
-      - test/serializer/simple_test.dart
-      - test/serializer/serialize_enums_test.dart
-      - test/deserializer/deserialize_enums_test.dart
-      - test/deserializer/deserialize_inmutable_class_test.dart
-      - test/deserializer/deserializer_test.dart
-      - test/deserializer/deserializer_generic_test.dart

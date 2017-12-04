@@ -12,10 +12,10 @@ class IncorrectTypeTransform extends Error {
   IncorrectTypeTransform(Object value, String type, [String key = "unknown"]) :
     _type = type,
     _field = key,
-    _foundType = serializable.reflect(value).type.qualifiedName;
+    _foundType = reflectType(value.runtimeType)?.name ?? value.runtimeType.toString();
 
 
-  String toString() => "IncorrectTypeTransform: Cannot transform field \"${_field}\" incorrect " +
+  String toString() => "IncorrectTypeTransform: Cannot transform field \"${_field}\" because of incorrect " +
       "type. Requires [${_type}] and found [${_foundType}]";
 }
 
@@ -27,7 +27,7 @@ class NoConstructorError extends Error {
   final String _clazz;
 
   NoConstructorError(ClassMirror mirr) :
-    _clazz = mirr.qualifiedName;
+    _clazz = mirr.name;
 
   String toString() => "No constructor found: Class [${_clazz}] doesn't either have a " +
         "constructor without arguments or arguments matching final fields.";
@@ -40,8 +40,8 @@ class NoConstructorError extends Error {
 class EntityDescriptionMissing extends Error {
   final String _clazz;
 
-  EntityDescriptionMissing(ClassMirror mirr) :
-    _clazz = mirr.qualifiedName;
+  EntityDescriptionMissing(ClassMirror cm) :
+    _clazz = cm.name;
 
   String toString() => "EntityDescription missing: Entity ${_clazz} is not descriped in ENTITY_MAP.";
 }

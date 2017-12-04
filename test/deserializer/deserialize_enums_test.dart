@@ -1,6 +1,12 @@
+library deserialiazer.deserialize_enums_test;
+
 import 'package:dson/dson.dart';
+import 'package:serializable/serializable.dart';
 import 'package:test/test.dart';
 
+part 'deserialize_enums_test.g.dart';
+
+@reflectable
 enum Color {
   BLUE,
   RED,
@@ -8,11 +14,13 @@ enum Color {
 }
 
 @serializable
-class ObjectWithEnum {
+class ObjectWithEnum extends _$ObjectWithEnumSerializable {
   Color color;
 }
 
 main() {
+
+  _initMirrors();
 
   test('deserialize enum', () {
     expect(fromJson('0', Color), Color.BLUE);
