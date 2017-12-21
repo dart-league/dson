@@ -9,8 +9,8 @@ part of deserialiazer.smart;
 abstract class _$SmartClassSerializable extends SerializableMap {
   String get name;
   int get age;
-  void set name(String v);
-  void set age(int v);
+  set name(String v);
+  set age(int v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -39,7 +39,7 @@ abstract class _$SmartClassSerializable extends SerializableMap {
 
 abstract class _$SmartNSmartSerializable extends SerializableMap {
   Map<dynamic, dynamic> get whatever;
-  void set whatever(Map<dynamic, dynamic> v);
+  set whatever(Map<dynamic, dynamic> v);
 
   operator [](Object __key) {
     switch (__key) {

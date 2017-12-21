@@ -43,6 +43,11 @@ class MapClass extends _$MapClassSerializable {
   Map<String, SimpleClass> map;
 }
 
+@serializable
+class GenClass<T> extends _$GenClassSerializable {
+  T data;
+}
+
 main() {
   _initMirrors();
 
@@ -88,5 +93,13 @@ main() {
 
     expect(test.map["test"].name, "test");
     expect(test.map["test2"].name, "test2");
+  });
+
+  test('deserialize: something with generics', () {
+    GenClass<String> test = fromMap<GenClass<String>>({
+      'data': 'hello, world!',
+      'runtimeType': 'GenClass',
+    });
+    expect(test.data,'hello, world!');
   });
 }

@@ -22,10 +22,10 @@ part of dson;
 /// Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///
 /// Throws [FormatException] if the [jsonStr] is not valid JSON text.
-dynamic fromJson(
+T fromJson<T>(
     String jsonStr, /*Type | List<Type> | List<List<Type>>*/ [type = dynamic]) {
   var filler = JSON.decode(jsonStr);
-  return _convertValue(type, filler);
+  return _convertValue(type, filler) as T;
 }
 
 /// This function is deprecated. Use `fromJson(jsonStr, [List, YourType])` instead.
@@ -93,9 +93,9 @@ Map fromJsonMap(String jsonStr, Type clazz) {
 /// have a constructor without or only optional arguments.
 /// Throws [IncorrectTypeTransform] if json data types doesn't match.
 /// Throws [FormatException] if the [jsonStr] is not valid JSON text.
-dynamic fromMap(
+T fromMap<T>(
     Object dataObject, /*Type | List<Type> | List<List<Type>>*/ [type = dynamic]) {
-  return _convertValue(type, dataObject);
+  return _convertValue(type, dataObject) as T;
 }
 
 /// This function is deprecated. Use `fromMap(jsonStr, [List, YourType])` instead.

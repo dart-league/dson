@@ -10,9 +10,9 @@ abstract class _$SimpleSerializable extends SerializableMap {
   String get id;
   double get value;
   bool get flag;
-  void set id(String v);
-  void set value(double v);
-  void set flag(bool v);
+  set id(String v);
+  set value(double v);
+  set flag(bool v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -47,8 +47,8 @@ abstract class _$SimpleSerializable extends SerializableMap {
 abstract class _$ComplexSerializable extends SerializableMap {
   Simple get simple;
   List<Simple> get list;
-  void set simple(Simple v);
-  void set list(List<Simple> v);
+  set simple(Simple v);
+  set list(List<Simple> v);
 
   operator [](Object __key) {
     switch (__key) {

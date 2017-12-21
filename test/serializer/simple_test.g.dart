@@ -8,7 +8,7 @@ part of serializer.simple_test;
 
 abstract class _$JustObjectSerializable extends SerializableMap {
   Object get object;
-  void set object(Object v);
+  set object(Object v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -33,7 +33,7 @@ abstract class _$JustObjectSerializable extends SerializableMap {
 abstract class _$TestGetterSerializable extends SerializableMap {
   String get _name;
   String get name;
-  void set _name(String v);
+  set _name(String v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -61,9 +61,9 @@ abstract class _$NestedClassSerializable extends SerializableMap {
   String get name;
   List<dynamic> get list;
   TestGetter get getter;
-  void set name(String v);
-  void set list(List<dynamic> v);
-  void set getter(TestGetter v);
+  set name(String v);
+  set list(List<dynamic> v);
+  set getter(TestGetter v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -97,7 +97,7 @@ abstract class _$NestedClassSerializable extends SerializableMap {
 
 abstract class _$SetClassSerializable extends SerializableMap {
   Set<dynamic> get names;
-  void set names(Set<dynamic> v);
+  set names(Set<dynamic> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -129,15 +129,15 @@ abstract class _$TestClass1Serializable extends SerializableMap {
   int get intNumber;
   bool get ignored;
   String get renamed;
-  void set name(String v);
-  void set matter(bool v);
-  void set number(num v);
-  void set list(List<dynamic> v);
-  void set map(Map<dynamic, dynamic> v);
-  void set child(TestClass1 v);
-  void set intNumber(int v);
-  void set ignored(bool v);
-  void set renamed(String v);
+  set name(String v);
+  set matter(bool v);
+  set number(num v);
+  set list(List<dynamic> v);
+  set map(Map<dynamic, dynamic> v);
+  set child(TestClass1 v);
+  set intNumber(int v);
+  set ignored(bool v);
+  set renamed(String v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -201,7 +201,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
 
 abstract class _$SimpleDateContainerSerializable extends SerializableMap {
   DateTime get testDate;
-  void set testDate(DateTime v);
+  set testDate(DateTime v);
 
   operator [](Object __key) {
     switch (__key) {

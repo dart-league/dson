@@ -8,7 +8,7 @@ part of deserialiazer.deserialize_generic_test;
 
 abstract class _$SimpleClassSerializable extends SerializableMap {
   String get name;
-  void set name(String v);
+  set name(String v);
   String toString();
 
   operator [](Object __key) {
@@ -35,7 +35,7 @@ abstract class _$SimpleClassSerializable extends SerializableMap {
 
 abstract class _$ListClassSerializable extends SerializableMap {
   List<SimpleClass> get list;
-  void set list(List<SimpleClass> v);
+  set list(List<SimpleClass> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -59,7 +59,7 @@ abstract class _$ListClassSerializable extends SerializableMap {
 
 abstract class _$ListListClassSerializable extends SerializableMap {
   List<List<SimpleClass>> get list;
-  void set list(List<List<SimpleClass>> v);
+  set list(List<List<SimpleClass>> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -83,7 +83,7 @@ abstract class _$ListListClassSerializable extends SerializableMap {
 
 abstract class _$ListListListClassSerializable extends SerializableMap {
   List<List<List<SimpleClass>>> get list;
-  void set list(List<List<List<SimpleClass>>> v);
+  set list(List<List<List<SimpleClass>>> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -107,7 +107,7 @@ abstract class _$ListListListClassSerializable extends SerializableMap {
 
 abstract class _$ListMapClassSerializable extends SerializableMap {
   List<Map<String, SimpleClass>> get list;
-  void set list(List<Map<String, SimpleClass>> v);
+  set list(List<Map<String, SimpleClass>> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -131,7 +131,7 @@ abstract class _$ListMapClassSerializable extends SerializableMap {
 
 abstract class _$ListListMapClassSerializable extends SerializableMap {
   List<List<Map<String, SimpleClass>>> get list;
-  void set list(List<List<Map<String, SimpleClass>>> v);
+  set list(List<List<Map<String, SimpleClass>>> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -155,7 +155,7 @@ abstract class _$ListListMapClassSerializable extends SerializableMap {
 
 abstract class _$MapClassSerializable extends SerializableMap {
   Map<String, SimpleClass> get map;
-  void set map(Map<String, SimpleClass> v);
+  set map(Map<String, SimpleClass> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -175,6 +175,30 @@ abstract class _$MapClassSerializable extends SerializableMap {
   }
 
   Iterable<String> get keys => MapClassClassMirror.fields.keys;
+}
+
+abstract class _$GenClassSerializable<T> extends SerializableMap {
+  T get data;
+  set data(T v);
+
+  operator [](Object __key) {
+    switch (__key) {
+      case 'data':
+        return data;
+    }
+    throwFieldNotFoundException(__key, 'GenClass');
+  }
+
+  operator []=(Object __key, __value) {
+    switch (__key) {
+      case 'data':
+        data = __value;
+        return;
+    }
+    throwFieldNotFoundException(__key, 'GenClass');
+  }
+
+  Iterable<String> get keys => GenClassClassMirror.fields.keys;
 }
 
 // **************************************************************************
@@ -340,6 +364,24 @@ const MapClassClassMirror = const ClassMirror(
     setters: const [
       'map'
     ]);
+_GenClass__Constructor([positionalParams, namedParams]) => new GenClass();
+
+const $$GenClass_fields_data = const DeclarationMirror(type: dynamic);
+
+const GenClassClassMirror = const ClassMirror(
+    name: 'GenClass',
+    constructors: const {
+      '': const FunctionMirror($call: _GenClass__Constructor)
+    },
+    fields: const {
+      'data': $$GenClass_fields_data
+    },
+    getters: const [
+      'data'
+    ],
+    setters: const [
+      'data'
+    ]);
 
 // **************************************************************************
 // Generator: InitMirrorsGenerator
@@ -353,7 +395,8 @@ _initMirrors() {
     ListListListClass: ListListListClassClassMirror,
     ListMapClass: ListMapClassClassMirror,
     ListListMapClass: ListListMapClassClassMirror,
-    MapClass: MapClassClassMirror
+    MapClass: MapClassClassMirror,
+    GenClass: GenClassClassMirror
   });
   initFunctionMirrors({});
 }

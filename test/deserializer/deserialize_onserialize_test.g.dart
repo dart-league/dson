@@ -9,8 +9,8 @@ part of deserialiazer.deserialize_onserialize_test;
 abstract class _$CoolClassSerializable extends SerializableMap {
   dynamic get a;
   dynamic get b;
-  void set a(dynamic v);
-  void set b(dynamic v);
+  set a(dynamic v);
+  set b(dynamic v);
   void saveA();
 
   operator [](Object __key) {
