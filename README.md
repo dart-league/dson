@@ -571,3 +571,35 @@ void main() {
 }
 
 ```
+
+## The easy way...
+
+```dart
+library easydson;
+import 'package:dson/dson.dart';
+
+@serializable
+class EasyClass extends _$EasyClassSerializable {
+  var whatever;
+  int what;
+  var whateverId;
+  EasyClass(this.whatever,this.what) {
+    whateverId=hashcode;
+  }
+  operator == (EasyClass other) => whateverId == other.whateverId;
+}
+
+part 'easy.g.dart';
+
+void main() {
+  _initMirrors();
+  var x = new EasyClass(new EasyClass({'hello':'world'},2),1);
+  var xStr = toJson(x);
+  var xStrToX = fromJson(xStr);
+  if (x == xStrToX) {
+    print('wow.'); // it will print 'wow.'
+  }
+}
+```
+
+Literally that was all you had to do. because it's just that smart.

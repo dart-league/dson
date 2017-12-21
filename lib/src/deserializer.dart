@@ -23,7 +23,7 @@ part of dson;
 ///
 /// Throws [FormatException] if the [jsonStr] is not valid JSON text.
 dynamic fromJson(
-    String jsonStr, /*Type | List<Type> | List<List<Type>>*/ type) {
+    String jsonStr, /*Type | List<Type> | List<List<Type>>*/ [type = dynamic]) {
   var filler = JSON.decode(jsonStr);
   return _convertValue(type, filler);
 }
@@ -94,7 +94,7 @@ Map fromJsonMap(String jsonStr, Type clazz) {
 /// Throws [IncorrectTypeTransform] if json data types doesn't match.
 /// Throws [FormatException] if the [jsonStr] is not valid JSON text.
 dynamic fromMap(
-    Object dataObject, /*Type | List<Type> | List<List<Type>>*/ type) {
+    Object dataObject, /*Type | List<Type> | List<List<Type>>*/ [type = dynamic]) {
   return _convertValue(type, dataObject);
 }
 
@@ -217,7 +217,7 @@ Object _convertValue(/*Type | List<Type>*/ valueType, Object value,
     [String key = '@OBJECT']) {
 //  _desLog.fine(() => "Converting (\"${key}\": $value) to ${valueType}");
 
-  if (valueType == "detect" || valueType == dynamic || valueType == Object) {
+  if (valueType == "detect" || valueType == dynamic || valueType == Object || valueType == null) {
     if (value is Map) {
       if (value.containsKey("runtimeType") && _isTypeExist(value["runtimeType"])) {
         //we can tell the object's type
