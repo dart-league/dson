@@ -188,6 +188,7 @@ void _pushField(String fieldName, DeclarationMirror variable,
   Object value = obj[fieldName];
 //  _serLog.finer("Start serializing field: ${fieldName}");
 
+  fieldName = _getFieldNameFromDeclaration(variable);
   // check if there is a DartsonProperty annotation
   SerializedName prop = variable.annotations
       ?.firstWhere((a) => a is SerializedName, orElse: () => null);
@@ -201,8 +202,7 @@ void _pushField(String fieldName, DeclarationMirror variable,
 //  _serLog.finer("depth: $depth");
 
   //If the value is not null and the annotation @ignore is not on variable declaration
-  if (value != null &&
-      !(variable.annotations?.any((a) => a is _Ignore) ?? false)
+  if (value != null && !_getIsIgnoredFromDeclaration(variable)
       // And exclude is pressent
       &&
       (exclude == null

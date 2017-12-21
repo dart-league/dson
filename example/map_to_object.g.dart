@@ -71,19 +71,24 @@ abstract class _$EntityClassSerializable extends SerializableMap {
 
 _EntityClass__Constructor([positionalParams, namedParams]) => new EntityClass();
 
-const $$EntityClass_fields_name = const DeclarationMirror(type: String);
-const $$EntityClass_fields__setted = const DeclarationMirror(type: String);
+const $$EntityClass_fields_name =
+    const DeclarationMirror(name: 'name', type: String);
+const $$EntityClass_fields__setted =
+    const DeclarationMirror(name: '_setted', type: String);
 const $$EntityClass_fields_otherName = const DeclarationMirror(
-    type: bool, annotations: const [const SerializedName(r'renamed')]);
-const $$EntityClass_fields_notVisible =
-    const DeclarationMirror(type: String, annotations: const [ignore]);
+    name: 'otherName',
+    type: bool,
+    annotations: const [const SerializedName(r'renamed')]);
+const $$EntityClass_fields_notVisible = const DeclarationMirror(
+    name: 'notVisible', type: String, annotations: const [ignore]);
 const $$EntityClass_fields_children =
-    const DeclarationMirror(type: const [List, EntityClass]);
-const $$EntityClass_fields_setted = const DeclarationMirror(type: String);
+    const DeclarationMirror(name: 'children', type: const [List, EntityClass]);
+const $$EntityClass_fields_setted =
+    const DeclarationMirror(name: 'setted', type: String);
 
 const EntityClassClassMirror =
     const ClassMirror(name: 'EntityClass', constructors: const {
-  '': const FunctionMirror($call: _EntityClass__Constructor)
+  '': const FunctionMirror(name: '', $call: _EntityClass__Constructor)
 }, fields: const {
   'name': $$EntityClass_fields_name,
   '_setted': $$EntityClass_fields__setted,

@@ -12,10 +12,10 @@ class IncorrectTypeTransform extends Error {
   IncorrectTypeTransform(Object value, String type, [String key = "unknown"]) :
     _type = type,
     _field = key,
-    _foundType = reflectType(value.runtimeType).name;
+    _foundType = reflectType(value.runtimeType)?.name ?? value.runtimeType.toString();
 
 
-  String toString() => "IncorrectTypeTransform: Cannot transform field \"${_field}\" incorrect " +
+  String toString() => "IncorrectTypeTransform: Cannot transform field \"${_field}\" because of incorrect " +
       "type. Requires [${_type}] and found [${_foundType}]";
 }
 

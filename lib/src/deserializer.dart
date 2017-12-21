@@ -133,7 +133,7 @@ Object _fillObject(SerializableMap obj, filler) {
   var classMirror = reflectType(obj.runtimeType);
   classMirror.setters.forEach((varName) {
     DeclarationMirror decl = classMirror.fields[varName];
-    String fieldName = varName;
+    String fieldName = _getFieldNameFromDeclaration(decl);
     var valueType = decl.type;
 
     // check if the property is renamed by SerializedName annotation
@@ -280,12 +280,6 @@ Object _convertValue(/*Type | List<Type>*/ valueType, Object value,
       return value;
     } else {
       throw new IncorrectTypeTransform(value, 'bool', key);
-    }
-  } else if (valueType == 'list') {
-    if (value is List) {
-      return value;
-    } else {
-      throw new IncorrectTypeTransform(value, 'list', key);
     }
   } else if (valueType == Map) {
     if (value is Map) {

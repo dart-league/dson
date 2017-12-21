@@ -2,8 +2,22 @@
 
 * [ ] Add include parameter to serialize function
 * [x] Add uuid check over hashCode for cyclical references
+* [ ] Add types to serialized values
+
+## 0.11.0
+
+- add caches for `SerializedName` and `Ignored` annotations
+- upgrade to `serializable@0.8.0` and `built_mirrors@0.7.1`
+
+## 0.10.2
+
+- fixes #23: The getter 'name' was called on null
 
 ## 0.10.1
+
+- deserialize int to double if required (fixes #22)
+
+## 0.10.0
 
 - Upgrade to `built_mirrors@^0.6.0` and `serializable@^0.7.0`
 

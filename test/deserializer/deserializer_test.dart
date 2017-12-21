@@ -20,6 +20,9 @@ class TestClass1 extends _$TestClass1Serializable {
   Map map;
   TestClass1 child;
   int intNumber;
+  int intNumber2;
+  double doubleNumber;
+  double doubleNumber2;
 
   @ignore
   bool ignored;
@@ -109,16 +112,32 @@ class RealWorldClass extends _$RealWorldClassSerializable {
 main() {
   _initMirrors();
 
-  test('deserialize: simple 1', () {
-    TestClass1 test = fromJson('{"name":"test","matter":true,"intNumber":2,"number":5,"list":[1,2,3],"map":{"k":"o"},"the_renamed":"test"}', TestClass1);
+  test('deserialize: simple.', () {
+    TestClass1 test = fromJson('{"name":"test","matter":true,"intNumber":2, "intNumber2":2.0, "doubleNumber": 2, "doubleNumber2": 2.0, "number":5,"list":[1,2,3],"map":{"k":"o"},"the_renamed":"test"}', TestClass1);
     expect(test.name, 'test');
     expect(test.matter, true);
     expect(test.intNumber, 2);
+    expect(test.intNumber2, 2);
+    expect(test.doubleNumber, 2.0);
+    expect(test.doubleNumber2, 2.0);
     expect(test.number, 5);
     expect(test.list.length, 3);
     expect(test.list[1], 2);
     expect(test.map["k"], "o");
     expect(test.renamed, "test");
+  });
+
+  test('deserialize: no constructor found.', () {
+    NoConstructorError err;
+    try {
+      NestedClass test = fromJson('{"name":"failure"}', NestedClass);
+      expect(test.name, equals("failure"));
+    } catch(ex) {
+      err = ex;
+    }
+
+    expect(err != null, true);
+    expect(err is NoConstructorError, true);
   });
 
   test('deserialize: nested parsing', () {
@@ -184,7 +203,7 @@ main() {
   });
 
   test('mapListToObjectList: List of SimplemapString', () {
-    List<SimpleMapString> test = fromMapList([{"map": {"test": 1, "test2": 2}}, {"map": {"test": 3, "test2": 4}}], SimpleMapString);
+    List<SimpleMapString> test = fromMap([{"map": {"test": 1, "test2": 2}}, {"map": {"test": 3, "test2": 4}}], [List, SimpleMapString]);
     expect(test[0].map["test"], 1);
     expect(test[0].map["test2"], 2);
     expect(test[1].map["test"], 3);
