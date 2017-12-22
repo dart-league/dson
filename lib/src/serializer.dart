@@ -164,19 +164,6 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
   return result;
 }
 
-Map _uIdFromClassCache = {};
-
-String _getUIdAttrFromClass(ClassMirror cm) => (_uIdFromClassCache
-  ..putIfAbsent(
-      cm,
-      () =>
-          cm.fields.values
-              .firstWhere(
-                  (v) => v.annotations?.contains((a) => a == uId) ?? false,
-                  orElse: () => null)
-              ?.name ??
-          'id'))[cm];
-
 /// Checks the DeclarationMirror [variable] for annotations and adds
 /// the value to the [result] map. If there's no [SerializedName] annotation
 /// with a different name set it will use the name of [symbol].

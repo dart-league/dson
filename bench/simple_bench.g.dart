@@ -81,14 +81,13 @@ abstract class _$ComplexSerializable extends SerializableMap {
 
 _Simple__Constructor([positionalParams, namedParams]) => new Simple();
 
-const $$Simple_fields_id = const DeclarationMirror(name: 'id', type: String);
-const $$Simple_fields_value =
-    const DeclarationMirror(name: 'value', type: double);
-const $$Simple_fields_flag = const DeclarationMirror(name: 'flag', type: bool);
+const $$Simple_fields_id = const DeclarationMirror(type: String);
+const $$Simple_fields_value = const DeclarationMirror(type: double);
+const $$Simple_fields_flag = const DeclarationMirror(type: bool);
 
 const SimpleClassMirror =
     const ClassMirror(name: 'Simple', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Simple__Constructor)
+  '': const FunctionMirror($call: _Simple__Constructor)
 }, fields: const {
   'id': $$Simple_fields_id,
   'value': $$Simple_fields_value,
@@ -104,15 +103,14 @@ const SimpleClassMirror =
 ]);
 _Complex__Constructor([positionalParams, namedParams]) => new Complex();
 
-const $$Complex_fields_simple =
-    const DeclarationMirror(name: 'simple', type: Simple);
+const $$Complex_fields_simple = const DeclarationMirror(type: Simple);
 const $$Complex_fields_list =
-    const DeclarationMirror(name: 'list', type: const [List, Simple]);
+    const DeclarationMirror(type: const [List, Simple]);
 
 const ComplexClassMirror = const ClassMirror(
     name: 'Complex',
     constructors: const {
-      '': const FunctionMirror(name: '', $call: _Complex__Constructor)
+      '': const FunctionMirror($call: _Complex__Constructor)
     },
     fields: const {
       'simple': $$Complex_fields_simple,

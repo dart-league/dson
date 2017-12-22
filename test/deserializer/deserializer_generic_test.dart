@@ -44,7 +44,7 @@ class MapClass extends _$MapClassSerializable {
 }
 
 @serializable
-class GenClass<T> extends _$GenClassSerializable {
+class GenClass<T> extends _$GenClassSerializable<T> {
   T data;
 }
 

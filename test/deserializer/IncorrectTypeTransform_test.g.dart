@@ -32,7 +32,7 @@ _SomeSerializable__Constructor([positionalParams, namedParams]) =>
 const SomeSerializableClassMirror = const ClassMirror(
     name: 'SomeSerializable',
     constructors: const {
-      '': const FunctionMirror(name: '', $call: _SomeSerializable__Constructor)
+      '': const FunctionMirror($call: _SomeSerializable__Constructor)
     });
 
 // **************************************************************************

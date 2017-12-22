@@ -39,13 +39,12 @@ const ColorClassMirror =
 _ObjectWithEnum__Constructor([positionalParams, namedParams]) =>
     new ObjectWithEnum();
 
-const $$ObjectWithEnum_fields_color =
-    const DeclarationMirror(name: 'color', type: Color);
+const $$ObjectWithEnum_fields_color = const DeclarationMirror(type: Color);
 
 const ObjectWithEnumClassMirror = const ClassMirror(
     name: 'ObjectWithEnum',
     constructors: const {
-      '': const FunctionMirror(name: '', $call: _ObjectWithEnum__Constructor)
+      '': const FunctionMirror($call: _ObjectWithEnum__Constructor)
     },
     fields: const {
       'color': $$ObjectWithEnum_fields_color
