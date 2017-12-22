@@ -37,6 +37,9 @@ main() {
     try {
       fromJson('{"name":"failure"}', ImmutableClassInvalidParameter);
     } catch (ex) {
+      if (ex is NoSuchMethodError) {
+        print(ex.stackTrace);
+      }
       err = ex;
     }
 

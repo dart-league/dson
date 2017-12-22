@@ -10,9 +10,9 @@ abstract class _$StudentSerializable extends SerializableMap {
   int get id;
   String get name;
   List<Course> get courses;
-  void set id(int v);
-  void set name(String v);
-  void set courses(List<Course> v);
+  set id(int v);
+  set name(String v);
+  set courses(List<Course> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -48,9 +48,9 @@ abstract class _$CourseSerializable extends SerializableMap {
   int get id;
   DateTime get beginDate;
   List<Student> get students;
-  void set id(int v);
-  void set beginDate(DateTime v);
-  void set students(List<Student> v);
+  set id(int v);
+  set beginDate(DateTime v);
+  set students(List<Student> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -88,15 +88,14 @@ abstract class _$CourseSerializable extends SerializableMap {
 
 _Student__Constructor([positionalParams, namedParams]) => new Student();
 
-const $$Student_fields_id = const DeclarationMirror(name: 'id', type: int);
-const $$Student_fields_name =
-    const DeclarationMirror(name: 'name', type: String);
+const $$Student_fields_id = const DeclarationMirror(type: int);
+const $$Student_fields_name = const DeclarationMirror(type: String);
 const $$Student_fields_courses =
-    const DeclarationMirror(name: 'courses', type: const [List, Course]);
+    const DeclarationMirror(type: const [List, Course]);
 
 const StudentClassMirror =
     const ClassMirror(name: 'Student', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Student__Constructor)
+  '': const FunctionMirror($call: _Student__Constructor)
 }, annotations: const [
   cyclical
 ], fields: const {
@@ -114,15 +113,14 @@ const StudentClassMirror =
 ]);
 _Course__Constructor([positionalParams, namedParams]) => new Course();
 
-const $$Course_fields_id = const DeclarationMirror(name: 'id', type: int);
-const $$Course_fields_beginDate =
-    const DeclarationMirror(name: 'beginDate', type: DateTime);
+const $$Course_fields_id = const DeclarationMirror(type: int);
+const $$Course_fields_beginDate = const DeclarationMirror(type: DateTime);
 const $$Course_fields_students =
-    const DeclarationMirror(name: 'students', type: const [List, Student]);
+    const DeclarationMirror(type: const [List, Student]);
 
 const CourseClassMirror =
     const ClassMirror(name: 'Course', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Course__Constructor)
+  '': const FunctionMirror($call: _Course__Constructor)
 }, annotations: const [
   cyclical
 ], fields: const {

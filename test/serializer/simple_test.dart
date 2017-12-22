@@ -106,47 +106,47 @@ main() {
       JustObject test = new JustObject();
       test.object = obj;
 
-      expect(toJson(test), '{"object":{"test":"test"}}');
+      expect(toJson(test), '{"runtimeType":"JustObject","object":{"test":"test"}}');
     });
 
     test('serialize: simple class', () {
       var test = new TestClass1();
       test.name = "test1";
       String str = toJson(test);
-      expect(str, '{"name":"test1"}');
+      expect(str, '{"runtimeType":"TestClass1","name":"test1"}');
     });
 
     test('serialize: ignore in object', () {
       var test = new TestClass1();
       test.name = "test";
       test.ignored = true;
-      expect(toJson(test), '{"name":"test"}');
+      expect(toJson(test), '{"runtimeType":"TestClass1","name":"test"}');
     });
 
     test('serialize: renamed property of object', () {
       var test = new TestClass1();
       test.renamed = "test";
-      expect(toJson(test), '{"the_renamed":"test"}');
+      expect(toJson(test), '{"runtimeType":"TestClass1","the_renamed":"test"}');
     });
 
     test('serialize: simple getter class', () {
-      expect(toJson(new TestGetter("test2")), '{"name":"test2"}');
+      expect(toJson(new TestGetter("test2")), '{"runtimeType":"TestGetter","name":"test2"}');
     });
 
     test('serialize: nested class', () {
       expect(toJson(new NestedClass("test", [1, 2, 3], new TestGetter("get it"))),
-          '{"name":"test","list":[1,2,3],"getter":{"name":"get it"}}');
+          '{"runtimeType":"NestedClass","name":"test","list":[1,2,3],"getter":{"runtimeType":"TestGetter","name":"get it"}}');
     });
 
     test('serialize: Set class', () {
       expect(toJson(new SetClass(new Set()..add("a"))),
-          '{"names":["a"]}');
+          '{"runtimeType":"SetClass","names":["a"]}');
     });
 
     test('serialize: DateTime', () {
       var obj = new SimpleDateContainer()
         ..testDate = new DateTime.now();
-      expect(toJson(obj), '{"testDate":"${obj.testDate.toIso8601String()}"}');
+      expect(toJson(obj), '{"runtimeType":"SimpleDateContainer","testDate":"${obj.testDate.toIso8601String()}"}');
     });
   });
 }

@@ -98,6 +98,17 @@ class SimpleVarContainer extends _$SimpleVarContainerSerializable {
   var someVar;
 }
 
+@serializable
+class RealWorldClass extends _$RealWorldClassSerializable {
+  String name;
+  int age;
+  num radius;
+  List<String> pimps;
+  get diameter => radius*2;
+  set diameter (num x) {radius = x/2;}
+  RealWorldClass(this.name,this.age,{this.radius:2,this.pimps});
+}
+
 main() {
   _initMirrors();
 
@@ -209,5 +220,23 @@ main() {
   test('deserialize: SimpleVarContainer', () {
     SimpleVarContainer simpleVarContainer = fromJson('{"someVar": "hello"}', SimpleVarContainer);
     expect(simpleVarContainer.someVar, 'hello');
+  });
+
+  test('deserialize: TestGetter', () {
+    TestGetter testGetter = fromJson('{"_name":"hello","name":"hello"}',TestGetter);
+    expect(testGetter.name,'hello');
+  });
+
+  test('deserialize: RealWorld', () {
+    RealWorldClass realWorld = fromMap({
+      "name": "cool",
+      "age": 13,
+      "radius": 35,
+      "pimps": ["a","b","c"],
+    }, RealWorldClass);
+    expect(realWorld.name,"cool");
+    expect(realWorld.age,13);
+    expect(realWorld.diameter,70);
+    expect(realWorld.pimps[1],"b");
   });
 }

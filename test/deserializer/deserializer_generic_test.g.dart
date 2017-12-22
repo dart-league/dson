@@ -8,7 +8,7 @@ part of deserialiazer.deserialize_generic_test;
 
 abstract class _$SimpleClassSerializable extends SerializableMap {
   String get name;
-  void set name(String v);
+  set name(String v);
   String toString();
 
   operator [](Object __key) {
@@ -35,7 +35,7 @@ abstract class _$SimpleClassSerializable extends SerializableMap {
 
 abstract class _$ListClassSerializable extends SerializableMap {
   List<SimpleClass> get list;
-  void set list(List<SimpleClass> v);
+  set list(List<SimpleClass> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -59,7 +59,7 @@ abstract class _$ListClassSerializable extends SerializableMap {
 
 abstract class _$ListListClassSerializable extends SerializableMap {
   List<List<SimpleClass>> get list;
-  void set list(List<List<SimpleClass>> v);
+  set list(List<List<SimpleClass>> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -83,7 +83,7 @@ abstract class _$ListListClassSerializable extends SerializableMap {
 
 abstract class _$ListListListClassSerializable extends SerializableMap {
   List<List<List<SimpleClass>>> get list;
-  void set list(List<List<List<SimpleClass>>> v);
+  set list(List<List<List<SimpleClass>>> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -107,7 +107,7 @@ abstract class _$ListListListClassSerializable extends SerializableMap {
 
 abstract class _$ListMapClassSerializable extends SerializableMap {
   List<Map<String, SimpleClass>> get list;
-  void set list(List<Map<String, SimpleClass>> v);
+  set list(List<Map<String, SimpleClass>> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -131,7 +131,7 @@ abstract class _$ListMapClassSerializable extends SerializableMap {
 
 abstract class _$ListListMapClassSerializable extends SerializableMap {
   List<List<Map<String, SimpleClass>>> get list;
-  void set list(List<List<Map<String, SimpleClass>>> v);
+  set list(List<List<Map<String, SimpleClass>>> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -155,7 +155,7 @@ abstract class _$ListListMapClassSerializable extends SerializableMap {
 
 abstract class _$MapClassSerializable extends SerializableMap {
   Map<String, SimpleClass> get map;
-  void set map(Map<String, SimpleClass> v);
+  set map(Map<String, SimpleClass> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -177,18 +177,41 @@ abstract class _$MapClassSerializable extends SerializableMap {
   Iterable<String> get keys => MapClassClassMirror.fields.keys;
 }
 
+abstract class _$GenClassSerializable<T> extends SerializableMap {
+  T get data;
+  set data(T v);
+
+  operator [](Object __key) {
+    switch (__key) {
+      case 'data':
+        return data;
+    }
+    throwFieldNotFoundException(__key, 'GenClass');
+  }
+
+  operator []=(Object __key, __value) {
+    switch (__key) {
+      case 'data':
+        data = __value;
+        return;
+    }
+    throwFieldNotFoundException(__key, 'GenClass');
+  }
+
+  Iterable<String> get keys => GenClassClassMirror.fields.keys;
+}
+
 // **************************************************************************
 // Generator: MirrorsGenerator
 // **************************************************************************
 
 _SimpleClass__Constructor([positionalParams, namedParams]) => new SimpleClass();
 
-const $$SimpleClass_fields_name =
-    const DeclarationMirror(name: 'name', type: String);
+const $$SimpleClass_fields_name = const DeclarationMirror(type: String);
 
 const SimpleClassClassMirror =
     const ClassMirror(name: 'SimpleClass', constructors: const {
-  '': const FunctionMirror(name: '', $call: _SimpleClass__Constructor)
+  '': const FunctionMirror($call: _SimpleClass__Constructor)
 }, fields: const {
   'name': $$SimpleClass_fields_name
 }, getters: const [
@@ -204,12 +227,12 @@ const SimpleClassClassMirror =
 _ListClass__Constructor([positionalParams, namedParams]) => new ListClass();
 
 const $$ListClass_fields_list =
-    const DeclarationMirror(name: 'list', type: const [List, SimpleClass]);
+    const DeclarationMirror(type: const [List, SimpleClass]);
 
 const ListClassClassMirror = const ClassMirror(
     name: 'ListClass',
     constructors: const {
-      '': const FunctionMirror(name: '', $call: _ListClass__Constructor)
+      '': const FunctionMirror($call: _ListClass__Constructor)
     },
     fields: const {
       'list': $$ListClass_fields_list
@@ -223,8 +246,7 @@ const ListClassClassMirror = const ClassMirror(
 _ListListClass__Constructor([positionalParams, namedParams]) =>
     new ListListClass();
 
-const $$ListListClass_fields_list =
-    const DeclarationMirror(name: 'list', type: const [
+const $$ListListClass_fields_list = const DeclarationMirror(type: const [
   List,
   const [List, SimpleClass]
 ]);
@@ -232,7 +254,7 @@ const $$ListListClass_fields_list =
 const ListListClassClassMirror = const ClassMirror(
     name: 'ListListClass',
     constructors: const {
-      '': const FunctionMirror(name: '', $call: _ListListClass__Constructor)
+      '': const FunctionMirror($call: _ListListClass__Constructor)
     },
     fields: const {
       'list': $$ListListClass_fields_list
@@ -246,8 +268,7 @@ const ListListClassClassMirror = const ClassMirror(
 _ListListListClass__Constructor([positionalParams, namedParams]) =>
     new ListListListClass();
 
-const $$ListListListClass_fields_list =
-    const DeclarationMirror(name: 'list', type: const [
+const $$ListListListClass_fields_list = const DeclarationMirror(type: const [
   List,
   const [
     List,
@@ -258,7 +279,7 @@ const $$ListListListClass_fields_list =
 const ListListListClassClassMirror = const ClassMirror(
     name: 'ListListListClass',
     constructors: const {
-      '': const FunctionMirror(name: '', $call: _ListListListClass__Constructor)
+      '': const FunctionMirror($call: _ListListListClass__Constructor)
     },
     fields: const {
       'list': $$ListListListClass_fields_list
@@ -272,8 +293,7 @@ const ListListListClassClassMirror = const ClassMirror(
 _ListMapClass__Constructor([positionalParams, namedParams]) =>
     new ListMapClass();
 
-const $$ListMapClass_fields_list =
-    const DeclarationMirror(name: 'list', type: const [
+const $$ListMapClass_fields_list = const DeclarationMirror(type: const [
   List,
   const [
     Map,
@@ -284,7 +304,7 @@ const $$ListMapClass_fields_list =
 const ListMapClassClassMirror = const ClassMirror(
     name: 'ListMapClass',
     constructors: const {
-      '': const FunctionMirror(name: '', $call: _ListMapClass__Constructor)
+      '': const FunctionMirror($call: _ListMapClass__Constructor)
     },
     fields: const {
       'list': $$ListMapClass_fields_list
@@ -298,8 +318,7 @@ const ListMapClassClassMirror = const ClassMirror(
 _ListListMapClass__Constructor([positionalParams, namedParams]) =>
     new ListListMapClass();
 
-const $$ListListMapClass_fields_list =
-    const DeclarationMirror(name: 'list', type: const [
+const $$ListListMapClass_fields_list = const DeclarationMirror(type: const [
   List,
   const [
     List,
@@ -313,7 +332,7 @@ const $$ListListMapClass_fields_list =
 const ListListMapClassClassMirror = const ClassMirror(
     name: 'ListListMapClass',
     constructors: const {
-      '': const FunctionMirror(name: '', $call: _ListListMapClass__Constructor)
+      '': const FunctionMirror($call: _ListListMapClass__Constructor)
     },
     fields: const {
       'list': $$ListListMapClass_fields_list
@@ -326,7 +345,7 @@ const ListListMapClassClassMirror = const ClassMirror(
     ]);
 _MapClass__Constructor([positionalParams, namedParams]) => new MapClass();
 
-const $$MapClass_fields_map = const DeclarationMirror(name: 'map', type: const [
+const $$MapClass_fields_map = const DeclarationMirror(type: const [
   Map,
   const [String, SimpleClass]
 ]);
@@ -334,7 +353,7 @@ const $$MapClass_fields_map = const DeclarationMirror(name: 'map', type: const [
 const MapClassClassMirror = const ClassMirror(
     name: 'MapClass',
     constructors: const {
-      '': const FunctionMirror(name: '', $call: _MapClass__Constructor)
+      '': const FunctionMirror($call: _MapClass__Constructor)
     },
     fields: const {
       'map': $$MapClass_fields_map
@@ -344,6 +363,24 @@ const MapClassClassMirror = const ClassMirror(
     ],
     setters: const [
       'map'
+    ]);
+_GenClass__Constructor([positionalParams, namedParams]) => new GenClass();
+
+const $$GenClass_fields_data = const DeclarationMirror(type: dynamic);
+
+const GenClassClassMirror = const ClassMirror(
+    name: 'GenClass',
+    constructors: const {
+      '': const FunctionMirror($call: _GenClass__Constructor)
+    },
+    fields: const {
+      'data': $$GenClass_fields_data
+    },
+    getters: const [
+      'data'
+    ],
+    setters: const [
+      'data'
     ]);
 
 // **************************************************************************
@@ -358,7 +395,8 @@ _initMirrors() {
     ListListListClass: ListListListClassClassMirror,
     ListMapClass: ListMapClassClassMirror,
     ListListMapClass: ListListMapClassClassMirror,
-    MapClass: MapClassClassMirror
+    MapClass: MapClassClassMirror,
+    GenClass: GenClassClassMirror
   });
   initFunctionMirrors({});
 }

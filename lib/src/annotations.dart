@@ -46,3 +46,9 @@ const uId = const _UId();
 class _UId extends Annotation {
   const _UId();
 }
+
+/// this annotation describes what function to run on serialize
+class OnSerialize extends Annotation {
+  final String toRun;
+  const OnSerialize(this.toRun);
+}
