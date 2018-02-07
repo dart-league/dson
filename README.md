@@ -31,26 +31,9 @@ dependencies:
   ...
 ```
 
-3. Create/edit `tool/watch.dart` and add next code on it:
+3. Create/edit `bin/main.dart` or `web/main.dart` and add the code shown in any of the samples below.
 
-```dart
-import 'package:build_runner/build_runner.dart';
-import 'package:dson/action.dart';
-
-
-main() async {
-  await watch(
-    // In next line replace `example/**.dart` for the globs you want to use as input, for example `**/*.dart`
-    // to take all the dart files of the project as input.
-      [dsonAction(const ['example/**.dart'])],
-      deleteFilesByDefault: true);
-}
-
-```
-
-4. Run `tool/watch.dart` to begin watching for changes in dart files
-
-5. Create/edit `bin/main.dart` or `web/main.dart` and add the code shown in any of the samples below.
+4. Run either `pub run build_runner build`, or `pub run build_runner watch`, or `pub run build_runner serve` in the console
 
 ## Convert objects to JSON strings
 

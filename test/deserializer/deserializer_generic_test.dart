@@ -1,6 +1,5 @@
 library deserialiazer.deserialize_generic_test;
 
-import 'package:serializable/serializable.dart';
 import 'package:test/test.dart';
 import 'package:dson/dson.dart';
 

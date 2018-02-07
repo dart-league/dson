@@ -1,0 +1,10 @@
+name: dson_example
+version: 0.0.1
+author: Luis Vargas <luisvargastijerino@gmail.com>
+environment:
+  sdk: '>=1.8.0 <2.0.0'
+dependencies:
+  dson:
+    path: ../
+dev_dependencies:
+  build_runner: ^0.7.0

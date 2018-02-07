@@ -2,6 +2,13 @@
 
 * [ ] Add include parameter to serialize function
 * [x] Add uuid check over hashCode for cyclical references
+
+## 0.12.0
+
+- add `dson_core` package
+- upgrade `build_runner` to version `0.7.0`
+- upgrade `build` to version `0.12.0`
+
 * [ ] Add types to serialized values
 
 ## 0.11.0

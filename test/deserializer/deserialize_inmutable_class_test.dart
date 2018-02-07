@@ -1,7 +1,6 @@
 library deserialiazer.deserialize_inmutable_class_test;
 
 import 'package:dson/dson.dart';
-import 'package:serializable/serializable.dart';
 import 'package:test/test.dart';
 
 part 'deserialize_inmutable_class_test.g.dart';
