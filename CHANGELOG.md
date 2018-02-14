@@ -1,7 +1,11 @@
 ## Todo
 
 * [ ] Add include parameter to serialize function
-* [x] Add uuid check over hashCode for cyclical references
+* [x] ~~Add uuid check over hashCode for cyclical references~~
+
+## 0.13.0
+
+- upgrade `serializable_core` to version `0.9.0` (fixes #32)
 
 ## 0.12.0
 

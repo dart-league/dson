@@ -35,7 +35,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
   bool get matter;
   num get number;
   List<dynamic> get list;
-  Map<dynamic, dynamic> get map;
+  Map<dynamic, dynamic> get myMap;
   TestClass1 get child;
   int get intNumber;
   int get intNumber2;
@@ -47,7 +47,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
   void set matter(bool v);
   void set number(num v);
   void set list(List<dynamic> v);
-  void set map(Map<dynamic, dynamic> v);
+  void set myMap(Map<dynamic, dynamic> v);
   void set child(TestClass1 v);
   void set intNumber(int v);
   void set intNumber2(int v);
@@ -66,8 +66,8 @@ abstract class _$TestClass1Serializable extends SerializableMap {
         return number;
       case 'list':
         return list;
-      case 'map':
-        return map;
+      case 'myMap':
+        return myMap;
       case 'child':
         return child;
       case 'intNumber':
@@ -100,8 +100,8 @@ abstract class _$TestClass1Serializable extends SerializableMap {
       case 'list':
         list = __value;
         return;
-      case 'map':
-        map = __value;
+      case 'myMap':
+        myMap = __value;
         return;
       case 'child':
         child = __value;
@@ -327,21 +327,21 @@ abstract class _$SimpleListSerializable extends SerializableMap {
 }
 
 abstract class _$SimpleMapSerializable extends SerializableMap {
-  Map<dynamic, dynamic> get map;
-  void set map(Map<dynamic, dynamic> v);
+  Map<dynamic, dynamic> get myMap;
+  void set myMap(Map<dynamic, dynamic> v);
 
   operator [](Object __key) {
     switch (__key) {
-      case 'map':
-        return map;
+      case 'myMap':
+        return myMap;
     }
     throwFieldNotFoundException(__key, 'SimpleMap');
   }
 
   operator []=(Object __key, __value) {
     switch (__key) {
-      case 'map':
-        map = __value;
+      case 'myMap':
+        myMap = __value;
         return;
     }
     throwFieldNotFoundException(__key, 'SimpleMap');
@@ -351,21 +351,21 @@ abstract class _$SimpleMapSerializable extends SerializableMap {
 }
 
 abstract class _$SimpleMapStringSerializable extends SerializableMap {
-  Map<String, num> get map;
-  void set map(Map<String, num> v);
+  Map<String, num> get myMap;
+  void set myMap(Map<String, num> v);
 
   operator [](Object __key) {
     switch (__key) {
-      case 'map':
-        return map;
+      case 'myMap':
+        return myMap;
     }
     throwFieldNotFoundException(__key, 'SimpleMapString');
   }
 
   operator []=(Object __key, __value) {
     switch (__key) {
-      case 'map':
-        map = __value;
+      case 'myMap':
+        myMap = __value;
         return;
     }
     throwFieldNotFoundException(__key, 'SimpleMapString');
@@ -428,8 +428,8 @@ const $$TestClass1_fields_number =
     const DeclarationMirror(name: 'number', type: num);
 const $$TestClass1_fields_list =
     const DeclarationMirror(name: 'list', type: const [List, dynamic]);
-const $$TestClass1_fields_map =
-    const DeclarationMirror(name: 'map', type: const [
+const $$TestClass1_fields_myMap =
+    const DeclarationMirror(name: 'myMap', type: const [
   Map,
   const [dynamic, dynamic]
 ]);
@@ -458,7 +458,7 @@ const TestClass1ClassMirror =
   'matter': $$TestClass1_fields_matter,
   'number': $$TestClass1_fields_number,
   'list': $$TestClass1_fields_list,
-  'map': $$TestClass1_fields_map,
+  'myMap': $$TestClass1_fields_myMap,
   'child': $$TestClass1_fields_child,
   'intNumber': $$TestClass1_fields_intNumber,
   'intNumber2': $$TestClass1_fields_intNumber2,
@@ -471,7 +471,7 @@ const TestClass1ClassMirror =
   'matter',
   'number',
   'list',
-  'map',
+  'myMap',
   'child',
   'intNumber',
   'intNumber2',
@@ -484,7 +484,7 @@ const TestClass1ClassMirror =
   'matter',
   'number',
   'list',
-  'map',
+  'myMap',
   'child',
   'intNumber',
   'intNumber2',
@@ -656,8 +656,8 @@ const SimpleListClassMirror = const ClassMirror(
     ]);
 _SimpleMap__Constructor([positionalParams, namedParams]) => new SimpleMap();
 
-const $$SimpleMap_fields_map =
-    const DeclarationMirror(name: 'map', type: const [
+const $$SimpleMap_fields_myMap =
+    const DeclarationMirror(name: 'myMap', type: const [
   Map,
   const [dynamic, dynamic]
 ]);
@@ -668,19 +668,19 @@ const SimpleMapClassMirror = const ClassMirror(
       '': const FunctionMirror(name: '', $call: _SimpleMap__Constructor)
     },
     fields: const {
-      'map': $$SimpleMap_fields_map
+      'myMap': $$SimpleMap_fields_myMap
     },
     getters: const [
-      'map'
+      'myMap'
     ],
     setters: const [
-      'map'
+      'myMap'
     ]);
 _SimpleMapString__Constructor([positionalParams, namedParams]) =>
     new SimpleMapString();
 
-const $$SimpleMapString_fields_map =
-    const DeclarationMirror(name: 'map', type: const [
+const $$SimpleMapString_fields_myMap =
+    const DeclarationMirror(name: 'myMap', type: const [
   Map,
   const [String, num]
 ]);
@@ -691,13 +691,13 @@ const SimpleMapStringClassMirror = const ClassMirror(
       '': const FunctionMirror(name: '', $call: _SimpleMapString__Constructor)
     },
     fields: const {
-      'map': $$SimpleMapString_fields_map
+      'myMap': $$SimpleMapString_fields_myMap
     },
     getters: const [
-      'map'
+      'myMap'
     ],
     setters: const [
-      'map'
+      'myMap'
     ]);
 _SimpleVarContainer__Constructor([positionalParams, namedParams]) =>
     new SimpleVarContainer();

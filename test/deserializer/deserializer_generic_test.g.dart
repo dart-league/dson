@@ -154,21 +154,21 @@ abstract class _$ListListMapClassSerializable extends SerializableMap {
 }
 
 abstract class _$MapClassSerializable extends SerializableMap {
-  Map<String, SimpleClass> get map;
-  void set map(Map<String, SimpleClass> v);
+  Map<String, SimpleClass> get myMap;
+  void set myMap(Map<String, SimpleClass> v);
 
   operator [](Object __key) {
     switch (__key) {
-      case 'map':
-        return map;
+      case 'myMap':
+        return myMap;
     }
     throwFieldNotFoundException(__key, 'MapClass');
   }
 
   operator []=(Object __key, __value) {
     switch (__key) {
-      case 'map':
-        map = __value;
+      case 'myMap':
+        myMap = __value;
         return;
     }
     throwFieldNotFoundException(__key, 'MapClass');
@@ -326,7 +326,8 @@ const ListListMapClassClassMirror = const ClassMirror(
     ]);
 _MapClass__Constructor([positionalParams, namedParams]) => new MapClass();
 
-const $$MapClass_fields_map = const DeclarationMirror(name: 'map', type: const [
+const $$MapClass_fields_myMap =
+    const DeclarationMirror(name: 'myMap', type: const [
   Map,
   const [String, SimpleClass]
 ]);
@@ -337,13 +338,13 @@ const MapClassClassMirror = const ClassMirror(
       '': const FunctionMirror(name: '', $call: _MapClass__Constructor)
     },
     fields: const {
-      'map': $$MapClass_fields_map
+      'myMap': $$MapClass_fields_myMap
     },
     getters: const [
-      'map'
+      'myMap'
     ],
     setters: const [
-      'map'
+      'myMap'
     ]);
 
 // **************************************************************************

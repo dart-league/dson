@@ -39,7 +39,7 @@ class ListListMapClass extends _$ListListMapClassSerializable {
 
 @serializable
 class MapClass extends _$MapClassSerializable {
-  Map<String, SimpleClass> map;
+  Map<String, SimpleClass> myMap;
 }
 
 main() {
@@ -83,9 +83,9 @@ main() {
   });
 
   test('deserialize: generic map', () {
-    MapClass test = fromJson('{"map": {"test": {"name": "test"}, "test2": {"name": "test2"}}}', MapClass);
+    MapClass test = fromJson('{"myMap": {"test": {"name": "test"}, "test2": {"name": "test2"}}}', MapClass);
 
-    expect(test.map["test"].name, "test");
-    expect(test.map["test2"].name, "test2");
+    expect(test.myMap["test"].name, "test");
+    expect(test.myMap["test2"].name, "test2");
   });
 }

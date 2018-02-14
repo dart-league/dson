@@ -124,7 +124,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
   bool get matter;
   num get number;
   List<dynamic> get list;
-  Map<dynamic, dynamic> get map;
+  Map<dynamic, dynamic> get myMap;
   TestClass1 get child;
   int get intNumber;
   bool get ignored;
@@ -133,7 +133,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
   void set matter(bool v);
   void set number(num v);
   void set list(List<dynamic> v);
-  void set map(Map<dynamic, dynamic> v);
+  void set myMap(Map<dynamic, dynamic> v);
   void set child(TestClass1 v);
   void set intNumber(int v);
   void set ignored(bool v);
@@ -149,8 +149,8 @@ abstract class _$TestClass1Serializable extends SerializableMap {
         return number;
       case 'list':
         return list;
-      case 'map':
-        return map;
+      case 'myMap':
+        return myMap;
       case 'child':
         return child;
       case 'intNumber':
@@ -177,8 +177,8 @@ abstract class _$TestClass1Serializable extends SerializableMap {
       case 'list':
         list = __value;
         return;
-      case 'map':
-        map = __value;
+      case 'myMap':
+        myMap = __value;
         return;
       case 'child':
         child = __value;
@@ -338,8 +338,8 @@ const $$TestClass1_fields_number =
     const DeclarationMirror(name: 'number', type: num);
 const $$TestClass1_fields_list =
     const DeclarationMirror(name: 'list', type: const [List, dynamic]);
-const $$TestClass1_fields_map =
-    const DeclarationMirror(name: 'map', type: const [
+const $$TestClass1_fields_myMap =
+    const DeclarationMirror(name: 'myMap', type: const [
   Map,
   const [dynamic, dynamic]
 ]);
@@ -362,7 +362,7 @@ const TestClass1ClassMirror =
   'matter': $$TestClass1_fields_matter,
   'number': $$TestClass1_fields_number,
   'list': $$TestClass1_fields_list,
-  'map': $$TestClass1_fields_map,
+  'myMap': $$TestClass1_fields_myMap,
   'child': $$TestClass1_fields_child,
   'intNumber': $$TestClass1_fields_intNumber,
   'ignored': $$TestClass1_fields_ignored,
@@ -372,7 +372,7 @@ const TestClass1ClassMirror =
   'matter',
   'number',
   'list',
-  'map',
+  'myMap',
   'child',
   'intNumber',
   'ignored',
@@ -382,7 +382,7 @@ const TestClass1ClassMirror =
   'matter',
   'number',
   'list',
-  'map',
+  'myMap',
   'child',
   'intNumber',
   'ignored',

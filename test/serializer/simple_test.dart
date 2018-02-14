@@ -41,7 +41,7 @@ class TestClass1 extends _$TestClass1Serializable {
   bool matter;
   num number;
   List list;
-  Map map;
+  Map myMap;
   TestClass1 child;
   int intNumber;
 
