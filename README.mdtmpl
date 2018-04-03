@@ -96,3 +96,9 @@ To extends objects that are going to be serializable you will need to add the co
 This is to advice the analyzer to ignore the error caused by inheriting from an object that is not a mixin. For example:
 
 {@example example/bin/extend_serializables.dart}
+
+## Serialize/Deserialize immutable objects
+
+To make an immutable class to be able to serialize/deserialize you only need to declare it with a constructor which only contains final parameters. For example:
+
+{@example example/bin/immutable_objects.dart}

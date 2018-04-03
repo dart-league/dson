@@ -9,6 +9,10 @@
 * [ ] Add support for MessagePack
 * [ ] Add support for converting to array of values-only
 
+## 0.13.2
+   
+- fix error serializing immutable with optional parameters
+
 ## 0.13.1
 
 - upgrade `source_gen` to version `^0.8.0`

@@ -29,6 +29,31 @@ abstract class _$ImmutableClassSerializable extends SerializableMap {
   Iterable<String> get keys => ImmutableClassClassMirror.fields.keys;
 }
 
+abstract class _$ImmutableWithOptionalParametersSerializable
+    extends SerializableMap {
+  int get id;
+  String get name;
+
+  operator [](Object __key) {
+    switch (__key) {
+      case 'id':
+        return id;
+      case 'name':
+        return name;
+    }
+    throwFieldNotFoundException(__key, 'ImmutableWithOptionalParameters');
+  }
+
+  operator []=(Object __key, __value) {
+    switch (__key) {
+    }
+    throwFieldNotFoundException(__key, 'ImmutableWithOptionalParameters');
+  }
+
+  Iterable<String> get keys =>
+      ImmutableWithOptionalParametersClassMirror.fields.keys;
+}
+
 abstract class _$ImmutableClassInvalidParameterSerializable
     extends SerializableMap {
   const _$ImmutableClassInvalidParameterSerializable();
@@ -83,6 +108,36 @@ const ImmutableClassClassMirror =
   'name',
   'renamed'
 ]);
+_ImmutableWithOptionalParameters__Constructor(
+        [positionalParams, namedParams]) =>
+    new ImmutableWithOptionalParameters(
+        id: namedParams['id'], name: namedParams['name']);
+
+const $$ImmutableWithOptionalParameters_fields_id =
+    const DeclarationMirror(name: 'id', type: int, isFinal: true);
+const $$ImmutableWithOptionalParameters_fields_name =
+    const DeclarationMirror(name: 'name', type: String, isFinal: true);
+
+const ImmutableWithOptionalParametersClassMirror = const ClassMirror(
+    name: 'ImmutableWithOptionalParameters',
+    constructors: const {
+      '': const FunctionMirror(
+          name: '',
+          namedParameters: const {
+            'id': const DeclarationMirror(name: 'id', type: int, isNamed: true),
+            'name': const DeclarationMirror(
+                name: 'name', type: String, isNamed: true)
+          },
+          $call: _ImmutableWithOptionalParameters__Constructor)
+    },
+    fields: const {
+      'id': $$ImmutableWithOptionalParameters_fields_id,
+      'name': $$ImmutableWithOptionalParameters_fields_name
+    },
+    getters: const [
+      'id',
+      'name'
+    ]);
 _ImmutableClassInvalidParameter__Constructor([positionalParams, namedParams]) =>
     new ImmutableClassInvalidParameter(positionalParams[0]);
 
@@ -114,6 +169,7 @@ const ImmutableClassInvalidParameterClassMirror = const ClassMirror(
 _initMirrors() {
   initClassMirrors({
     ImmutableClass: ImmutableClassClassMirror,
+    ImmutableWithOptionalParameters: ImmutableWithOptionalParametersClassMirror,
     ImmutableClassInvalidParameter: ImmutableClassInvalidParameterClassMirror
   });
 }

@@ -16,6 +16,14 @@ class ImmutableClass extends _$ImmutableClassSerializable {
 }
 
 @serializable
+class ImmutableWithOptionalParameters extends _$ImmutableWithOptionalParametersSerializable {
+  final int id;
+  final String name;
+
+  ImmutableWithOptionalParameters({this.id, this.name});
+}
+
+@serializable
 class ImmutableClassInvalidParameter extends _$ImmutableClassInvalidParameterSerializable {
   final String name;
 
@@ -29,6 +37,12 @@ main() {
     ImmutableClass test = fromJson('{"name":"test", "the_renamed": "test"}', ImmutableClass);
     expect(test.name, equals("test"));
     expect(test.renamed, equals("test"));
+  });
+
+  test('deserialize: immutable class with optional parameters.', () {
+    ImmutableWithOptionalParameters test = fromJson('{"id": 1, "name": "test"}', ImmutableWithOptionalParameters);
+    expect(test.id, equals(1));
+    expect(test.name, equals("test"));
   });
 
   test('deserialize: immutable class with invalid parameter', () {
