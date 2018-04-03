@@ -9,9 +9,13 @@ This library was initially a fork from [Dartson](https://github.com/eredo/dartso
  * Dartson uses custom transformers to convert objects to JSON. This produce faster and smaller code after dart2Js. Instead DSON uses [serializable]() and [built_mirrors]() libraries. This should produce code as fast and small as Dartson transformer.
  * DSON has the ability to serialize cyclical objects by mean of `depth` parameter, which allows users to specify how deep in the object graph they want to serialize.
  * DSON has the ability to exclude attributes for serialziation in two ways. 
-  * Using `@ignore` over every attribute. This make excluding attributes too global and hardcoded, so users can only specify one exclusion schema.
-  * Using `exclude` map as parameter for `toJson` method. This is more flexible, since it allows to have many exclusion schemas for serialization.
+    * Using `@ignore` over every attribute. This make excluding attributes too global and hardcoded, so users can only specify one exclusion schema.
+    * Using `exclude` map as parameter for `toJson` method. This is more flexible, since it allows to have many exclusion schemas for serialization.
  * DSON uses the annotation `@serializable` instead `@entity` which is used by Dartson.
+
+## Comparison with other libraries
+
+https://github.com/drails-dart/dart-serialise
 
 ## Tutorials
 
@@ -27,7 +31,7 @@ This library was initially a fork from [Dartson](https://github.com/eredo/dartso
 ...
 dependencies:
   ...
-  dson: ^0.5.0
+  dson: any # replace for latest version
   ...
 ```
 
@@ -496,7 +500,7 @@ void main() {
 
 ### Converting `Maps` and `Lists<Map>` to dart objects
 
-Frameworks like Angular.dart come with several HTTP services which already transform the HTTP response to a map using `JSON.encode`. To use those encoded Maps or Lists use `fromMap` and `fromMapList` functions.
+Frameworks like Angular.dart come with several HTTP services which already transform the HTTP response to a map using `JSON.encode`. To use those encoded Maps or Lists use `fromMap` function.
 
 ```dart
 library example.map_to_object; // this line is needed for the generator
@@ -551,6 +555,82 @@ void main() {
   print(list.length); // > 2
   print(list[0].name); // > test
   print(list[0].children[0].name); // > child1
+}
+
+```
+
+## Extend serializable Objects
+
+To extends objects that are going to be serializable you will need to add the comment:
+
+```dart
+// ignore: mixin_inherits_from_not_object
+```
+
+This is to advice the analyzer to ignore the error caused by inheriting from an object that is not a mixin. For example:
+
+```dart
+library extend_serializables;
+
+import 'package:dson/dson.dart';
+
+part 'extend_serializables.g.dart';
+
+@serializable
+class Person extends _$PersonSerializable {
+  int id;
+  String firstName;
+  String lastName;
+  DateTime dateOfBirth;
+}
+
+@serializable
+// ignore: mixin_inherits_from_not_object
+class Employee extends Person with _$EmployeeSerializable {
+  double salary;
+}
+
+@serializable
+// ignore: mixin_inherits_from_not_object
+class Manager extends Employee with _$ManagerSerializable {
+  List<Employee> subordinates;
+}
+
+main() {
+  _initMirrors();
+
+  var person = new Person()
+    ..id = 1
+    ..firstName = 'Jhon'
+    ..lastName = 'Doe'
+    ..dateOfBirth = new DateTime.now();
+
+  var personJson = toJson(person);
+
+  print('personJson: $personJson');
+
+  var employee = new Employee()
+    ..id = 1
+    ..firstName = 'Employee'
+    ..lastName = 'Doe'
+    ..dateOfBirth = new DateTime.now()
+    ..salary = 1000.0;
+
+  var employeeJson = toJson(employee);
+
+  print('employeeJson: $employeeJson');
+
+  var manager = new Manager()
+    ..id = 1
+    ..firstName = 'Manager'
+    ..lastName = 'Doe'
+    ..dateOfBirth = new DateTime.now()
+    ..salary = 2000.0
+    ..subordinates = [employee];
+
+  var managerJson = toJson(manager);
+
+  print('managerJson: $managerJson');
 }
 
 ```

@@ -116,5 +116,4 @@ _initMirrors() {
     ImmutableClass: ImmutableClassClassMirror,
     ImmutableClassInvalidParameter: ImmutableClassInvalidParameterClassMirror
   });
-  initFunctionMirrors({});
 }

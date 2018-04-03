@@ -41,5 +41,4 @@ const SomeSerializableClassMirror = const ClassMirror(
 
 _initMirrors() {
   initClassMirrors({SomeSerializable: SomeSerializableClassMirror});
-  initFunctionMirrors({});
 }

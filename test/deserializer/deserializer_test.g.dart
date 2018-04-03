@@ -735,5 +735,4 @@ _initMirrors() {
     SimpleMapString: SimpleMapStringClassMirror,
     SimpleVarContainer: SimpleVarContainerClassMirror
   });
-  initFunctionMirrors({});
 }

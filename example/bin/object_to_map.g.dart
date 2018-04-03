@@ -148,5 +148,4 @@ const PersonClassMirror =
 
 _initMirrors() {
   initClassMirrors({Person: PersonClassMirror});
-  initFunctionMirrors({});
 }

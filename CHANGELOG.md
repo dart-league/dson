@@ -2,6 +2,17 @@
 
 * [ ] Add include parameter to serialize function
 * [x] ~~Add uuid check over hashCode for cyclical references~~
+* [ ] Add types to serialized values
+* [ ] Add support for hal-json
+* [ ] Add support for schema-json
+* [ ] Add support for csv
+* [ ] Add support for MessagePack
+* [ ] Add support for converting to array of values-only
+
+## 0.13.1
+
+- upgrade `source_gen` to version `^0.8.0`
+- add extend object sample to README
 
 ## 0.13.0
 
@@ -12,8 +23,6 @@
 - add `dson_core` package
 - upgrade `build_runner` to version `0.7.0`
 - upgrade `build` to version `0.12.0`
-
-* [ ] Add types to serialized values
 
 ## 0.11.0
 

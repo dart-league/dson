@@ -64,5 +64,4 @@ const ObjectWithEnumClassMirror = const ClassMirror(
 _initMirrors() {
   initClassMirrors(
       {Color: ColorClassMirror, ObjectWithEnum: ObjectWithEnumClassMirror});
-  initFunctionMirrors({});
 }

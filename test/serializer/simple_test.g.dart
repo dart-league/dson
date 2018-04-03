@@ -418,5 +418,4 @@ _initMirrors() {
     TestClass1: TestClass1ClassMirror,
     SimpleDateContainer: SimpleDateContainerClassMirror
   });
-  initFunctionMirrors({});
 }

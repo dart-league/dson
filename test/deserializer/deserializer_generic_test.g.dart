@@ -57,6 +57,30 @@ abstract class _$ListClassSerializable extends SerializableMap {
   Iterable<String> get keys => ListClassClassMirror.fields.keys;
 }
 
+abstract class _$ListTClassSerializable<T> extends SerializableMap {
+  List<T> get listT;
+  void set listT(List<T> v);
+
+  operator [](Object __key) {
+    switch (__key) {
+      case 'listT':
+        return listT;
+    }
+    throwFieldNotFoundException(__key, 'ListTClass');
+  }
+
+  operator []=(Object __key, __value) {
+    switch (__key) {
+      case 'listT':
+        listT = __value;
+        return;
+    }
+    throwFieldNotFoundException(__key, 'ListTClass');
+  }
+
+  Iterable<String> get keys => ListTClassClassMirror.fields.keys;
+}
+
 abstract class _$ListListClassSerializable extends SerializableMap {
   List<List<SimpleClass>> get list;
   void set list(List<List<SimpleClass>> v);
@@ -220,6 +244,25 @@ const ListClassClassMirror = const ClassMirror(
     setters: const [
       'list'
     ]);
+_ListTClass__Constructor([positionalParams, namedParams]) => new ListTClass();
+
+const $$ListTClass_fields_listT =
+    const DeclarationMirror(name: 'listT', type: const [List, dynamic]);
+
+const ListTClassClassMirror = const ClassMirror(
+    name: 'ListTClass',
+    constructors: const {
+      '': const FunctionMirror(name: '', $call: _ListTClass__Constructor)
+    },
+    fields: const {
+      'listT': $$ListTClass_fields_listT
+    },
+    getters: const [
+      'listT'
+    ],
+    setters: const [
+      'listT'
+    ]);
 _ListListClass__Constructor([positionalParams, namedParams]) =>
     new ListListClass();
 
@@ -355,11 +398,14 @@ _initMirrors() {
   initClassMirrors({
     SimpleClass: SimpleClassClassMirror,
     ListClass: ListClassClassMirror,
+    ListTClass: ListTClassClassMirror,
     ListListClass: ListListClassClassMirror,
     ListListListClass: ListListListClassClassMirror,
     ListMapClass: ListMapClassClassMirror,
     ListListMapClass: ListListMapClassClassMirror,
     MapClass: MapClassClassMirror
   });
-  initFunctionMirrors({});
+
+  getClassMirrorFromGenericInstance =
+      (instance) => instance is ListTClass ? ListTClassClassMirror : null;
 }

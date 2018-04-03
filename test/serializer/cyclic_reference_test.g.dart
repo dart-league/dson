@@ -506,5 +506,4 @@ _initMirrors() {
     Student: StudentClassMirror,
     Course: CourseClassMirror
   });
-  initFunctionMirrors({});
 }

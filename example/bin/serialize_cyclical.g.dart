@@ -208,5 +208,4 @@ const AddressClassMirror =
 _initMirrors() {
   initClassMirrors(
       {Employee: EmployeeClassMirror, Address: AddressClassMirror});
-  initFunctionMirrors({});
 }

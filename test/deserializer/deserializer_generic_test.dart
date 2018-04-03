@@ -18,6 +18,11 @@ class ListClass extends _$ListClassSerializable {
 }
 
 @serializable
+class ListTClass<T> extends _$ListTClassSerializable<T> {
+  List<T> listT;
+}
+
+@serializable
 class ListListClass extends _$ListListClassSerializable {
   List<List<SimpleClass>> list;
 }

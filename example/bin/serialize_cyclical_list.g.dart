@@ -145,5 +145,4 @@ const CourseClassMirror =
 
 _initMirrors() {
   initClassMirrors({Student: StudentClassMirror, Course: CourseClassMirror});
-  initFunctionMirrors({});
 }

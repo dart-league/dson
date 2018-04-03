@@ -118,5 +118,4 @@ const EntityClassClassMirror =
 
 _initMirrors() {
   initClassMirrors({EntityClass: EntityClassClassMirror});
-  initFunctionMirrors({});
 }
