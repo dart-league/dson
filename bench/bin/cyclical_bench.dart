@@ -75,7 +75,7 @@ main() {
   int serializeTimeTotal = 0;
   int deserializeTimeTotal = 0;
 
-  print(toJson(books, depth: 'authors'));
+//  print(toJson(books, depth: 'authors'));
 
   for (int j=0; j<50; j++) {
     var s = new Stopwatch()..start();
