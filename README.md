@@ -33,11 +33,17 @@ dependencies:
   ...
   dson: any # replace for latest version
   ...
+dev_dependencies:
+  ...
+  build_runner: any # replace for latest version
+  ...
 ```
 
 3. Create/edit `bin/main.dart` or `web/main.dart` and add the code shown in any of the samples below.
 
-4. Run either `pub run build_runner build`, or `pub run build_runner watch`, or `pub run build_runner serve` in the console
+4. Run either `pub run build_runner build`, `pub run build_runner watch`, or `pub run build_runner serve` in the console
+
+5. For flutter packages you should use either `flutter packages pub run build_runner build` or `flutter packages pub run build_runner watch` in the console
 
 ## Convert objects to JSON strings
 

@@ -9,6 +9,10 @@
 * [ ] Add support for MessagePack
 * [ ] Add support for converting to array of values-only
 
+## 0.13.3
+
+- fix #34 and fix #35
+
 ## 0.13.2
    
 - fix error serializing immutable with optional parameters
