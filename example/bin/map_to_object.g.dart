@@ -26,7 +26,7 @@ abstract class _$EntityClassSerializable extends SerializableMap {
         return name;
       case '_setted':
         return _setted;
-      case 'otherName':
+      case 'renamed':
         return otherName;
       case 'notVisible':
         return notVisible;
@@ -46,14 +46,15 @@ abstract class _$EntityClassSerializable extends SerializableMap {
       case '_setted':
         _setted = __value;
         return;
-      case 'otherName':
+      case 'renamed':
         otherName = __value;
         return;
       case 'notVisible':
         notVisible = __value;
         return;
       case 'children':
-        children = __value;
+        children = fromSerialized(
+            __value, [() => new List<EntityClass>(), () => new EntityClass()]);
         return;
       case 'setted':
         setted = __value;
@@ -76,9 +77,9 @@ const $$EntityClass_fields_name =
 const $$EntityClass_fields__setted =
     const DeclarationMirror(name: '_setted', type: String);
 const $$EntityClass_fields_otherName = const DeclarationMirror(
-    name: 'otherName',
-    type: bool,
-    annotations: const [const SerializedName(r'renamed')]);
+  name: 'renamed',
+  type: bool,
+);
 const $$EntityClass_fields_notVisible = const DeclarationMirror(
     name: 'notVisible', type: String, annotations: const [ignore]);
 const $$EntityClass_fields_children =
@@ -92,21 +93,21 @@ const EntityClassClassMirror =
 }, fields: const {
   'name': $$EntityClass_fields_name,
   '_setted': $$EntityClass_fields__setted,
-  'otherName': $$EntityClass_fields_otherName,
+  'renamed': $$EntityClass_fields_otherName,
   'notVisible': $$EntityClass_fields_notVisible,
   'children': $$EntityClass_fields_children,
   'setted': $$EntityClass_fields_setted
 }, getters: const [
   'name',
   '_setted',
-  'otherName',
+  'renamed',
   'notVisible',
   'children',
   'setted'
 ], setters: const [
   'name',
   '_setted',
-  'otherName',
+  'renamed',
   'notVisible',
   'children',
   'setted'

@@ -28,7 +28,7 @@ abstract class _$SomeObjectSerializable<T> extends SerializableMap {
         id = __value;
         return;
       case 'genericList':
-        genericList = __value;
+        genericList = fromSerialized(__value, () => new List<T>());
         return;
     }
     throwFieldNotFoundException(__key, 'SomeObject');

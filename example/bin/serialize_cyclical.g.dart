@@ -46,10 +46,10 @@ abstract class _$EmployeeSerializable extends SerializableMap {
         lastName = __value;
         return;
       case 'address':
-        address = __value;
+        address = fromSerialized(__value, () => new Address());
         return;
       case 'manager':
-        manager = __value;
+        manager = fromSerialized(__value, () => new Employee());
         return;
     }
     throwFieldNotFoundException(__key, 'Employee');
@@ -108,7 +108,7 @@ abstract class _$AddressSerializable extends SerializableMap {
         postalCode = __value;
         return;
       case 'owner':
-        owner = __value;
+        owner = fromSerialized(__value, () => new Employee());
         return;
     }
     throwFieldNotFoundException(__key, 'Address');

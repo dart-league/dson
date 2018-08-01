@@ -83,10 +83,10 @@ abstract class _$NestedClassSerializable extends SerializableMap {
         name = __value;
         return;
       case 'list':
-        list = __value;
+        list = fromSerialized(__value, () => new List<dynamic>());
         return;
       case 'getter':
-        getter = __value;
+        getter = fromSerialized(__value, () => new TestGetter());
         return;
     }
     throwFieldNotFoundException(__key, 'NestedClass');
@@ -110,7 +110,7 @@ abstract class _$SetClassSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'names':
-        names = __value;
+        names = fromSerialized(__value, () => new Set<dynamic>());
         return;
     }
     throwFieldNotFoundException(__key, 'SetClass');
@@ -157,7 +157,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
         return intNumber;
       case 'ignored':
         return ignored;
-      case 'renamed':
+      case 'the_renamed':
         return renamed;
     }
     throwFieldNotFoundException(__key, 'TestClass1');
@@ -175,13 +175,13 @@ abstract class _$TestClass1Serializable extends SerializableMap {
         number = __value;
         return;
       case 'list':
-        list = __value;
+        list = fromSerialized(__value, () => new List<dynamic>());
         return;
       case 'myMap':
-        myMap = __value;
+        myMap = fromSerialized(__value, () => new Map<dynamic, dynamic>());
         return;
       case 'child':
-        child = __value;
+        child = fromSerialized(__value, () => new TestClass1());
         return;
       case 'intNumber':
         intNumber = __value;
@@ -189,7 +189,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
       case 'ignored':
         ignored = __value;
         return;
-      case 'renamed':
+      case 'the_renamed':
         renamed = __value;
         return;
     }
@@ -214,7 +214,7 @@ abstract class _$SimpleDateContainerSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'testDate':
-        testDate = __value;
+        testDate = fromSerializedDateTime(__value);
         return;
     }
     throwFieldNotFoundException(__key, 'SimpleDateContainer');
@@ -354,9 +354,9 @@ const $$TestClass1_fields_intNumber =
 const $$TestClass1_fields_ignored = const DeclarationMirror(
     name: 'ignored', type: bool, annotations: const [ignore]);
 const $$TestClass1_fields_renamed = const DeclarationMirror(
-    name: 'renamed',
-    type: String,
-    annotations: const [const SerializedName(r'the_renamed')]);
+  name: 'the_renamed',
+  type: String,
+);
 
 const TestClass1ClassMirror =
     const ClassMirror(name: 'TestClass1', constructors: const {
@@ -370,7 +370,7 @@ const TestClass1ClassMirror =
   'child': $$TestClass1_fields_child,
   'intNumber': $$TestClass1_fields_intNumber,
   'ignored': $$TestClass1_fields_ignored,
-  'renamed': $$TestClass1_fields_renamed
+  'the_renamed': $$TestClass1_fields_renamed
 }, getters: const [
   'name',
   'matter',
@@ -380,7 +380,7 @@ const TestClass1ClassMirror =
   'child',
   'intNumber',
   'ignored',
-  'renamed'
+  'the_renamed'
 ], setters: const [
   'name',
   'matter',
@@ -390,7 +390,7 @@ const TestClass1ClassMirror =
   'child',
   'intNumber',
   'ignored',
-  'renamed'
+  'the_renamed'
 ]);
 
 _SimpleDateContainer__Constructor([positionalParams, namedParams]) =>

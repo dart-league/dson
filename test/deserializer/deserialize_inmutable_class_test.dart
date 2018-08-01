@@ -30,6 +30,11 @@ class ImmutableClassInvalidParameter extends _$ImmutableClassInvalidParameterSer
   const ImmutableClassInvalidParameter(String aName) : name = aName;
 }
 
+@serializable
+class ListWithImmutableClass {
+  List<ImmutableClass> immutables;
+}
+
 main() {
   _initMirrors();
 

@@ -48,7 +48,8 @@ abstract class _$ListClassSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'list':
-        list = __value;
+        list = fromSerialized(
+            __value, [() => new List<SimpleClass>(), () => new SimpleClass()]);
         return;
     }
     throwFieldNotFoundException(__key, 'ListClass');
@@ -72,7 +73,7 @@ abstract class _$ListTClassSerializable<T> extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'listT':
-        listT = __value;
+        listT = fromSerialized(__value, () => new List<T>());
         return;
     }
     throwFieldNotFoundException(__key, 'ListTClass');
@@ -96,7 +97,10 @@ abstract class _$ListListClassSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'list':
-        list = __value;
+        list = fromSerialized(__value, [
+          () => new List<List<SimpleClass>>(),
+          [() => new List<SimpleClass>(), () => new SimpleClass()]
+        ]);
         return;
     }
     throwFieldNotFoundException(__key, 'ListListClass');
@@ -120,7 +124,13 @@ abstract class _$ListListListClassSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'list':
-        list = __value;
+        list = fromSerialized(__value, [
+          () => new List<List<List<SimpleClass>>>(),
+          [
+            () => new List<List<SimpleClass>>(),
+            [() => new List<SimpleClass>(), () => new SimpleClass()]
+          ]
+        ]);
         return;
     }
     throwFieldNotFoundException(__key, 'ListListListClass');
@@ -144,7 +154,10 @@ abstract class _$ListMapClassSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'list':
-        list = __value;
+        list = fromSerialized(__value, [
+          () => new List<Map<String, SimpleClass>>(),
+          [() => new Map<String, SimpleClass>(), null, () => new SimpleClass()]
+        ]);
         return;
     }
     throwFieldNotFoundException(__key, 'ListMapClass');
@@ -168,7 +181,17 @@ abstract class _$ListListMapClassSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'list':
-        list = __value;
+        list = fromSerialized(__value, [
+          () => new List<List<Map<String, SimpleClass>>>(),
+          [
+            () => new List<Map<String, SimpleClass>>(),
+            [
+              () => new Map<String, SimpleClass>(),
+              null,
+              () => new SimpleClass()
+            ]
+          ]
+        ]);
         return;
     }
     throwFieldNotFoundException(__key, 'ListListMapClass');
@@ -192,7 +215,11 @@ abstract class _$MapClassSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'myMap':
-        myMap = __value;
+        myMap = fromSerialized(__value, [
+          () => new Map<String, SimpleClass>(),
+          null,
+          () => new SimpleClass()
+        ]);
         return;
     }
     throwFieldNotFoundException(__key, 'MapClass');
