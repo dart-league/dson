@@ -3,7 +3,7 @@
 part of example.map_to_object;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$EntityClassSerializable extends SerializableMap {
@@ -66,7 +66,7 @@ abstract class _$EntityClassSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _EntityClass__Constructor([positionalParams, namedParams]) => new EntityClass();
@@ -113,7 +113,7 @@ const EntityClassClassMirror =
 ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {

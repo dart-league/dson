@@ -3,7 +3,7 @@
 part of deserialiazer.deserialize_generic_test;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$SimpleClassSerializable extends SerializableMap {
@@ -202,7 +202,7 @@ abstract class _$MapClassSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _SimpleClass__Constructor([positionalParams, namedParams]) => new SimpleClass();
@@ -225,6 +225,7 @@ const SimpleClassClassMirror =
     returnType: String,
   )
 });
+
 _ListClass__Constructor([positionalParams, namedParams]) => new ListClass();
 
 const $$ListClass_fields_list =
@@ -244,6 +245,7 @@ const ListClassClassMirror = const ClassMirror(
     setters: const [
       'list'
     ]);
+
 _ListTClass__Constructor([positionalParams, namedParams]) => new ListTClass();
 
 const $$ListTClass_fields_listT =
@@ -263,6 +265,7 @@ const ListTClassClassMirror = const ClassMirror(
     setters: const [
       'listT'
     ]);
+
 _ListListClass__Constructor([positionalParams, namedParams]) =>
     new ListListClass();
 
@@ -286,6 +289,7 @@ const ListListClassClassMirror = const ClassMirror(
     setters: const [
       'list'
     ]);
+
 _ListListListClass__Constructor([positionalParams, namedParams]) =>
     new ListListListClass();
 
@@ -312,6 +316,7 @@ const ListListListClassClassMirror = const ClassMirror(
     setters: const [
       'list'
     ]);
+
 _ListMapClass__Constructor([positionalParams, namedParams]) =>
     new ListMapClass();
 
@@ -338,6 +343,7 @@ const ListMapClassClassMirror = const ClassMirror(
     setters: const [
       'list'
     ]);
+
 _ListListMapClass__Constructor([positionalParams, namedParams]) =>
     new ListListMapClass();
 
@@ -367,6 +373,7 @@ const ListListMapClassClassMirror = const ClassMirror(
     setters: const [
       'list'
     ]);
+
 _MapClass__Constructor([positionalParams, namedParams]) => new MapClass();
 
 const $$MapClass_fields_myMap =
@@ -391,7 +398,7 @@ const MapClassClassMirror = const ClassMirror(
     ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {

@@ -3,7 +3,7 @@
 part of deserializer_test;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$SimpleDateContainerSerializable extends SerializableMap {
@@ -399,7 +399,7 @@ abstract class _$SimpleVarContainerSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _SimpleDateContainer__Constructor([positionalParams, namedParams]) =>
@@ -418,6 +418,7 @@ const SimpleDateContainerClassMirror =
 ], setters: const [
   'testDate'
 ]);
+
 _TestClass1__Constructor([positionalParams, namedParams]) => new TestClass1();
 
 const $$TestClass1_fields_name =
@@ -493,6 +494,7 @@ const TestClass1ClassMirror =
   'ignored',
   'renamed'
 ]);
+
 _JustObject__Constructor([positionalParams, namedParams]) => new JustObject();
 
 const $$JustObject_fields_object =
@@ -512,6 +514,7 @@ const JustObjectClassMirror = const ClassMirror(
     setters: const [
       'object'
     ]);
+
 _SetClass__Constructor([positionalParams, namedParams]) => new SetClass();
 
 const $$SetClass_fields_names =
@@ -531,6 +534,7 @@ const SetClassClassMirror = const ClassMirror(
     setters: const [
       'names'
     ]);
+
 _TestGetter__Constructor([positionalParams, namedParams]) =>
     new TestGetter(positionalParams[0]);
 
@@ -556,6 +560,7 @@ const TestGetterClassMirror =
 ], setters: const [
   '_name'
 ]);
+
 _TestSetter__Constructor([positionalParams, namedParams]) => new TestSetter();
 
 const $$TestSetter_fields__name =
@@ -580,6 +585,7 @@ const TestSetterClassMirror = const ClassMirror(
       '_name',
       'name'
     ]);
+
 _NestedClass__Constructor([positionalParams, namedParams]) => new NestedClass(
     positionalParams[0], positionalParams[1], positionalParams[2]);
 
@@ -615,6 +621,7 @@ const NestedClassClassMirror =
   'list',
   'getter'
 ]);
+
 _SimpleClass__Constructor([positionalParams, namedParams]) => new SimpleClass();
 
 const $$SimpleClass_fields_name =
@@ -635,6 +642,7 @@ const SimpleClassClassMirror =
     returnType: String,
   )
 });
+
 _SimpleList__Constructor([positionalParams, namedParams]) => new SimpleList();
 
 const $$SimpleList_fields_list =
@@ -654,6 +662,7 @@ const SimpleListClassMirror = const ClassMirror(
     setters: const [
       'list'
     ]);
+
 _SimpleMap__Constructor([positionalParams, namedParams]) => new SimpleMap();
 
 const $$SimpleMap_fields_myMap =
@@ -676,6 +685,7 @@ const SimpleMapClassMirror = const ClassMirror(
     setters: const [
       'myMap'
     ]);
+
 _SimpleMapString__Constructor([positionalParams, namedParams]) =>
     new SimpleMapString();
 
@@ -699,6 +709,7 @@ const SimpleMapStringClassMirror = const ClassMirror(
     setters: const [
       'myMap'
     ]);
+
 _SimpleVarContainer__Constructor([positionalParams, namedParams]) =>
     new SimpleVarContainer();
 
@@ -717,7 +728,7 @@ const SimpleVarContainerClassMirror =
 ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {

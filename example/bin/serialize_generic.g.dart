@@ -3,7 +3,7 @@
 part of example.serialize_ciclical;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$SomeObjectSerializable<T> extends SerializableMap {
@@ -69,7 +69,7 @@ abstract class _$PersonSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _SomeObject__Constructor([positionalParams, namedParams]) => new SomeObject();
@@ -95,6 +95,7 @@ const SomeObjectClassMirror = const ClassMirror(
       'id',
       'genericList'
     ]);
+
 _Person__Constructor([positionalParams, namedParams]) => new Person();
 
 const $$Person_fields_id = const DeclarationMirror(name: 'id', type: int);
@@ -120,7 +121,7 @@ const PersonClassMirror = const ClassMirror(
     ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {

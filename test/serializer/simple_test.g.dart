@@ -3,7 +3,7 @@
 part of serializer.simple_test;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$JustObjectSerializable extends SerializableMap {
@@ -224,7 +224,7 @@ abstract class _$SimpleDateContainerSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _JustObject__Constructor([positionalParams, namedParams]) => new JustObject();
@@ -246,6 +246,7 @@ const JustObjectClassMirror = const ClassMirror(
     setters: const [
       'object'
     ]);
+
 _TestGetter__Constructor([positionalParams, namedParams]) =>
     new TestGetter(positionalParams[0]);
 
@@ -271,6 +272,7 @@ const TestGetterClassMirror =
 ], setters: const [
   '_name'
 ]);
+
 _NestedClass__Constructor([positionalParams, namedParams]) => new NestedClass(
     positionalParams[0], positionalParams[1], positionalParams[2]);
 
@@ -306,6 +308,7 @@ const NestedClassClassMirror =
   'list',
   'getter'
 ]);
+
 _SetClass__Constructor([positionalParams, namedParams]) =>
     new SetClass(positionalParams[0]);
 
@@ -328,6 +331,7 @@ const SetClassClassMirror =
 ], setters: const [
   'names'
 ]);
+
 _TestClass1__Constructor([positionalParams, namedParams]) => new TestClass1();
 
 const $$TestClass1_fields_name =
@@ -388,6 +392,7 @@ const TestClass1ClassMirror =
   'ignored',
   'renamed'
 ]);
+
 _SimpleDateContainer__Constructor([positionalParams, namedParams]) =>
     new SimpleDateContainer();
 
@@ -406,7 +411,7 @@ const SimpleDateContainerClassMirror =
 ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {

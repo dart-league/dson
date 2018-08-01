@@ -3,7 +3,7 @@
 part of dson_example_web;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$PersonSerializable extends SerializableMap {
@@ -163,7 +163,7 @@ abstract class _$ManagerSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _Person__Constructor([positionalParams, namedParams]) => new Person();
@@ -195,6 +195,7 @@ const PersonClassMirror =
   'lastName',
   'dateOfBirth'
 ]);
+
 _Employee__Constructor([positionalParams, namedParams]) => new Employee();
 
 const $$Employee_fields_salary =
@@ -215,6 +216,7 @@ const EmployeeClassMirror = const ClassMirror(
     getters: const ['salary', 'id', 'firstName', 'lastName', 'dateOfBirth'],
     setters: const ['salary', 'id', 'firstName', 'lastName', 'dateOfBirth'],
     superclass: Person);
+
 _Manager__Constructor([positionalParams, namedParams]) => new Manager();
 
 const $$Manager_fields_subordinates =
@@ -252,7 +254,7 @@ const ManagerClassMirror = const ClassMirror(
     superclass: Employee);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {

@@ -3,7 +3,7 @@
 part of example.serialize_cyclical;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$EmployeeSerializable extends SerializableMap {
@@ -118,7 +118,7 @@ abstract class _$AddressSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _Employee__Constructor([positionalParams, namedParams]) => new Employee();
@@ -158,6 +158,7 @@ const EmployeeClassMirror =
   'address',
   'manager'
 ]);
+
 _Address__Constructor([positionalParams, namedParams]) => new Address();
 
 const $$Address_fields_key =
@@ -202,7 +203,7 @@ const AddressClassMirror =
 ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {

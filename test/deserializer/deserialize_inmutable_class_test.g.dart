@@ -3,7 +3,7 @@
 part of deserialiazer.deserialize_inmutable_class_test;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$ImmutableClassSerializable extends SerializableMap {
@@ -78,7 +78,7 @@ abstract class _$ImmutableClassInvalidParameterSerializable
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _ImmutableClass__Constructor([positionalParams, namedParams]) =>
@@ -108,6 +108,7 @@ const ImmutableClassClassMirror =
   'name',
   'renamed'
 ]);
+
 _ImmutableWithOptionalParameters__Constructor(
         [positionalParams, namedParams]) =>
     new ImmutableWithOptionalParameters(
@@ -138,6 +139,7 @@ const ImmutableWithOptionalParametersClassMirror = const ClassMirror(
       'id',
       'name'
     ]);
+
 _ImmutableClassInvalidParameter__Constructor([positionalParams, namedParams]) =>
     new ImmutableClassInvalidParameter(positionalParams[0]);
 
@@ -163,7 +165,7 @@ const ImmutableClassInvalidParameterClassMirror = const ClassMirror(
     ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {

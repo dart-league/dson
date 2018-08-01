@@ -12,4 +12,4 @@ Builder builder(_) => new PartBuilder(const [
           const DsonGenerator(),
           const MirrorsGenerator(),
           const InitMirrorsGenerator()
-        ]);
+        ], '.g.dart');

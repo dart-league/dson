@@ -3,7 +3,7 @@
 part of example.exclude_attributes;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$StudentSerializable extends SerializableMap {
@@ -83,7 +83,7 @@ abstract class _$CourseSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _Student__Constructor([positionalParams, namedParams]) => new Student();
@@ -112,6 +112,7 @@ const StudentClassMirror =
   'name',
   'courses'
 ]);
+
 _Course__Constructor([positionalParams, namedParams]) => new Course();
 
 const $$Course_fields_id = const DeclarationMirror(name: 'id', type: int);
@@ -140,7 +141,7 @@ const CourseClassMirror =
 ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {

@@ -3,7 +3,7 @@
 part of example.serialize_final_objects;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$PersonSerializable extends SerializableMap {
@@ -30,7 +30,7 @@ abstract class _$PersonSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _Person__Constructor([positionalParams, namedParams]) =>
@@ -60,7 +60,7 @@ const PersonClassMirror =
 ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {

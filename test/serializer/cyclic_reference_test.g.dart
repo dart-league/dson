@@ -3,7 +3,7 @@
 part of serializer.cyclic_reference_serialize;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$EmployeeSerializable extends SerializableMap {
@@ -291,7 +291,7 @@ abstract class _$CourseSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _Employee__Constructor([positionalParams, namedParams]) => new Employee();
@@ -330,6 +330,7 @@ const EmployeeClassMirror =
   'address',
   'manager'
 ]);
+
 _Address__Constructor([positionalParams, namedParams]) => new Address();
 
 const $$Address_fields_id = const DeclarationMirror(name: 'id', type: int);
@@ -371,6 +372,7 @@ const AddressClassMirror =
   'postalCode',
   'owner'
 ]);
+
 _Employee2__Constructor([positionalParams, namedParams]) => new Employee2();
 
 const $$Employee2_fields_firstName =
@@ -403,6 +405,7 @@ const Employee2ClassMirror =
   'address',
   'manager'
 ]);
+
 _Address2__Constructor([positionalParams, namedParams]) => new Address2();
 
 const $$Address2_fields_street =
@@ -440,6 +443,7 @@ const Address2ClassMirror =
   'postalCode',
   'owner'
 ]);
+
 _Student__Constructor([positionalParams, namedParams]) => new Student();
 
 const $$Student_fields_id = const DeclarationMirror(name: 'id', type: int);
@@ -466,6 +470,7 @@ const StudentClassMirror =
   'name',
   'courses'
 ]);
+
 _Course__Constructor([positionalParams, namedParams]) => new Course();
 
 const $$Course_fields_id = const DeclarationMirror(name: 'id', type: int);
@@ -494,7 +499,7 @@ const CourseClassMirror =
 ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {
