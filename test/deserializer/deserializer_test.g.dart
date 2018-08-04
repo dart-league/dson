@@ -21,7 +21,7 @@ abstract class _$SimpleDateContainerSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'testDate':
-        testDate = __value;
+        testDate = fromSerializedDateTime(__value);
         return;
     }
     throwFieldNotFoundException(__key, 'SimpleDateContainer');
@@ -80,7 +80,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
         return doubleNumber2;
       case 'ignored':
         return ignored;
-      case 'renamed':
+      case 'the_renamed':
         return renamed;
     }
     throwFieldNotFoundException(__key, 'TestClass1');
@@ -98,13 +98,13 @@ abstract class _$TestClass1Serializable extends SerializableMap {
         number = __value;
         return;
       case 'list':
-        list = __value;
+        list = fromSerialized(__value, () => new List<dynamic>());
         return;
       case 'myMap':
-        myMap = __value;
+        myMap = fromSerialized(__value, () => new Map<dynamic, dynamic>());
         return;
       case 'child':
-        child = __value;
+        child = fromSerialized(__value, () => new TestClass1());
         return;
       case 'intNumber':
         intNumber = __value;
@@ -121,7 +121,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
       case 'ignored':
         ignored = __value;
         return;
-      case 'renamed':
+      case 'the_renamed':
         renamed = __value;
         return;
     }
@@ -170,7 +170,7 @@ abstract class _$SetClassSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'names':
-        names = __value;
+        names = fromSerialized(__value, () => new Set<String>());
         return;
     }
     throwFieldNotFoundException(__key, 'SetClass');
@@ -263,10 +263,10 @@ abstract class _$NestedClassSerializable extends SerializableMap {
         name = __value;
         return;
       case 'list':
-        list = __value;
+        list = fromSerialized(__value, () => new List<dynamic>());
         return;
       case 'getter':
-        getter = __value;
+        getter = fromSerialized(__value, () => new TestGetter());
         return;
     }
     throwFieldNotFoundException(__key, 'NestedClass');
@@ -317,7 +317,7 @@ abstract class _$SimpleListSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'list':
-        list = __value;
+        list = fromSerialized(__value, () => new List<dynamic>());
         return;
     }
     throwFieldNotFoundException(__key, 'SimpleList');
@@ -341,7 +341,7 @@ abstract class _$SimpleMapSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'myMap':
-        myMap = __value;
+        myMap = fromSerialized(__value, () => new Map<dynamic, dynamic>());
         return;
     }
     throwFieldNotFoundException(__key, 'SimpleMap');
@@ -365,7 +365,7 @@ abstract class _$SimpleMapStringSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'myMap':
-        myMap = __value;
+        myMap = fromSerialized(__value, () => new Map<String, num>());
         return;
     }
     throwFieldNotFoundException(__key, 'SimpleMapString');
@@ -447,9 +447,9 @@ const $$TestClass1_fields_doubleNumber2 =
 const $$TestClass1_fields_ignored = const DeclarationMirror(
     name: 'ignored', type: bool, annotations: const [ignore]);
 const $$TestClass1_fields_renamed = const DeclarationMirror(
-    name: 'renamed',
-    type: String,
-    annotations: const [const SerializedName(r'the_renamed')]);
+  name: 'the_renamed',
+  type: String,
+);
 
 const TestClass1ClassMirror =
     const ClassMirror(name: 'TestClass1', constructors: const {
@@ -466,7 +466,7 @@ const TestClass1ClassMirror =
   'doubleNumber': $$TestClass1_fields_doubleNumber,
   'doubleNumber2': $$TestClass1_fields_doubleNumber2,
   'ignored': $$TestClass1_fields_ignored,
-  'renamed': $$TestClass1_fields_renamed
+  'the_renamed': $$TestClass1_fields_renamed
 }, getters: const [
   'name',
   'matter',
@@ -479,7 +479,7 @@ const TestClass1ClassMirror =
   'doubleNumber',
   'doubleNumber2',
   'ignored',
-  'renamed'
+  'the_renamed'
 ], setters: const [
   'name',
   'matter',
@@ -492,7 +492,7 @@ const TestClass1ClassMirror =
   'doubleNumber',
   'doubleNumber2',
   'ignored',
-  'renamed'
+  'the_renamed'
 ]);
 
 _JustObject__Constructor([positionalParams, namedParams]) => new JustObject();

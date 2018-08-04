@@ -21,7 +21,7 @@ abstract class _$ObjectWithEnumSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'color':
-        color = __value;
+        color = fromSerializedEnum(__value, Color, () => Color.values);
         return;
     }
     throwFieldNotFoundException(__key, 'ObjectWithEnum');

@@ -9,6 +9,14 @@
 * [ ] Add support for MessagePack
 * [ ] Add support for converting to array of values-only
 
+## 0.15.0
+   
+- upgrade `serializable_core` to version `0.11.0` since
+ this version now generates from methods which now allows
+ convert objects from generic values.
+- move `SerializedName` to `built_mirrors` library since
+ the serialized name is now generated at build time
+
 ## 0.14.0
 
 - upgrade `source_gen` to version `^0.9.0`

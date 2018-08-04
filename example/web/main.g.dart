@@ -42,7 +42,7 @@ abstract class _$PersonSerializable extends SerializableMap {
         lastName = __value;
         return;
       case 'dateOfBirth':
-        dateOfBirth = __value;
+        dateOfBirth = fromSerializedDateTime(__value);
         return;
     }
     throwFieldNotFoundException(__key, 'Person');
@@ -94,7 +94,7 @@ abstract class _$EmployeeSerializable extends SerializableMap {
         lastName = __value;
         return;
       case 'dateOfBirth':
-        dateOfBirth = __value;
+        dateOfBirth = fromSerializedDateTime(__value);
         return;
     }
     throwFieldNotFoundException(__key, 'Employee');
@@ -138,7 +138,8 @@ abstract class _$ManagerSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'subordinates':
-        subordinates = __value;
+        subordinates = fromSerialized(
+            __value, [() => new List<Employee>(), () => new Employee()]);
         return;
       case 'salary':
         salary = __value;
@@ -153,7 +154,7 @@ abstract class _$ManagerSerializable extends SerializableMap {
         lastName = __value;
         return;
       case 'dateOfBirth':
-        dateOfBirth = __value;
+        dateOfBirth = fromSerializedDateTime(__value);
         return;
     }
     throwFieldNotFoundException(__key, 'Manager');

@@ -46,10 +46,10 @@ abstract class _$EmployeeSerializable extends SerializableMap {
         lastName = __value;
         return;
       case 'address':
-        address = __value;
+        address = fromSerialized(__value, () => new Address());
         return;
       case 'manager':
-        manager = __value;
+        manager = fromSerialized(__value, () => new Employee());
         return;
     }
     throwFieldNotFoundException(__key, 'Employee');
@@ -108,7 +108,7 @@ abstract class _$AddressSerializable extends SerializableMap {
         postalCode = __value;
         return;
       case 'owner':
-        owner = __value;
+        owner = fromSerialized(__value, () => new Employee());
         return;
     }
     throwFieldNotFoundException(__key, 'Address');
@@ -150,10 +150,10 @@ abstract class _$Employee2Serializable extends SerializableMap {
         lastName = __value;
         return;
       case 'address':
-        address = __value;
+        address = fromSerialized(__value, () => new Address2());
         return;
       case 'manager':
-        manager = __value;
+        manager = fromSerialized(__value, () => new Employee2());
         return;
     }
     throwFieldNotFoundException(__key, 'Employee2');
@@ -205,7 +205,7 @@ abstract class _$Address2Serializable extends SerializableMap {
         postalCode = __value;
         return;
       case 'owner':
-        owner = __value;
+        owner = fromSerialized(__value, () => new Employee2());
         return;
     }
     throwFieldNotFoundException(__key, 'Address2');
@@ -243,7 +243,8 @@ abstract class _$StudentSerializable extends SerializableMap {
         name = __value;
         return;
       case 'courses':
-        courses = __value;
+        courses = fromSerialized(
+            __value, [() => new List<Course>(), () => new Course()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Student');
@@ -278,10 +279,11 @@ abstract class _$CourseSerializable extends SerializableMap {
         id = __value;
         return;
       case 'beginDate':
-        beginDate = __value;
+        beginDate = fromSerializedDateTime(__value);
         return;
       case 'students':
-        students = __value;
+        students = fromSerialized(
+            __value, [() => new List<Student>(), () => new Student()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Course');

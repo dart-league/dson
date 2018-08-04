@@ -35,7 +35,8 @@ abstract class _$StudentSerializable extends SerializableMap {
         name = __value;
         return;
       case 'courses':
-        courses = __value;
+        courses = fromSerialized(
+            __value, [() => new List<Course>(), () => new Course()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Student');
@@ -70,10 +71,11 @@ abstract class _$CourseSerializable extends SerializableMap {
         id = __value;
         return;
       case 'beginDate':
-        beginDate = __value;
+        beginDate = fromSerializedDateTime(__value);
         return;
       case 'students':
-        students = __value;
+        students = fromSerialized(
+            __value, [() => new List<Student>(), () => new Student()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Course');
