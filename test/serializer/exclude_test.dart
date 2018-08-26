@@ -1,7 +1,6 @@
 library serializer.exclude_test;
 
 import 'package:dson/dson.dart';
-import 'package:serializable/serializable.dart';
 import 'package:test/test.dart';
 
 part 'exclude_test.g.dart';

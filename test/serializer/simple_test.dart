@@ -1,7 +1,6 @@
 library serializer.simple_test;
 
 import 'package:dson/dson.dart';
-import 'package:serializable/serializable.dart';
 import 'package:test/test.dart';
 
 part 'simple_test.g.dart';
@@ -42,7 +41,7 @@ class TestClass1 extends _$TestClass1Serializable {
   bool matter;
   num number;
   List list;
-  Map map;
+  Map myMap;
   TestClass1 child;
   int intNumber;
 

@@ -133,5 +133,4 @@ const ComplexClassMirror = const ClassMirror(
 
 _initMirrors() {
   initClassMirrors({Simple: SimpleClassMirror, Complex: ComplexClassMirror});
-  initFunctionMirrors({});
 }

@@ -1,6 +1,5 @@
 library deserialiazer.deserialize_generic_test;
 
-import 'package:serializable/serializable.dart';
 import 'package:test/test.dart';
 import 'package:dson/dson.dart';
 
@@ -16,6 +15,11 @@ class SimpleClass extends _$SimpleClassSerializable {
 @serializable
 class ListClass extends _$ListClassSerializable {
   List<SimpleClass> list;
+}
+
+@serializable
+class ListTClass<T> extends _$ListTClassSerializable<T> {
+  List<T> listT;
 }
 
 @serializable
@@ -40,7 +44,7 @@ class ListListMapClass extends _$ListListMapClassSerializable {
 
 @serializable
 class MapClass extends _$MapClassSerializable {
-  Map<String, SimpleClass> map;
+  Map<String, SimpleClass> myMap;
 }
 
 main() {
@@ -84,9 +88,9 @@ main() {
   });
 
   test('deserialize: generic map', () {
-    MapClass test = fromJson('{"map": {"test": {"name": "test"}, "test2": {"name": "test2"}}}', MapClass);
+    MapClass test = fromJson('{"myMap": {"test": {"name": "test"}, "test2": {"name": "test2"}}}', MapClass);
 
-    expect(test.map["test"].name, "test");
-    expect(test.map["test2"].name, "test2");
+    expect(test.myMap["test"].name, "test");
+    expect(test.myMap["test2"].name, "test2");
   });
 }

@@ -3,7 +3,7 @@
 part of serializer.cyclic_reference_serialize;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$EmployeeSerializable extends SerializableMap {
@@ -46,10 +46,10 @@ abstract class _$EmployeeSerializable extends SerializableMap {
         lastName = __value;
         return;
       case 'address':
-        address = __value;
+        address = fromSerialized(__value, () => new Address());
         return;
       case 'manager':
-        manager = __value;
+        manager = fromSerialized(__value, () => new Employee());
         return;
     }
     throwFieldNotFoundException(__key, 'Employee');
@@ -108,7 +108,7 @@ abstract class _$AddressSerializable extends SerializableMap {
         postalCode = __value;
         return;
       case 'owner':
-        owner = __value;
+        owner = fromSerialized(__value, () => new Employee());
         return;
     }
     throwFieldNotFoundException(__key, 'Address');
@@ -150,10 +150,10 @@ abstract class _$Employee2Serializable extends SerializableMap {
         lastName = __value;
         return;
       case 'address':
-        address = __value;
+        address = fromSerialized(__value, () => new Address2());
         return;
       case 'manager':
-        manager = __value;
+        manager = fromSerialized(__value, () => new Employee2());
         return;
     }
     throwFieldNotFoundException(__key, 'Employee2');
@@ -205,7 +205,7 @@ abstract class _$Address2Serializable extends SerializableMap {
         postalCode = __value;
         return;
       case 'owner':
-        owner = __value;
+        owner = fromSerialized(__value, () => new Employee2());
         return;
     }
     throwFieldNotFoundException(__key, 'Address2');
@@ -243,7 +243,8 @@ abstract class _$StudentSerializable extends SerializableMap {
         name = __value;
         return;
       case 'courses':
-        courses = __value;
+        courses = fromSerialized(
+            __value, [() => new List<Course>(), () => new Course()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Student');
@@ -278,10 +279,11 @@ abstract class _$CourseSerializable extends SerializableMap {
         id = __value;
         return;
       case 'beginDate':
-        beginDate = __value;
+        beginDate = fromSerializedDateTime(__value);
         return;
       case 'students':
-        students = __value;
+        students = fromSerialized(
+            __value, [() => new List<Student>(), () => new Student()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Course');
@@ -291,7 +293,7 @@ abstract class _$CourseSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _Employee__Constructor([positionalParams, namedParams]) => new Employee();
@@ -330,6 +332,7 @@ const EmployeeClassMirror =
   'address',
   'manager'
 ]);
+
 _Address__Constructor([positionalParams, namedParams]) => new Address();
 
 const $$Address_fields_id = const DeclarationMirror(name: 'id', type: int);
@@ -371,6 +374,7 @@ const AddressClassMirror =
   'postalCode',
   'owner'
 ]);
+
 _Employee2__Constructor([positionalParams, namedParams]) => new Employee2();
 
 const $$Employee2_fields_firstName =
@@ -403,6 +407,7 @@ const Employee2ClassMirror =
   'address',
   'manager'
 ]);
+
 _Address2__Constructor([positionalParams, namedParams]) => new Address2();
 
 const $$Address2_fields_street =
@@ -440,6 +445,7 @@ const Address2ClassMirror =
   'postalCode',
   'owner'
 ]);
+
 _Student__Constructor([positionalParams, namedParams]) => new Student();
 
 const $$Student_fields_id = const DeclarationMirror(name: 'id', type: int);
@@ -466,6 +472,7 @@ const StudentClassMirror =
   'name',
   'courses'
 ]);
+
 _Course__Constructor([positionalParams, namedParams]) => new Course();
 
 const $$Course_fields_id = const DeclarationMirror(name: 'id', type: int);
@@ -494,7 +501,7 @@ const CourseClassMirror =
 ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {
@@ -506,5 +513,4 @@ _initMirrors() {
     Student: StudentClassMirror,
     Course: CourseClassMirror
   });
-  initFunctionMirrors({});
 }

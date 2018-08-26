@@ -1,7 +1,6 @@
 library deserializer_test;
 
 import 'package:dson/dson.dart';
-import 'package:serializable/serializable.dart';
 import 'package:test/test.dart';
 
 part 'deserializer_test.g.dart';
@@ -17,7 +16,7 @@ class TestClass1 extends _$TestClass1Serializable {
   bool matter;
   num number;
   List list;
-  Map map;
+  Map myMap;
   TestClass1 child;
   int intNumber;
   int intNumber2;
@@ -59,6 +58,7 @@ class TestSetter extends _$TestSetterSerializable {
   String _name;
 
   String get name => _name;
+
   set name(String n) => _name = n;
 }
 
@@ -85,12 +85,12 @@ class SimpleList extends _$SimpleListSerializable {
 
 @serializable
 class SimpleMap extends _$SimpleMapSerializable {
-  Map map;
+  Map myMap;
 }
 
 @serializable
 class SimpleMapString extends _$SimpleMapStringSerializable {
-  Map<String,num> map;
+  Map<String, num> myMap;
 }
 
 @serializable
@@ -102,7 +102,10 @@ main() {
   _initMirrors();
 
   test('deserialize: simple.', () {
-    TestClass1 test = fromJson('{"name":"test","matter":true,"intNumber":2, "intNumber2":2.0, "doubleNumber": 2, "doubleNumber2": 2.0, "number":5,"list":[1,2,3],"map":{"k":"o"},"the_renamed":"test"}', TestClass1);
+    TestClass1 test = fromJson(
+        '{"name":"test","matter":true,"intNumber":2, "intNumber2":2, "doubleNumber": 2.0, "doubleNumber2": 2.0,'
+        ' "number":5,"list":[1,2,3],"myMap":{"k":"o"},"the_renamed":"test"}',
+        TestClass1);
     expect(test.name, 'test');
     expect(test.matter, true);
     expect(test.intNumber, 2);
@@ -112,21 +115,13 @@ main() {
     expect(test.number, 5);
     expect(test.list.length, 3);
     expect(test.list[1], 2);
-    expect(test.map["k"], "o");
+    expect(test.myMap["k"], "o");
     expect(test.renamed, "test");
   });
 
   test('deserialize: no constructor found.', () {
-    NoConstructorError err;
-    try {
-      NestedClass test = fromJson('{"name":"failure"}', NestedClass);
-      expect(test.name, equals("failure"));
-    } catch(ex) {
-      err = ex;
-    }
-
-    expect(err != null, true);
-    expect(err is NoConstructorError, true);
+    NestedClass test = fromJson('{"name":"failure"}', NestedClass);
+    expect(test.name, equals("failure"));
   });
 
   test('deserialize: nested parsing', () {
@@ -145,21 +140,21 @@ main() {
   });
 
   test('deserialize: simple map', () {
-    SimpleMap test = fromJson('{"map": {"test": "test", "test2": "test2"}}', SimpleMap);
+    SimpleMap test = fromJson('{"myMap": {"test": "test", "test2": "test2"}}', SimpleMap);
 
-    expect(test.map["test"], "test");
-    expect(test.map["test2"], "test2");
+    expect(test.myMap["test"], "test");
+    expect(test.myMap["test2"], "test2");
   });
 
   test('deserialize: simple map with type declaration', () {
-    SimpleMapString test = fromJson('{"map": {"test": 1, "test2": 2}}', SimpleMapString);
+    SimpleMapString test = fromJson('{"myMap": {"test": 1, "test2": 2}}', SimpleMapString);
 
-    expect(test.map["test"], 1);
-    expect(test.map["test2"], 2);
+    expect(test.myMap["test"], 1);
+    expect(test.myMap["test2"], 2);
   });
 
   test('deserialize: list of simple class', () {
-    List<SimpleClass> test = fromJson('[{"name":"test"},{"name":"test2"}]', const [List, SimpleClass]);
+    List<SimpleClass> test = fromJson('[{"name":"test"},{"name":"test2"}]', [() => List<SimpleClass>(), SimpleClass]);
     expect(test[0].name, "test");
     expect(test[1].name, "test2");
   });
@@ -169,10 +164,11 @@ main() {
     expect(test.names.contains("test"), true);
   });
 
-
   test('deserialize: map of simple class', () {
-    Map<String, SimpleClass> test = fromJson('{"key1":{"name":"test"},"key2":{"name":"test2"}}',
-        const [Map, const [String, SimpleClass]]);
+    Map<String, SimpleClass> test = fromJson('{"key1":{"name":"test"},"key2":{"name":"test2"}}', [
+      () => Map<String, SimpleClass>(),
+      const [String, SimpleClass]
+    ]);
     expect(test["key1"].name, "test");
     expect(test["key2"].name, "test2");
   });
@@ -184,19 +180,29 @@ main() {
 
   test('mapToObject: SimpleMapString', () {
     SimpleMapString test = fromMap({
-      "map": {"test": 1, "test2": 2}
+      "myMap": {"test": 1, "test2": 2}
     }, SimpleMapString);
 
-    expect(test.map["test"], 1);
-    expect(test.map["test2"], 2);
+    expect(test.myMap["test"], 1);
+    expect(test.myMap["test2"], 2);
   });
 
   test('mapListToObjectList: List of SimplemapString', () {
-    List<SimpleMapString> test = fromMap([{"map": {"test": 1, "test2": 2}}, {"map": {"test": 3, "test2": 4}}], [List, SimpleMapString]);
-    expect(test[0].map["test"], 1);
-    expect(test[0].map["test2"], 2);
-    expect(test[1].map["test"], 3);
-    expect(test[1].map["test2"], 4);
+    List<SimpleMapString> test = fromMap([
+      {
+        "myMap": {"test": 1, "test2": 2}
+      },
+      {
+        "myMap": {"test": 3, "test2": 4}
+      }
+    ], [
+      () => List<SimpleMapString>(),
+      SimpleMapString
+    ]);
+    expect(test[0].myMap["test"], 1);
+    expect(test[0].myMap["test2"], 2);
+    expect(test[1].myMap["test"], 3);
+    expect(test[1].myMap["test2"], 4);
   });
 
   test('deserialize: DateTime', () {

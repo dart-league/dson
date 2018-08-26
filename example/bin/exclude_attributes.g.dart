@@ -1,9 +1,9 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of example.serialize_cyclical_list;
+part of example.exclude_attributes;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$StudentSerializable extends SerializableMap {
@@ -35,7 +35,8 @@ abstract class _$StudentSerializable extends SerializableMap {
         name = __value;
         return;
       case 'courses':
-        courses = __value;
+        courses = fromSerialized(
+            __value, [() => new List<Course>(), () => new Course()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Student');
@@ -70,10 +71,11 @@ abstract class _$CourseSerializable extends SerializableMap {
         id = __value;
         return;
       case 'beginDate':
-        beginDate = __value;
+        beginDate = fromSerializedDateTime(__value);
         return;
       case 'students':
-        students = __value;
+        students = fromSerialized(
+            __value, [() => new List<Student>(), () => new Student()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Course');
@@ -83,7 +85,7 @@ abstract class _$CourseSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _Student__Constructor([positionalParams, namedParams]) => new Student();
@@ -112,6 +114,7 @@ const StudentClassMirror =
   'name',
   'courses'
 ]);
+
 _Course__Constructor([positionalParams, namedParams]) => new Course();
 
 const $$Course_fields_id = const DeclarationMirror(name: 'id', type: int);
@@ -140,10 +143,9 @@ const CourseClassMirror =
 ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {
   initClassMirrors({Student: StudentClassMirror, Course: CourseClassMirror});
-  initFunctionMirrors({});
 }

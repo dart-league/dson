@@ -3,7 +3,7 @@
 part of serializar.serialize_enums_test;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$ObjectWithEnumSerializable extends SerializableMap {
@@ -21,7 +21,7 @@ abstract class _$ObjectWithEnumSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'color':
-        color = __value;
+        color = fromSerializedEnum(__value, Color, () => Color.values);
         return;
     }
     throwFieldNotFoundException(__key, 'ObjectWithEnum');
@@ -31,11 +31,12 @@ abstract class _$ObjectWithEnumSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 const ColorClassMirror =
     const ClassMirror(name: 'Color', isEnum: true, values: Color.values);
+
 _ObjectWithEnum__Constructor([positionalParams, namedParams]) =>
     new ObjectWithEnum();
 
@@ -58,11 +59,10 @@ const ObjectWithEnumClassMirror = const ClassMirror(
     ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {
   initClassMirrors(
       {Color: ColorClassMirror, ObjectWithEnum: ObjectWithEnumClassMirror});
-  initFunctionMirrors({});
 }

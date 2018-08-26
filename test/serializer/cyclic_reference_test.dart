@@ -1,7 +1,6 @@
 library serializer.cyclic_reference_serialize;
 
 import 'package:dson/dson.dart';
-import 'package:serializable/serializable.dart';
 import 'package:test/test.dart';
 
 part 'cyclic_reference_test.g.dart';

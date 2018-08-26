@@ -1,7 +1,6 @@
 library serializar.serialize_enums_test;
 
 import 'package:dson/dson.dart';
-import 'package:serializable/serializable.dart';
 import 'package:test/test.dart';
 
 part 'serialize_enums_test.g.dart';

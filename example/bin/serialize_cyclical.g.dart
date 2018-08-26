@@ -3,7 +3,7 @@
 part of example.serialize_cyclical;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$EmployeeSerializable extends SerializableMap {
@@ -46,10 +46,10 @@ abstract class _$EmployeeSerializable extends SerializableMap {
         lastName = __value;
         return;
       case 'address':
-        address = __value;
+        address = fromSerialized(__value, () => new Address());
         return;
       case 'manager':
-        manager = __value;
+        manager = fromSerialized(__value, () => new Employee());
         return;
     }
     throwFieldNotFoundException(__key, 'Employee');
@@ -108,7 +108,7 @@ abstract class _$AddressSerializable extends SerializableMap {
         postalCode = __value;
         return;
       case 'owner':
-        owner = __value;
+        owner = fromSerialized(__value, () => new Employee());
         return;
     }
     throwFieldNotFoundException(__key, 'Address');
@@ -118,7 +118,7 @@ abstract class _$AddressSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _Employee__Constructor([positionalParams, namedParams]) => new Employee();
@@ -158,6 +158,7 @@ const EmployeeClassMirror =
   'address',
   'manager'
 ]);
+
 _Address__Constructor([positionalParams, namedParams]) => new Address();
 
 const $$Address_fields_key =
@@ -202,11 +203,10 @@ const AddressClassMirror =
 ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {
   initClassMirrors(
       {Employee: EmployeeClassMirror, Address: AddressClassMirror});
-  initFunctionMirrors({});
 }

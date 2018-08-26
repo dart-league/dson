@@ -1,9 +1,9 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of example.object_to_json;
+part of example.object_to_map;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$PersonSerializable extends SerializableMap {
@@ -37,7 +37,7 @@ abstract class _$PersonSerializable extends SerializableMap {
         return height;
       case 'dateOfBirth':
         return dateOfBirth;
-      case 'otherName':
+      case 'renamed':
         return otherName;
       case 'notVisible':
         return notVisible;
@@ -64,9 +64,9 @@ abstract class _$PersonSerializable extends SerializableMap {
         height = __value;
         return;
       case 'dateOfBirth':
-        dateOfBirth = __value;
+        dateOfBirth = fromSerializedDateTime(__value);
         return;
-      case 'otherName':
+      case 'renamed':
         otherName = __value;
         return;
       case 'notVisible':
@@ -83,7 +83,7 @@ abstract class _$PersonSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _Person__Constructor([positionalParams, namedParams]) => new Person();
@@ -98,9 +98,9 @@ const $$Person_fields_height =
 const $$Person_fields_dateOfBirth =
     const DeclarationMirror(name: 'dateOfBirth', type: DateTime);
 const $$Person_fields_otherName = const DeclarationMirror(
-    name: 'otherName',
-    type: String,
-    annotations: const [const SerializedName(r'renamed')]);
+  name: 'renamed',
+  type: String,
+);
 const $$Person_fields_notVisible = const DeclarationMirror(
     name: 'notVisible', type: String, annotations: const [ignore]);
 const $$Person_fields__private =
@@ -117,7 +117,7 @@ const PersonClassMirror =
   'lastName': $$Person_fields_lastName,
   'height': $$Person_fields_height,
   'dateOfBirth': $$Person_fields_dateOfBirth,
-  'otherName': $$Person_fields_otherName,
+  'renamed': $$Person_fields_otherName,
   'notVisible': $$Person_fields_notVisible,
   '_private': $$Person_fields__private,
   'doGetter': $$Person_fields_doGetter
@@ -127,7 +127,7 @@ const PersonClassMirror =
   'lastName',
   'height',
   'dateOfBirth',
-  'otherName',
+  'renamed',
   'notVisible',
   '_private',
   'doGetter'
@@ -137,16 +137,15 @@ const PersonClassMirror =
   'lastName',
   'height',
   'dateOfBirth',
-  'otherName',
+  'renamed',
   'notVisible',
   '_private'
 ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {
   initClassMirrors({Person: PersonClassMirror});
-  initFunctionMirrors({});
 }

@@ -1,8 +1,58 @@
 ## Todo
 
 * [ ] Add include parameter to serialize function
-* [x] Add uuid check over hashCode for cyclical references
+* [x] ~~Add uuid check over hashCode for cyclical references~~
 * [ ] Add types to serialized values
+* [ ] Add support for hal-json
+* [ ] Add support for schema-json
+* [ ] Add support for csv
+* [ ] Add support for MessagePack
+* [ ] Add support for converting to array of values-only
+
+## 0.15.1
+
+- fix deserialize class with default constructor with optional args (fix #37).
+- deserialize immutable with wrong constructor-parameter name now is possible. However now it returns null for that parameter after deserializing instead throwing `NoConstructorFound` error.
+
+## 0.15.0
+   
+- upgrade `serializable_core` to version `0.11.0` since
+ this version now generates from methods which now allows
+ convert objects from generic values.
+- move `SerializedName` to `built_mirrors` library since
+ the serialized name is now generated at build time
+
+## 0.14.0
+
+- upgrade `source_gen` to version `^0.9.0`
+- upgrade `analyzer` to version `^0.32.0`
+- upgrade `built_mirrors_core` to version `^0.9.0`
+- upgrade `serializable_core` to version `^0.10.0`
+- upgrade `build_runner` to version `^0.9.0`
+- upgrade `test` to version `^1.0.0`
+
+## 0.13.3
+
+- fix #34 and fix #35
+
+## 0.13.2
+   
+- fix error serializing immutable with optional parameters
+
+## 0.13.1
+
+- upgrade `source_gen` to version `^0.8.0`
+- add extend object sample to README
+
+## 0.13.0
+
+- upgrade `serializable_core` to version `0.9.0` (fixes #32)
+
+## 0.12.0
+
+- add `dson_core` package
+- upgrade `build_runner` to version `0.7.0`
+- upgrade `build` to version `0.12.0`
 
 ## 0.11.0
 

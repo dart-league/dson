@@ -2,4 +2,4 @@ language: dart
 dart:
   - stable
   - dev
-script: pub run test
+script: dartanalyzer --fatal-warnings . && pub run build_runner test --delete-conflicting-outputs

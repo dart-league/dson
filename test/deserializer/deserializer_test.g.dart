@@ -3,7 +3,7 @@
 part of deserializer_test;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// DsonGenerator
 // **************************************************************************
 
 abstract class _$SimpleDateContainerSerializable extends SerializableMap {
@@ -21,7 +21,7 @@ abstract class _$SimpleDateContainerSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'testDate':
-        testDate = __value;
+        testDate = fromSerializedDateTime(__value);
         return;
     }
     throwFieldNotFoundException(__key, 'SimpleDateContainer');
@@ -35,7 +35,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
   bool get matter;
   num get number;
   List<dynamic> get list;
-  Map<dynamic, dynamic> get map;
+  Map<dynamic, dynamic> get myMap;
   TestClass1 get child;
   int get intNumber;
   int get intNumber2;
@@ -47,7 +47,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
   void set matter(bool v);
   void set number(num v);
   void set list(List<dynamic> v);
-  void set map(Map<dynamic, dynamic> v);
+  void set myMap(Map<dynamic, dynamic> v);
   void set child(TestClass1 v);
   void set intNumber(int v);
   void set intNumber2(int v);
@@ -66,8 +66,8 @@ abstract class _$TestClass1Serializable extends SerializableMap {
         return number;
       case 'list':
         return list;
-      case 'map':
-        return map;
+      case 'myMap':
+        return myMap;
       case 'child':
         return child;
       case 'intNumber':
@@ -80,7 +80,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
         return doubleNumber2;
       case 'ignored':
         return ignored;
-      case 'renamed':
+      case 'the_renamed':
         return renamed;
     }
     throwFieldNotFoundException(__key, 'TestClass1');
@@ -98,13 +98,13 @@ abstract class _$TestClass1Serializable extends SerializableMap {
         number = __value;
         return;
       case 'list':
-        list = __value;
+        list = fromSerialized(__value, () => new List<dynamic>());
         return;
-      case 'map':
-        map = __value;
+      case 'myMap':
+        myMap = fromSerialized(__value, () => new Map<dynamic, dynamic>());
         return;
       case 'child':
-        child = __value;
+        child = fromSerialized(__value, () => new TestClass1());
         return;
       case 'intNumber':
         intNumber = __value;
@@ -121,7 +121,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
       case 'ignored':
         ignored = __value;
         return;
-      case 'renamed':
+      case 'the_renamed':
         renamed = __value;
         return;
     }
@@ -170,7 +170,7 @@ abstract class _$SetClassSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'names':
-        names = __value;
+        names = fromSerialized(__value, () => new Set<String>());
         return;
     }
     throwFieldNotFoundException(__key, 'SetClass');
@@ -263,10 +263,10 @@ abstract class _$NestedClassSerializable extends SerializableMap {
         name = __value;
         return;
       case 'list':
-        list = __value;
+        list = fromSerialized(__value, () => new List<dynamic>());
         return;
       case 'getter':
-        getter = __value;
+        getter = fromSerialized(__value, () => new TestGetter());
         return;
     }
     throwFieldNotFoundException(__key, 'NestedClass');
@@ -317,7 +317,7 @@ abstract class _$SimpleListSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'list':
-        list = __value;
+        list = fromSerialized(__value, () => new List<dynamic>());
         return;
     }
     throwFieldNotFoundException(__key, 'SimpleList');
@@ -327,21 +327,21 @@ abstract class _$SimpleListSerializable extends SerializableMap {
 }
 
 abstract class _$SimpleMapSerializable extends SerializableMap {
-  Map<dynamic, dynamic> get map;
-  void set map(Map<dynamic, dynamic> v);
+  Map<dynamic, dynamic> get myMap;
+  void set myMap(Map<dynamic, dynamic> v);
 
   operator [](Object __key) {
     switch (__key) {
-      case 'map':
-        return map;
+      case 'myMap':
+        return myMap;
     }
     throwFieldNotFoundException(__key, 'SimpleMap');
   }
 
   operator []=(Object __key, __value) {
     switch (__key) {
-      case 'map':
-        map = __value;
+      case 'myMap':
+        myMap = fromSerialized(__value, () => new Map<dynamic, dynamic>());
         return;
     }
     throwFieldNotFoundException(__key, 'SimpleMap');
@@ -351,21 +351,21 @@ abstract class _$SimpleMapSerializable extends SerializableMap {
 }
 
 abstract class _$SimpleMapStringSerializable extends SerializableMap {
-  Map<String, num> get map;
-  void set map(Map<String, num> v);
+  Map<String, num> get myMap;
+  void set myMap(Map<String, num> v);
 
   operator [](Object __key) {
     switch (__key) {
-      case 'map':
-        return map;
+      case 'myMap':
+        return myMap;
     }
     throwFieldNotFoundException(__key, 'SimpleMapString');
   }
 
   operator []=(Object __key, __value) {
     switch (__key) {
-      case 'map':
-        map = __value;
+      case 'myMap':
+        myMap = fromSerialized(__value, () => new Map<String, num>());
         return;
     }
     throwFieldNotFoundException(__key, 'SimpleMapString');
@@ -399,7 +399,7 @@ abstract class _$SimpleVarContainerSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
 _SimpleDateContainer__Constructor([positionalParams, namedParams]) =>
@@ -418,6 +418,7 @@ const SimpleDateContainerClassMirror =
 ], setters: const [
   'testDate'
 ]);
+
 _TestClass1__Constructor([positionalParams, namedParams]) => new TestClass1();
 
 const $$TestClass1_fields_name =
@@ -428,8 +429,8 @@ const $$TestClass1_fields_number =
     const DeclarationMirror(name: 'number', type: num);
 const $$TestClass1_fields_list =
     const DeclarationMirror(name: 'list', type: const [List, dynamic]);
-const $$TestClass1_fields_map =
-    const DeclarationMirror(name: 'map', type: const [
+const $$TestClass1_fields_myMap =
+    const DeclarationMirror(name: 'myMap', type: const [
   Map,
   const [dynamic, dynamic]
 ]);
@@ -446,9 +447,9 @@ const $$TestClass1_fields_doubleNumber2 =
 const $$TestClass1_fields_ignored = const DeclarationMirror(
     name: 'ignored', type: bool, annotations: const [ignore]);
 const $$TestClass1_fields_renamed = const DeclarationMirror(
-    name: 'renamed',
-    type: String,
-    annotations: const [const SerializedName(r'the_renamed')]);
+  name: 'the_renamed',
+  type: String,
+);
 
 const TestClass1ClassMirror =
     const ClassMirror(name: 'TestClass1', constructors: const {
@@ -458,41 +459,42 @@ const TestClass1ClassMirror =
   'matter': $$TestClass1_fields_matter,
   'number': $$TestClass1_fields_number,
   'list': $$TestClass1_fields_list,
-  'map': $$TestClass1_fields_map,
+  'myMap': $$TestClass1_fields_myMap,
   'child': $$TestClass1_fields_child,
   'intNumber': $$TestClass1_fields_intNumber,
   'intNumber2': $$TestClass1_fields_intNumber2,
   'doubleNumber': $$TestClass1_fields_doubleNumber,
   'doubleNumber2': $$TestClass1_fields_doubleNumber2,
   'ignored': $$TestClass1_fields_ignored,
-  'renamed': $$TestClass1_fields_renamed
+  'the_renamed': $$TestClass1_fields_renamed
 }, getters: const [
   'name',
   'matter',
   'number',
   'list',
-  'map',
+  'myMap',
   'child',
   'intNumber',
   'intNumber2',
   'doubleNumber',
   'doubleNumber2',
   'ignored',
-  'renamed'
+  'the_renamed'
 ], setters: const [
   'name',
   'matter',
   'number',
   'list',
-  'map',
+  'myMap',
   'child',
   'intNumber',
   'intNumber2',
   'doubleNumber',
   'doubleNumber2',
   'ignored',
-  'renamed'
+  'the_renamed'
 ]);
+
 _JustObject__Constructor([positionalParams, namedParams]) => new JustObject();
 
 const $$JustObject_fields_object =
@@ -512,6 +514,7 @@ const JustObjectClassMirror = const ClassMirror(
     setters: const [
       'object'
     ]);
+
 _SetClass__Constructor([positionalParams, namedParams]) => new SetClass();
 
 const $$SetClass_fields_names =
@@ -531,6 +534,7 @@ const SetClassClassMirror = const ClassMirror(
     setters: const [
       'names'
     ]);
+
 _TestGetter__Constructor([positionalParams, namedParams]) =>
     new TestGetter(positionalParams[0]);
 
@@ -556,6 +560,7 @@ const TestGetterClassMirror =
 ], setters: const [
   '_name'
 ]);
+
 _TestSetter__Constructor([positionalParams, namedParams]) => new TestSetter();
 
 const $$TestSetter_fields__name =
@@ -580,6 +585,7 @@ const TestSetterClassMirror = const ClassMirror(
       '_name',
       'name'
     ]);
+
 _NestedClass__Constructor([positionalParams, namedParams]) => new NestedClass(
     positionalParams[0], positionalParams[1], positionalParams[2]);
 
@@ -615,6 +621,7 @@ const NestedClassClassMirror =
   'list',
   'getter'
 ]);
+
 _SimpleClass__Constructor([positionalParams, namedParams]) => new SimpleClass();
 
 const $$SimpleClass_fields_name =
@@ -635,6 +642,7 @@ const SimpleClassClassMirror =
     returnType: String,
   )
 });
+
 _SimpleList__Constructor([positionalParams, namedParams]) => new SimpleList();
 
 const $$SimpleList_fields_list =
@@ -654,10 +662,11 @@ const SimpleListClassMirror = const ClassMirror(
     setters: const [
       'list'
     ]);
+
 _SimpleMap__Constructor([positionalParams, namedParams]) => new SimpleMap();
 
-const $$SimpleMap_fields_map =
-    const DeclarationMirror(name: 'map', type: const [
+const $$SimpleMap_fields_myMap =
+    const DeclarationMirror(name: 'myMap', type: const [
   Map,
   const [dynamic, dynamic]
 ]);
@@ -668,19 +677,20 @@ const SimpleMapClassMirror = const ClassMirror(
       '': const FunctionMirror(name: '', $call: _SimpleMap__Constructor)
     },
     fields: const {
-      'map': $$SimpleMap_fields_map
+      'myMap': $$SimpleMap_fields_myMap
     },
     getters: const [
-      'map'
+      'myMap'
     ],
     setters: const [
-      'map'
+      'myMap'
     ]);
+
 _SimpleMapString__Constructor([positionalParams, namedParams]) =>
     new SimpleMapString();
 
-const $$SimpleMapString_fields_map =
-    const DeclarationMirror(name: 'map', type: const [
+const $$SimpleMapString_fields_myMap =
+    const DeclarationMirror(name: 'myMap', type: const [
   Map,
   const [String, num]
 ]);
@@ -691,14 +701,15 @@ const SimpleMapStringClassMirror = const ClassMirror(
       '': const FunctionMirror(name: '', $call: _SimpleMapString__Constructor)
     },
     fields: const {
-      'map': $$SimpleMapString_fields_map
+      'myMap': $$SimpleMapString_fields_myMap
     },
     getters: const [
-      'map'
+      'myMap'
     ],
     setters: const [
-      'map'
+      'myMap'
     ]);
+
 _SimpleVarContainer__Constructor([positionalParams, namedParams]) =>
     new SimpleVarContainer();
 
@@ -717,7 +728,7 @@ const SimpleVarContainerClassMirror =
 ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {
@@ -735,5 +746,4 @@ _initMirrors() {
     SimpleMapString: SimpleMapStringClassMirror,
     SimpleVarContainer: SimpleVarContainerClassMirror
   });
-  initFunctionMirrors({});
 }
