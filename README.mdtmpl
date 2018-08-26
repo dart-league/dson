@@ -102,3 +102,5 @@ This is to advice the analyzer to ignore the error caused by inheriting from an 
 To make an immutable class to be able to serialize/deserialize you only need to declare it with a constructor which only contains final parameters. For example:
 
 {@example example/bin/immutable_objects.dart}
+
+> Be sure the names of the fields and constructor parameters match. If they do not match, then the deserialized object will contain attributes with null value

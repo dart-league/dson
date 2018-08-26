@@ -674,3 +674,5 @@ main() {
   print('p1FromJson: (id: ${p1FromJson.id}, name: ${p1FromJson.name})');
 }
 ```
+
+> Be sure the names of the fields and constructor parameters match. If they do not match, then the deserialized object will contain attributes with null value

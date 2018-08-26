@@ -51,14 +51,8 @@ main() {
   });
 
   test('deserialize: immutable class with invalid parameter', () {
-    NoConstructorError err;
-    try {
-      fromJson('{"name":"failure"}', ImmutableClassInvalidParameter);
-    } catch (ex) {
-      err = ex;
-    }
+    ImmutableClassInvalidParameter result = fromJson('{"name":"failure"}', ImmutableClassInvalidParameter);
 
-    expect(err != null, true);
-    expect(err is NoConstructorError, true);
+    expect(result.name, null);
   });
 }

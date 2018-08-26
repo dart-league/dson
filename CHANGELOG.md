@@ -9,6 +9,11 @@
 * [ ] Add support for MessagePack
 * [ ] Add support for converting to array of values-only
 
+## 0.15.1
+
+- fix deserialize class with default constructor with optional args (fix #37).
+- deserialize immutable with wrong constructor-parameter name now is possible. However now it returns null for that parameter after deserializing instead throwing `NoConstructorFound` error.
+
 ## 0.15.0
    
 - upgrade `serializable_core` to version `0.11.0` since

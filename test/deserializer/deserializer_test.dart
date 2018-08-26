@@ -120,16 +120,8 @@ main() {
   });
 
   test('deserialize: no constructor found.', () {
-    NoConstructorError err;
-    try {
-      NestedClass test = fromJson('{"name":"failure"}', NestedClass);
-      expect(test.name, equals("failure"));
-    } catch (ex) {
-      err = ex;
-    }
-
-    expect(err != null, true);
-    expect(err is NoConstructorError, true);
+    NestedClass test = fromJson('{"name":"failure"}', NestedClass);
+    expect(test.name, equals("failure"));
   });
 
   test('deserialize: nested parsing', () {
@@ -196,9 +188,17 @@ main() {
   });
 
   test('mapListToObjectList: List of SimplemapString', () {
-    List<SimpleMapString> test = fromMap(
-        [{"myMap": {"test": 1, "test2": 2}}, {"myMap": {"test": 3, "test2": 4}}],
-        [() => List<SimpleMapString>(), SimpleMapString]);
+    List<SimpleMapString> test = fromMap([
+      {
+        "myMap": {"test": 1, "test2": 2}
+      },
+      {
+        "myMap": {"test": 3, "test2": 4}
+      }
+    ], [
+      () => List<SimpleMapString>(),
+      SimpleMapString
+    ]);
     expect(test[0].myMap["test"], 1);
     expect(test[0].myMap["test2"], 2);
     expect(test[1].myMap["test"], 3);
