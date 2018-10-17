@@ -17,3 +17,4 @@ packages/
 *.iml
 .idea/
 .dart_tool
+_README.xml

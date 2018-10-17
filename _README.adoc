@@ -1,10 +1,12 @@
-# DSON
+= DSON
 
-![Build Status](https://travis-ci.org/drails-dart/dson.svg?branch=master)
+image:https://travis-ci.org/dart-league/dson.svg?branch=master["Build Status"]
+
+https://travis-ci.org/dart-league/dson[]
 
 DSON is a dart library which converts Dart Objects into their JSON representation.
 
-This library was initially a fork from [Dartson](https://github.com/eredo/dartson). Now it contains some differences:
+This library was initially a fork from https://github.com/eredo/dartson[Dartson]. Now it contains some differences:
 
  * Dartson uses custom transformers to convert objects to JSON. This produce faster and smaller code after dart2Js. Instead DSON uses [serializable]() and [built_mirrors]() libraries. This should produce code as fast and small as Dartson transformer.
  * DSON has the ability to serialize cyclical objects by mean of `depth` parameter, which allows users to specify how deep in the object graph they want to serialize.
@@ -13,19 +15,19 @@ This library was initially a fork from [Dartson](https://github.com/eredo/dartso
     * Using `exclude` map as parameter for `toJson` method. This is more flexible, since it allows to have many exclusion schemas for serialization.
  * DSON uses the annotation `@serializable` instead `@entity` which is used by Dartson.
 
-## Comparison with other libraries
+== Comparison with other libraries
 
 https://github.com/drails-dart/dart-serialise
 
-## Tutorials
+== Tutorials
 
-[![DSON tutorials](http://img.youtube.com/vi/dZrCrCsw208/0.jpg)](https://www.youtube.com/watch?v=dZrCrCsw208&list=PLkMd51xTELZKV66oLUJLgnsFbOQy8irJ0 "01 Object to Json - DSON ")
+image:http://img.youtube.com/vi/dZrCrCsw208/0.jpg["DSON tutorials", link="https://www.youtube.com/watch?v=dZrCrCsw208&list=PLkMd51xTELZKV66oLUJLgnsFbOQy8irJ0"]
 
-## Configuration
+== Configuration
 
-1. Create a new dart project.
+1- Create a new dart project.
 
-2. Add dependencies to `pubspec.yaml`
+2- Add dependencies to `pubspec.yaml`
 
 ```yaml
 ...
@@ -35,57 +37,71 @@ dependencies:
   ...
 ```
 
-3. Create/edit `bin/main.dart` or `web/main.dart` and add the code shown in any of the samples below.
+3- Create/edit `bin/main.dart` or `web/main.dart` and add the code shown in any of the samples below.
 
-4. Run either `pub run build_runner build`, or `pub run build_runner watch`, or `pub run build_runner serve` in the console
+4- Run either `pub run build_runner build`, or `pub run build_runner watch`, or `pub run build_runner serve` in the console
 
-## Convert objects to JSON strings
+== Convert objects to JSON strings
 
 To convert objects to JSON strings you only need to use the `toJson` function, annotate the object with `@serializable` and pass the `object` to the `toJson` function as parameter:
 
-{@example example/bin/object_to_json.dart}
+```dart
+include::example/bin/object_to_json.dart[]
+```
 
-## Converting objects to Maps
+== Converting objects to Maps
 
 To convert objects to Maps you only need to use the `toMap` function, annotate the object with `@serializable` and pass the `object` to `toMap` function as parameter:
 
-{@example example/bin/object_to_map.dart}
+```dart
+example/bin/object_to_map.dart
+```
 
-### Serializing Cyclical Objects
+=== Serializing Cyclical Objects
 
 To serialize objects that contains Cyclical References it would be needed to use the annotation `@cyclical`. If this annotation is present and the `depth` variable is not set then the non-primitive objects are not going to be parsed and only the id (or hashmap if the object does not contains id) is going to be present. Let's see next example:
 
-{@example example/bin/serialize_cyclical.dart}
+```dart
+example/bin/serialize_cyclical.dart
+```
 
 as you can see employee has an address, and the address has an owner of type Employee. If the property `id` is not present in the object then it is going to take the `hashcode` value from the object as reference. And finally, the `depth` parameter passed to serialize function tells serializer how deep you want to go throw the reference. This help us not only to avoid cyclical reference, but to determine what referenced objects should be serialized.
 
 The same applies for lists:
 
-{@example example/bin/serialize_cyclical_list.dart}
+```dart
+example/bin/serialize_cyclical_list.dart
+```
     
 Without the annotation `@cyclical` the program is going to throw a stack overflow error caused by the serializing of cyclical objects.
 
-### Excluding attributes from being serialized
+=== Excluding attributes from being serialized
 
 To exclude parameter from being serialized we have two options the first option is using `@ignore` over the attribute to ignore. However this approach is too global. What I want to say with this is that the attribute is going to be ignored always.
 
 Another way to exclude attributes is adding the parameter `exclude` to `serialize` function. In this way we only exclude those attributes during that serialization.
 
-{@example example/bin/exclude_attributes.dart}
+```dart
+example/bin/exclude_attributes.dart
+```
 
-## Convert JSON strings to objects
+== Convert JSON strings to objects
 
 To convert JSON strings to objects you only need to use the `fromJson` and `fromJsonList` functions and pass the `json` string to deserialize and the `Type` of the object as parameters:
 
-{@example example/bin/json_to_object.dart}
+```dart
+example/bin/json_to_object.dart
+```
 
-### Converting `Maps` and `Lists<Map>` to dart objects
+=== Converting `Maps` and `Lists<Map>` to dart objects
 
 Frameworks like Angular.dart come with several HTTP services which already transform the HTTP response to a map using `JSON.encode`. To use those encoded Maps or Lists use `fromMap` function.
 
-{@example example/bin/map_to_object.dart}
+```dart
+example/bin/map_to_object.dart
+```
 
-## Extend serializable Objects
+== Extend serializable Objects
 
 To extends objects that are going to be serializable you will need to add the comment:
 
@@ -95,12 +111,16 @@ To extends objects that are going to be serializable you will need to add the co
 
 This is to advice the analyzer to ignore the error caused by inheriting from an object that is not a mixin. For example:
 
-{@example example/bin/extend_serializables.dart}
+```dart
+example/bin/extend_serializables.dart
+```
 
-## Serialize/Deserialize immutable objects
+== Serialize/Deserialize immutable objects
 
 To make an immutable class to be able to serialize/deserialize you only need to declare it with a constructor which only contains final parameters. For example:
 
-{@example example/bin/immutable_objects.dart}
+```dart
+example/bin/immutable_objects.dart
+```
 
 > Be sure the names of the fields and constructor parameters match. If they do not match, then the deserialized object will contain attributes with null value

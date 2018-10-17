@@ -9,6 +9,15 @@
 * [ ] Add support for MessagePack
 * [ ] Add support for converting to array of values-only
 
+## 0.15.2
+
+- upgrade `analyzer` to version `^0.33.0`
+- upgrade `build_runner` to version `^1.0.0`
+- upgrade `build` to version `^1.0.1`
+- upgrade `built_mirrors_core` to version `^0.10.1`
+- upgrade `serializable_core` to version `^0.11.1`
+- upgrade `dson_core` to version `^0.15.2`
+
 ## 0.15.1
 
 - fix deserialize class with default constructor with optional args (fix #37).
