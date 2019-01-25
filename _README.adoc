@@ -1,4 +1,5 @@
 = DSON
+:toc: top
 
 image:https://travis-ci.org/dart-league/dson.svg?branch=master["Build Status"]
 
@@ -67,7 +68,7 @@ example/bin/object_to_map.dart
 To serialize objects that contains Cyclical References it would be needed to use the annotation `@cyclical`. If this annotation is present and the `depth` variable is not set then the non-primitive objects are not going to be parsed and only the id (or hashmap if the object does not contains id) is going to be present. Let's see next example:
 
 ```dart
-example/bin/serialize_cyclical.dart
+include::example/bin/serialize_cyclical.dart[]
 ```
 
 as you can see employee has an address, and the address has an owner of type Employee. If the property `id` is not present in the object then it is going to take the `hashcode` value from the object as reference. And finally, the `depth` parameter passed to serialize function tells serializer how deep you want to go throw the reference. This help us not only to avoid cyclical reference, but to determine what referenced objects should be serialized.
@@ -75,7 +76,7 @@ as you can see employee has an address, and the address has an owner of type Emp
 The same applies for lists:
 
 ```dart
-example/bin/serialize_cyclical_list.dart
+include::example/bin/serialize_cyclical_list.dart[]
 ```
     
 Without the annotation `@cyclical` the program is going to throw a stack overflow error caused by the serializing of cyclical objects.
@@ -87,7 +88,7 @@ To exclude parameter from being serialized we have two options the first option 
 Another way to exclude attributes is adding the parameter `exclude` to `serialize` function. In this way we only exclude those attributes during that serialization.
 
 ```dart
-example/bin/exclude_attributes.dart
+include::example/bin/exclude_attributes.dart[]
 ```
 
 == Convert JSON strings to objects
@@ -95,7 +96,7 @@ example/bin/exclude_attributes.dart
 To convert JSON strings to objects you only need to use the `fromJson` and `fromJsonList` functions and pass the `json` string to deserialize and the `Type` of the object as parameters:
 
 ```dart
-example/bin/json_to_object.dart
+include::example/bin/json_to_object.dart[]
 ```
 
 === Converting `Maps` and `Lists<Map>` to dart objects
@@ -103,7 +104,7 @@ example/bin/json_to_object.dart
 Frameworks like Angular.dart come with several HTTP services which already transform the HTTP response to a map using `JSON.encode`. To use those encoded Maps or Lists use `fromMap` function.
 
 ```dart
-example/bin/map_to_object.dart
+include::example/bin/map_to_object.dart[]
 ```
 
 == Extend serializable Objects
@@ -117,7 +118,7 @@ To extends objects that are going to be serializable you will need to add the co
 This is to advice the analyzer to ignore the error caused by inheriting from an object that is not a mixin. For example:
 
 ```dart
-example/bin/extend_serializables.dart
+include::example/bin/extend_serializables.dart[]
 ```
 
 == Serialize/Deserialize immutable objects
@@ -125,7 +126,9 @@ example/bin/extend_serializables.dart
 To make an immutable class to be able to serialize/deserialize you only need to declare it with a constructor which only contains final parameters. For example:
 
 ```dart
-example/bin/immutable_objects.dart
+include::example/bin/immutable_objects.dart[]
 ```
 
 > Be sure the names of the fields and constructor parameters match. If they do not match, then the deserialized object will contain attributes with null value
+
+==
