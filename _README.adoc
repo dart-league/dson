@@ -131,4 +131,20 @@ include::example/bin/immutable_objects.dart[]
 
 > Be sure the names of the fields and constructor parameters match. If they do not match, then the deserialized object will contain attributes with null value
 
-==
+== Contribute
+
+=== Edit README
+
+Please don't edit `README.md`, instead edit `_README.adoc` then run next command:
+
+```
+asciidoctor -b docbook _README.adoc && pandoc -f docbook -t gfm _README.xml -o README.md
+```
+
+=== Issues
+
+If you find any problem please create a new https://github.com/dart-league/dson/issues/new[issue]
+
+=== Pull Request
+
+You can also help to maintain this project by creating a new https://github.com/dart-league/dson/compare[pull request]

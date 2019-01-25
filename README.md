@@ -1,3 +1,5 @@
+# DSON
+
 [![Build Status](https://travis-ci.org/dart-league/dson.svg?branch=master)](https://travis-ci.org/dart-league/dson)
 
 DSON is a dart library which converts Dart Objects into their JSON
@@ -685,4 +687,21 @@ main() {
 > they do not match, then the deserialized object will contain
 > attributes with null value
 
-\==
+# Contribute
+
+## Edit README
+
+Please don’t edit `README.md`, instead edit `_README.adoc` then run next
+command:
+
+    asciidoctor -b docbook _README.adoc && pandoc -f docbook -t gfm _README.xml -o README.md
+
+## Issues
+
+If you find any problem please create a new
+[issue](https://github.com/dart-league/dson/issues/new)
+
+## Pull Request
+
+You can also help to maintain this project by creating a new [pull
+request](https://github.com/dart-league/dson/compare)
