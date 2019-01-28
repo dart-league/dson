@@ -20,14 +20,14 @@ differences:
 
   - DSON has the ability to exclude attributes for serialziation in two
     ways.
-
-  - Using `@ignore` over every attribute. This make excluding attributes
-    too global and hardcoded, so users can only specify one exclusion
-    schema.
-
-  - Using `exclude` map as parameter for `toJson` method. This is more
-    flexible, since it allows to have many exclusion schemas for
-    serialization.
+    
+      - Using `@ignore` over every attribute. This make excluding
+        attributes too global and hardcoded, so users can only specify
+        one exclusion schema.
+    
+      - Using `exclude` map as parameter for `toJson` method. This is
+        more flexible, since it allows to have many exclusion schemas
+        for serialization.
 
   - DSON uses the annotation `@serializable` instead `@entity` which is
     used by Dartson.
@@ -570,7 +570,7 @@ void main() {
 }
 ```
 
-# Extend serializable Objects
+# Extend Serializable Objects
 
 To extends objects that are going to be serializable you will need to
 add the comment:
@@ -647,7 +647,7 @@ main() {
 }
 ```
 
-# Serialize/Deserialize immutable objects
+# Serialize/Deserialize Immutable Objects
 
 To make an immutable class to be able to serialize/deserialize you only
 need to declare it with a constructor which only contains final
@@ -686,6 +686,78 @@ main() {
 > Be sure the names of the fields and constructor parameters match. If
 > they do not match, then the deserialized object will contain
 > attributes with null value
+
+# Serialize/Deserialize Generic Objects
+
+Serializing generic objects is pretty simple, you only need to call the
+`toJson` function as fallow:
+
+``` dart
+  var jsonStr = toJson(page);
+```
+
+Deserialization however is more complicated. You need to specify a list
+of factories and types starting with the top class. In the same list of
+factory you will also need to specify a map of factories for each
+generic attribute, for
+example:
+
+``` dart
+  Page<Person> page2 = fromJson(jsonStr, [() => Page<Person>(), {'items': [() => List<Person>(), Person]}]);
+```
+
+the full code of the example should look as fallow:
+
+``` dart
+library example.generics;
+
+import 'package:dson/dson.dart';
+
+part 'generics.g.dart';
+
+@serializable
+class Page<T> extends _$PageSerializable<T> {
+  int size;
+
+  int total;
+
+  int number;
+
+  List<T> items;
+}
+
+@serializable
+class Person extends _$PersonSerializable {
+  int id;
+
+  String name;
+}
+
+main() {
+  _initMirrors();
+
+  var p = new Person()
+    ..id = 1
+    ..name = 'person 1';
+
+  var page = new Page<Person>()
+    ..size = 1
+    ..number = 1
+    ..total = 100
+    ..items = [p];
+
+  var jsonStr = toJson(page);
+  print('jsonStr: $jsonStr');
+
+  Page<Person> page2 = fromJson(jsonStr, [() => Page<Person>(), {'items': [() => List<Person>(), Person]}]);
+
+  print('page2.size: ${page2.size}');
+  print('page2.number: ${page2.number}');
+  print('page2.total: ${page2.total}');
+  print('page2.items[0].id: ${page2.items[0].id}');
+  print('page2.items[0].name: ${page2.items[0].name}');
+}
+```
 
 # Contribute
 

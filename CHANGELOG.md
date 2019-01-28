@@ -8,6 +8,12 @@
 * [ ] Add support for csv
 * [ ] Add support for MessagePack
 * [ ] Add support for converting to array of values-only
+## 0.15.3
+
+- Enhance serialization of generics
+- Add ability to deserialize generics
+- upgrade `analyzer` to version `^0.34.0`
+- upgrade `serializable_core` to version `^0.11.2`
 
 ## 0.15.2
 

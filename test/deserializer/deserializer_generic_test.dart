@@ -57,6 +57,14 @@ main() {
     expect(test.list[1].name, 'test2');
   });
 
+  test('deserialize: generic List<T>', () {
+    ListTClass<SimpleClass> test = fromJson('{"listT": [{"name": "test1"}, {"name": "test2"}]}',
+            [() => ListTClass<SimpleClass>(), {'listT': [() => List<SimpleClass>(), SimpleClass]}]);
+
+    expect(test.listT[0].name, 'test1');
+    expect(test.listT[1].name, 'test2');
+  });
+
   test('deserialize: generic List<List<SimpleClass>>', () {
     ListListClass test = fromJson('{"list": [[{"name": "test1"}, {"name": "test2"}]]}', ListListClass);
 

@@ -12,8 +12,8 @@ This library was initially a fork from https://github.com/eredo/dartson[Dartson]
  * Dartson uses custom transformers to convert objects to JSON. This produce faster and smaller code after dart2Js. Instead DSON uses [serializable]() and [built_mirrors]() libraries. This should produce code as fast and small as Dartson transformer.
  * DSON has the ability to serialize cyclical objects by mean of `depth` parameter, which allows users to specify how deep in the object graph they want to serialize.
  * DSON has the ability to exclude attributes for serialziation in two ways. 
-    * Using `@ignore` over every attribute. This make excluding attributes too global and hardcoded, so users can only specify one exclusion schema.
-    * Using `exclude` map as parameter for `toJson` method. This is more flexible, since it allows to have many exclusion schemas for serialization.
+    ** Using `@ignore` over every attribute. This make excluding attributes too global and hardcoded, so users can only specify one exclusion schema.
+    ** Using `exclude` map as parameter for `toJson` method. This is more flexible, since it allows to have many exclusion schemas for serialization.
  * DSON uses the annotation `@serializable` instead `@entity` which is used by Dartson.
 
 == Comparison with other libraries
@@ -107,7 +107,7 @@ Frameworks like Angular.dart come with several HTTP services which already trans
 include::example/bin/map_to_object.dart[]
 ```
 
-== Extend serializable Objects
+== Extend Serializable Objects
 
 To extends objects that are going to be serializable you will need to add the comment:
 
@@ -121,7 +121,7 @@ This is to advice the analyzer to ignore the error caused by inheriting from an 
 include::example/bin/extend_serializables.dart[]
 ```
 
-== Serialize/Deserialize immutable objects
+== Serialize/Deserialize Immutable Objects
 
 To make an immutable class to be able to serialize/deserialize you only need to declare it with a constructor which only contains final parameters. For example:
 
@@ -130,6 +130,26 @@ include::example/bin/immutable_objects.dart[]
 ```
 
 > Be sure the names of the fields and constructor parameters match. If they do not match, then the deserialized object will contain attributes with null value
+
+== Serialize/Deserialize Generic Objects
+
+Serializing generic objects is pretty simple, you only need to call the `toJson` function as fallow:
+
+```dart
+include::example/bin/generics.dart[tag=serialize]
+```
+
+Deserialization however is more complicated. You need to specify a list of factories and types starting with the top class. In the same list of factory you will also need to specify a map of factories for each generic attribute, for example:
+
+```dart
+include::example/bin/generics.dart[tag=deserialize]
+```
+
+the full code of the example should look as fallow:
+
+```dart
+include::example/bin/generics.dart[tags=**]
+```
 
 == Contribute
 
