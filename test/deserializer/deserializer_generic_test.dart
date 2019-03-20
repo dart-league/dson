@@ -23,6 +23,18 @@ class ListTClass<T> extends _$ListTClassSerializable<T> {
 }
 
 @serializable
+class GenericTClass<T> extends _$GenericTClassSerializable<T> {
+  T t;
+}
+
+@serializable
+class GenericT1T2Class<T1, T2> extends _$GenericT1T2ClassSerializable<T1, T2> {
+  T1 t1;
+
+  T2 t2;
+}
+
+@serializable
 class ListListClass extends _$ListListClassSerializable {
   List<List<SimpleClass>> list;
 }
@@ -63,6 +75,20 @@ main() {
 
     expect(test.listT[0].name, 'test1');
     expect(test.listT[1].name, 'test2');
+  });
+
+  test('deserialize: GenericTClass', () {
+    GenericTClass<SimpleClass> test = fromJson('{"t": {"name": "test"}}', [() => GenericTClass<SimpleClass>(), {'t': SimpleClass}]);
+    
+    expect(test.t.name, 'test');
+  });
+
+  test('deserialize: GenericT1T2Class', () {
+    GenericT1T2Class<SimpleClass, List<SimpleClass>> test = fromJson('{"t1": {"name": "test"}, "t2": [{"name": "test"}]}',
+        [() => GenericT1T2Class<SimpleClass, List<SimpleClass>>(), {'t1': SimpleClass, 't2': [() => List<SimpleClass>(), SimpleClass]}]);
+
+    expect(test.t1.name, 'test');
+    expect(test.t2[0].name, 'test');
   });
 
   test('deserialize: generic List<List<SimpleClass>>', () {

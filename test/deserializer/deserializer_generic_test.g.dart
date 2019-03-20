@@ -82,6 +82,61 @@ abstract class _$ListTClassSerializable<T> extends SerializableMap {
   Iterable<String> get keys => ListTClassClassMirror.fields.keys;
 }
 
+abstract class _$GenericTClassSerializable<T> extends SerializableMap {
+  T get t;
+  void set t(T v);
+
+  operator [](Object __key) {
+    switch (__key) {
+      case 't':
+        return t;
+    }
+    throwFieldNotFoundException(__key, 'GenericTClass');
+  }
+
+  operator []=(Object __key, __value) {
+    switch (__key) {
+      case 't':
+        t = __value;
+        return;
+    }
+    throwFieldNotFoundException(__key, 'GenericTClass');
+  }
+
+  Iterable<String> get keys => GenericTClassClassMirror.fields.keys;
+}
+
+abstract class _$GenericT1T2ClassSerializable<T1, T2> extends SerializableMap {
+  T1 get t1;
+  T2 get t2;
+  void set t1(T1 v);
+  void set t2(T2 v);
+
+  operator [](Object __key) {
+    switch (__key) {
+      case 't1':
+        return t1;
+      case 't2':
+        return t2;
+    }
+    throwFieldNotFoundException(__key, 'GenericT1T2Class');
+  }
+
+  operator []=(Object __key, __value) {
+    switch (__key) {
+      case 't1':
+        t1 = __value;
+        return;
+      case 't2':
+        t2 = __value;
+        return;
+    }
+    throwFieldNotFoundException(__key, 'GenericT1T2Class');
+  }
+
+  Iterable<String> get keys => GenericT1T2ClassClassMirror.fields.keys;
+}
+
 abstract class _$ListListClassSerializable extends SerializableMap {
   List<List<SimpleClass>> get list;
   void set list(List<List<SimpleClass>> v);
@@ -293,6 +348,53 @@ const ListTClassClassMirror = const ClassMirror(
       'listT'
     ]);
 
+_GenericTClass__Constructor([positionalParams, namedParams]) =>
+    new GenericTClass();
+
+const $$GenericTClass_fields_t =
+    const DeclarationMirror(name: 't', type: dynamic);
+
+const GenericTClassClassMirror = const ClassMirror(
+    name: 'GenericTClass',
+    constructors: const {
+      '': const FunctionMirror(name: '', $call: _GenericTClass__Constructor)
+    },
+    fields: const {
+      't': $$GenericTClass_fields_t
+    },
+    getters: const [
+      't'
+    ],
+    setters: const [
+      't'
+    ]);
+
+_GenericT1T2Class__Constructor([positionalParams, namedParams]) =>
+    new GenericT1T2Class();
+
+const $$GenericT1T2Class_fields_t1 =
+    const DeclarationMirror(name: 't1', type: dynamic);
+const $$GenericT1T2Class_fields_t2 =
+    const DeclarationMirror(name: 't2', type: dynamic);
+
+const GenericT1T2ClassClassMirror = const ClassMirror(
+    name: 'GenericT1T2Class',
+    constructors: const {
+      '': const FunctionMirror(name: '', $call: _GenericT1T2Class__Constructor)
+    },
+    fields: const {
+      't1': $$GenericT1T2Class_fields_t1,
+      't2': $$GenericT1T2Class_fields_t2
+    },
+    getters: const [
+      't1',
+      't2'
+    ],
+    setters: const [
+      't1',
+      't2'
+    ]);
+
 _ListListClass__Constructor([positionalParams, namedParams]) =>
     new ListListClass();
 
@@ -433,6 +535,8 @@ _initMirrors() {
     SimpleClass: SimpleClassClassMirror,
     ListClass: ListClassClassMirror,
     ListTClass: ListTClassClassMirror,
+    GenericTClass: GenericTClassClassMirror,
+    GenericT1T2Class: GenericT1T2ClassClassMirror,
     ListListClass: ListListClassClassMirror,
     ListListListClass: ListListListClassClassMirror,
     ListMapClass: ListMapClassClassMirror,
@@ -440,6 +544,9 @@ _initMirrors() {
     MapClass: MapClassClassMirror
   });
 
-  getClassMirrorFromGenericInstance =
-      (instance) => instance is ListTClass ? ListTClassClassMirror : null;
+  getClassMirrorFromGenericInstance = (instance) => instance is ListTClass
+      ? ListTClassClassMirror
+      : instance is GenericTClass
+          ? GenericTClassClassMirror
+          : instance is GenericT1T2Class ? GenericT1T2ClassClassMirror : null;
 }

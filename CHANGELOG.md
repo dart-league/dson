@@ -8,6 +8,11 @@
 * [ ] Add support for csv
 * [ ] Add support for MessagePack
 * [ ] Add support for converting to array of values-only
+
+## 0.15.4
+
+- upgrade `built_mirrors_core` to version `^0.10.4` (fixes: #44).
+
 ## 0.15.3
 
 - Enhance serialization of generics

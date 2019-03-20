@@ -9,3 +9,6 @@ dependencies:
 dev_dependencies:
   build_runner: any
   build_web_compilers: any
+dependency_overrides:
+  built_mirrors_core:
+    path: ../../built_mirrors_core

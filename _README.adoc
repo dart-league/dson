@@ -151,6 +151,76 @@ the full code of the example should look as fallow:
 include::example/bin/generics.dart[tags=**]
 ```
 
+At this point you could be thinking how the held you know what should it be te correct factory list to convert from json. And maybe why we didn't use something simpler like just passing the type like next:
+
+```dart
+Page<Person> page2 = fromJson(jsonStr, Page<Person>);
+```
+
+Sadly it is not possible in dart to pass generic typed types as parameters, but in previous versions of the library this was possible just passing an array of types as fallow:
+
+```dart
+Page<Person> page2 = fromJson(jsonStr, [Page, Person]);
+```
+
+As you can see you only needed to convert `<` and `>` into brackets `[` and `]` respectively and also add two more brackets at the start and end of the type.
+
+However, that was only possible in previous versions of Dart SDK. The latest version does not allows to set values of dynamic types into the attributes of classes. So that, we need to specify the conversion process using factory functions and types as fallow:
+
+* First take the generic `Page<Person>` that will be converted from json.
+* Replace the `<` and `>` by brackets, so it should look as follow `Page[Person]`.
+* Add brackets at the start and end: `[Page[Person]]`
+* Add commas before every internal start bracket: `[Page, [Person]]`
+* Since `Person` is not a generic we remove the enclosing brackets: `[Page, Person]`
+* Replace `Page` by a factory function like next:
+
+```dart
+[() => Page<Person>(), Person]
+```
+
+* If the generic would be a `List` or `Map` the previous would be enough. However the generic is `Page` which means we need to know which is the attribute that handle the generic type, in this case is `items`. Knowing that we replace `Person` by a map with the names of the attributes as keys and a factory of the types as values. As a result we will have something like next:
+
+```dart
+{'items': List<Person>}
+```
+
+* Remember that passing generic types as parameter is disallowed, so we need to convert it to an array of factories and types. Hence you should have something like next:
+
+```dart
+{'items': [List, [Person]]}
+```
+* Remember that we need to remove the brackets of non-generics as fallow:
+
+```dart
+{'items': [List, Person]}
+```
+
+* here you can also notice that `List` is a generic, so it should be converted into factory function:
+
+```dart
+() => List<Person>
+```
+
+* then we replace this factory in the `items` value of the previous created map:
+
+```dart
+{'items': [() => List<Person>(), Person]
+```
+
+* And finally we replace this map in the previous list as fallow:
+
+```dart
+[() => Page<Person>(), {'items': [() => List<Person>(), Person]}]
+```
+
+== Serialize/Deserialize Extended Generic Objects
+
+Extended Generics can also be handled by this library for example you can use next code:
+
+```dart
+include::example/bin/extend_generics.dart[]
+```
+
 == Contribute
 
 === Edit README
