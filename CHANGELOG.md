@@ -9,6 +9,10 @@
 * [ ] Add support for MessagePack
 * [ ] Add support for converting to array of values-only
 
+## 0.15.4+1
+
+- fix docs
+
 ## 0.15.4
 
 - upgrade `built_mirrors_core` to version `^0.10.4` (fixes: #44).

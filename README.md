@@ -1,6 +1,7 @@
-# DSON
+![Build
+Status](https://travis-ci.org/dart-league/dson.svg?branch=master)
 
-[![Build Status](https://travis-ci.org/dart-league/dson.svg?branch=master)](https://travis-ci.org/dart-league/dson)
+<https://travis-ci.org/dart-league/dson>
 
 DSON is a dart library which converts Dart Objects into their JSON
 representation.
@@ -132,8 +133,7 @@ To serialize objects that contains Cyclical References it would be
 needed to use the annotation `@cyclical`. If this annotation is present
 and the `depth` variable is not set then the non-primitive objects are
 not going to be parsed and only the id (or hashmap if the object does
-not contains id) is going to be present. Let’s see next
-example:
+not contains id) is going to be present. Let’s see next example:
 
 ``` dart
 library example.serialize_cyclical; // this line is needed for the generator
@@ -224,8 +224,7 @@ serializer how deep you want to go throw the reference. This help us not
 only to avoid cyclical reference, but to determine what referenced
 objects should be serialized.
 
-The same applies for
-lists:
+The same applies for lists:
 
 ``` dart
 library example.serialize_cyclical_list; // this line is needed for the generator
@@ -336,8 +335,7 @@ attribute is going to be ignored always.
 
 Another way to exclude attributes is adding the parameter `exclude` to
 `serialize` function. In this way we only exclude those attributes
-during that
-serialization.
+during that serialization.
 
 ``` dart
 library example.exclude_attributes; // this line is needed for the generator
@@ -699,8 +697,7 @@ Serializing generic objects is pretty simple, you only need to call the
 Deserialization however is more complicated. You need to specify a list
 of factories and types starting with the top class. In the same list of
 factory you will also need to specify a map of factories for each
-generic attribute, for
-example:
+generic attribute, for example:
 
 ``` dart
   Page<Person> page2 = fromJson(jsonStr, [() => Page<Person>(), {'items': [() => List<Person>(), Person]}]);
@@ -756,6 +753,203 @@ main() {
   print('page2.total: ${page2.total}');
   print('page2.items[0].id: ${page2.items[0].id}');
   print('page2.items[0].name: ${page2.items[0].name}');
+}
+```
+
+At this point you could be thinking how the held you know what should it
+be te correct factory list to convert from json. And maybe why we didn’t
+use something simpler like just passing the type like next:
+
+``` dart
+Page<Person> page2 = fromJson(jsonStr, Page<Person>);
+```
+
+Sadly it is not possible in dart to pass generic typed types as
+parameters, but in previous versions of the library this was possible
+just passing an array of types as fallow:
+
+``` dart
+Page<Person> page2 = fromJson(jsonStr, [Page, Person]);
+```
+
+As you can see you only needed to convert `<` and `>` into brackets `[`
+and `]` respectively and also add two more brackets at the start and end
+of the type.
+
+However, that was only possible in previous versions of Dart SDK. The
+latest version does not allows to set values of dynamic types into the
+attributes of classes. So that, we need to specify the conversion
+process using factory functions and types as fallow:
+
+  - First take the generic `Page<Person>` that will be converted from
+    json.
+
+  - Replace the `<` and `>` by brackets, so it should look as follow
+    `Page[Person]`.
+
+  - Add brackets at the start and end: `[Page[Person]]`
+
+  - Add commas before every internal start bracket: `[Page, [Person]]`
+
+  - Since `Person` is not a generic we remove the enclosing brackets:
+    `[Page, Person]`
+
+  - Replace `Page` by a factory function like next:
+
+<!-- end list -->
+
+``` dart
+[() => Page<Person>(), Person]
+```
+
+  - If the generic would be a `List` or `Map` the previous would be
+    enough. However the generic is `Page` which means we need to know
+    which is the attribute that handle the generic type, in this case is
+    `items`. Knowing that we replace `Person` by a map with the names of
+    the attributes as keys and a factory of the types as values. As a
+    result we will have something like next:
+
+<!-- end list -->
+
+``` dart
+{'items': List<Person>}
+```
+
+  - Remember that passing generic types as parameter is disallowed, so
+    we need to convert it to an array of factories and types. Hence you
+    should have something like next:
+
+<!-- end list -->
+
+``` dart
+{'items': [List, [Person]]}
+```
+
+  - Remember that we need to remove the brackets of non-generics as
+    fallow:
+
+<!-- end list -->
+
+``` dart
+{'items': [List, Person]}
+```
+
+  - here you can also notice that `List` is a generic, so it should be
+    converted into factory function:
+
+<!-- end list -->
+
+``` dart
+() => List<Person>
+```
+
+  - then we replace this factory in the `items` value of the previous
+    created map:
+
+<!-- end list -->
+
+``` dart
+{'items': [() => List<Person>(), Person]
+```
+
+  - And finally we replace this map in the previous list as fallow:
+
+<!-- end list -->
+
+``` dart
+[() => Page<Person>(), {'items': [() => List<Person>(), Person]}]
+```
+
+# Serialize/Deserialize Extended Generic Objects
+
+Extended Generics can also be handled by this library for example you
+can use next code:
+
+``` dart
+library extend_generics;
+
+import 'package:dson/dson.dart';
+
+part 'extend_generics.g.dart';
+
+abstract class IManager<T> {
+  List<Employee<T>> subordinates;
+}
+
+@serializable
+class Person<T> extends _$PersonSerializable<T> {
+  int id;
+  String firstName;
+  T lastName;
+  DateTime dateOfBirth;
+}
+
+@serializable
+// ignore: mixin_inherits_from_not_object
+class Employee<T> extends Person<T> with _$EmployeeSerializable<T> {
+  double salary;
+}
+
+@serializable
+// ignore: mixin_inherits_from_not_object
+class Manager<T> extends Employee<T> with _$ManagerSerializable<T> implements IManager<T> {
+  List<Employee<T>> subordinates;
+}
+
+main() {
+  _initMirrors();
+
+  var person = new Person<String>()
+    ..id = 1
+    ..firstName = 'Jhon'
+    ..lastName = 'Doe'
+    ..dateOfBirth = new DateTime.now();
+
+  var personJson = toJson(person);
+
+  print('personJson: $personJson');
+
+  Person<String> person2 = fromJson(personJson, [() => Person<String>(), {'lastName': String}]);
+  print('\nPerson From Json:');
+  print('person2.firstName: ${person2.firstName}');
+  print('person2.lastName: ${person2.lastName}\n');
+
+  var employee = new Employee<String>()
+    ..id = 1
+    ..firstName = 'Employee'
+    ..lastName = 'Doe'
+    ..dateOfBirth = new DateTime.now()
+    ..salary = 1000.0;
+  print(employee.runtimeType);
+  var employeeJson = toJson(employee);
+
+  print('employeeJson: $employeeJson');
+
+  Employee<String> employee2 = fromJson(employeeJson, [() => Employee<String>(), {'lastName': String}]);
+  print('\nEmployee From Json:');
+  print('employee2.firstName: ${employee2.firstName}');
+  print('employee2.lastName: ${employee2.lastName}');
+  print('employee2.salary: ${employee2.salary}\n');
+
+  var manager = new Manager<String>()
+    ..id = 1
+    ..firstName = 'Manager'
+    ..lastName = 'Doe'
+    ..dateOfBirth = new DateTime.now()
+    ..salary = 2000.0
+    ..subordinates = [employee];
+
+  var managerJson = toJson(manager);
+
+  print('managerJson: $managerJson');
+
+  Manager<String> manager2 = fromJson(managerJson, [() => Manager<String>(), {'lastName': String}]);
+  print('\nManager From Json:');
+  print('manager2.firstName: ${manager2.firstName}');
+  print('manager2.lastName: ${manager2.lastName}');
+  print('manager2.salary: ${manager2.salary}');
+  print('manager2.subordinates: ${manager2.subordinates}');
+
 }
 ```
 
