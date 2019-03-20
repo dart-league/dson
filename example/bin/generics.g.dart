@@ -11,10 +11,10 @@ abstract class _$PageSerializable<T> extends SerializableMap {
   int get total;
   int get number;
   List<T> get items;
-  void set size(int v);
-  void set total(int v);
-  void set number(int v);
-  void set items(List<T> v);
+  set size(int v);
+  set total(int v);
+  set number(int v);
+  set items(List<T> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -54,8 +54,8 @@ abstract class _$PageSerializable<T> extends SerializableMap {
 abstract class _$PersonSerializable extends SerializableMap {
   int get id;
   String get name;
-  void set id(int v);
-  void set name(String v);
+  set id(int v);
+  set name(String v);
 
   operator [](Object __key) {
     switch (__key) {

@@ -11,10 +11,10 @@ abstract class _$PersonSerializable<T> extends SerializableMap {
   String get firstName;
   T get lastName;
   DateTime get dateOfBirth;
-  void set id(int v);
-  void set firstName(String v);
-  void set lastName(T v);
-  void set dateOfBirth(DateTime v);
+  set id(int v);
+  set firstName(String v);
+  set lastName(T v);
+  set dateOfBirth(DateTime v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -57,11 +57,11 @@ abstract class _$EmployeeSerializable<T> extends SerializableMap {
   String get firstName;
   T get lastName;
   DateTime get dateOfBirth;
-  void set salary(double v);
-  void set id(int v);
-  void set firstName(String v);
-  void set lastName(T v);
-  void set dateOfBirth(DateTime v);
+  set salary(double v);
+  set id(int v);
+  set firstName(String v);
+  set lastName(T v);
+  set dateOfBirth(DateTime v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -110,12 +110,12 @@ abstract class _$ManagerSerializable<T> extends SerializableMap {
   String get firstName;
   T get lastName;
   DateTime get dateOfBirth;
-  void set subordinates(List<Employee<T>> v);
-  void set salary(double v);
-  void set id(int v);
-  void set firstName(String v);
-  void set lastName(T v);
-  void set dateOfBirth(DateTime v);
+  set subordinates(List<Employee<T>> v);
+  set salary(double v);
+  set id(int v);
+  set firstName(String v);
+  set lastName(T v);
+  set dateOfBirth(DateTime v);
 
   operator [](Object __key) {
     switch (__key) {

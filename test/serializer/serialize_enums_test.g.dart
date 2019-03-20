@@ -8,7 +8,7 @@ part of serializar.serialize_enums_test;
 
 abstract class _$ObjectWithEnumSerializable extends SerializableMap {
   Color get color;
-  void set color(Color v);
+  set color(Color v);
 
   operator [](Object __key) {
     switch (__key) {

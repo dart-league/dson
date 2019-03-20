@@ -16,14 +16,14 @@ abstract class _$PersonSerializable extends SerializableMap {
   String get notVisible;
   String get _private;
   String get doGetter;
-  void set id(int v);
-  void set firstName(String v);
-  void set lastName(dynamic v);
-  void set height(double v);
-  void set dateOfBirth(DateTime v);
-  void set otherName(String v);
-  void set notVisible(String v);
-  void set _private(String v);
+  set id(int v);
+  set firstName(String v);
+  set lastName(dynamic v);
+  set height(double v);
+  set dateOfBirth(DateTime v);
+  set otherName(String v);
+  set notVisible(String v);
+  set _private(String v);
 
   operator [](Object __key) {
     switch (__key) {

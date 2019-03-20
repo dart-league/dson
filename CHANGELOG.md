@@ -9,6 +9,10 @@
 * [ ] Add support for MessagePack
 * [ ] Add support for converting to array of values-only
 
+## 0.15.5
+
+- fix set null values to attributes (fixes: #45)
+
 ## 0.15.4+1
 
 - fix docs

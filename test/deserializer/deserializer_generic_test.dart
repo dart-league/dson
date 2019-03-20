@@ -81,6 +81,10 @@ main() {
     GenericTClass<SimpleClass> test = fromJson('{"t": {"name": "test"}}', [() => GenericTClass<SimpleClass>(), {'t': SimpleClass}]);
     
     expect(test.t.name, 'test');
+
+    GenericTClass<SimpleClass> test2 = fromJson('{"t": null}', [() => GenericTClass<SimpleClass>(), {'t': SimpleClass}]);
+
+    expect(test2.t, null);
   });
 
   test('deserialize: GenericT1T2Class', () {

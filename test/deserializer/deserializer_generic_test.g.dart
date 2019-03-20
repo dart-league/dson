@@ -8,7 +8,7 @@ part of deserialiazer.deserialize_generic_test;
 
 abstract class _$SimpleClassSerializable extends SerializableMap {
   String get name;
-  void set name(String v);
+  set name(String v);
   String toString();
 
   operator [](Object __key) {
@@ -35,7 +35,7 @@ abstract class _$SimpleClassSerializable extends SerializableMap {
 
 abstract class _$ListClassSerializable extends SerializableMap {
   List<SimpleClass> get list;
-  void set list(List<SimpleClass> v);
+  set list(List<SimpleClass> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -60,7 +60,7 @@ abstract class _$ListClassSerializable extends SerializableMap {
 
 abstract class _$ListTClassSerializable<T> extends SerializableMap {
   List<T> get listT;
-  void set listT(List<T> v);
+  set listT(List<T> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -84,7 +84,7 @@ abstract class _$ListTClassSerializable<T> extends SerializableMap {
 
 abstract class _$GenericTClassSerializable<T> extends SerializableMap {
   T get t;
-  void set t(T v);
+  set t(T v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -109,8 +109,8 @@ abstract class _$GenericTClassSerializable<T> extends SerializableMap {
 abstract class _$GenericT1T2ClassSerializable<T1, T2> extends SerializableMap {
   T1 get t1;
   T2 get t2;
-  void set t1(T1 v);
-  void set t2(T2 v);
+  set t1(T1 v);
+  set t2(T2 v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -139,7 +139,7 @@ abstract class _$GenericT1T2ClassSerializable<T1, T2> extends SerializableMap {
 
 abstract class _$ListListClassSerializable extends SerializableMap {
   List<List<SimpleClass>> get list;
-  void set list(List<List<SimpleClass>> v);
+  set list(List<List<SimpleClass>> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -166,7 +166,7 @@ abstract class _$ListListClassSerializable extends SerializableMap {
 
 abstract class _$ListListListClassSerializable extends SerializableMap {
   List<List<List<SimpleClass>>> get list;
-  void set list(List<List<List<SimpleClass>>> v);
+  set list(List<List<List<SimpleClass>>> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -196,7 +196,7 @@ abstract class _$ListListListClassSerializable extends SerializableMap {
 
 abstract class _$ListMapClassSerializable extends SerializableMap {
   List<Map<String, SimpleClass>> get list;
-  void set list(List<Map<String, SimpleClass>> v);
+  set list(List<Map<String, SimpleClass>> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -223,7 +223,7 @@ abstract class _$ListMapClassSerializable extends SerializableMap {
 
 abstract class _$ListListMapClassSerializable extends SerializableMap {
   List<List<Map<String, SimpleClass>>> get list;
-  void set list(List<List<Map<String, SimpleClass>>> v);
+  set list(List<List<Map<String, SimpleClass>>> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -257,7 +257,7 @@ abstract class _$ListListMapClassSerializable extends SerializableMap {
 
 abstract class _$MapClassSerializable extends SerializableMap {
   Map<String, SimpleClass> get myMap;
-  void set myMap(Map<String, SimpleClass> v);
+  set myMap(Map<String, SimpleClass> v);
 
   operator [](Object __key) {
     switch (__key) {

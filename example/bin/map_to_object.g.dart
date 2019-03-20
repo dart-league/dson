@@ -13,12 +13,12 @@ abstract class _$EntityClassSerializable extends SerializableMap {
   String get notVisible;
   List<EntityClass> get children;
   String get setted;
-  void set name(String v);
-  void set _setted(String v);
-  void set otherName(bool v);
-  void set notVisible(String v);
-  void set children(List<EntityClass> v);
-  void set setted(String v);
+  set name(String v);
+  set _setted(String v);
+  set otherName(bool v);
+  set notVisible(String v);
+  set children(List<EntityClass> v);
+  set setted(String v);
 
   operator [](Object __key) {
     switch (__key) {

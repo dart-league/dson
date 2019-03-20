@@ -12,11 +12,11 @@ abstract class _$EmployeeSerializable extends SerializableMap {
   String get lastName;
   Address get address;
   Employee get manager;
-  void set id(int v);
-  void set firstName(String v);
-  void set lastName(String v);
-  void set address(Address v);
-  void set manager(Employee v);
+  set id(int v);
+  set firstName(String v);
+  set lastName(String v);
+  set address(Address v);
+  set manager(Employee v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -65,12 +65,12 @@ abstract class _$AddressSerializable extends SerializableMap {
   String get country;
   String get postalCode;
   Employee get owner;
-  void set id(int v);
-  void set street(String v);
-  void set city(String v);
-  void set country(String v);
-  void set postalCode(String v);
-  void set owner(Employee v);
+  set id(int v);
+  set street(String v);
+  set city(String v);
+  set country(String v);
+  set postalCode(String v);
+  set owner(Employee v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -122,10 +122,10 @@ abstract class _$Employee2Serializable extends SerializableMap {
   String get lastName;
   Address2 get address;
   Employee2 get manager;
-  void set firstName(String v);
-  void set lastName(String v);
-  void set address(Address2 v);
-  void set manager(Employee2 v);
+  set firstName(String v);
+  set lastName(String v);
+  set address(Address2 v);
+  set manager(Employee2 v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -168,11 +168,11 @@ abstract class _$Address2Serializable extends SerializableMap {
   String get country;
   String get postalCode;
   Employee2 get owner;
-  void set street(String v);
-  void set city(String v);
-  void set country(String v);
-  void set postalCode(String v);
-  void set owner(Employee2 v);
+  set street(String v);
+  set city(String v);
+  set country(String v);
+  set postalCode(String v);
+  set owner(Employee2 v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -218,9 +218,9 @@ abstract class _$StudentSerializable extends SerializableMap {
   int get id;
   String get name;
   List<Course> get courses;
-  void set id(int v);
-  void set name(String v);
-  void set courses(List<Course> v);
+  set id(int v);
+  set name(String v);
+  set courses(List<Course> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -257,9 +257,9 @@ abstract class _$CourseSerializable extends SerializableMap {
   int get id;
   DateTime get beginDate;
   List<Student> get students;
-  void set id(int v);
-  void set beginDate(DateTime v);
-  void set students(List<Student> v);
+  set id(int v);
+  set beginDate(DateTime v);
+  set students(List<Student> v);
 
   operator [](Object __key) {
     switch (__key) {

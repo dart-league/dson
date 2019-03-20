@@ -82,4 +82,5 @@ main() {
   print('manager2.salary: ${manager2.salary}');
   print('manager2.subordinates: ${manager2.subordinates}');
 
+  var commonBeanMap = {'code': '90009', 'msg': 'test', 'resultData': null};
 }

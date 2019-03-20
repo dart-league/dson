@@ -8,7 +8,7 @@ part of deserializer_test;
 
 abstract class _$SimpleDateContainerSerializable extends SerializableMap {
   DateTime get testDate;
-  void set testDate(DateTime v);
+  set testDate(DateTime v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -43,18 +43,18 @@ abstract class _$TestClass1Serializable extends SerializableMap {
   double get doubleNumber2;
   bool get ignored;
   String get renamed;
-  void set name(String v);
-  void set matter(bool v);
-  void set number(num v);
-  void set list(List<dynamic> v);
-  void set myMap(Map<dynamic, dynamic> v);
-  void set child(TestClass1 v);
-  void set intNumber(int v);
-  void set intNumber2(int v);
-  void set doubleNumber(double v);
-  void set doubleNumber2(double v);
-  void set ignored(bool v);
-  void set renamed(String v);
+  set name(String v);
+  set matter(bool v);
+  set number(num v);
+  set list(List<dynamic> v);
+  set myMap(Map<dynamic, dynamic> v);
+  set child(TestClass1 v);
+  set intNumber(int v);
+  set intNumber2(int v);
+  set doubleNumber(double v);
+  set doubleNumber2(double v);
+  set ignored(bool v);
+  set renamed(String v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -133,7 +133,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
 
 abstract class _$JustObjectSerializable extends SerializableMap {
   Object get object;
-  void set object(Object v);
+  set object(Object v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -157,7 +157,7 @@ abstract class _$JustObjectSerializable extends SerializableMap {
 
 abstract class _$SetClassSerializable extends SerializableMap {
   Set<String> get names;
-  void set names(Set<String> v);
+  set names(Set<String> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -182,7 +182,7 @@ abstract class _$SetClassSerializable extends SerializableMap {
 abstract class _$TestGetterSerializable extends SerializableMap {
   String get _name;
   String get name;
-  void set _name(String v);
+  set _name(String v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -209,8 +209,8 @@ abstract class _$TestGetterSerializable extends SerializableMap {
 abstract class _$TestSetterSerializable extends SerializableMap {
   String get _name;
   String get name;
-  void set _name(String v);
-  void set name(String v);
+  set _name(String v);
+  set name(String v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -241,9 +241,9 @@ abstract class _$NestedClassSerializable extends SerializableMap {
   String get name;
   List<dynamic> get list;
   TestGetter get getter;
-  void set name(String v);
-  void set list(List<dynamic> v);
-  void set getter(TestGetter v);
+  set name(String v);
+  set list(List<dynamic> v);
+  set getter(TestGetter v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -277,7 +277,7 @@ abstract class _$NestedClassSerializable extends SerializableMap {
 
 abstract class _$SimpleClassSerializable extends SerializableMap {
   String get name;
-  void set name(String v);
+  set name(String v);
   String toString();
 
   operator [](Object __key) {
@@ -304,7 +304,7 @@ abstract class _$SimpleClassSerializable extends SerializableMap {
 
 abstract class _$SimpleListSerializable extends SerializableMap {
   List<dynamic> get list;
-  void set list(List<dynamic> v);
+  set list(List<dynamic> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -328,7 +328,7 @@ abstract class _$SimpleListSerializable extends SerializableMap {
 
 abstract class _$SimpleMapSerializable extends SerializableMap {
   Map<dynamic, dynamic> get myMap;
-  void set myMap(Map<dynamic, dynamic> v);
+  set myMap(Map<dynamic, dynamic> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -352,7 +352,7 @@ abstract class _$SimpleMapSerializable extends SerializableMap {
 
 abstract class _$SimpleMapStringSerializable extends SerializableMap {
   Map<String, num> get myMap;
-  void set myMap(Map<String, num> v);
+  set myMap(Map<String, num> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -376,7 +376,7 @@ abstract class _$SimpleMapStringSerializable extends SerializableMap {
 
 abstract class _$SimpleVarContainerSerializable extends SerializableMap {
   dynamic get someVar;
-  void set someVar(dynamic v);
+  set someVar(dynamic v);
 
   operator [](Object __key) {
     switch (__key) {

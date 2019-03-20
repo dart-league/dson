@@ -79,7 +79,7 @@ abstract class _$ImmutableClassInvalidParameterSerializable
 
 abstract class _$ListWithImmutableClassSerializable extends SerializableMap {
   List<ImmutableClass> get immutables;
-  void set immutables(List<ImmutableClass> v);
+  set immutables(List<ImmutableClass> v);
 
   operator [](Object __key) {
     switch (__key) {

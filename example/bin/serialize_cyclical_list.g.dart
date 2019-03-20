@@ -10,9 +10,9 @@ abstract class _$StudentSerializable extends SerializableMap {
   int get id;
   String get name;
   List<Course> get courses;
-  void set id(int v);
-  void set name(String v);
-  void set courses(List<Course> v);
+  set id(int v);
+  set name(String v);
+  set courses(List<Course> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -49,9 +49,9 @@ abstract class _$CourseSerializable extends SerializableMap {
   int get id;
   DateTime get beginDate;
   List<Student> get students;
-  void set id(int v);
-  void set beginDate(DateTime v);
-  void set students(List<Student> v);
+  set id(int v);
+  set beginDate(DateTime v);
+  set students(List<Student> v);
 
   operator [](Object __key) {
     switch (__key) {

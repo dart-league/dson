@@ -10,8 +10,8 @@ abstract class _$ClassWithConstructorWithArgumentsSerializable
     extends SerializableMap {
   int get id;
   String get name;
-  void set id(int v);
-  void set name(String v);
+  set id(int v);
+  set name(String v);
 
   operator [](Object __key) {
     switch (__key) {
