@@ -9,6 +9,10 @@
 * [ ] Add support for MessagePack
 * [ ] Add support for converting to array of values-only
 
+## 0.15.6
+   
+- upgrade `analyzer` to version `^0.36.0`
+
 ## 0.15.5
 
 - fix set null values to attributes (fixes: #45)

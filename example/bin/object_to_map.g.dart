@@ -7,6 +7,7 @@ part of example.object_to_map;
 // **************************************************************************
 
 abstract class _$PersonSerializable extends SerializableMap {
+  String get doGetter;
   int get id;
   String get firstName;
   dynamic get lastName;
@@ -15,7 +16,6 @@ abstract class _$PersonSerializable extends SerializableMap {
   String get otherName;
   String get notVisible;
   String get _private;
-  String get doGetter;
   set id(int v);
   set firstName(String v);
   set lastName(dynamic v);
@@ -27,6 +27,8 @@ abstract class _$PersonSerializable extends SerializableMap {
 
   operator [](Object __key) {
     switch (__key) {
+      case 'doGetter':
+        return doGetter;
       case 'id':
         return id;
       case 'firstName':
@@ -43,8 +45,6 @@ abstract class _$PersonSerializable extends SerializableMap {
         return notVisible;
       case '_private':
         return _private;
-      case 'doGetter':
-        return doGetter;
     }
     throwFieldNotFoundException(__key, 'Person');
   }
@@ -122,6 +122,7 @@ const PersonClassMirror =
   '_private': $$Person_fields__private,
   'doGetter': $$Person_fields_doGetter
 }, getters: const [
+  'doGetter',
   'id',
   'firstName',
   'lastName',
@@ -129,8 +130,7 @@ const PersonClassMirror =
   'dateOfBirth',
   'renamed',
   'notVisible',
-  '_private',
-  'doGetter'
+  '_private'
 ], setters: const [
   'id',
   'firstName',

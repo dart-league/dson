@@ -180,16 +180,16 @@ abstract class _$SetClassSerializable extends SerializableMap {
 }
 
 abstract class _$TestGetterSerializable extends SerializableMap {
-  String get _name;
   String get name;
+  String get _name;
   set _name(String v);
 
   operator [](Object __key) {
     switch (__key) {
-      case '_name':
-        return _name;
       case 'name':
         return name;
+      case '_name':
+        return _name;
     }
     throwFieldNotFoundException(__key, 'TestGetter');
   }
@@ -207,28 +207,28 @@ abstract class _$TestGetterSerializable extends SerializableMap {
 }
 
 abstract class _$TestSetterSerializable extends SerializableMap {
-  String get _name;
   String get name;
-  set _name(String v);
+  String get _name;
   set name(String v);
+  set _name(String v);
 
   operator [](Object __key) {
     switch (__key) {
-      case '_name':
-        return _name;
       case 'name':
         return name;
+      case '_name':
+        return _name;
     }
     throwFieldNotFoundException(__key, 'TestSetter');
   }
 
   operator []=(Object __key, __value) {
     switch (__key) {
-      case '_name':
-        _name = __value;
-        return;
       case 'name':
         name = __value;
+        return;
+      case '_name':
+        _name = __value;
         return;
     }
     throwFieldNotFoundException(__key, 'TestSetter');
@@ -555,8 +555,8 @@ const TestGetterClassMirror =
   '_name': $$TestGetter_fields__name,
   'name': $$TestGetter_fields_name
 }, getters: const [
-  '_name',
-  'name'
+  'name',
+  '_name'
 ], setters: const [
   '_name'
 ]);
@@ -578,12 +578,12 @@ const TestSetterClassMirror = const ClassMirror(
       'name': $$TestSetter_fields_name
     },
     getters: const [
-      '_name',
-      'name'
+      'name',
+      '_name'
     ],
     setters: const [
-      '_name',
-      'name'
+      'name',
+      '_name'
     ]);
 
 _NestedClass__Constructor([positionalParams, namedParams]) => new NestedClass(
