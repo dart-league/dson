@@ -233,7 +233,7 @@ asciidoctor -b docbook _README.adoc && pandoc -f docbook -t gfm _README.xml -o R
 
 === Issues
 
-If you find any problem please create a new https://github.com/dart-league/dson/issues/new[issue]
+If you find any problem please create a https://github.com/dart-league/dson/issues/new[issue]
 
 === Pull Request
 

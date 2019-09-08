@@ -102,49 +102,49 @@ main() {
       var obj = {
         "test": "test"
       };
-      JustObject test = new JustObject();
+      JustObject test = JustObject();
       test.object = obj;
 
       expect(toJson(test), '{"object":{"test":"test"}}');
     });
 
     test('serialize: simple class', () {
-      var test = new TestClass1();
+      var test = TestClass1();
       test.name = "test1";
       String str = toJson(test);
       expect(str, '{"name":"test1"}');
     });
 
     test('serialize: ignore in object', () {
-      var test = new TestClass1();
+      var test = TestClass1();
       test.name = "test";
       test.ignored = true;
       expect(toJson(test), '{"name":"test"}');
     });
 
     test('serialize: renamed property of object', () {
-      var test = new TestClass1();
+      var test = TestClass1();
       test.renamed = "test";
       expect(toJson(test), '{"the_renamed":"test"}');
     });
 
     test('serialize: simple getter class', () {
-      expect(toJson(new TestGetter("test2")), '{"name":"test2"}');
+      expect(toJson(TestGetter("test2")), '{"name":"test2"}');
     });
 
     test('serialize: nested class', () {
-      expect(toJson(new NestedClass("test", [1, 2, 3], new TestGetter("get it"))),
+      expect(toJson(NestedClass("test", [1, 2, 3], TestGetter("get it"))),
           '{"name":"test","list":[1,2,3],"getter":{"name":"get it"}}');
     });
 
     test('serialize: Set class', () {
-      expect(toJson(new SetClass(new Set()..add("a"))),
+      expect(toJson(SetClass(Set()..add("a"))),
           '{"names":["a"]}');
     });
 
     test('serialize: DateTime', () {
-      var obj = new SimpleDateContainer()
-        ..testDate = new DateTime.now();
+      var obj = SimpleDateContainer()
+        ..testDate = DateTime.now();
       expect(toJson(obj), '{"testDate":"${obj.testDate.toIso8601String()}"}');
     });
   });

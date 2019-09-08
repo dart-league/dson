@@ -32,23 +32,23 @@ class Address extends _$AddressSerializable {
 void main() {
   _initMirrors();
 
-  var manager = new Employee()
+  var manager = Employee()
     ..key = 1
     ..firstName = 'Jhon'
     ..lastName = 'Doe';
-  manager.address = new Address()
+  manager.address = Address()
     ..key = 1
     ..street = 'some street'
     ..city = 'Miami'
     ..country = 'USA'
     ..owner = manager;
 
-  var employee = new Employee()
+  var employee = Employee()
     ..key = 2
     ..firstName = 'Luis'
     ..lastName = 'Vargas'
     ..manager = manager;
-  employee.address = new Address()
+  employee.address = Address()
     ..key = 2
     ..street = 'some street'
     ..city = 'Miami'

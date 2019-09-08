@@ -206,7 +206,7 @@ main() {
   });
 
   test('deserialize: DateTime', () {
-    var date = new DateTime.now();
+    var date = DateTime.now();
     var ctg = fromJson('{"testDate":"${date.toString()}"}', SimpleDateContainer);
     expect(ctg.testDate is DateTime, true);
     expect(ctg.testDate == date, true);

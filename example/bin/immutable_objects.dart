@@ -15,7 +15,7 @@ class Person extends _$PersonSerializable {
 main() {
   _initMirrors();
 
-  var p1 = new Person(id: 1, name: 'Jhon Doe');
+  var p1 = Person(id: 1, name: 'Jhon Doe');
 
   var p1Json = toJson(p1);
 

@@ -3,7 +3,7 @@
 part of serializer.generic;
 
 // **************************************************************************
-// DsonGenerator
+// SerializableGenerator
 // **************************************************************************
 
 abstract class _$PageSerializable<T> extends SerializableMap {
@@ -42,7 +42,7 @@ abstract class _$PageSerializable<T> extends SerializableMap {
         number = __value;
         return;
       case 'items':
-        items = fromSerialized(__value, () => new List<T>());
+        items = fromSerialized(__value, () => List<T>());
         return;
     }
     throwFieldNotFoundException(__key, 'Page');
@@ -94,7 +94,7 @@ abstract class _$ResourceSerializable<T, ID> extends SerializableMap {
         number = __value;
         return;
       case 'items':
-        items = fromSerialized(__value, () => new List<T>());
+        items = fromSerialized(__value, () => List<T>());
         return;
     }
     throwFieldNotFoundException(__key, 'Resource');
@@ -176,94 +176,78 @@ abstract class _$EmployeeSerializable extends SerializableMap {
 // MirrorsGenerator
 // **************************************************************************
 
-_Page__Constructor([positionalParams, namedParams]) => new Page();
+_Page__Constructor([positionalParams, namedParams]) => Page();
 
-const $$Page_fields_size = const DeclarationMirror(name: 'size', type: int);
-const $$Page_fields_total = const DeclarationMirror(name: 'total', type: int);
-const $$Page_fields_number = const DeclarationMirror(name: 'number', type: int);
+const $$Page_fields_size = DeclarationMirror(name: 'size', type: int);
+const $$Page_fields_total = DeclarationMirror(name: 'total', type: int);
+const $$Page_fields_number = DeclarationMirror(name: 'number', type: int);
 const $$Page_fields_items =
-    const DeclarationMirror(name: 'items', type: const [List, dynamic]);
+    DeclarationMirror(name: 'items', type: [List, dynamic]);
 
-const PageClassMirror = const ClassMirror(name: 'Page', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Page__Constructor)
-}, fields: const {
+const PageClassMirror = ClassMirror(name: 'Page', constructors: {
+  '': FunctionMirror(name: '', $call: _Page__Constructor)
+}, fields: {
   'size': $$Page_fields_size,
   'total': $$Page_fields_total,
   'number': $$Page_fields_number,
   'items': $$Page_fields_items
-}, getters: const [
+}, getters: [
   'size',
   'total',
   'number',
   'items'
-], setters: const [
+], setters: [
   'size',
   'total',
   'number',
   'items'
 ]);
 
-_Resource__Constructor([positionalParams, namedParams]) => new Resource();
+_Resource__Constructor([positionalParams, namedParams]) => Resource();
 
-const $$Resource_fields_id = const DeclarationMirror(name: 'id', type: dynamic);
+const $$Resource_fields_id = DeclarationMirror(name: 'id', type: dynamic);
 
-const ResourceClassMirror = const ClassMirror(
+const ResourceClassMirror = ClassMirror(
     name: 'Resource',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _Resource__Constructor)
-    },
-    fields: const {
+    constructors: {'': FunctionMirror(name: '', $call: _Resource__Constructor)},
+    fields: {
       'id': $$Resource_fields_id,
       'size': $$Page_fields_size,
       'total': $$Page_fields_total,
       'number': $$Page_fields_number,
       'items': $$Page_fields_items
     },
-    getters: const ['id', 'size', 'total', 'number', 'items'],
-    setters: const ['id', 'size', 'total', 'number', 'items'],
+    getters: ['id', 'size', 'total', 'number', 'items'],
+    setters: ['id', 'size', 'total', 'number', 'items'],
     superclass: Page);
 
-_Person__Constructor([positionalParams, namedParams]) => new Person();
+_Person__Constructor([positionalParams, namedParams]) => Person();
 
-const $$Person_fields_id = const DeclarationMirror(name: 'id', type: int);
-const $$Person_fields_name =
-    const DeclarationMirror(name: 'name', type: String);
+const $$Person_fields_id = DeclarationMirror(name: 'id', type: int);
+const $$Person_fields_name = DeclarationMirror(name: 'name', type: String);
 
-const PersonClassMirror = const ClassMirror(
+const PersonClassMirror = ClassMirror(
     name: 'Person',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _Person__Constructor)
-    },
-    fields: const {
-      'id': $$Person_fields_id,
-      'name': $$Person_fields_name
-    },
-    getters: const [
-      'id',
-      'name'
-    ],
-    setters: const [
-      'id',
-      'name'
-    ]);
+    constructors: {'': FunctionMirror(name: '', $call: _Person__Constructor)},
+    fields: {'id': $$Person_fields_id, 'name': $$Person_fields_name},
+    getters: ['id', 'name'],
+    setters: ['id', 'name']);
 
-_Employee__Constructor([positionalParams, namedParams]) => new Employee();
+_Employee__Constructor([positionalParams, namedParams]) => Employee();
 
 const $$Employee_fields_salary =
-    const DeclarationMirror(name: 'salary', type: double);
+    DeclarationMirror(name: 'salary', type: double);
 
-const EmployeeClassMirror = const ClassMirror(
+const EmployeeClassMirror = ClassMirror(
     name: 'Employee',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _Employee__Constructor)
-    },
-    fields: const {
+    constructors: {'': FunctionMirror(name: '', $call: _Employee__Constructor)},
+    fields: {
       'salary': $$Employee_fields_salary,
       'id': $$Person_fields_id,
       'name': $$Person_fields_name
     },
-    getters: const ['salary', 'id', 'name'],
-    setters: const ['salary', 'id', 'name'],
+    getters: ['salary', 'id', 'name'],
+    setters: ['salary', 'id', 'name'],
     superclass: Person);
 
 // **************************************************************************

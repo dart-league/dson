@@ -3,7 +3,7 @@
 part of example.exclude_attributes;
 
 // **************************************************************************
-// DsonGenerator
+// SerializableGenerator
 // **************************************************************************
 
 abstract class _$StudentSerializable extends SerializableMap {
@@ -35,8 +35,8 @@ abstract class _$StudentSerializable extends SerializableMap {
         name = __value;
         return;
       case 'courses':
-        courses = fromSerialized(
-            __value, [() => new List<Course>(), () => new Course()]);
+        courses =
+            fromSerialized(__value, [() => List<Course>(), () => Course()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Student');
@@ -74,8 +74,8 @@ abstract class _$CourseSerializable extends SerializableMap {
         beginDate = fromSerializedDateTime(__value);
         return;
       case 'students':
-        students = fromSerialized(
-            __value, [() => new List<Student>(), () => new Student()]);
+        students =
+            fromSerialized(__value, [() => List<Student>(), () => Student()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Course');
@@ -88,55 +88,52 @@ abstract class _$CourseSerializable extends SerializableMap {
 // MirrorsGenerator
 // **************************************************************************
 
-_Student__Constructor([positionalParams, namedParams]) => new Student();
+_Student__Constructor([positionalParams, namedParams]) => Student();
 
-const $$Student_fields_id = const DeclarationMirror(name: 'id', type: int);
-const $$Student_fields_name =
-    const DeclarationMirror(name: 'name', type: String);
+const $$Student_fields_id = DeclarationMirror(name: 'id', type: int);
+const $$Student_fields_name = DeclarationMirror(name: 'name', type: String);
 const $$Student_fields_courses =
-    const DeclarationMirror(name: 'courses', type: const [List, Course]);
+    DeclarationMirror(name: 'courses', type: [List, Course]);
 
-const StudentClassMirror =
-    const ClassMirror(name: 'Student', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Student__Constructor)
-}, annotations: const [
+const StudentClassMirror = ClassMirror(name: 'Student', constructors: {
+  '': FunctionMirror(name: '', $call: _Student__Constructor)
+}, annotations: [
   cyclical
-], fields: const {
+], fields: {
   'id': $$Student_fields_id,
   'name': $$Student_fields_name,
   'courses': $$Student_fields_courses
-}, getters: const [
+}, getters: [
   'id',
   'name',
   'courses'
-], setters: const [
+], setters: [
   'id',
   'name',
   'courses'
 ]);
 
-_Course__Constructor([positionalParams, namedParams]) => new Course();
+_Course__Constructor([positionalParams, namedParams]) => Course();
 
-const $$Course_fields_id = const DeclarationMirror(name: 'id', type: int);
+const $$Course_fields_id = DeclarationMirror(name: 'id', type: int);
 const $$Course_fields_beginDate =
-    const DeclarationMirror(name: 'beginDate', type: DateTime);
+    DeclarationMirror(name: 'beginDate', type: DateTime);
 const $$Course_fields_students =
-    const DeclarationMirror(name: 'students', type: const [List, Student]);
+    DeclarationMirror(name: 'students', type: [List, Student]);
 
-const CourseClassMirror =
-    const ClassMirror(name: 'Course', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Course__Constructor)
-}, annotations: const [
+const CourseClassMirror = ClassMirror(name: 'Course', constructors: {
+  '': FunctionMirror(name: '', $call: _Course__Constructor)
+}, annotations: [
   cyclical
-], fields: const {
+], fields: {
   'id': $$Course_fields_id,
   'beginDate': $$Course_fields_beginDate,
   'students': $$Course_fields_students
-}, getters: const [
+}, getters: [
   'id',
   'beginDate',
   'students'
-], setters: const [
+], setters: [
   'id',
   'beginDate',
   'students'

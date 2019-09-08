@@ -3,7 +3,7 @@
 part of deserialiazer.deserialize_inmutable_class_test;
 
 // **************************************************************************
-// DsonGenerator
+// SerializableGenerator
 // **************************************************************************
 
 abstract class _$ImmutableClassSerializable extends SerializableMap {
@@ -93,8 +93,8 @@ abstract class _$ListWithImmutableClassSerializable extends SerializableMap {
     switch (__key) {
       case 'immutables':
         immutables = fromSerialized(__value, [
-          () => new List<ImmutableClass>(),
-          () => new ImmutableClass(__value['name'], __value['the_renamed'])
+          () => List<ImmutableClass>(),
+          () => ImmutableClass(__value['name'], __value['the_renamed'])
         ]);
         return;
     }
@@ -109,108 +109,98 @@ abstract class _$ListWithImmutableClassSerializable extends SerializableMap {
 // **************************************************************************
 
 _ImmutableClass__Constructor([positionalParams, namedParams]) =>
-    new ImmutableClass(positionalParams[0], positionalParams[1]);
+    ImmutableClass(positionalParams[0], positionalParams[1]);
 
 const $$ImmutableClass_fields_name =
-    const DeclarationMirror(name: 'name', type: String, isFinal: true);
-const $$ImmutableClass_fields_renamed = const DeclarationMirror(
+    DeclarationMirror(name: 'name', type: String, isFinal: true);
+const $$ImmutableClass_fields_renamed = DeclarationMirror(
   name: 'the_renamed',
   type: String,
   isFinal: true,
 );
 
 const ImmutableClassClassMirror =
-    const ClassMirror(name: 'ImmutableClass', constructors: const {
-  '': const FunctionMirror(
+    ClassMirror(name: 'ImmutableClass', constructors: {
+  '': FunctionMirror(
       name: '',
-      positionalParameters: const [
-        const DeclarationMirror(name: 'name', type: String, isRequired: true),
-        const DeclarationMirror(
-            name: 'the_renamed', type: String, isRequired: true)
+      positionalParameters: [
+        DeclarationMirror(name: 'name', type: String, isRequired: true),
+        DeclarationMirror(name: 'the_renamed', type: String, isRequired: true)
       ],
       $call: _ImmutableClass__Constructor)
-}, fields: const {
+}, fields: {
   'name': $$ImmutableClass_fields_name,
   'the_renamed': $$ImmutableClass_fields_renamed
-}, getters: const [
+}, getters: [
   'name',
   'the_renamed'
 ]);
 
 _ImmutableWithOptionalParameters__Constructor(
         [positionalParams, namedParams]) =>
-    new ImmutableWithOptionalParameters(
+    ImmutableWithOptionalParameters(
         id: namedParams['id'], name: namedParams['name']);
 
 const $$ImmutableWithOptionalParameters_fields_id =
-    const DeclarationMirror(name: 'id', type: int, isFinal: true);
+    DeclarationMirror(name: 'id', type: int, isFinal: true);
 const $$ImmutableWithOptionalParameters_fields_name =
-    const DeclarationMirror(name: 'name', type: String, isFinal: true);
+    DeclarationMirror(name: 'name', type: String, isFinal: true);
 
-const ImmutableWithOptionalParametersClassMirror = const ClassMirror(
-    name: 'ImmutableWithOptionalParameters',
-    constructors: const {
-      '': const FunctionMirror(
-          name: '',
-          namedParameters: const {
-            'id': const DeclarationMirror(name: 'id', type: int, isNamed: true),
-            'name': const DeclarationMirror(
-                name: 'name', type: String, isNamed: true)
-          },
-          $call: _ImmutableWithOptionalParameters__Constructor)
-    },
-    fields: const {
-      'id': $$ImmutableWithOptionalParameters_fields_id,
-      'name': $$ImmutableWithOptionalParameters_fields_name
-    },
-    getters: const [
-      'id',
-      'name'
-    ]);
+const ImmutableWithOptionalParametersClassMirror =
+    ClassMirror(name: 'ImmutableWithOptionalParameters', constructors: {
+  '': FunctionMirror(
+      name: '',
+      namedParameters: {
+        'id': DeclarationMirror(name: 'id', type: int, isNamed: true),
+        'name': DeclarationMirror(name: 'name', type: String, isNamed: true)
+      },
+      $call: _ImmutableWithOptionalParameters__Constructor)
+}, fields: {
+  'id': $$ImmutableWithOptionalParameters_fields_id,
+  'name': $$ImmutableWithOptionalParameters_fields_name
+}, getters: [
+  'id',
+  'name'
+]);
 
 _ImmutableClassInvalidParameter__Constructor([positionalParams, namedParams]) =>
-    new ImmutableClassInvalidParameter(positionalParams[0]);
+    ImmutableClassInvalidParameter(positionalParams[0]);
 
 const $$ImmutableClassInvalidParameter_fields_name =
-    const DeclarationMirror(name: 'name', type: String, isFinal: true);
+    DeclarationMirror(name: 'name', type: String, isFinal: true);
 
-const ImmutableClassInvalidParameterClassMirror = const ClassMirror(
-    name: 'ImmutableClassInvalidParameter',
-    constructors: const {
-      '': const FunctionMirror(
-          name: '',
-          positionalParameters: const [
-            const DeclarationMirror(
-                name: 'aName', type: String, isRequired: true)
-          ],
-          $call: _ImmutableClassInvalidParameter__Constructor)
-    },
-    fields: const {
-      'name': $$ImmutableClassInvalidParameter_fields_name
-    },
-    getters: const [
-      'name'
-    ]);
+const ImmutableClassInvalidParameterClassMirror =
+    ClassMirror(name: 'ImmutableClassInvalidParameter', constructors: {
+  '': FunctionMirror(
+      name: '',
+      positionalParameters: [
+        DeclarationMirror(name: 'aName', type: String, isRequired: true)
+      ],
+      $call: _ImmutableClassInvalidParameter__Constructor)
+}, fields: {
+  'name': $$ImmutableClassInvalidParameter_fields_name
+}, getters: [
+  'name'
+]);
 
 _ListWithImmutableClass__Constructor([positionalParams, namedParams]) =>
-    new ListWithImmutableClass();
+    ListWithImmutableClass();
 
-const $$ListWithImmutableClass_fields_immutables = const DeclarationMirror(
-    name: 'immutables', type: const [List, ImmutableClass]);
+const $$ListWithImmutableClass_fields_immutables =
+    DeclarationMirror(name: 'immutables', type: [List, ImmutableClass]);
 
-const ListWithImmutableClassClassMirror = const ClassMirror(
+const ListWithImmutableClassClassMirror = ClassMirror(
     name: 'ListWithImmutableClass',
-    constructors: const {
-      '': const FunctionMirror(
-          name: '', $call: _ListWithImmutableClass__Constructor)
+    constructors: {
+      '': FunctionMirror(name: '', $call: _ListWithImmutableClass__Constructor)
     },
-    fields: const {
+    fields: {
       'immutables': $$ListWithImmutableClass_fields_immutables
     },
-    getters: const [
+    getters: [
       'immutables'
     ],
-    setters: const [
+    setters: [
       'immutables'
     ]);
 

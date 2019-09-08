@@ -9,10 +9,8 @@ dependencies:
 dev_dependencies:
   build_runner: any
   build_web_compilers: any
-dependency_overrides:
-#  built_mirrors_core:
-#    path: ../../built_mirrors_core
+#dependency_overrides:
+#  built_mirrors:
+#    path: ../../built_mirrors
 #  serializable_core:
-#    path: ../../serializable_core
-#  dson_core:
-#    path: ../../dson_core
+#    path: ../../serializable

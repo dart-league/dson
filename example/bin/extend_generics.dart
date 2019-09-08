@@ -31,11 +31,11 @@ class Manager<T> extends Employee<T> with _$ManagerSerializable<T> implements IM
 main() {
   _initMirrors();
 
-  var person = new Person<String>()
+  var person = Person<String>()
     ..id = 1
     ..firstName = 'Jhon'
     ..lastName = 'Doe'
-    ..dateOfBirth = new DateTime.now();
+    ..dateOfBirth = DateTime.now();
 
   var personJson = toJson(person);
 
@@ -46,11 +46,11 @@ main() {
   print('person2.firstName: ${person2.firstName}');
   print('person2.lastName: ${person2.lastName}\n');
 
-  var employee = new Employee<String>()
+  var employee = Employee<String>()
     ..id = 1
     ..firstName = 'Employee'
     ..lastName = 'Doe'
-    ..dateOfBirth = new DateTime.now()
+    ..dateOfBirth = DateTime.now()
     ..salary = 1000.0;
   print(employee.runtimeType);
   var employeeJson = toJson(employee);
@@ -63,11 +63,11 @@ main() {
   print('employee2.lastName: ${employee2.lastName}');
   print('employee2.salary: ${employee2.salary}\n');
 
-  var manager = new Manager<String>()
+  var manager = Manager<String>()
     ..id = 1
     ..firstName = 'Manager'
     ..lastName = 'Doe'
-    ..dateOfBirth = new DateTime.now()
+    ..dateOfBirth = DateTime.now()
     ..salary = 2000.0
     ..subordinates = [employee];
 
@@ -81,6 +81,4 @@ main() {
   print('manager2.lastName: ${manager2.lastName}');
   print('manager2.salary: ${manager2.salary}');
   print('manager2.subordinates: ${manager2.subordinates}');
-
-  var commonBeanMap = {'code': '90009', 'msg': 'test', 'resultData': null};
 }

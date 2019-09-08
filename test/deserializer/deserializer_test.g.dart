@@ -3,7 +3,7 @@
 part of deserializer_test;
 
 // **************************************************************************
-// DsonGenerator
+// SerializableGenerator
 // **************************************************************************
 
 abstract class _$SimpleDateContainerSerializable extends SerializableMap {
@@ -98,13 +98,13 @@ abstract class _$TestClass1Serializable extends SerializableMap {
         number = __value;
         return;
       case 'list':
-        list = fromSerialized(__value, () => new List<dynamic>());
+        list = fromSerialized(__value, () => List<dynamic>());
         return;
       case 'myMap':
-        myMap = fromSerialized(__value, () => new Map<dynamic, dynamic>());
+        myMap = fromSerialized(__value, () => Map<dynamic, dynamic>());
         return;
       case 'child':
-        child = fromSerialized(__value, () => new TestClass1());
+        child = fromSerialized(__value, () => TestClass1());
         return;
       case 'intNumber':
         intNumber = __value;
@@ -170,7 +170,7 @@ abstract class _$SetClassSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'names':
-        names = fromSerialized(__value, () => new Set<String>());
+        names = fromSerialized(__value, () => Set<String>());
         return;
     }
     throwFieldNotFoundException(__key, 'SetClass');
@@ -263,10 +263,10 @@ abstract class _$NestedClassSerializable extends SerializableMap {
         name = __value;
         return;
       case 'list':
-        list = fromSerialized(__value, () => new List<dynamic>());
+        list = fromSerialized(__value, () => List<dynamic>());
         return;
       case 'getter':
-        getter = fromSerialized(__value, () => new TestGetter());
+        getter = fromSerialized(__value, () => TestGetter());
         return;
     }
     throwFieldNotFoundException(__key, 'NestedClass');
@@ -317,7 +317,7 @@ abstract class _$SimpleListSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'list':
-        list = fromSerialized(__value, () => new List<dynamic>());
+        list = fromSerialized(__value, () => List<dynamic>());
         return;
     }
     throwFieldNotFoundException(__key, 'SimpleList');
@@ -341,7 +341,7 @@ abstract class _$SimpleMapSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'myMap':
-        myMap = fromSerialized(__value, () => new Map<dynamic, dynamic>());
+        myMap = fromSerialized(__value, () => Map<dynamic, dynamic>());
         return;
     }
     throwFieldNotFoundException(__key, 'SimpleMap');
@@ -365,7 +365,7 @@ abstract class _$SimpleMapStringSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'myMap':
-        myMap = fromSerialized(__value, () => new Map<String, num>());
+        myMap = fromSerialized(__value, () => Map<String, num>());
         return;
     }
     throwFieldNotFoundException(__key, 'SimpleMapString');
@@ -403,58 +403,58 @@ abstract class _$SimpleVarContainerSerializable extends SerializableMap {
 // **************************************************************************
 
 _SimpleDateContainer__Constructor([positionalParams, namedParams]) =>
-    new SimpleDateContainer();
+    SimpleDateContainer();
 
 const $$SimpleDateContainer_fields_testDate =
-    const DeclarationMirror(name: 'testDate', type: DateTime);
+    DeclarationMirror(name: 'testDate', type: DateTime);
 
-const SimpleDateContainerClassMirror =
-    const ClassMirror(name: 'SimpleDateContainer', constructors: const {
-  '': const FunctionMirror(name: '', $call: _SimpleDateContainer__Constructor)
-}, fields: const {
-  'testDate': $$SimpleDateContainer_fields_testDate
-}, getters: const [
-  'testDate'
-], setters: const [
-  'testDate'
-]);
+const SimpleDateContainerClassMirror = ClassMirror(
+    name: 'SimpleDateContainer',
+    constructors: {
+      '': FunctionMirror(name: '', $call: _SimpleDateContainer__Constructor)
+    },
+    fields: {
+      'testDate': $$SimpleDateContainer_fields_testDate
+    },
+    getters: [
+      'testDate'
+    ],
+    setters: [
+      'testDate'
+    ]);
 
-_TestClass1__Constructor([positionalParams, namedParams]) => new TestClass1();
+_TestClass1__Constructor([positionalParams, namedParams]) => TestClass1();
 
-const $$TestClass1_fields_name =
-    const DeclarationMirror(name: 'name', type: String);
+const $$TestClass1_fields_name = DeclarationMirror(name: 'name', type: String);
 const $$TestClass1_fields_matter =
-    const DeclarationMirror(name: 'matter', type: bool);
-const $$TestClass1_fields_number =
-    const DeclarationMirror(name: 'number', type: num);
+    DeclarationMirror(name: 'matter', type: bool);
+const $$TestClass1_fields_number = DeclarationMirror(name: 'number', type: num);
 const $$TestClass1_fields_list =
-    const DeclarationMirror(name: 'list', type: const [List, dynamic]);
-const $$TestClass1_fields_myMap =
-    const DeclarationMirror(name: 'myMap', type: const [
+    DeclarationMirror(name: 'list', type: [List, dynamic]);
+const $$TestClass1_fields_myMap = DeclarationMirror(name: 'myMap', type: [
   Map,
-  const [dynamic, dynamic]
+  [dynamic, dynamic]
 ]);
 const $$TestClass1_fields_child =
-    const DeclarationMirror(name: 'child', type: TestClass1);
+    DeclarationMirror(name: 'child', type: TestClass1);
 const $$TestClass1_fields_intNumber =
-    const DeclarationMirror(name: 'intNumber', type: int);
+    DeclarationMirror(name: 'intNumber', type: int);
 const $$TestClass1_fields_intNumber2 =
-    const DeclarationMirror(name: 'intNumber2', type: int);
+    DeclarationMirror(name: 'intNumber2', type: int);
 const $$TestClass1_fields_doubleNumber =
-    const DeclarationMirror(name: 'doubleNumber', type: double);
+    DeclarationMirror(name: 'doubleNumber', type: double);
 const $$TestClass1_fields_doubleNumber2 =
-    const DeclarationMirror(name: 'doubleNumber2', type: double);
-const $$TestClass1_fields_ignored = const DeclarationMirror(
-    name: 'ignored', type: bool, annotations: const [ignore]);
-const $$TestClass1_fields_renamed = const DeclarationMirror(
+    DeclarationMirror(name: 'doubleNumber2', type: double);
+const $$TestClass1_fields_ignored =
+    DeclarationMirror(name: 'ignored', type: bool, annotations: [ignore]);
+const $$TestClass1_fields_renamed = DeclarationMirror(
   name: 'the_renamed',
   type: String,
 );
 
-const TestClass1ClassMirror =
-    const ClassMirror(name: 'TestClass1', constructors: const {
-  '': const FunctionMirror(name: '', $call: _TestClass1__Constructor)
-}, fields: const {
+const TestClass1ClassMirror = ClassMirror(name: 'TestClass1', constructors: {
+  '': FunctionMirror(name: '', $call: _TestClass1__Constructor)
+}, fields: {
   'name': $$TestClass1_fields_name,
   'matter': $$TestClass1_fields_matter,
   'number': $$TestClass1_fields_number,
@@ -467,7 +467,7 @@ const TestClass1ClassMirror =
   'doubleNumber2': $$TestClass1_fields_doubleNumber2,
   'ignored': $$TestClass1_fields_ignored,
   'the_renamed': $$TestClass1_fields_renamed
-}, getters: const [
+}, getters: [
   'name',
   'matter',
   'number',
@@ -480,7 +480,7 @@ const TestClass1ClassMirror =
   'doubleNumber2',
   'ignored',
   'the_renamed'
-], setters: const [
+], setters: [
   'name',
   'matter',
   'number',
@@ -495,237 +495,202 @@ const TestClass1ClassMirror =
   'the_renamed'
 ]);
 
-_JustObject__Constructor([positionalParams, namedParams]) => new JustObject();
+_JustObject__Constructor([positionalParams, namedParams]) => JustObject();
 
 const $$JustObject_fields_object =
-    const DeclarationMirror(name: 'object', type: Object);
+    DeclarationMirror(name: 'object', type: Object);
 
-const JustObjectClassMirror = const ClassMirror(
-    name: 'JustObject',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _JustObject__Constructor)
-    },
-    fields: const {
-      'object': $$JustObject_fields_object
-    },
-    getters: const [
-      'object'
-    ],
-    setters: const [
-      'object'
-    ]);
+const JustObjectClassMirror = ClassMirror(name: 'JustObject', constructors: {
+  '': FunctionMirror(name: '', $call: _JustObject__Constructor)
+}, fields: {
+  'object': $$JustObject_fields_object
+}, getters: [
+  'object'
+], setters: [
+  'object'
+]);
 
-_SetClass__Constructor([positionalParams, namedParams]) => new SetClass();
+_SetClass__Constructor([positionalParams, namedParams]) => SetClass();
 
 const $$SetClass_fields_names =
-    const DeclarationMirror(name: 'names', type: const [Set, String]);
+    DeclarationMirror(name: 'names', type: [Set, String]);
 
-const SetClassClassMirror = const ClassMirror(
+const SetClassClassMirror = ClassMirror(
     name: 'SetClass',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _SetClass__Constructor)
-    },
-    fields: const {
-      'names': $$SetClass_fields_names
-    },
-    getters: const [
-      'names'
-    ],
-    setters: const [
-      'names'
-    ]);
+    constructors: {'': FunctionMirror(name: '', $call: _SetClass__Constructor)},
+    fields: {'names': $$SetClass_fields_names},
+    getters: ['names'],
+    setters: ['names']);
 
 _TestGetter__Constructor([positionalParams, namedParams]) =>
-    new TestGetter(positionalParams[0]);
+    TestGetter(positionalParams[0]);
 
 const $$TestGetter_fields__name =
-    const DeclarationMirror(name: '_name', type: String);
+    DeclarationMirror(name: '_name', type: String);
 const $$TestGetter_fields_name =
-    const DeclarationMirror(name: 'name', type: String, isFinal: true);
+    DeclarationMirror(name: 'name', type: String, isFinal: true);
 
-const TestGetterClassMirror =
-    const ClassMirror(name: 'TestGetter', constructors: const {
-  '': const FunctionMirror(
+const TestGetterClassMirror = ClassMirror(name: 'TestGetter', constructors: {
+  '': FunctionMirror(
       name: '',
-      positionalParameters: const [
-        const DeclarationMirror(name: '_name', type: String)
-      ],
+      positionalParameters: [DeclarationMirror(name: '_name', type: String)],
       $call: _TestGetter__Constructor)
-}, fields: const {
+}, fields: {
   '_name': $$TestGetter_fields__name,
   'name': $$TestGetter_fields_name
-}, getters: const [
+}, getters: [
   'name',
   '_name'
-], setters: const [
+], setters: [
   '_name'
 ]);
 
-_TestSetter__Constructor([positionalParams, namedParams]) => new TestSetter();
+_TestSetter__Constructor([positionalParams, namedParams]) => TestSetter();
 
 const $$TestSetter_fields__name =
-    const DeclarationMirror(name: '_name', type: String);
-const $$TestSetter_fields_name =
-    const DeclarationMirror(name: 'name', type: String);
+    DeclarationMirror(name: '_name', type: String);
+const $$TestSetter_fields_name = DeclarationMirror(name: 'name', type: String);
 
-const TestSetterClassMirror = const ClassMirror(
-    name: 'TestSetter',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _TestSetter__Constructor)
-    },
-    fields: const {
-      '_name': $$TestSetter_fields__name,
-      'name': $$TestSetter_fields_name
-    },
-    getters: const [
-      'name',
-      '_name'
-    ],
-    setters: const [
-      'name',
-      '_name'
-    ]);
+const TestSetterClassMirror = ClassMirror(name: 'TestSetter', constructors: {
+  '': FunctionMirror(name: '', $call: _TestSetter__Constructor)
+}, fields: {
+  '_name': $$TestSetter_fields__name,
+  'name': $$TestSetter_fields_name
+}, getters: [
+  'name',
+  '_name'
+], setters: [
+  'name',
+  '_name'
+]);
 
-_NestedClass__Constructor([positionalParams, namedParams]) => new NestedClass(
-    positionalParams[0], positionalParams[1], positionalParams[2]);
+_NestedClass__Constructor([positionalParams, namedParams]) =>
+    NestedClass(positionalParams[0], positionalParams[1], positionalParams[2]);
 
-const $$NestedClass_fields_name =
-    const DeclarationMirror(name: 'name', type: String);
+const $$NestedClass_fields_name = DeclarationMirror(name: 'name', type: String);
 const $$NestedClass_fields_list =
-    const DeclarationMirror(name: 'list', type: const [List, dynamic]);
+    DeclarationMirror(name: 'list', type: [List, dynamic]);
 const $$NestedClass_fields_getter =
-    const DeclarationMirror(name: 'getter', type: TestGetter);
+    DeclarationMirror(name: 'getter', type: TestGetter);
 
-const NestedClassClassMirror =
-    const ClassMirror(name: 'NestedClass', constructors: const {
-  '': const FunctionMirror(
+const NestedClassClassMirror = ClassMirror(name: 'NestedClass', constructors: {
+  '': FunctionMirror(
       name: '',
-      positionalParameters: const [
-        const DeclarationMirror(name: 'name', type: String, isRequired: true),
-        const DeclarationMirror(
-            name: 'list', type: const [List, dynamic], isRequired: true),
-        const DeclarationMirror(
-            name: 'getter', type: TestGetter, isRequired: true)
+      positionalParameters: [
+        DeclarationMirror(name: 'name', type: String, isRequired: true),
+        DeclarationMirror(
+            name: 'list', type: [List, dynamic], isRequired: true),
+        DeclarationMirror(name: 'getter', type: TestGetter, isRequired: true)
       ],
       $call: _NestedClass__Constructor)
-}, fields: const {
+}, fields: {
   'name': $$NestedClass_fields_name,
   'list': $$NestedClass_fields_list,
   'getter': $$NestedClass_fields_getter
-}, getters: const [
+}, getters: [
   'name',
   'list',
   'getter'
-], setters: const [
+], setters: [
   'name',
   'list',
   'getter'
 ]);
 
-_SimpleClass__Constructor([positionalParams, namedParams]) => new SimpleClass();
+_SimpleClass__Constructor([positionalParams, namedParams]) => SimpleClass();
 
-const $$SimpleClass_fields_name =
-    const DeclarationMirror(name: 'name', type: String);
+const $$SimpleClass_fields_name = DeclarationMirror(name: 'name', type: String);
 
-const SimpleClassClassMirror =
-    const ClassMirror(name: 'SimpleClass', constructors: const {
-  '': const FunctionMirror(name: '', $call: _SimpleClass__Constructor)
-}, fields: const {
+const SimpleClassClassMirror = ClassMirror(name: 'SimpleClass', constructors: {
+  '': FunctionMirror(name: '', $call: _SimpleClass__Constructor)
+}, fields: {
   'name': $$SimpleClass_fields_name
-}, getters: const [
+}, getters: [
   'name'
-], setters: const [
+], setters: [
   'name'
-], methods: const {
-  'toString': const FunctionMirror(
+], methods: {
+  'toString': FunctionMirror(
     name: 'toString',
     returnType: String,
   )
 });
 
-_SimpleList__Constructor([positionalParams, namedParams]) => new SimpleList();
+_SimpleList__Constructor([positionalParams, namedParams]) => SimpleList();
 
 const $$SimpleList_fields_list =
-    const DeclarationMirror(name: 'list', type: const [List, dynamic]);
+    DeclarationMirror(name: 'list', type: [List, dynamic]);
 
-const SimpleListClassMirror = const ClassMirror(
-    name: 'SimpleList',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _SimpleList__Constructor)
-    },
-    fields: const {
-      'list': $$SimpleList_fields_list
-    },
-    getters: const [
-      'list'
-    ],
-    setters: const [
-      'list'
-    ]);
-
-_SimpleMap__Constructor([positionalParams, namedParams]) => new SimpleMap();
-
-const $$SimpleMap_fields_myMap =
-    const DeclarationMirror(name: 'myMap', type: const [
-  Map,
-  const [dynamic, dynamic]
+const SimpleListClassMirror = ClassMirror(name: 'SimpleList', constructors: {
+  '': FunctionMirror(name: '', $call: _SimpleList__Constructor)
+}, fields: {
+  'list': $$SimpleList_fields_list
+}, getters: [
+  'list'
+], setters: [
+  'list'
 ]);
 
-const SimpleMapClassMirror = const ClassMirror(
-    name: 'SimpleMap',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _SimpleMap__Constructor)
-    },
-    fields: const {
-      'myMap': $$SimpleMap_fields_myMap
-    },
-    getters: const [
-      'myMap'
-    ],
-    setters: const [
-      'myMap'
-    ]);
+_SimpleMap__Constructor([positionalParams, namedParams]) => SimpleMap();
+
+const $$SimpleMap_fields_myMap = DeclarationMirror(name: 'myMap', type: [
+  Map,
+  [dynamic, dynamic]
+]);
+
+const SimpleMapClassMirror = ClassMirror(name: 'SimpleMap', constructors: {
+  '': FunctionMirror(name: '', $call: _SimpleMap__Constructor)
+}, fields: {
+  'myMap': $$SimpleMap_fields_myMap
+}, getters: [
+  'myMap'
+], setters: [
+  'myMap'
+]);
 
 _SimpleMapString__Constructor([positionalParams, namedParams]) =>
-    new SimpleMapString();
+    SimpleMapString();
 
-const $$SimpleMapString_fields_myMap =
-    const DeclarationMirror(name: 'myMap', type: const [
+const $$SimpleMapString_fields_myMap = DeclarationMirror(name: 'myMap', type: [
   Map,
-  const [String, num]
+  [String, num]
 ]);
 
-const SimpleMapStringClassMirror = const ClassMirror(
+const SimpleMapStringClassMirror = ClassMirror(
     name: 'SimpleMapString',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _SimpleMapString__Constructor)
+    constructors: {
+      '': FunctionMirror(name: '', $call: _SimpleMapString__Constructor)
     },
-    fields: const {
+    fields: {
       'myMap': $$SimpleMapString_fields_myMap
     },
-    getters: const [
+    getters: [
       'myMap'
     ],
-    setters: const [
+    setters: [
       'myMap'
     ]);
 
 _SimpleVarContainer__Constructor([positionalParams, namedParams]) =>
-    new SimpleVarContainer();
+    SimpleVarContainer();
 
 const $$SimpleVarContainer_fields_someVar =
-    const DeclarationMirror(name: 'someVar', type: dynamic);
+    DeclarationMirror(name: 'someVar', type: dynamic);
 
-const SimpleVarContainerClassMirror =
-    const ClassMirror(name: 'SimpleVarContainer', constructors: const {
-  '': const FunctionMirror(name: '', $call: _SimpleVarContainer__Constructor)
-}, fields: const {
-  'someVar': $$SimpleVarContainer_fields_someVar
-}, getters: const [
-  'someVar'
-], setters: const [
-  'someVar'
-]);
+const SimpleVarContainerClassMirror = ClassMirror(
+    name: 'SimpleVarContainer',
+    constructors: {
+      '': FunctionMirror(name: '', $call: _SimpleVarContainer__Constructor)
+    },
+    fields: {
+      'someVar': $$SimpleVarContainer_fields_someVar
+    },
+    getters: [
+      'someVar'
+    ],
+    setters: [
+      'someVar'
+    ]);
 
 // **************************************************************************
 // InitMirrorsGenerator

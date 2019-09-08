@@ -9,6 +9,14 @@
 * [ ] Add support for MessagePack
 * [ ] Add support for converting to array of values-only
 
+## 0.16.0
+
+- Add `analysis_options` and check for unnecessary `new` and `const` keywords
+- Remove dependency on `serializable_core` and `built_mirrors_core`
+- Add dependency to `serializable` and `built_mirrors`
+- Change builder from `PartBuilder` to `SharedPartBuilder`, this way generator can run alongside with other generators
+- Make builder `auto_apply: dependents`. This way builder only run on direct dependents
+
 ## 0.15.6
    
 - upgrade `analyzer` to version `^0.36.0`

@@ -3,7 +3,7 @@
 part of deserialiazer.deserialize_generic_test;
 
 // **************************************************************************
-// DsonGenerator
+// SerializableGenerator
 // **************************************************************************
 
 abstract class _$SimpleClassSerializable extends SerializableMap {
@@ -49,7 +49,7 @@ abstract class _$ListClassSerializable extends SerializableMap {
     switch (__key) {
       case 'list':
         list = fromSerialized(
-            __value, [() => new List<SimpleClass>(), () => new SimpleClass()]);
+            __value, [() => List<SimpleClass>(), () => SimpleClass()]);
         return;
     }
     throwFieldNotFoundException(__key, 'ListClass');
@@ -73,7 +73,7 @@ abstract class _$ListTClassSerializable<T> extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'listT':
-        listT = fromSerialized(__value, () => new List<T>());
+        listT = fromSerialized(__value, () => List<T>());
         return;
     }
     throwFieldNotFoundException(__key, 'ListTClass');
@@ -153,8 +153,8 @@ abstract class _$ListListClassSerializable extends SerializableMap {
     switch (__key) {
       case 'list':
         list = fromSerialized(__value, [
-          () => new List<List<SimpleClass>>(),
-          [() => new List<SimpleClass>(), () => new SimpleClass()]
+          () => List<List<SimpleClass>>(),
+          [() => List<SimpleClass>(), () => SimpleClass()]
         ]);
         return;
     }
@@ -180,10 +180,10 @@ abstract class _$ListListListClassSerializable extends SerializableMap {
     switch (__key) {
       case 'list':
         list = fromSerialized(__value, [
-          () => new List<List<List<SimpleClass>>>(),
+          () => List<List<List<SimpleClass>>>(),
           [
-            () => new List<List<SimpleClass>>(),
-            [() => new List<SimpleClass>(), () => new SimpleClass()]
+            () => List<List<SimpleClass>>(),
+            [() => List<SimpleClass>(), () => SimpleClass()]
           ]
         ]);
         return;
@@ -210,8 +210,8 @@ abstract class _$ListMapClassSerializable extends SerializableMap {
     switch (__key) {
       case 'list':
         list = fromSerialized(__value, [
-          () => new List<Map<String, SimpleClass>>(),
-          [() => new Map<String, SimpleClass>(), null, () => new SimpleClass()]
+          () => List<Map<String, SimpleClass>>(),
+          [() => Map<String, SimpleClass>(), null, () => SimpleClass()]
         ]);
         return;
     }
@@ -237,14 +237,10 @@ abstract class _$ListListMapClassSerializable extends SerializableMap {
     switch (__key) {
       case 'list':
         list = fromSerialized(__value, [
-          () => new List<List<Map<String, SimpleClass>>>(),
+          () => List<List<Map<String, SimpleClass>>>(),
           [
-            () => new List<Map<String, SimpleClass>>(),
-            [
-              () => new Map<String, SimpleClass>(),
-              null,
-              () => new SimpleClass()
-            ]
+            () => List<Map<String, SimpleClass>>(),
+            [() => Map<String, SimpleClass>(), null, () => SimpleClass()]
           ]
         ]);
         return;
@@ -270,11 +266,8 @@ abstract class _$MapClassSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'myMap':
-        myMap = fromSerialized(__value, [
-          () => new Map<String, SimpleClass>(),
-          null,
-          () => new SimpleClass()
-        ]);
+        myMap = fromSerialized(__value,
+            [() => Map<String, SimpleClass>(), null, () => SimpleClass()]);
         return;
     }
     throwFieldNotFoundException(__key, 'MapClass');
@@ -287,244 +280,215 @@ abstract class _$MapClassSerializable extends SerializableMap {
 // MirrorsGenerator
 // **************************************************************************
 
-_SimpleClass__Constructor([positionalParams, namedParams]) => new SimpleClass();
+_SimpleClass__Constructor([positionalParams, namedParams]) => SimpleClass();
 
-const $$SimpleClass_fields_name =
-    const DeclarationMirror(name: 'name', type: String);
+const $$SimpleClass_fields_name = DeclarationMirror(name: 'name', type: String);
 
-const SimpleClassClassMirror =
-    const ClassMirror(name: 'SimpleClass', constructors: const {
-  '': const FunctionMirror(name: '', $call: _SimpleClass__Constructor)
-}, fields: const {
+const SimpleClassClassMirror = ClassMirror(name: 'SimpleClass', constructors: {
+  '': FunctionMirror(name: '', $call: _SimpleClass__Constructor)
+}, fields: {
   'name': $$SimpleClass_fields_name
-}, getters: const [
+}, getters: [
   'name'
-], setters: const [
+], setters: [
   'name'
-], methods: const {
-  'toString': const FunctionMirror(
+], methods: {
+  'toString': FunctionMirror(
     name: 'toString',
     returnType: String,
   )
 });
 
-_ListClass__Constructor([positionalParams, namedParams]) => new ListClass();
+_ListClass__Constructor([positionalParams, namedParams]) => ListClass();
 
 const $$ListClass_fields_list =
-    const DeclarationMirror(name: 'list', type: const [List, SimpleClass]);
+    DeclarationMirror(name: 'list', type: [List, SimpleClass]);
 
-const ListClassClassMirror = const ClassMirror(
-    name: 'ListClass',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _ListClass__Constructor)
-    },
-    fields: const {
-      'list': $$ListClass_fields_list
-    },
-    getters: const [
-      'list'
-    ],
-    setters: const [
-      'list'
-    ]);
+const ListClassClassMirror = ClassMirror(name: 'ListClass', constructors: {
+  '': FunctionMirror(name: '', $call: _ListClass__Constructor)
+}, fields: {
+  'list': $$ListClass_fields_list
+}, getters: [
+  'list'
+], setters: [
+  'list'
+]);
 
-_ListTClass__Constructor([positionalParams, namedParams]) => new ListTClass();
+_ListTClass__Constructor([positionalParams, namedParams]) => ListTClass();
 
 const $$ListTClass_fields_listT =
-    const DeclarationMirror(name: 'listT', type: const [List, dynamic]);
+    DeclarationMirror(name: 'listT', type: [List, dynamic]);
 
-const ListTClassClassMirror = const ClassMirror(
-    name: 'ListTClass',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _ListTClass__Constructor)
-    },
-    fields: const {
-      'listT': $$ListTClass_fields_listT
-    },
-    getters: const [
-      'listT'
-    ],
-    setters: const [
-      'listT'
-    ]);
+const ListTClassClassMirror = ClassMirror(name: 'ListTClass', constructors: {
+  '': FunctionMirror(name: '', $call: _ListTClass__Constructor)
+}, fields: {
+  'listT': $$ListTClass_fields_listT
+}, getters: [
+  'listT'
+], setters: [
+  'listT'
+]);
 
-_GenericTClass__Constructor([positionalParams, namedParams]) =>
-    new GenericTClass();
+_GenericTClass__Constructor([positionalParams, namedParams]) => GenericTClass();
 
-const $$GenericTClass_fields_t =
-    const DeclarationMirror(name: 't', type: dynamic);
+const $$GenericTClass_fields_t = DeclarationMirror(name: 't', type: dynamic);
 
-const GenericTClassClassMirror = const ClassMirror(
+const GenericTClassClassMirror = ClassMirror(
     name: 'GenericTClass',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _GenericTClass__Constructor)
+    constructors: {
+      '': FunctionMirror(name: '', $call: _GenericTClass__Constructor)
     },
-    fields: const {
+    fields: {
       't': $$GenericTClass_fields_t
     },
-    getters: const [
+    getters: [
       't'
     ],
-    setters: const [
+    setters: [
       't'
     ]);
 
 _GenericT1T2Class__Constructor([positionalParams, namedParams]) =>
-    new GenericT1T2Class();
+    GenericT1T2Class();
 
 const $$GenericT1T2Class_fields_t1 =
-    const DeclarationMirror(name: 't1', type: dynamic);
+    DeclarationMirror(name: 't1', type: dynamic);
 const $$GenericT1T2Class_fields_t2 =
-    const DeclarationMirror(name: 't2', type: dynamic);
+    DeclarationMirror(name: 't2', type: dynamic);
 
-const GenericT1T2ClassClassMirror = const ClassMirror(
+const GenericT1T2ClassClassMirror = ClassMirror(
     name: 'GenericT1T2Class',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _GenericT1T2Class__Constructor)
+    constructors: {
+      '': FunctionMirror(name: '', $call: _GenericT1T2Class__Constructor)
     },
-    fields: const {
+    fields: {
       't1': $$GenericT1T2Class_fields_t1,
       't2': $$GenericT1T2Class_fields_t2
     },
-    getters: const [
+    getters: [
       't1',
       't2'
     ],
-    setters: const [
+    setters: [
       't1',
       't2'
     ]);
 
-_ListListClass__Constructor([positionalParams, namedParams]) =>
-    new ListListClass();
+_ListListClass__Constructor([positionalParams, namedParams]) => ListListClass();
 
-const $$ListListClass_fields_list =
-    const DeclarationMirror(name: 'list', type: const [
+const $$ListListClass_fields_list = DeclarationMirror(name: 'list', type: [
   List,
-  const [List, SimpleClass]
+  [List, SimpleClass]
 ]);
 
-const ListListClassClassMirror = const ClassMirror(
+const ListListClassClassMirror = ClassMirror(
     name: 'ListListClass',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _ListListClass__Constructor)
+    constructors: {
+      '': FunctionMirror(name: '', $call: _ListListClass__Constructor)
     },
-    fields: const {
+    fields: {
       'list': $$ListListClass_fields_list
     },
-    getters: const [
+    getters: [
       'list'
     ],
-    setters: const [
+    setters: [
       'list'
     ]);
 
 _ListListListClass__Constructor([positionalParams, namedParams]) =>
-    new ListListListClass();
+    ListListListClass();
 
-const $$ListListListClass_fields_list =
-    const DeclarationMirror(name: 'list', type: const [
+const $$ListListListClass_fields_list = DeclarationMirror(name: 'list', type: [
   List,
-  const [
+  [
     List,
-    const [List, SimpleClass]
+    [List, SimpleClass]
   ]
 ]);
 
-const ListListListClassClassMirror = const ClassMirror(
+const ListListListClassClassMirror = ClassMirror(
     name: 'ListListListClass',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _ListListListClass__Constructor)
+    constructors: {
+      '': FunctionMirror(name: '', $call: _ListListListClass__Constructor)
     },
-    fields: const {
+    fields: {
       'list': $$ListListListClass_fields_list
     },
-    getters: const [
+    getters: [
       'list'
     ],
-    setters: const [
+    setters: [
       'list'
     ]);
 
-_ListMapClass__Constructor([positionalParams, namedParams]) =>
-    new ListMapClass();
+_ListMapClass__Constructor([positionalParams, namedParams]) => ListMapClass();
 
-const $$ListMapClass_fields_list =
-    const DeclarationMirror(name: 'list', type: const [
+const $$ListMapClass_fields_list = DeclarationMirror(name: 'list', type: [
   List,
-  const [
+  [
     Map,
-    const [String, SimpleClass]
+    [String, SimpleClass]
   ]
 ]);
 
-const ListMapClassClassMirror = const ClassMirror(
+const ListMapClassClassMirror = ClassMirror(
     name: 'ListMapClass',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _ListMapClass__Constructor)
+    constructors: {
+      '': FunctionMirror(name: '', $call: _ListMapClass__Constructor)
     },
-    fields: const {
+    fields: {
       'list': $$ListMapClass_fields_list
     },
-    getters: const [
+    getters: [
       'list'
     ],
-    setters: const [
+    setters: [
       'list'
     ]);
 
 _ListListMapClass__Constructor([positionalParams, namedParams]) =>
-    new ListListMapClass();
+    ListListMapClass();
 
-const $$ListListMapClass_fields_list =
-    const DeclarationMirror(name: 'list', type: const [
+const $$ListListMapClass_fields_list = DeclarationMirror(name: 'list', type: [
   List,
-  const [
+  [
     List,
-    const [
+    [
       Map,
-      const [String, SimpleClass]
+      [String, SimpleClass]
     ]
   ]
 ]);
 
-const ListListMapClassClassMirror = const ClassMirror(
+const ListListMapClassClassMirror = ClassMirror(
     name: 'ListListMapClass',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _ListListMapClass__Constructor)
+    constructors: {
+      '': FunctionMirror(name: '', $call: _ListListMapClass__Constructor)
     },
-    fields: const {
+    fields: {
       'list': $$ListListMapClass_fields_list
     },
-    getters: const [
+    getters: [
       'list'
     ],
-    setters: const [
+    setters: [
       'list'
     ]);
 
-_MapClass__Constructor([positionalParams, namedParams]) => new MapClass();
+_MapClass__Constructor([positionalParams, namedParams]) => MapClass();
 
-const $$MapClass_fields_myMap =
-    const DeclarationMirror(name: 'myMap', type: const [
+const $$MapClass_fields_myMap = DeclarationMirror(name: 'myMap', type: [
   Map,
-  const [String, SimpleClass]
+  [String, SimpleClass]
 ]);
 
-const MapClassClassMirror = const ClassMirror(
+const MapClassClassMirror = ClassMirror(
     name: 'MapClass',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _MapClass__Constructor)
-    },
-    fields: const {
-      'myMap': $$MapClass_fields_myMap
-    },
-    getters: const [
-      'myMap'
-    ],
-    setters: const [
-      'myMap'
-    ]);
+    constructors: {'': FunctionMirror(name: '', $call: _MapClass__Constructor)},
+    fields: {'myMap': $$MapClass_fields_myMap},
+    getters: ['myMap'],
+    setters: ['myMap']);
 
 // **************************************************************************
 // InitMirrorsGenerator

@@ -3,7 +3,7 @@
 part of example.serialize_final_objects;
 
 // **************************************************************************
-// DsonGenerator
+// SerializableGenerator
 // **************************************************************************
 
 abstract class _$PersonSerializable extends SerializableMap {
@@ -34,27 +34,25 @@ abstract class _$PersonSerializable extends SerializableMap {
 // **************************************************************************
 
 _Person__Constructor([positionalParams, namedParams]) =>
-    new Person(id: namedParams['id'], name: namedParams['name']);
+    Person(id: namedParams['id'], name: namedParams['name']);
 
 const $$Person_fields_id =
-    const DeclarationMirror(name: 'id', type: int, isFinal: true);
+    DeclarationMirror(name: 'id', type: int, isFinal: true);
 const $$Person_fields_name =
-    const DeclarationMirror(name: 'name', type: String, isFinal: true);
+    DeclarationMirror(name: 'name', type: String, isFinal: true);
 
-const PersonClassMirror =
-    const ClassMirror(name: 'Person', constructors: const {
-  '': const FunctionMirror(
+const PersonClassMirror = ClassMirror(name: 'Person', constructors: {
+  '': FunctionMirror(
       name: '',
-      namedParameters: const {
-        'id': const DeclarationMirror(name: 'id', type: int, isNamed: true),
-        'name':
-            const DeclarationMirror(name: 'name', type: String, isNamed: true)
+      namedParameters: {
+        'id': DeclarationMirror(name: 'id', type: int, isNamed: true),
+        'name': DeclarationMirror(name: 'name', type: String, isNamed: true)
       },
       $call: _Person__Constructor)
-}, fields: const {
+}, fields: {
   'id': $$Person_fields_id,
   'name': $$Person_fields_name
-}, getters: const [
+}, getters: [
   'id',
   'name'
 ]);

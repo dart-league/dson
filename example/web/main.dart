@@ -28,32 +28,32 @@ class Manager extends Employee with _$ManagerSerializable {
 main() {
   _initMirrors();
 
-  var person = new Person()
+  var person = Person()
     ..id = 1
     ..firstName = 'Jhon'
     ..lastName = 'Doe'
-    ..dateOfBirth = new DateTime.now();
+    ..dateOfBirth = DateTime.now();
 
   var personJson = toJson(person);
 
   printToScreen('personJson: $personJson');
 
-  var employee = new Employee()
+  var employee = Employee()
     ..id = 1
     ..firstName = 'Jhon'
     ..lastName = 'Doe'
-    ..dateOfBirth = new DateTime.now()
+    ..dateOfBirth = DateTime.now()
     ..salary = 1000.0;
 
   var employeeJson = toJson(employee);
 
   printToScreen('employeeJson: $employeeJson');
 
-  var manager = new Manager()
+  var manager = Manager()
     ..id = 1
     ..firstName = 'Jhon'
     ..lastName = 'Doe'
-    ..dateOfBirth = new DateTime.now()
+    ..dateOfBirth = DateTime.now()
     ..salary = 1000.0
     ..subordinates = [employee];
 
@@ -63,7 +63,7 @@ main() {
 }
 
 printToScreen(String value) {
-  document.body.append(new PreElement()..appendText(value));
+  document.body.append(PreElement()..appendText(value));
 }
 
 

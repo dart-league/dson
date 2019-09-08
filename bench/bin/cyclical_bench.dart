@@ -57,15 +57,15 @@ main() {
 	}]''';
 
   List<Book> books = [
-    new Book()..id = 1..name = "book 1",
-    new Book()..id = 2..name = "book 2",
-    new Book()..id = 3..name = "book 3"
+    Book()..id = 1..name = "book 1",
+    Book()..id = 2..name = "book 2",
+    Book()..id = 3..name = "book 3"
   ];
 
   List<Author> authors = [
-    new Author()..id = 1..name = "author 1"..books = [books[0], books[1]],
-    new Author()..id = 2..name = "author 2"..books = [books[1], books[2]],
-    new Author()..id = 3..name = "author 3"..books = [books[0], books[2]],
+    Author()..id = 1..name = "author 1"..books = [books[0], books[1]],
+    Author()..id = 2..name = "author 2"..books = [books[1], books[2]],
+    Author()..id = 3..name = "author 3"..books = [books[0], books[2]],
   ];
 
   books[0].authors = [authors[0], authors[2]];
@@ -78,7 +78,7 @@ main() {
 //  print(toJson(books, depth: 'authors'));
 
   for (int j=0; j<50; j++) {
-    var s = new Stopwatch()..start();
+    var s = Stopwatch()..start();
 
     for (int i=0; i<1000; i++) {
       books = fromJson(booksJson, [List, Book]);

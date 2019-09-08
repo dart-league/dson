@@ -31,7 +31,7 @@ class ImmutableClassInvalidParameter extends _$ImmutableClassInvalidParameterSer
 }
 
 @serializable
-class ListWithImmutableClass {
+class ListWithImmutableClass extends _$ListWithImmutableClassSerializable {
   List<ImmutableClass> immutables;
 }
 

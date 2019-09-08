@@ -1,9 +1,19 @@
+targets:
+  $default:
+    builders:
+      dson:
+        generate_for: [example/**, test/**]
+      serializable:
+        generate_for:
+          exclude: ['**']
+      built_mirrors:
+        generate_for:
+          exclude: ['**']
 builders:
-  dson_builder:
-    target: :_dson
+  dson:
     import: package:dson/builder.dart
     builder_factories: [builder]
-    build_to: source
-    auto_apply: root_package
+    auto_apply: dependents
     build_extensions:
-      .dart: [.g.dart]
+      .dart: [.dson.g.part]
+    applies_builders: [source_gen|combining_builder]

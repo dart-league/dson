@@ -3,16 +3,16 @@
 part of simple_bench;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// SerializableGenerator
 // **************************************************************************
 
 abstract class _$SimpleSerializable extends SerializableMap {
   String get id;
   double get value;
   bool get flag;
-  void set id(String v);
-  void set value(double v);
-  void set flag(bool v);
+  set id(String v);
+  set value(double v);
+  set flag(bool v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -47,8 +47,8 @@ abstract class _$SimpleSerializable extends SerializableMap {
 abstract class _$ComplexSerializable extends SerializableMap {
   Simple get simple;
   List<Simple> get list;
-  void set simple(Simple v);
-  void set list(List<Simple> v);
+  set simple(Simple v);
+  set list(List<Simple> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -63,10 +63,10 @@ abstract class _$ComplexSerializable extends SerializableMap {
   operator []=(Object __key, __value) {
     switch (__key) {
       case 'simple':
-        simple = __value;
+        simple = fromSerialized(__value, () => Simple());
         return;
       case 'list':
-        list = __value;
+        list = fromSerialized(__value, [() => List<Simple>(), () => Simple()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Complex');
@@ -76,59 +76,46 @@ abstract class _$ComplexSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
-_Simple__Constructor([positionalParams, namedParams]) => new Simple();
+_Simple__Constructor([positionalParams, namedParams]) => Simple();
 
-const $$Simple_fields_id = const DeclarationMirror(name: 'id', type: String);
-const $$Simple_fields_value =
-    const DeclarationMirror(name: 'value', type: double);
-const $$Simple_fields_flag = const DeclarationMirror(name: 'flag', type: bool);
+const $$Simple_fields_id = DeclarationMirror(name: 'id', type: String);
+const $$Simple_fields_value = DeclarationMirror(name: 'value', type: double);
+const $$Simple_fields_flag = DeclarationMirror(name: 'flag', type: bool);
 
-const SimpleClassMirror =
-    const ClassMirror(name: 'Simple', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Simple__Constructor)
-}, fields: const {
+const SimpleClassMirror = ClassMirror(name: 'Simple', constructors: {
+  '': FunctionMirror(name: '', $call: _Simple__Constructor)
+}, fields: {
   'id': $$Simple_fields_id,
   'value': $$Simple_fields_value,
   'flag': $$Simple_fields_flag
-}, getters: const [
+}, getters: [
   'id',
   'value',
   'flag'
-], setters: const [
+], setters: [
   'id',
   'value',
   'flag'
 ]);
-_Complex__Constructor([positionalParams, namedParams]) => new Complex();
 
-const $$Complex_fields_simple =
-    const DeclarationMirror(name: 'simple', type: Simple);
+_Complex__Constructor([positionalParams, namedParams]) => Complex();
+
+const $$Complex_fields_simple = DeclarationMirror(name: 'simple', type: Simple);
 const $$Complex_fields_list =
-    const DeclarationMirror(name: 'list', type: const [List, Simple]);
+    DeclarationMirror(name: 'list', type: [List, Simple]);
 
-const ComplexClassMirror = const ClassMirror(
+const ComplexClassMirror = ClassMirror(
     name: 'Complex',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _Complex__Constructor)
-    },
-    fields: const {
-      'simple': $$Complex_fields_simple,
-      'list': $$Complex_fields_list
-    },
-    getters: const [
-      'simple',
-      'list'
-    ],
-    setters: const [
-      'simple',
-      'list'
-    ]);
+    constructors: {'': FunctionMirror(name: '', $call: _Complex__Constructor)},
+    fields: {'simple': $$Complex_fields_simple, 'list': $$Complex_fields_list},
+    getters: ['simple', 'list'],
+    setters: ['simple', 'list']);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {

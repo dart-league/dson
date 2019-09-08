@@ -3,7 +3,7 @@
 part of deserializer.deserialize_default_constructor_with_args;
 
 // **************************************************************************
-// DsonGenerator
+// SerializableGenerator
 // **************************************************************************
 
 abstract class _$ClassWithConstructorWithArgumentsSerializable
@@ -45,35 +45,31 @@ abstract class _$ClassWithConstructorWithArgumentsSerializable
 
 _ClassWithConstructorWithArguments__Constructor(
         [positionalParams, namedParams]) =>
-    new ClassWithConstructorWithArguments(id: namedParams['id']);
+    ClassWithConstructorWithArguments(id: namedParams['id']);
 
 const $$ClassWithConstructorWithArguments_fields_id =
-    const DeclarationMirror(name: 'id', type: int);
+    DeclarationMirror(name: 'id', type: int);
 const $$ClassWithConstructorWithArguments_fields_name =
-    const DeclarationMirror(name: 'name', type: String);
+    DeclarationMirror(name: 'name', type: String);
 
-const ClassWithConstructorWithArgumentsClassMirror = const ClassMirror(
-    name: 'ClassWithConstructorWithArguments',
-    constructors: const {
-      '': const FunctionMirror(
-          name: '',
-          namedParameters: const {
-            'id': const DeclarationMirror(name: 'id', type: int, isNamed: true)
-          },
-          $call: _ClassWithConstructorWithArguments__Constructor)
-    },
-    fields: const {
-      'id': $$ClassWithConstructorWithArguments_fields_id,
-      'name': $$ClassWithConstructorWithArguments_fields_name
-    },
-    getters: const [
-      'id',
-      'name'
-    ],
-    setters: const [
-      'id',
-      'name'
-    ]);
+const ClassWithConstructorWithArgumentsClassMirror =
+    ClassMirror(name: 'ClassWithConstructorWithArguments', constructors: {
+  '': FunctionMirror(
+      name: '',
+      namedParameters: {
+        'id': DeclarationMirror(name: 'id', type: int, isNamed: true)
+      },
+      $call: _ClassWithConstructorWithArguments__Constructor)
+}, fields: {
+  'id': $$ClassWithConstructorWithArguments_fields_id,
+  'name': $$ClassWithConstructorWithArguments_fields_name
+}, getters: [
+  'id',
+  'name'
+], setters: [
+  'id',
+  'name'
+]);
 
 // **************************************************************************
 // InitMirrorsGenerator

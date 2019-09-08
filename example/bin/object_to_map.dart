@@ -27,12 +27,12 @@ class Person extends _$PersonSerializable {
 void main() {
   _initMirrors();
 
-  Person object = new Person()
+  Person object = Person()
     ..id = 1
     ..firstName = "Jhon"
     ..lastName = "Doe"
     ..height = 1.8
-    ..dateOfBirth = new DateTime(1988, 4, 1, 6, 31)
+    ..dateOfBirth = DateTime(1988, 4, 1, 6, 31)
     ..otherName = "Juan"
     ..notVisible = "hallo";
 

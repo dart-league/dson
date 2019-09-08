@@ -10,23 +10,23 @@ main() {
 
   group('ciclical test with id >', () {
 
-    var manager = new Employee()
+    var manager = Employee()
       ..id = 1
       ..firstName = 'Jhon'
       ..lastName = 'Doe';
-    manager.address = new Address()
+    manager.address = Address()
         ..id = 1
         ..street = 'some street'
         ..city = 'Miami'
         ..country = 'USA'
         ..owner = manager;
   
-    var employee = new Employee()
+    var employee = Employee()
       ..id = 2
       ..firstName = 'Luis'
       ..lastName = 'Vargas'
       ..manager = manager;
-    employee.address = new Address()
+    employee.address = Address()
         ..id = 2
         ..street = 'some street'
         ..city = 'Miami'
@@ -59,20 +59,20 @@ main() {
 
   group('Ciclical Test without id >', () {
 
-    var manager = new Employee2()
+    var manager = Employee2()
       ..firstName = 'Jhon'
       ..lastName = 'Doe';
-    manager.address = new Address2()
+    manager.address = Address2()
         ..street = 'some street'
         ..city = 'Miami'
         ..country = 'USA'
         ..owner = manager;
 
-    var employee = new Employee2()
+    var employee = Employee2()
       ..firstName = 'Luis'
       ..lastName = 'Vargas'
       ..manager = manager;
-    employee.address = new Address2()
+    employee.address = Address2()
         ..street = 'some street'
         ..city = 'Miami'
         ..country = 'USA'
@@ -140,26 +140,26 @@ main() {
   group('ciclical list test with id >', () {
 
 
-    var student1 = new Student()
+    var student1 = Student()
         ..id = 1
         ..name = 'student1',
-      student2 = new Student()
+      student2 = Student()
         ..id = 2
         ..name = 'student2',
-      student3 = new Student()
+      student3 = Student()
         ..id = 3
         ..name = 'student3',
-      course1 = new Course()
+      course1 = Course()
         ..id = 1
-        ..beginDate = new DateTime.utc(2015, 1, 1)
+        ..beginDate = DateTime.utc(2015, 1, 1)
         ..students = [student1, student2],
-      course2 = new Course()
+      course2 = Course()
         ..id = 2
-        ..beginDate = new DateTime.utc(2015, 1, 2)
+        ..beginDate = DateTime.utc(2015, 1, 2)
         ..students = [student2, student3],
-      course3 = new Course()
+      course3 = Course()
         ..id = 3
-        ..beginDate = new DateTime.utc(2015, 1, 3)
+        ..beginDate = DateTime.utc(2015, 1, 3)
         ..students = [student1, student3];
 
     student1.courses = [course1, course3];

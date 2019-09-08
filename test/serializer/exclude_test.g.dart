@@ -3,7 +3,7 @@
 part of serializer.exclude_test;
 
 // **************************************************************************
-// DsonGenerator
+// SerializableGenerator
 // **************************************************************************
 
 abstract class _$EmployeeSerializable extends SerializableMap {
@@ -46,10 +46,10 @@ abstract class _$EmployeeSerializable extends SerializableMap {
         lastName = __value;
         return;
       case 'address':
-        address = fromSerialized(__value, () => new Address());
+        address = fromSerialized(__value, () => Address());
         return;
       case 'manager':
-        manager = fromSerialized(__value, () => new Employee());
+        manager = fromSerialized(__value, () => Employee());
         return;
     }
     throwFieldNotFoundException(__key, 'Employee');
@@ -108,7 +108,7 @@ abstract class _$AddressSerializable extends SerializableMap {
         postalCode = __value;
         return;
       case 'owner':
-        owner = fromSerialized(__value, () => new Employee());
+        owner = fromSerialized(__value, () => Employee());
         return;
     }
     throwFieldNotFoundException(__key, 'Address');
@@ -150,10 +150,10 @@ abstract class _$Employee2Serializable extends SerializableMap {
         lastName = __value;
         return;
       case 'address':
-        address = fromSerialized(__value, () => new Address2());
+        address = fromSerialized(__value, () => Address2());
         return;
       case 'manager':
-        manager = fromSerialized(__value, () => new Employee2());
+        manager = fromSerialized(__value, () => Employee2());
         return;
     }
     throwFieldNotFoundException(__key, 'Employee2');
@@ -205,7 +205,7 @@ abstract class _$Address2Serializable extends SerializableMap {
         postalCode = __value;
         return;
       case 'owner':
-        owner = fromSerialized(__value, () => new Employee2());
+        owner = fromSerialized(__value, () => Employee2());
         return;
     }
     throwFieldNotFoundException(__key, 'Address2');
@@ -243,8 +243,8 @@ abstract class _$StudentSerializable extends SerializableMap {
         name = __value;
         return;
       case 'courses':
-        courses = fromSerialized(
-            __value, [() => new List<Course>(), () => new Course()]);
+        courses =
+            fromSerialized(__value, [() => List<Course>(), () => Course()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Student');
@@ -282,8 +282,8 @@ abstract class _$CourseSerializable extends SerializableMap {
         beginDate = fromSerializedDateTime(__value);
         return;
       case 'students':
-        students = fromSerialized(
-            __value, [() => new List<Student>(), () => new Student()]);
+        students =
+            fromSerialized(__value, [() => List<Student>(), () => Student()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Course');
@@ -296,36 +296,35 @@ abstract class _$CourseSerializable extends SerializableMap {
 // MirrorsGenerator
 // **************************************************************************
 
-_Employee__Constructor([positionalParams, namedParams]) => new Employee();
+_Employee__Constructor([positionalParams, namedParams]) => Employee();
 
-const $$Employee_fields_id = const DeclarationMirror(name: 'id', type: int);
+const $$Employee_fields_id = DeclarationMirror(name: 'id', type: int);
 const $$Employee_fields_firstName =
-    const DeclarationMirror(name: 'firstName', type: String);
+    DeclarationMirror(name: 'firstName', type: String);
 const $$Employee_fields_lastName =
-    const DeclarationMirror(name: 'lastName', type: String);
+    DeclarationMirror(name: 'lastName', type: String);
 const $$Employee_fields_address =
-    const DeclarationMirror(name: 'address', type: Address);
+    DeclarationMirror(name: 'address', type: Address);
 const $$Employee_fields_manager =
-    const DeclarationMirror(name: 'manager', type: Employee);
+    DeclarationMirror(name: 'manager', type: Employee);
 
-const EmployeeClassMirror =
-    const ClassMirror(name: 'Employee', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Employee__Constructor)
-}, annotations: const [
+const EmployeeClassMirror = ClassMirror(name: 'Employee', constructors: {
+  '': FunctionMirror(name: '', $call: _Employee__Constructor)
+}, annotations: [
   cyclical
-], fields: const {
+], fields: {
   'id': $$Employee_fields_id,
   'firstName': $$Employee_fields_firstName,
   'lastName': $$Employee_fields_lastName,
   'address': $$Employee_fields_address,
   'manager': $$Employee_fields_manager
-}, getters: const [
+}, getters: [
   'id',
   'firstName',
   'lastName',
   'address',
   'manager'
-], setters: const [
+], setters: [
   'id',
   'firstName',
   'lastName',
@@ -333,40 +332,36 @@ const EmployeeClassMirror =
   'manager'
 ]);
 
-_Address__Constructor([positionalParams, namedParams]) => new Address();
+_Address__Constructor([positionalParams, namedParams]) => Address();
 
-const $$Address_fields_id = const DeclarationMirror(name: 'id', type: int);
-const $$Address_fields_street =
-    const DeclarationMirror(name: 'street', type: String);
-const $$Address_fields_city =
-    const DeclarationMirror(name: 'city', type: String);
+const $$Address_fields_id = DeclarationMirror(name: 'id', type: int);
+const $$Address_fields_street = DeclarationMirror(name: 'street', type: String);
+const $$Address_fields_city = DeclarationMirror(name: 'city', type: String);
 const $$Address_fields_country =
-    const DeclarationMirror(name: 'country', type: String);
+    DeclarationMirror(name: 'country', type: String);
 const $$Address_fields_postalCode =
-    const DeclarationMirror(name: 'postalCode', type: String);
-const $$Address_fields_owner =
-    const DeclarationMirror(name: 'owner', type: Employee);
+    DeclarationMirror(name: 'postalCode', type: String);
+const $$Address_fields_owner = DeclarationMirror(name: 'owner', type: Employee);
 
-const AddressClassMirror =
-    const ClassMirror(name: 'Address', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Address__Constructor)
-}, annotations: const [
+const AddressClassMirror = ClassMirror(name: 'Address', constructors: {
+  '': FunctionMirror(name: '', $call: _Address__Constructor)
+}, annotations: [
   cyclical
-], fields: const {
+], fields: {
   'id': $$Address_fields_id,
   'street': $$Address_fields_street,
   'city': $$Address_fields_city,
   'country': $$Address_fields_country,
   'postalCode': $$Address_fields_postalCode,
   'owner': $$Address_fields_owner
-}, getters: const [
+}, getters: [
   'id',
   'street',
   'city',
   'country',
   'postalCode',
   'owner'
-], setters: const [
+], setters: [
   'id',
   'street',
   'city',
@@ -375,70 +370,67 @@ const AddressClassMirror =
   'owner'
 ]);
 
-_Employee2__Constructor([positionalParams, namedParams]) => new Employee2();
+_Employee2__Constructor([positionalParams, namedParams]) => Employee2();
 
 const $$Employee2_fields_firstName =
-    const DeclarationMirror(name: 'firstName', type: String);
+    DeclarationMirror(name: 'firstName', type: String);
 const $$Employee2_fields_lastName =
-    const DeclarationMirror(name: 'lastName', type: String);
+    DeclarationMirror(name: 'lastName', type: String);
 const $$Employee2_fields_address =
-    const DeclarationMirror(name: 'address', type: Address2);
+    DeclarationMirror(name: 'address', type: Address2);
 const $$Employee2_fields_manager =
-    const DeclarationMirror(name: 'manager', type: Employee2);
+    DeclarationMirror(name: 'manager', type: Employee2);
 
-const Employee2ClassMirror =
-    const ClassMirror(name: 'Employee2', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Employee2__Constructor)
-}, annotations: const [
+const Employee2ClassMirror = ClassMirror(name: 'Employee2', constructors: {
+  '': FunctionMirror(name: '', $call: _Employee2__Constructor)
+}, annotations: [
   cyclical
-], fields: const {
+], fields: {
   'firstName': $$Employee2_fields_firstName,
   'lastName': $$Employee2_fields_lastName,
   'address': $$Employee2_fields_address,
   'manager': $$Employee2_fields_manager
-}, getters: const [
+}, getters: [
   'firstName',
   'lastName',
   'address',
   'manager'
-], setters: const [
+], setters: [
   'firstName',
   'lastName',
   'address',
   'manager'
 ]);
 
-_Address2__Constructor([positionalParams, namedParams]) => new Address2();
+_Address2__Constructor([positionalParams, namedParams]) => Address2();
 
 const $$Address2_fields_street =
-    const DeclarationMirror(name: 'street', type: String);
-const $$Address2_fields_city =
-    const DeclarationMirror(name: 'city', type: String);
+    DeclarationMirror(name: 'street', type: String);
+const $$Address2_fields_city = DeclarationMirror(name: 'city', type: String);
 const $$Address2_fields_country =
-    const DeclarationMirror(name: 'country', type: String);
+    DeclarationMirror(name: 'country', type: String);
 const $$Address2_fields_postalCode =
-    const DeclarationMirror(name: 'postalCode', type: String);
+    DeclarationMirror(name: 'postalCode', type: String);
 const $$Address2_fields_owner =
-    const DeclarationMirror(name: 'owner', type: Employee2);
+    DeclarationMirror(name: 'owner', type: Employee2);
 
-const Address2ClassMirror =
-    const ClassMirror(name: 'Address2', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Address2__Constructor)
-}, annotations: const [
+const Address2ClassMirror = ClassMirror(name: 'Address2', constructors: {
+  '': FunctionMirror(name: '', $call: _Address2__Constructor)
+}, annotations: [
   cyclical
-], fields: const {
+], fields: {
   'street': $$Address2_fields_street,
   'city': $$Address2_fields_city,
   'country': $$Address2_fields_country,
   'postalCode': $$Address2_fields_postalCode,
   'owner': $$Address2_fields_owner
-}, getters: const [
+}, getters: [
   'street',
   'city',
   'country',
   'postalCode',
   'owner'
-], setters: const [
+], setters: [
   'street',
   'city',
   'country',
@@ -446,55 +438,52 @@ const Address2ClassMirror =
   'owner'
 ]);
 
-_Student__Constructor([positionalParams, namedParams]) => new Student();
+_Student__Constructor([positionalParams, namedParams]) => Student();
 
-const $$Student_fields_id = const DeclarationMirror(name: 'id', type: int);
-const $$Student_fields_name =
-    const DeclarationMirror(name: 'name', type: String);
+const $$Student_fields_id = DeclarationMirror(name: 'id', type: int);
+const $$Student_fields_name = DeclarationMirror(name: 'name', type: String);
 const $$Student_fields_courses =
-    const DeclarationMirror(name: 'courses', type: const [List, Course]);
+    DeclarationMirror(name: 'courses', type: [List, Course]);
 
-const StudentClassMirror =
-    const ClassMirror(name: 'Student', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Student__Constructor)
-}, annotations: const [
+const StudentClassMirror = ClassMirror(name: 'Student', constructors: {
+  '': FunctionMirror(name: '', $call: _Student__Constructor)
+}, annotations: [
   cyclical
-], fields: const {
+], fields: {
   'id': $$Student_fields_id,
   'name': $$Student_fields_name,
   'courses': $$Student_fields_courses
-}, getters: const [
+}, getters: [
   'id',
   'name',
   'courses'
-], setters: const [
+], setters: [
   'id',
   'name',
   'courses'
 ]);
 
-_Course__Constructor([positionalParams, namedParams]) => new Course();
+_Course__Constructor([positionalParams, namedParams]) => Course();
 
-const $$Course_fields_id = const DeclarationMirror(name: 'id', type: int);
+const $$Course_fields_id = DeclarationMirror(name: 'id', type: int);
 const $$Course_fields_beginDate =
-    const DeclarationMirror(name: 'beginDate', type: DateTime);
+    DeclarationMirror(name: 'beginDate', type: DateTime);
 const $$Course_fields_students =
-    const DeclarationMirror(name: 'students', type: const [List, Student]);
+    DeclarationMirror(name: 'students', type: [List, Student]);
 
-const CourseClassMirror =
-    const ClassMirror(name: 'Course', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Course__Constructor)
-}, annotations: const [
+const CourseClassMirror = ClassMirror(name: 'Course', constructors: {
+  '': FunctionMirror(name: '', $call: _Course__Constructor)
+}, annotations: [
   cyclical
-], fields: const {
+], fields: {
   'id': $$Course_fields_id,
   'beginDate': $$Course_fields_beginDate,
   'students': $$Course_fields_students
-}, getters: const [
+}, getters: [
   'id',
   'beginDate',
   'students'
-], setters: const [
+], setters: [
   'id',
   'beginDate',
   'students'

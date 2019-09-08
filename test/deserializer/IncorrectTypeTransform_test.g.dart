@@ -3,7 +3,7 @@
 part of IncorrectTypeTransform_test;
 
 // **************************************************************************
-// DsonGenerator
+// SerializableGenerator
 // **************************************************************************
 
 abstract class _$SomeSerializableSerializable extends SerializableMap {
@@ -27,12 +27,12 @@ abstract class _$SomeSerializableSerializable extends SerializableMap {
 // **************************************************************************
 
 _SomeSerializable__Constructor([positionalParams, namedParams]) =>
-    new SomeSerializable();
+    SomeSerializable();
 
-const SomeSerializableClassMirror = const ClassMirror(
+const SomeSerializableClassMirror = ClassMirror(
     name: 'SomeSerializable',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _SomeSerializable__Constructor)
+    constructors: {
+      '': FunctionMirror(name: '', $call: _SomeSerializable__Constructor)
     });
 
 // **************************************************************************

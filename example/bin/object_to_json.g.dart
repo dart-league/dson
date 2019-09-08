@@ -3,7 +3,7 @@
 part of example.object_to_json;
 
 // **************************************************************************
-// DsonGenerator
+// SerializableGenerator
 // **************************************************************************
 
 abstract class _$PersonSerializable extends SerializableMap {
@@ -86,32 +86,30 @@ abstract class _$PersonSerializable extends SerializableMap {
 // MirrorsGenerator
 // **************************************************************************
 
-_Person__Constructor([positionalParams, namedParams]) => new Person();
+_Person__Constructor([positionalParams, namedParams]) => Person();
 
-const $$Person_fields_id = const DeclarationMirror(name: 'id', type: int);
+const $$Person_fields_id = DeclarationMirror(name: 'id', type: int);
 const $$Person_fields_firstName =
-    const DeclarationMirror(name: 'firstName', type: String);
+    DeclarationMirror(name: 'firstName', type: String);
 const $$Person_fields_lastName =
-    const DeclarationMirror(name: 'lastName', type: dynamic);
-const $$Person_fields_height =
-    const DeclarationMirror(name: 'height', type: double);
+    DeclarationMirror(name: 'lastName', type: dynamic);
+const $$Person_fields_height = DeclarationMirror(name: 'height', type: double);
 const $$Person_fields_dateOfBirth =
-    const DeclarationMirror(name: 'dateOfBirth', type: DateTime);
-const $$Person_fields_otherName = const DeclarationMirror(
+    DeclarationMirror(name: 'dateOfBirth', type: DateTime);
+const $$Person_fields_otherName = DeclarationMirror(
   name: 'renamed',
   type: String,
 );
-const $$Person_fields_notVisible = const DeclarationMirror(
-    name: 'notVisible', type: String, annotations: const [ignore]);
+const $$Person_fields_notVisible =
+    DeclarationMirror(name: 'notVisible', type: String, annotations: [ignore]);
 const $$Person_fields__private =
-    const DeclarationMirror(name: '_private', type: String);
+    DeclarationMirror(name: '_private', type: String);
 const $$Person_fields_doGetter =
-    const DeclarationMirror(name: 'doGetter', type: String, isFinal: true);
+    DeclarationMirror(name: 'doGetter', type: String, isFinal: true);
 
-const PersonClassMirror =
-    const ClassMirror(name: 'Person', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Person__Constructor)
-}, fields: const {
+const PersonClassMirror = ClassMirror(name: 'Person', constructors: {
+  '': FunctionMirror(name: '', $call: _Person__Constructor)
+}, fields: {
   'id': $$Person_fields_id,
   'firstName': $$Person_fields_firstName,
   'lastName': $$Person_fields_lastName,
@@ -121,7 +119,7 @@ const PersonClassMirror =
   'notVisible': $$Person_fields_notVisible,
   '_private': $$Person_fields__private,
   'doGetter': $$Person_fields_doGetter
-}, getters: const [
+}, getters: [
   'doGetter',
   'id',
   'firstName',
@@ -131,7 +129,7 @@ const PersonClassMirror =
   'renamed',
   'notVisible',
   '_private'
-], setters: const [
+], setters: [
   'id',
   'firstName',
   'lastName',

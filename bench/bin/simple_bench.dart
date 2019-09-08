@@ -38,17 +38,17 @@ void main() {
   int deserializeTimeTotal = 0;
 
   for (int j=0; j<50; j++) {
-    var s = new Stopwatch()..start();
+    var s = Stopwatch()..start();
 
     for (int i=0; i<1000; i++)
     {
-      var complex = new Complex()
+      var complex = Complex()
         ..list = [
-          new Simple()..id = "item 0"..value = 0.0..flag = true,
-          new Simple()..id = "item 1"..value = 1.0..flag = false,
-          new Simple()..id = "item 2"..value = 2.0..flag = true
+          Simple()..id = "item 0"..value = 0.0..flag = true,
+          Simple()..id = "item 1"..value = 1.0..flag = false,
+          Simple()..id = "item 2"..value = 2.0..flag = true
         ]
-        ..simple = (new Simple()..id = "something"..value = 42.0..flag = true);
+        ..simple = (Simple()..id = "something"..value = 42.0..flag = true);
 
       toJson(complex);
     }

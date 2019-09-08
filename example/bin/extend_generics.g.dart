@@ -3,7 +3,7 @@
 part of extend_generics;
 
 // **************************************************************************
-// DsonGenerator
+// SerializableGenerator
 // **************************************************************************
 
 abstract class _$PersonSerializable<T> extends SerializableMap {
@@ -139,7 +139,7 @@ abstract class _$ManagerSerializable<T> extends SerializableMap {
     switch (__key) {
       case 'subordinates':
         subordinates = fromSerialized(
-            __value, [() => new List<Employee<T>>(), () => new Employee<T>()]);
+            __value, [() => List<Employee<T>>(), () => Employee<T>()]);
         return;
       case 'salary':
         salary = __value;
@@ -167,71 +167,66 @@ abstract class _$ManagerSerializable<T> extends SerializableMap {
 // MirrorsGenerator
 // **************************************************************************
 
-_Person__Constructor([positionalParams, namedParams]) => new Person();
+_Person__Constructor([positionalParams, namedParams]) => Person();
 
-const $$Person_fields_id = const DeclarationMirror(name: 'id', type: int);
+const $$Person_fields_id = DeclarationMirror(name: 'id', type: int);
 const $$Person_fields_firstName =
-    const DeclarationMirror(name: 'firstName', type: String);
+    DeclarationMirror(name: 'firstName', type: String);
 const $$Person_fields_lastName =
-    const DeclarationMirror(name: 'lastName', type: dynamic);
+    DeclarationMirror(name: 'lastName', type: dynamic);
 const $$Person_fields_dateOfBirth =
-    const DeclarationMirror(name: 'dateOfBirth', type: DateTime);
+    DeclarationMirror(name: 'dateOfBirth', type: DateTime);
 
-const PersonClassMirror =
-    const ClassMirror(name: 'Person', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Person__Constructor)
-}, fields: const {
+const PersonClassMirror = ClassMirror(name: 'Person', constructors: {
+  '': FunctionMirror(name: '', $call: _Person__Constructor)
+}, fields: {
   'id': $$Person_fields_id,
   'firstName': $$Person_fields_firstName,
   'lastName': $$Person_fields_lastName,
   'dateOfBirth': $$Person_fields_dateOfBirth
-}, getters: const [
+}, getters: [
   'id',
   'firstName',
   'lastName',
   'dateOfBirth'
-], setters: const [
+], setters: [
   'id',
   'firstName',
   'lastName',
   'dateOfBirth'
 ]);
 
-_Employee__Constructor([positionalParams, namedParams]) => new Employee();
+_Employee__Constructor([positionalParams, namedParams]) => Employee();
 
 const $$Employee_fields_salary =
-    const DeclarationMirror(name: 'salary', type: double);
+    DeclarationMirror(name: 'salary', type: double);
 
-const EmployeeClassMirror = const ClassMirror(
+const EmployeeClassMirror = ClassMirror(
     name: 'Employee',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _Employee__Constructor)
-    },
-    fields: const {
+    constructors: {'': FunctionMirror(name: '', $call: _Employee__Constructor)},
+    fields: {
       'salary': $$Employee_fields_salary,
       'id': $$Person_fields_id,
       'firstName': $$Person_fields_firstName,
       'lastName': $$Person_fields_lastName,
       'dateOfBirth': $$Person_fields_dateOfBirth
     },
-    getters: const ['salary', 'id', 'firstName', 'lastName', 'dateOfBirth'],
-    setters: const ['salary', 'id', 'firstName', 'lastName', 'dateOfBirth'],
+    getters: ['salary', 'id', 'firstName', 'lastName', 'dateOfBirth'],
+    setters: ['salary', 'id', 'firstName', 'lastName', 'dateOfBirth'],
     superclass: Person);
 
-_Manager__Constructor([positionalParams, namedParams]) => new Manager();
+_Manager__Constructor([positionalParams, namedParams]) => Manager();
 
 const $$Manager_fields_subordinates =
-    const DeclarationMirror(name: 'subordinates', type: const [
+    DeclarationMirror(name: 'subordinates', type: [
   List,
-  const [Employee, dynamic]
+  [Employee, dynamic]
 ]);
 
-const ManagerClassMirror = const ClassMirror(
+const ManagerClassMirror = ClassMirror(
     name: 'Manager',
-    constructors: const {
-      '': const FunctionMirror(name: '', $call: _Manager__Constructor)
-    },
-    fields: const {
+    constructors: {'': FunctionMirror(name: '', $call: _Manager__Constructor)},
+    fields: {
       'subordinates': $$Manager_fields_subordinates,
       'salary': $$Employee_fields_salary,
       'id': $$Person_fields_id,
@@ -239,7 +234,7 @@ const ManagerClassMirror = const ClassMirror(
       'lastName': $$Person_fields_lastName,
       'dateOfBirth': $$Person_fields_dateOfBirth
     },
-    getters: const [
+    getters: [
       'subordinates',
       'salary',
       'id',
@@ -247,7 +242,7 @@ const ManagerClassMirror = const ClassMirror(
       'lastName',
       'dateOfBirth'
     ],
-    setters: const [
+    setters: [
       'subordinates',
       'salary',
       'id',
@@ -256,7 +251,7 @@ const ManagerClassMirror = const ClassMirror(
       'dateOfBirth'
     ],
     superclass: Employee,
-    superinterfaces: const [IManager]);
+    superinterfaces: [IManager]);
 
 // **************************************************************************
 // InitMirrorsGenerator

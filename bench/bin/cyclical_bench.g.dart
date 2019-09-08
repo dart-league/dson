@@ -3,16 +3,16 @@
 part of cyclical_bench;
 
 // **************************************************************************
-// Generator: DsonGenerator
+// SerializableGenerator
 // **************************************************************************
 
 abstract class _$BookSerializable extends SerializableMap {
   int get id;
   String get name;
   List<Author> get authors;
-  void set id(int v);
-  void set name(String v);
-  void set authors(List<Author> v);
+  set id(int v);
+  set name(String v);
+  set authors(List<Author> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -35,7 +35,8 @@ abstract class _$BookSerializable extends SerializableMap {
         name = __value;
         return;
       case 'authors':
-        authors = __value;
+        authors =
+            fromSerialized(__value, [() => List<Author>(), () => Author()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Book');
@@ -48,9 +49,9 @@ abstract class _$AuthorSerializable extends SerializableMap {
   int get id;
   String get name;
   List<Book> get books;
-  void set id(int v);
-  void set name(String v);
-  void set books(List<Book> v);
+  set id(int v);
+  set name(String v);
+  set books(List<Book> v);
 
   operator [](Object __key) {
     switch (__key) {
@@ -73,7 +74,7 @@ abstract class _$AuthorSerializable extends SerializableMap {
         name = __value;
         return;
       case 'books':
-        books = __value;
+        books = fromSerialized(__value, [() => List<Book>(), () => Book()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Author');
@@ -83,64 +84,63 @@ abstract class _$AuthorSerializable extends SerializableMap {
 }
 
 // **************************************************************************
-// Generator: MirrorsGenerator
+// MirrorsGenerator
 // **************************************************************************
 
-_Book__Constructor([positionalParams, namedParams]) => new Book();
+_Book__Constructor([positionalParams, namedParams]) => Book();
 
-const $$Book_fields_id = const DeclarationMirror(name: 'id', type: int);
-const $$Book_fields_name = const DeclarationMirror(name: 'name', type: String);
+const $$Book_fields_id = DeclarationMirror(name: 'id', type: int);
+const $$Book_fields_name = DeclarationMirror(name: 'name', type: String);
 const $$Book_fields_authors =
-    const DeclarationMirror(name: 'authors', type: const [List, Author]);
+    DeclarationMirror(name: 'authors', type: [List, Author]);
 
-const BookClassMirror = const ClassMirror(name: 'Book', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Book__Constructor)
-}, annotations: const [
+const BookClassMirror = ClassMirror(name: 'Book', constructors: {
+  '': FunctionMirror(name: '', $call: _Book__Constructor)
+}, annotations: [
   cyclical,
-  const SomeAnnotation()
-], fields: const {
+  SomeAnnotation()
+], fields: {
   'id': $$Book_fields_id,
   'name': $$Book_fields_name,
   'authors': $$Book_fields_authors
-}, getters: const [
+}, getters: [
   'id',
   'name',
   'authors'
-], setters: const [
+], setters: [
   'id',
   'name',
   'authors'
 ]);
-_Author__Constructor([positionalParams, namedParams]) => new Author();
 
-const $$Author_fields_id = const DeclarationMirror(name: 'id', type: int);
-const $$Author_fields_name =
-    const DeclarationMirror(name: 'name', type: String);
+_Author__Constructor([positionalParams, namedParams]) => Author();
+
+const $$Author_fields_id = DeclarationMirror(name: 'id', type: int);
+const $$Author_fields_name = DeclarationMirror(name: 'name', type: String);
 const $$Author_fields_books =
-    const DeclarationMirror(name: 'books', type: const [List, Book]);
+    DeclarationMirror(name: 'books', type: [List, Book]);
 
-const AuthorClassMirror =
-    const ClassMirror(name: 'Author', constructors: const {
-  '': const FunctionMirror(name: '', $call: _Author__Constructor)
-}, annotations: const [
+const AuthorClassMirror = ClassMirror(name: 'Author', constructors: {
+  '': FunctionMirror(name: '', $call: _Author__Constructor)
+}, annotations: [
   cyclical,
-  const SomeAnnotation()
-], fields: const {
+  SomeAnnotation()
+], fields: {
   'id': $$Author_fields_id,
   'name': $$Author_fields_name,
   'books': $$Author_fields_books
-}, getters: const [
+}, getters: [
   'id',
   'name',
   'books'
-], setters: const [
+], setters: [
   'id',
   'name',
   'books'
 ]);
 
 // **************************************************************************
-// Generator: InitMirrorsGenerator
+// InitMirrorsGenerator
 // **************************************************************************
 
 _initMirrors() {

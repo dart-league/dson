@@ -26,7 +26,7 @@ main() {
   });
 
   test('serialize object with enum', () {
-    var o = new ObjectWithEnum()..color = Color.BLUE;
+    var o = ObjectWithEnum()..color = Color.BLUE;
     expect(toJson(o), '{"color":0}');
     expect(toJson(o..color = Color.RED), '{"color":1}');
     expect(toJson(o..color = Color.GREEN), '{"color":2}');

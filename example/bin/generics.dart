@@ -25,11 +25,11 @@ class Person extends _$PersonSerializable {
 main() {
   _initMirrors();
 
-  var p = new Person()
+  var p = Person()
     ..id = 1
     ..name = 'person 1';
 
-  var page = new Page<Person>()
+  var page = Page<Person>()
     ..size = 1
     ..number = 1
     ..total = 100

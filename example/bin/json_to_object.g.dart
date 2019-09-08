@@ -3,7 +3,7 @@
 part of example.json_to_object;
 
 // **************************************************************************
-// DsonGenerator
+// SerializableGenerator
 // **************************************************************************
 
 abstract class _$EntityClassSerializable extends SerializableMap {
@@ -57,7 +57,7 @@ abstract class _$EntityClassSerializable extends SerializableMap {
         return;
       case 'children':
         children = fromSerialized(
-            __value, [() => new List<EntityClass>(), () => new EntityClass()]);
+            __value, [() => List<EntityClass>(), () => EntityClass()]);
         return;
     }
     throwFieldNotFoundException(__key, 'EntityClass');
@@ -70,41 +70,39 @@ abstract class _$EntityClassSerializable extends SerializableMap {
 // MirrorsGenerator
 // **************************************************************************
 
-_EntityClass__Constructor([positionalParams, namedParams]) => new EntityClass();
+_EntityClass__Constructor([positionalParams, namedParams]) => EntityClass();
 
-const $$EntityClass_fields_name =
-    const DeclarationMirror(name: 'name', type: String);
+const $$EntityClass_fields_name = DeclarationMirror(name: 'name', type: String);
 const $$EntityClass_fields__setted =
-    const DeclarationMirror(name: '_setted', type: String);
-const $$EntityClass_fields_otherName = const DeclarationMirror(
+    DeclarationMirror(name: '_setted', type: String);
+const $$EntityClass_fields_otherName = DeclarationMirror(
   name: 'renamed',
   type: bool,
 );
-const $$EntityClass_fields_notVisible = const DeclarationMirror(
-    name: 'notVisible', type: String, annotations: const [ignore]);
+const $$EntityClass_fields_notVisible =
+    DeclarationMirror(name: 'notVisible', type: String, annotations: [ignore]);
 const $$EntityClass_fields_children =
-    const DeclarationMirror(name: 'children', type: const [List, EntityClass]);
+    DeclarationMirror(name: 'children', type: [List, EntityClass]);
 const $$EntityClass_fields_setted =
-    const DeclarationMirror(name: 'setted', type: String);
+    DeclarationMirror(name: 'setted', type: String);
 
-const EntityClassClassMirror =
-    const ClassMirror(name: 'EntityClass', constructors: const {
-  '': const FunctionMirror(name: '', $call: _EntityClass__Constructor)
-}, fields: const {
+const EntityClassClassMirror = ClassMirror(name: 'EntityClass', constructors: {
+  '': FunctionMirror(name: '', $call: _EntityClass__Constructor)
+}, fields: {
   'name': $$EntityClass_fields_name,
   '_setted': $$EntityClass_fields__setted,
   'renamed': $$EntityClass_fields_otherName,
   'notVisible': $$EntityClass_fields_notVisible,
   'children': $$EntityClass_fields_children,
   'setted': $$EntityClass_fields_setted
-}, getters: const [
+}, getters: [
   'setted',
   'name',
   '_setted',
   'renamed',
   'notVisible',
   'children'
-], setters: const [
+], setters: [
   'setted',
   'name',
   '_setted',
