@@ -31,16 +31,16 @@ abstract class _$JustObjectSerializable extends SerializableMap {
 }
 
 abstract class _$TestGetterSerializable extends SerializableMap {
-  String get name;
   String get _name;
+  String get name;
   set _name(String v);
 
   operator [](Object __key) {
     switch (__key) {
-      case 'name':
-        return name;
       case '_name':
         return _name;
+      case 'name':
+        return name;
     }
     throwFieldNotFoundException(__key, 'TestGetter');
   }
@@ -259,8 +259,8 @@ const TestGetterClassMirror = ClassMirror(name: 'TestGetter', constructors: {
   '_name': $$TestGetter_fields__name,
   'name': $$TestGetter_fields_name
 }, getters: [
-  'name',
-  '_name'
+  '_name',
+  'name'
 ], setters: [
   '_name'
 ]);

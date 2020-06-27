@@ -7,23 +7,21 @@ part of example.map_to_object;
 // **************************************************************************
 
 abstract class _$EntityClassSerializable extends SerializableMap {
-  String get setted;
   String get name;
   String get _setted;
   bool get otherName;
   String get notVisible;
   List<EntityClass> get children;
-  set setted(String v);
+  String get setted;
   set name(String v);
   set _setted(String v);
   set otherName(bool v);
   set notVisible(String v);
   set children(List<EntityClass> v);
+  set setted(String v);
 
   operator [](Object __key) {
     switch (__key) {
-      case 'setted':
-        return setted;
       case 'name':
         return name;
       case '_setted':
@@ -34,15 +32,14 @@ abstract class _$EntityClassSerializable extends SerializableMap {
         return notVisible;
       case 'children':
         return children;
+      case 'setted':
+        return setted;
     }
     throwFieldNotFoundException(__key, 'EntityClass');
   }
 
   operator []=(Object __key, __value) {
     switch (__key) {
-      case 'setted':
-        setted = __value;
-        return;
       case 'name':
         name = __value;
         return;
@@ -58,6 +55,9 @@ abstract class _$EntityClassSerializable extends SerializableMap {
       case 'children':
         children = fromSerialized(
             __value, [() => List<EntityClass>(), () => EntityClass()]);
+        return;
+      case 'setted':
+        setted = __value;
         return;
     }
     throwFieldNotFoundException(__key, 'EntityClass');
@@ -96,19 +96,19 @@ const EntityClassClassMirror = ClassMirror(name: 'EntityClass', constructors: {
   'children': $$EntityClass_fields_children,
   'setted': $$EntityClass_fields_setted
 }, getters: [
-  'setted',
   'name',
   '_setted',
   'renamed',
   'notVisible',
-  'children'
+  'children',
+  'setted'
 ], setters: [
-  'setted',
   'name',
   '_setted',
   'renamed',
   'notVisible',
-  'children'
+  'children',
+  'setted'
 ]);
 
 // **************************************************************************
