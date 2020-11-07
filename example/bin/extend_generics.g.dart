@@ -268,5 +268,7 @@ _initMirrors() {
       ? ManagerClassMirror
       : instance is Employee
           ? EmployeeClassMirror
-          : instance is Person ? PersonClassMirror : null;
+          : instance is Person
+              ? PersonClassMirror
+              : null;
 }

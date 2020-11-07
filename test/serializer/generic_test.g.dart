@@ -264,5 +264,7 @@ _initMirrors() {
 
   getClassMirrorFromGenericInstance = (instance) => instance is Resource
       ? ResourceClassMirror
-      : instance is Page ? PageClassMirror : null;
+      : instance is Page
+          ? PageClassMirror
+          : null;
 }

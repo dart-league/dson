@@ -512,5 +512,7 @@ _initMirrors() {
       ? ListTClassClassMirror
       : instance is GenericTClass
           ? GenericTClassClassMirror
-          : instance is GenericT1T2Class ? GenericT1T2ClassClassMirror : null;
+          : instance is GenericT1T2Class
+              ? GenericT1T2ClassClassMirror
+              : null;
 }
