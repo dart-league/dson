@@ -9,6 +9,17 @@
 * [ ] Add support for MessagePack
 * [ ] Add support for converting to array of values-only
 
+## 1.0.0
+
+- Upgrade `source_gen` to `^1.2.1`
+- Upgrade `build` to `^3.3.1`
+- Upgrade `analyzer` to `^0.40.0`
+- Upgrade `test` to `^1.20.2`
+- Upgrade `build_test` to `^2.1.5`
+- Upgrade `build_runner` to `^2.1.8`
+- Upgrade `built_mirrors` to `^1.0.0`
+- Upgrade `serializable` to `^1.0.0`
+
 ## 0.18.0
 
 - Upgrade `analyzer` to `^0.40.0`

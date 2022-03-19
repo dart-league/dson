@@ -1,3 +1,5 @@
+# DSON
+
 ![Build
 Status](https://travis-ci.org/dart-league/dson.svg?branch=master)
 
@@ -33,15 +35,15 @@ differences:
   - DSON uses the annotation `@serializable` instead `@entity` which is
     used by Dartson.
 
-# Comparison with other libraries
+## Comparison with other libraries
 
 <https://github.com/drails-dart/dart-serialise>
 
-# Tutorials
+## Tutorials
 
 ![DSON tutorials](http://img.youtube.com/vi/dZrCrCsw208/0.jpg)
 
-# Configuration
+## Configuration
 
 1- Create a new dart project.
 
@@ -63,10 +65,10 @@ dev_dependencies:
 3- Create/edit `bin/main.dart` or `web/main.dart` and add the code shown
 in any of the samples below.
 
-4- Run either `pub run build_runner build`, or `pub run build_runner
-watch`, or `pub run build_runner serve` in the console
+4- Run either `dart run build_runner build`, or `dart run build_runner
+watch`, or `dart run build_runner serve` in the console
 
-# Convert objects to JSON strings
+## Convert objects to JSON strings
 
 To convert objects to JSON strings you only need to use the `toJson`
 function, annotate the object with `@serializable` and pass the `object`
@@ -102,12 +104,12 @@ class Person extends _$PersonSerializable {
 void main() {
   _initMirrors();
 
-  Person object = new Person()
+  Person object = Person()
     ..id = 1
     ..firstName = "Jhon"
     ..lastName = "Doe"
     ..height = 1.8
-    ..dateOfBirth = new DateTime(1988, 4, 1, 6, 31)
+    ..dateOfBirth = DateTime(1988, 4, 1, 6, 31)
     ..otherName = "Juan"
     ..notVisible = "hallo";
 
@@ -117,17 +119,58 @@ void main() {
 }
 ```
 
-# Converting objects to Maps
+## Converting objects to Maps
 
 To convert objects to Maps you only need to use the `toMap` function,
 annotate the object with `@serializable` and pass the `object` to
 `toMap` function as parameter:
 
 ``` dart
-example/bin/object_to_map.dart
+library example.object_to_map; // this line is needed for the generator
+
+import 'package:dson/dson.dart';
+
+part 'object_to_map.g.dart';  // this line is needed for the generator
+
+@serializable
+class Person extends _$PersonSerializable {
+  int id;
+  String firstName;
+  var lastName; //This is a dynamic attribute could be String, int, duble, num, date or another type
+  double height;
+  DateTime dateOfBirth;
+
+  @SerializedName("renamed")
+  String otherName;
+
+  @ignore
+  String notVisible;
+
+  // private members are never serialized
+  String _private = "name";
+
+  String get doGetter => _private;
+}
+
+void main() {
+  _initMirrors();
+
+  Person object = Person()
+    ..id = 1
+    ..firstName = "Jhon"
+    ..lastName = "Doe"
+    ..height = 1.8
+    ..dateOfBirth = DateTime(1988, 4, 1, 6, 31)
+    ..otherName = "Juan"
+    ..notVisible = "hallo";
+
+  Map map = toMap(object);
+  print(map);
+  // will print: '{id:1, firstName: Jhon, lastName: Doe, height: 1.8, dateOfBirth: 1988-04-01T06:31:00.000, renamed: Juan, doGetter: name}'
+}
 ```
 
-## Serializing Cyclical Objects
+### Serializing Cyclical Objects
 
 To serialize objects that contains Cyclical References it would be
 needed to use the annotation `@cyclical`. If this annotation is present
@@ -170,23 +213,23 @@ class Address extends _$AddressSerializable {
 void main() {
   _initMirrors();
 
-  var manager = new Employee()
+  var manager = Employee()
     ..key = 1
     ..firstName = 'Jhon'
     ..lastName = 'Doe';
-  manager.address = new Address()
+  manager.address = Address()
     ..key = 1
     ..street = 'some street'
     ..city = 'Miami'
     ..country = 'USA'
     ..owner = manager;
 
-  var employee = new Employee()
+  var employee = Employee()
     ..key = 2
     ..firstName = 'Luis'
     ..lastName = 'Vargas'
     ..manager = manager;
-  employee.address = new Address()
+  employee.address = Address()
     ..key = 2
     ..street = 'some street'
     ..city = 'Miami'
@@ -256,26 +299,26 @@ void main() {
 // by the moment is needed to initialize the mirrors manually
   _initMirrors();
 
-  var student1 = new Student()
+  var student1 = Student()
     ..id = 1
     ..name = 'student1',
-      student2 = new Student()
+      student2 = Student()
         ..id = 2
         ..name = 'student2',
-      student3 = new Student()
+      student3 = Student()
         ..id = 3
         ..name = 'student3',
-      course1 = new Course()
+      course1 = Course()
         ..id = 1
-        ..beginDate = new DateTime.utc(2015, 1, 1)
+        ..beginDate = DateTime.utc(2015, 1, 1)
         ..students = [student1, student2],
-      course2 = new Course()
+      course2 = Course()
         ..id = 2
-        ..beginDate = new DateTime.utc(2015, 1, 2)
+        ..beginDate = DateTime.utc(2015, 1, 2)
         ..students = [student2, student3],
-      course3 = new Course()
+      course3 = Course()
         ..id = 3
-        ..beginDate = new DateTime.utc(2015, 1, 3)
+        ..beginDate = DateTime.utc(2015, 1, 3)
         ..students = [student1, student3];
 
   student1.courses = [course1, course3];
@@ -326,7 +369,7 @@ void main() {
 Without the annotation `@cyclical` the program is going to throw a stack
 overflow error caused by the serializing of cyclical objects.
 
-## Excluding attributes from being serialized
+### Excluding attributes from being serialized
 
 To exclude parameter from being serialized we have two options the first
 option is using `@ignore` over the attribute to ignore. However this
@@ -342,7 +385,6 @@ library example.exclude_attributes; // this line is needed for the generator
 
 import 'package:dson/dson.dart';
 
-// replace `main` for the name of your file
 part 'exclude_attributes.g.dart';  // this line is needed for the generator
 
 @serializable
@@ -367,26 +409,26 @@ class Course extends _$CourseSerializable {
 void main() {
   _initMirrors();
 
-  var student1 = new Student()
+  var student1 = Student()
     ..id = 1
     ..name = 'student1',
-      student2 = new Student()
+      student2 = Student()
         ..id = 2
         ..name = 'student2',
-      student3 = new Student()
+      student3 = Student()
         ..id = 3
         ..name = 'student3',
-      course1 = new Course()
+      course1 = Course()
         ..id = 1
-        ..beginDate = new DateTime.utc(2015, 1, 1)
+        ..beginDate = DateTime.utc(2015, 1, 1)
         ..students = [student1, student2],
-      course2 = new Course()
+      course2 = Course()
         ..id = 2
-        ..beginDate = new DateTime.utc(2015, 1, 2)
+        ..beginDate = DateTime.utc(2015, 1, 2)
         ..students = [student2, student3],
-      course3 = new Course()
+      course3 = Course()
         ..id = 3
-        ..beginDate = new DateTime.utc(2015, 1, 3)
+        ..beginDate = DateTime.utc(2015, 1, 3)
         ..students = [student1, student3];
 
   student1.courses = [course1, course3];
@@ -455,7 +497,7 @@ void main() {
 }
 ```
 
-# Convert JSON strings to objects
+## Convert JSON strings to objects
 
 To convert JSON strings to objects you only need to use the `fromJson`
 and `fromJsonList` functions and pass the `json` string to deserialize
@@ -506,7 +548,7 @@ void main() {
 }
 ```
 
-## Converting `Maps` and `Lists<Map>` to dart objects
+### Converting `Maps` and `Lists<Map>` to dart objects
 
 Frameworks like Angular.dart come with several HTTP services which
 already transform the HTTP response to a map using `JSON.encode`. To use
@@ -568,7 +610,7 @@ void main() {
 }
 ```
 
-# Extend Serializable Objects
+## Extend Serializable Objects
 
 To extends objects that are going to be serializable you will need to
 add the comment:
@@ -610,32 +652,32 @@ class Manager extends Employee with _$ManagerSerializable {
 main() {
   _initMirrors();
 
-  var person = new Person()
+  var person = Person()
     ..id = 1
     ..firstName = 'Jhon'
     ..lastName = 'Doe'
-    ..dateOfBirth = new DateTime.now();
+    ..dateOfBirth = DateTime.now();
 
   var personJson = toJson(person);
 
   print('personJson: $personJson');
 
-  var employee = new Employee()
+  var employee = Employee()
     ..id = 1
     ..firstName = 'Employee'
     ..lastName = 'Doe'
-    ..dateOfBirth = new DateTime.now()
+    ..dateOfBirth = DateTime.now()
     ..salary = 1000.0;
 
   var employeeJson = toJson(employee);
 
   print('employeeJson: $employeeJson');
 
-  var manager = new Manager()
+  var manager = Manager()
     ..id = 1
     ..firstName = 'Manager'
     ..lastName = 'Doe'
-    ..dateOfBirth = new DateTime.now()
+    ..dateOfBirth = DateTime.now()
     ..salary = 2000.0
     ..subordinates = [employee];
 
@@ -669,7 +711,7 @@ class Person extends _$PersonSerializable {
 main() {
   _initMirrors();
 
-  var p1 = new Person(id: 1, name: 'Jhon Doe');
+  var p1 = Person(id: 1, name: 'Jhon Doe');
 
   var p1Json = toJson(p1);
 
@@ -733,11 +775,11 @@ class Person extends _$PersonSerializable {
 main() {
   _initMirrors();
 
-  var p = new Person()
+  var p = Person()
     ..id = 1
     ..name = 'person 1';
 
-  var page = new Page<Person>()
+  var page = Page<Person>()
     ..size = 1
     ..number = 1
     ..total = 100
@@ -899,11 +941,11 @@ class Manager<T> extends Employee<T> with _$ManagerSerializable<T> implements IM
 main() {
   _initMirrors();
 
-  var person = new Person<String>()
+  var person = Person<String>()
     ..id = 1
     ..firstName = 'Jhon'
     ..lastName = 'Doe'
-    ..dateOfBirth = new DateTime.now();
+    ..dateOfBirth = DateTime.now();
 
   var personJson = toJson(person);
 
@@ -914,11 +956,11 @@ main() {
   print('person2.firstName: ${person2.firstName}');
   print('person2.lastName: ${person2.lastName}\n');
 
-  var employee = new Employee<String>()
+  var employee = Employee<String>()
     ..id = 1
     ..firstName = 'Employee'
     ..lastName = 'Doe'
-    ..dateOfBirth = new DateTime.now()
+    ..dateOfBirth = DateTime.now()
     ..salary = 1000.0;
   print(employee.runtimeType);
   var employeeJson = toJson(employee);
@@ -931,11 +973,11 @@ main() {
   print('employee2.lastName: ${employee2.lastName}');
   print('employee2.salary: ${employee2.salary}\n');
 
-  var manager = new Manager<String>()
+  var manager = Manager<String>()
     ..id = 1
     ..firstName = 'Manager'
     ..lastName = 'Doe'
-    ..dateOfBirth = new DateTime.now()
+    ..dateOfBirth = DateTime.now()
     ..salary = 2000.0
     ..subordinates = [employee];
 
@@ -949,25 +991,24 @@ main() {
   print('manager2.lastName: ${manager2.lastName}');
   print('manager2.salary: ${manager2.salary}');
   print('manager2.subordinates: ${manager2.subordinates}');
-
 }
 ```
 
-# Contribute
+## Contribute
 
-## Edit README
+### Edit README
 
 Please don’t edit `README.md`, instead edit `_README.adoc` then run next
 command:
 
     asciidoctor -b docbook _README.adoc && pandoc -f docbook -t gfm _README.xml -o README.md
 
-## Issues
+### Issues
 
-If you find any problem please create a new
+If you find any problem please create a
 [issue](https://github.com/dart-league/dson/issues/new)
 
-## Pull Request
+### Pull Request
 
 You can also help to maintain this project by creating a new [pull
 request](https://github.com/dart-league/dson/compare)

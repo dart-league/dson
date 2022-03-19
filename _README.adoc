@@ -1,4 +1,4 @@
-= DSON
+== DSON
 :toc: top
 
 image:https://travis-ci.org/dart-league/dson.svg?branch=master["Build Status"]
@@ -16,21 +16,22 @@ This library was initially a fork from https://github.com/eredo/dartson[Dartson]
     ** Using `exclude` map as parameter for `toJson` method. This is more flexible, since it allows to have many exclusion schemas for serialization.
  * DSON uses the annotation `@serializable` instead `@entity` which is used by Dartson.
 
-== Comparison with other libraries
+=== Comparison with other libraries
 
 https://github.com/drails-dart/dart-serialise
 
-== Tutorials
+=== Tutorials
 
 image:http://img.youtube.com/vi/dZrCrCsw208/0.jpg["DSON tutorials", link="https://www.youtube.com/watch?v=dZrCrCsw208&list=PLkMd51xTELZKV66oLUJLgnsFbOQy8irJ0"]
 
-== Configuration
+=== Configuration
 
 1- Create a new dart project.
 
 2- Add dependencies to `pubspec.yaml`
 
-```yaml
+[source,yaml]
+----
 ...
 dependencies:
   ...
@@ -41,29 +42,31 @@ dev_dependencies:
   build_runner: any
   build_web_compilers: any
   ...
-```
+----
 
 3- Create/edit `bin/main.dart` or `web/main.dart` and add the code shown in any of the samples below.
 
-4- Run either `pub run build_runner build`, or `pub run build_runner watch`, or `pub run build_runner serve` in the console
+4- Run either `dart run build_runner build`, or `dart run build_runner watch`, or `dart run build_runner serve` in the console
 
-== Convert objects to JSON strings
+=== Convert objects to JSON strings
 
 To convert objects to JSON strings you only need to use the `toJson` function, annotate the object with `@serializable` and pass the `object` to the `toJson` function as parameter:
 
-```dart
+[source,dart]
+----
 include::example/bin/object_to_json.dart[]
-```
+----
 
-== Converting objects to Maps
+=== Converting objects to Maps
 
 To convert objects to Maps you only need to use the `toMap` function, annotate the object with `@serializable` and pass the `object` to `toMap` function as parameter:
 
-```dart
-example/bin/object_to_map.dart
-```
+[source,dart]
+----
+include::example/bin/object_to_map.dart[]
+----
 
-=== Serializing Cyclical Objects
+==== Serializing Cyclical Objects
 
 To serialize objects that contains Cyclical References it would be needed to use the annotation `@cyclical`. If this annotation is present and the `depth` variable is not set then the non-primitive objects are not going to be parsed and only the id (or hashmap if the object does not contains id) is going to be present. Let's see next example:
 
@@ -81,7 +84,7 @@ include::example/bin/serialize_cyclical_list.dart[]
     
 Without the annotation `@cyclical` the program is going to throw a stack overflow error caused by the serializing of cyclical objects.
 
-=== Excluding attributes from being serialized
+==== Excluding attributes from being serialized
 
 To exclude parameter from being serialized we have two options the first option is using `@ignore` over the attribute to ignore. However this approach is too global. What I want to say with this is that the attribute is going to be ignored always.
 
@@ -91,7 +94,7 @@ Another way to exclude attributes is adding the parameter `exclude` to `serializ
 include::example/bin/exclude_attributes.dart[]
 ```
 
-== Convert JSON strings to objects
+=== Convert JSON strings to objects
 
 To convert JSON strings to objects you only need to use the `fromJson` and `fromJsonList` functions and pass the `json` string to deserialize and the `Type` of the object as parameters:
 
@@ -99,7 +102,7 @@ To convert JSON strings to objects you only need to use the `fromJson` and `from
 include::example/bin/json_to_object.dart[]
 ```
 
-=== Converting `Maps` and `Lists<Map>` to dart objects
+==== Converting `Maps` and `Lists<Map>` to dart objects
 
 Frameworks like Angular.dart come with several HTTP services which already transform the HTTP response to a map using `JSON.encode`. To use those encoded Maps or Lists use `fromMap` function.
 
@@ -107,7 +110,7 @@ Frameworks like Angular.dart come with several HTTP services which already trans
 include::example/bin/map_to_object.dart[]
 ```
 
-== Extend Serializable Objects
+=== Extend Serializable Objects
 
 To extends objects that are going to be serializable you will need to add the comment:
 
@@ -221,9 +224,9 @@ Extended Generics can also be handled by this library for example you can use ne
 include::example/bin/extend_generics.dart[]
 ```
 
-== Contribute
+=== Contribute
 
-=== Edit README
+==== Edit README
 
 Please don't edit `README.md`, instead edit `_README.adoc` then run next command:
 
@@ -231,10 +234,10 @@ Please don't edit `README.md`, instead edit `_README.adoc` then run next command
 asciidoctor -b docbook _README.adoc && pandoc -f docbook -t gfm _README.xml -o README.md
 ```
 
-=== Issues
+==== Issues
 
 If you find any problem please create a https://github.com/dart-league/dson/issues/new[issue]
 
-=== Pull Request
+==== Pull Request
 
 You can also help to maintain this project by creating a new https://github.com/dart-league/dson/compare[pull request]

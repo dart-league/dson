@@ -34,9 +34,6 @@ abstract class _$ObjectWithEnumSerializable extends SerializableMap {
 // MirrorsGenerator
 // **************************************************************************
 
-const ColorClassMirror =
-    ClassMirror(name: 'Color', isEnum: true, values: Color.values);
-
 _ObjectWithEnum__Constructor([positionalParams, namedParams]) =>
     ObjectWithEnum();
 
@@ -57,6 +54,9 @@ const ObjectWithEnumClassMirror = ClassMirror(
     setters: [
       'color'
     ]);
+
+const ColorClassMirror =
+    ClassMirror(name: 'Color', isEnum: true, values: Color.values);
 
 // **************************************************************************
 // InitMirrorsGenerator

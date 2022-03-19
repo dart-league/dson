@@ -105,7 +105,7 @@ const $$Person_fields_notVisible =
 const $$Person_fields__private =
     DeclarationMirror(name: '_private', type: String);
 const $$Person_fields_doGetter =
-    DeclarationMirror(name: 'doGetter', type: String, isFinal: true);
+    DeclarationMirror(name: 'doGetter', type: String);
 
 const PersonClassMirror = ClassMirror(name: 'Person', constructors: {
   '': FunctionMirror(name: '', $call: _Person__Constructor)

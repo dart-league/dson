@@ -247,8 +247,7 @@ _TestGetter__Constructor([positionalParams, namedParams]) =>
 
 const $$TestGetter_fields__name =
     DeclarationMirror(name: '_name', type: String);
-const $$TestGetter_fields_name =
-    DeclarationMirror(name: 'name', type: String, isFinal: true);
+const $$TestGetter_fields_name = DeclarationMirror(name: 'name', type: String);
 
 const TestGetterClassMirror = ClassMirror(name: 'TestGetter', constructors: {
   '': FunctionMirror(
