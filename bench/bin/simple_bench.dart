@@ -5,17 +5,17 @@ import 'package:dson/dson.dart';
 part 'simple_bench.g.dart';
 
 @serializable
-class Simple extends _$SimpleSerializable {
-  String id;
-  double value;
-  bool flag;
+class Simple extends SerializableMap with _$SimpleSerializable {
+  String? id;
+  double? value;
+  bool? flag;
 }
 
 
 @serializable
-class Complex extends _$ComplexSerializable {
-  Simple simple;
-  List<Simple> list;
+class Complex extends SerializableMap with _$ComplexSerializable {
+  Simple? simple;
+  List<Simple>? list;
 }
 
 void main() {
@@ -37,19 +37,19 @@ void main() {
   int serializeTimeTotal = 0;
   int deserializeTimeTotal = 0;
 
+  final complex = Complex()
+    ..list = [
+      Simple()..id = "item 0"..value = 0.0..flag = true,
+      Simple()..id = "item 1"..value = 1.0..flag = false,
+      Simple()..id = "item 2"..value = 2.0..flag = true
+    ]
+    ..simple = (Simple()..id = "something"..value = 42.0..flag = true);
+
   for (int j=0; j<50; j++) {
     var s = Stopwatch()..start();
 
-    for (int i=0; i<1000; i++)
+    for (int i=0; i<10000; i++)
     {
-      var complex = Complex()
-        ..list = [
-          Simple()..id = "item 0"..value = 0.0..flag = true,
-          Simple()..id = "item 1"..value = 1.0..flag = false,
-          Simple()..id = "item 2"..value = 2.0..flag = true
-        ]
-        ..simple = (Simple()..id = "something"..value = 42.0..flag = true);
-
       toJson(complex);
     }
 

@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of dson_example_web;
+part of 'main.dart';
 
 // **************************************************************************
 // SerializableGenerator
 // **************************************************************************
 
-abstract class _$PersonSerializable extends SerializableMap {
-  int get id;
-  String get firstName;
-  String get lastName;
-  DateTime get dateOfBirth;
-  set id(int v);
-  set firstName(String v);
-  set lastName(String v);
-  set dateOfBirth(DateTime v);
+mixin _$PersonSerializable on SerializableMap {
+  int? get id;
+  String? get firstName;
+  String? get lastName;
+  DateTime? get dateOfBirth;
+  set id(int? v);
+  set firstName(String? v);
+  set lastName(String? v);
+  set dateOfBirth(DateTime? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'id':
         return id;
@@ -30,7 +30,7 @@ abstract class _$PersonSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Person');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'id':
         id = __value;
@@ -48,22 +48,22 @@ abstract class _$PersonSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Person');
   }
 
-  Iterable<String> get keys => PersonClassMirror.fields.keys;
+  Iterable<String> get keys => PersonClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$EmployeeSerializable extends SerializableMap {
-  double get salary;
-  int get id;
-  String get firstName;
-  String get lastName;
-  DateTime get dateOfBirth;
-  set salary(double v);
-  set id(int v);
-  set firstName(String v);
-  set lastName(String v);
-  set dateOfBirth(DateTime v);
+mixin _$EmployeeSerializable on SerializableMap {
+  double? get salary;
+  int? get id;
+  String? get firstName;
+  String? get lastName;
+  DateTime? get dateOfBirth;
+  set salary(double? v);
+  set id(int? v);
+  set firstName(String? v);
+  set lastName(String? v);
+  set dateOfBirth(DateTime? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'salary':
         return salary;
@@ -79,7 +79,7 @@ abstract class _$EmployeeSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Employee');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'salary':
         salary = __value;
@@ -100,24 +100,24 @@ abstract class _$EmployeeSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Employee');
   }
 
-  Iterable<String> get keys => EmployeeClassMirror.fields.keys;
+  Iterable<String> get keys => EmployeeClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$ManagerSerializable extends SerializableMap {
-  List<Employee> get subordinates;
-  double get salary;
-  int get id;
-  String get firstName;
-  String get lastName;
-  DateTime get dateOfBirth;
-  set subordinates(List<Employee> v);
-  set salary(double v);
-  set id(int v);
-  set firstName(String v);
-  set lastName(String v);
-  set dateOfBirth(DateTime v);
+mixin _$ManagerSerializable on SerializableMap {
+  List<Employee>? get subordinates;
+  double? get salary;
+  int? get id;
+  String? get firstName;
+  String? get lastName;
+  DateTime? get dateOfBirth;
+  set subordinates(List<Employee>? v);
+  set salary(double? v);
+  set id(int? v);
+  set firstName(String? v);
+  set lastName(String? v);
+  set dateOfBirth(DateTime? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'subordinates':
         return subordinates;
@@ -135,11 +135,11 @@ abstract class _$ManagerSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Manager');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'subordinates':
-        subordinates =
-            fromSerialized(__value, [() => List<Employee>(), () => Employee()]);
+        subordinates = fromSerialized(__value,
+            [() => List<Employee>.empty(growable: true), () => Employee()]);
         return;
       case 'salary':
         salary = __value;
@@ -160,7 +160,7 @@ abstract class _$ManagerSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Manager');
   }
 
-  Iterable<String> get keys => ManagerClassMirror.fields.keys;
+  Iterable<String> get keys => ManagerClassMirror.fields?.keys ?? [];
 }
 
 // **************************************************************************
@@ -177,24 +177,18 @@ const $$Person_fields_lastName =
 const $$Person_fields_dateOfBirth =
     DeclarationMirror(name: 'dateOfBirth', type: DateTime);
 
-const PersonClassMirror = ClassMirror(name: 'Person', constructors: {
-  '': FunctionMirror(name: '', $call: _Person__Constructor)
-}, fields: {
-  'id': $$Person_fields_id,
-  'firstName': $$Person_fields_firstName,
-  'lastName': $$Person_fields_lastName,
-  'dateOfBirth': $$Person_fields_dateOfBirth
-}, getters: [
-  'id',
-  'firstName',
-  'lastName',
-  'dateOfBirth'
-], setters: [
-  'id',
-  'firstName',
-  'lastName',
-  'dateOfBirth'
-]);
+const PersonClassMirror = ClassMirror(
+    name: 'Person',
+    constructors: {'': FunctionMirror(name: '', $call: _Person__Constructor)},
+    fields: {
+      'id': $$Person_fields_id,
+      'firstName': $$Person_fields_firstName,
+      'lastName': $$Person_fields_lastName,
+      'dateOfBirth': $$Person_fields_dateOfBirth
+    },
+    getters: ['id', 'firstName', 'lastName', 'dateOfBirth'],
+    setters: ['id', 'firstName', 'lastName', 'dateOfBirth'],
+    superclass: SerializableMap);
 
 _Employee__Constructor([positionalParams, namedParams]) => Employee();
 

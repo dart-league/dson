@@ -1,17 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of deserialiazer.deserialize_generic_test;
+part of 'deserializer_generic_test.dart';
 
 // **************************************************************************
 // SerializableGenerator
 // **************************************************************************
 
-abstract class _$SimpleClassSerializable extends SerializableMap {
-  String get name;
-  set name(String v);
+mixin _$SimpleClassSerializable on SerializableMap {
+  String? get name;
+  set name(String? v);
   String toString();
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'name':
         return name;
@@ -21,7 +21,7 @@ abstract class _$SimpleClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'SimpleClass');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'name':
         name = __value;
@@ -30,14 +30,14 @@ abstract class _$SimpleClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'SimpleClass');
   }
 
-  Iterable<String> get keys => SimpleClassClassMirror.fields.keys;
+  Iterable<String> get keys => SimpleClassClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$ListClassSerializable extends SerializableMap {
-  List<SimpleClass> get list;
-  set list(List<SimpleClass> v);
+mixin _$ListClassSerializable on SerializableMap {
+  List<SimpleClass>? get list;
+  set list(List<SimpleClass>? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'list':
         return list;
@@ -45,24 +45,26 @@ abstract class _$ListClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'ListClass');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'list':
-        list = fromSerialized(
-            __value, [() => List<SimpleClass>(), () => SimpleClass()]);
+        list = fromSerialized(__value, [
+          () => List<SimpleClass>.empty(growable: true),
+          () => SimpleClass()
+        ]);
         return;
     }
     throwFieldNotFoundException(__key, 'ListClass');
   }
 
-  Iterable<String> get keys => ListClassClassMirror.fields.keys;
+  Iterable<String> get keys => ListClassClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$ListTClassSerializable<T> extends SerializableMap {
-  List<T> get listT;
-  set listT(List<T> v);
+mixin _$ListTClassSerializable<T> on SerializableMap {
+  List<T>? get listT;
+  set listT(List<T>? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'listT':
         return listT;
@@ -70,23 +72,23 @@ abstract class _$ListTClassSerializable<T> extends SerializableMap {
     throwFieldNotFoundException(__key, 'ListTClass');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'listT':
-        listT = fromSerialized(__value, () => List<T>());
+        listT = fromSerialized(__value, () => List<T>.empty(growable: true));
         return;
     }
     throwFieldNotFoundException(__key, 'ListTClass');
   }
 
-  Iterable<String> get keys => ListTClassClassMirror.fields.keys;
+  Iterable<String> get keys => ListTClassClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$GenericTClassSerializable<T> extends SerializableMap {
-  T get t;
-  set t(T v);
+mixin _$GenericTClassSerializable<T> on SerializableMap {
+  T? get t;
+  set t(T? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 't':
         return t;
@@ -94,7 +96,7 @@ abstract class _$GenericTClassSerializable<T> extends SerializableMap {
     throwFieldNotFoundException(__key, 'GenericTClass');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 't':
         t = __value;
@@ -103,16 +105,16 @@ abstract class _$GenericTClassSerializable<T> extends SerializableMap {
     throwFieldNotFoundException(__key, 'GenericTClass');
   }
 
-  Iterable<String> get keys => GenericTClassClassMirror.fields.keys;
+  Iterable<String> get keys => GenericTClassClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$GenericT1T2ClassSerializable<T1, T2> extends SerializableMap {
-  T1 get t1;
-  T2 get t2;
-  set t1(T1 v);
-  set t2(T2 v);
+mixin _$GenericT1T2ClassSerializable<T1, T2> on SerializableMap {
+  T1? get t1;
+  T2? get t2;
+  set t1(T1? v);
+  set t2(T2? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 't1':
         return t1;
@@ -122,7 +124,7 @@ abstract class _$GenericT1T2ClassSerializable<T1, T2> extends SerializableMap {
     throwFieldNotFoundException(__key, 'GenericT1T2Class');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 't1':
         t1 = __value;
@@ -134,14 +136,14 @@ abstract class _$GenericT1T2ClassSerializable<T1, T2> extends SerializableMap {
     throwFieldNotFoundException(__key, 'GenericT1T2Class');
   }
 
-  Iterable<String> get keys => GenericT1T2ClassClassMirror.fields.keys;
+  Iterable<String> get keys => GenericT1T2ClassClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$ListListClassSerializable extends SerializableMap {
-  List<List<SimpleClass>> get list;
-  set list(List<List<SimpleClass>> v);
+mixin _$ListListClassSerializable on SerializableMap {
+  List<List<SimpleClass>>? get list;
+  set list(List<List<SimpleClass>>? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'list':
         return list;
@@ -149,26 +151,26 @@ abstract class _$ListListClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'ListListClass');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'list':
         list = fromSerialized(__value, [
-          () => List<List<SimpleClass>>(),
-          [() => List<SimpleClass>(), () => SimpleClass()]
+          () => List<List<SimpleClass>>.empty(growable: true),
+          [() => List<SimpleClass>.empty(growable: true), () => SimpleClass()]
         ]);
         return;
     }
     throwFieldNotFoundException(__key, 'ListListClass');
   }
 
-  Iterable<String> get keys => ListListClassClassMirror.fields.keys;
+  Iterable<String> get keys => ListListClassClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$ListListListClassSerializable extends SerializableMap {
-  List<List<List<SimpleClass>>> get list;
-  set list(List<List<List<SimpleClass>>> v);
+mixin _$ListListListClassSerializable on SerializableMap {
+  List<List<List<SimpleClass>>>? get list;
+  set list(List<List<List<SimpleClass>>>? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'list':
         return list;
@@ -176,14 +178,14 @@ abstract class _$ListListListClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'ListListListClass');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'list':
         list = fromSerialized(__value, [
-          () => List<List<List<SimpleClass>>>(),
+          () => List<List<List<SimpleClass>>>.empty(growable: true),
           [
-            () => List<List<SimpleClass>>(),
-            [() => List<SimpleClass>(), () => SimpleClass()]
+            () => List<List<SimpleClass>>.empty(growable: true),
+            [() => List<SimpleClass>.empty(growable: true), () => SimpleClass()]
           ]
         ]);
         return;
@@ -191,14 +193,14 @@ abstract class _$ListListListClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'ListListListClass');
   }
 
-  Iterable<String> get keys => ListListListClassClassMirror.fields.keys;
+  Iterable<String> get keys => ListListListClassClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$ListMapClassSerializable extends SerializableMap {
-  List<Map<String, SimpleClass>> get list;
-  set list(List<Map<String, SimpleClass>> v);
+mixin _$ListMapClassSerializable on SerializableMap {
+  List<Map<String, SimpleClass>>? get list;
+  set list(List<Map<String, SimpleClass>>? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'list':
         return list;
@@ -206,11 +208,11 @@ abstract class _$ListMapClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'ListMapClass');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'list':
         list = fromSerialized(__value, [
-          () => List<Map<String, SimpleClass>>(),
+          () => List<Map<String, SimpleClass>>.empty(growable: true),
           [() => Map<String, SimpleClass>(), null, () => SimpleClass()]
         ]);
         return;
@@ -218,14 +220,14 @@ abstract class _$ListMapClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'ListMapClass');
   }
 
-  Iterable<String> get keys => ListMapClassClassMirror.fields.keys;
+  Iterable<String> get keys => ListMapClassClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$ListListMapClassSerializable extends SerializableMap {
-  List<List<Map<String, SimpleClass>>> get list;
-  set list(List<List<Map<String, SimpleClass>>> v);
+mixin _$ListListMapClassSerializable on SerializableMap {
+  List<List<Map<String, SimpleClass>>>? get list;
+  set list(List<List<Map<String, SimpleClass>>>? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'list':
         return list;
@@ -233,13 +235,13 @@ abstract class _$ListListMapClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'ListListMapClass');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'list':
         list = fromSerialized(__value, [
-          () => List<List<Map<String, SimpleClass>>>(),
+          () => List<List<Map<String, SimpleClass>>>.empty(growable: true),
           [
-            () => List<Map<String, SimpleClass>>(),
+            () => List<Map<String, SimpleClass>>.empty(growable: true),
             [() => Map<String, SimpleClass>(), null, () => SimpleClass()]
           ]
         ]);
@@ -248,14 +250,14 @@ abstract class _$ListListMapClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'ListListMapClass');
   }
 
-  Iterable<String> get keys => ListListMapClassClassMirror.fields.keys;
+  Iterable<String> get keys => ListListMapClassClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$MapClassSerializable extends SerializableMap {
-  Map<String, SimpleClass> get myMap;
-  set myMap(Map<String, SimpleClass> v);
+mixin _$MapClassSerializable on SerializableMap {
+  Map<String, SimpleClass>? get myMap;
+  set myMap(Map<String, SimpleClass>? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'myMap':
         return myMap;
@@ -263,7 +265,7 @@ abstract class _$MapClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'MapClass');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'myMap':
         myMap = fromSerialized(__value,
@@ -273,7 +275,7 @@ abstract class _$MapClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'MapClass');
   }
 
-  Iterable<String> get keys => MapClassClassMirror.fields.keys;
+  Iterable<String> get keys => MapClassClassMirror.fields?.keys ?? [];
 }
 
 // **************************************************************************
@@ -284,50 +286,51 @@ _SimpleClass__Constructor([positionalParams, namedParams]) => SimpleClass();
 
 const $$SimpleClass_fields_name = DeclarationMirror(name: 'name', type: String);
 
-const SimpleClassClassMirror = ClassMirror(name: 'SimpleClass', constructors: {
-  '': FunctionMirror(name: '', $call: _SimpleClass__Constructor)
-}, fields: {
-  'name': $$SimpleClass_fields_name
-}, getters: [
-  'name'
-], setters: [
-  'name'
-], methods: {
-  'toString': FunctionMirror(
-    name: 'toString',
-    returnType: String,
-  )
-});
+const SimpleClassClassMirror = ClassMirror(
+    name: 'SimpleClass',
+    constructors: {
+      '': FunctionMirror(name: '', $call: _SimpleClass__Constructor)
+    },
+    fields: {'name': $$SimpleClass_fields_name},
+    getters: ['name'],
+    setters: ['name'],
+    methods: {
+      'toString': FunctionMirror(
+        name: 'toString',
+        returnType: String,
+      )
+    },
+    superclass: SerializableMap);
 
 _ListClass__Constructor([positionalParams, namedParams]) => ListClass();
 
 const $$ListClass_fields_list =
     DeclarationMirror(name: 'list', type: [List, SimpleClass]);
 
-const ListClassClassMirror = ClassMirror(name: 'ListClass', constructors: {
-  '': FunctionMirror(name: '', $call: _ListClass__Constructor)
-}, fields: {
-  'list': $$ListClass_fields_list
-}, getters: [
-  'list'
-], setters: [
-  'list'
-]);
+const ListClassClassMirror = ClassMirror(
+    name: 'ListClass',
+    constructors: {
+      '': FunctionMirror(name: '', $call: _ListClass__Constructor)
+    },
+    fields: {'list': $$ListClass_fields_list},
+    getters: ['list'],
+    setters: ['list'],
+    superclass: SerializableMap);
 
 _ListTClass__Constructor([positionalParams, namedParams]) => ListTClass();
 
 const $$ListTClass_fields_listT =
     DeclarationMirror(name: 'listT', type: [List, dynamic]);
 
-const ListTClassClassMirror = ClassMirror(name: 'ListTClass', constructors: {
-  '': FunctionMirror(name: '', $call: _ListTClass__Constructor)
-}, fields: {
-  'listT': $$ListTClass_fields_listT
-}, getters: [
-  'listT'
-], setters: [
-  'listT'
-]);
+const ListTClassClassMirror = ClassMirror(
+    name: 'ListTClass',
+    constructors: {
+      '': FunctionMirror(name: '', $call: _ListTClass__Constructor)
+    },
+    fields: {'listT': $$ListTClass_fields_listT},
+    getters: ['listT'],
+    setters: ['listT'],
+    superclass: SerializableMap);
 
 _GenericTClass__Constructor([positionalParams, namedParams]) => GenericTClass();
 
@@ -338,15 +341,10 @@ const GenericTClassClassMirror = ClassMirror(
     constructors: {
       '': FunctionMirror(name: '', $call: _GenericTClass__Constructor)
     },
-    fields: {
-      't': $$GenericTClass_fields_t
-    },
-    getters: [
-      't'
-    ],
-    setters: [
-      't'
-    ]);
+    fields: {'t': $$GenericTClass_fields_t},
+    getters: ['t'],
+    setters: ['t'],
+    superclass: SerializableMap);
 
 _GenericT1T2Class__Constructor([positionalParams, namedParams]) =>
     GenericT1T2Class();
@@ -365,14 +363,9 @@ const GenericT1T2ClassClassMirror = ClassMirror(
       't1': $$GenericT1T2Class_fields_t1,
       't2': $$GenericT1T2Class_fields_t2
     },
-    getters: [
-      't1',
-      't2'
-    ],
-    setters: [
-      't1',
-      't2'
-    ]);
+    getters: ['t1', 't2'],
+    setters: ['t1', 't2'],
+    superclass: SerializableMap);
 
 _ListListClass__Constructor([positionalParams, namedParams]) => ListListClass();
 
@@ -386,15 +379,10 @@ const ListListClassClassMirror = ClassMirror(
     constructors: {
       '': FunctionMirror(name: '', $call: _ListListClass__Constructor)
     },
-    fields: {
-      'list': $$ListListClass_fields_list
-    },
-    getters: [
-      'list'
-    ],
-    setters: [
-      'list'
-    ]);
+    fields: {'list': $$ListListClass_fields_list},
+    getters: ['list'],
+    setters: ['list'],
+    superclass: SerializableMap);
 
 _ListListListClass__Constructor([positionalParams, namedParams]) =>
     ListListListClass();
@@ -412,15 +400,10 @@ const ListListListClassClassMirror = ClassMirror(
     constructors: {
       '': FunctionMirror(name: '', $call: _ListListListClass__Constructor)
     },
-    fields: {
-      'list': $$ListListListClass_fields_list
-    },
-    getters: [
-      'list'
-    ],
-    setters: [
-      'list'
-    ]);
+    fields: {'list': $$ListListListClass_fields_list},
+    getters: ['list'],
+    setters: ['list'],
+    superclass: SerializableMap);
 
 _ListMapClass__Constructor([positionalParams, namedParams]) => ListMapClass();
 
@@ -437,15 +420,10 @@ const ListMapClassClassMirror = ClassMirror(
     constructors: {
       '': FunctionMirror(name: '', $call: _ListMapClass__Constructor)
     },
-    fields: {
-      'list': $$ListMapClass_fields_list
-    },
-    getters: [
-      'list'
-    ],
-    setters: [
-      'list'
-    ]);
+    fields: {'list': $$ListMapClass_fields_list},
+    getters: ['list'],
+    setters: ['list'],
+    superclass: SerializableMap);
 
 _ListListMapClass__Constructor([positionalParams, namedParams]) =>
     ListListMapClass();
@@ -466,15 +444,10 @@ const ListListMapClassClassMirror = ClassMirror(
     constructors: {
       '': FunctionMirror(name: '', $call: _ListListMapClass__Constructor)
     },
-    fields: {
-      'list': $$ListListMapClass_fields_list
-    },
-    getters: [
-      'list'
-    ],
-    setters: [
-      'list'
-    ]);
+    fields: {'list': $$ListListMapClass_fields_list},
+    getters: ['list'],
+    setters: ['list'],
+    superclass: SerializableMap);
 
 _MapClass__Constructor([positionalParams, namedParams]) => MapClass();
 
@@ -488,7 +461,8 @@ const MapClassClassMirror = ClassMirror(
     constructors: {'': FunctionMirror(name: '', $call: _MapClass__Constructor)},
     fields: {'myMap': $$MapClass_fields_myMap},
     getters: ['myMap'],
-    setters: ['myMap']);
+    setters: ['myMap'],
+    superclass: SerializableMap);
 
 // **************************************************************************
 // InitMirrorsGenerator

@@ -6,13 +6,13 @@ import 'package:test/test.dart';
 part 'simple_test.g.dart';
 
 @serializable
-class JustObject extends _$JustObjectSerializable {
-  Object object;
+class JustObject extends SerializableMap with _$JustObjectSerializable {
+  Object? object;
 }
 
 @serializable
-class TestGetter extends _$TestGetterSerializable {
-  TestGetter([this._name]);
+class TestGetter extends SerializableMap with _$TestGetterSerializable {
+  TestGetter([this._name = '']);
 
   String _name;
 
@@ -20,7 +20,7 @@ class TestGetter extends _$TestGetterSerializable {
 }
 
 @serializable
-class NestedClass extends _$NestedClassSerializable {
+class NestedClass extends SerializableMap with _$NestedClassSerializable {
   String name;
   List list;
   TestGetter getter;
@@ -29,34 +29,34 @@ class NestedClass extends _$NestedClassSerializable {
 }
 
 @serializable
-class SetClass extends _$SetClassSerializable {
+class SetClass extends SerializableMap with _$SetClassSerializable {
   Set names;
 
   SetClass(this.names);
 }
 
 @serializable
-class TestClass1 extends _$TestClass1Serializable {
-  String name;
-  bool matter;
-  num number;
-  List list;
-  Map myMap;
-  TestClass1 child;
-  int intNumber;
+class TestClass1 extends SerializableMap with _$TestClass1Serializable {
+  String? name;
+  bool? matter;
+  num? number;
+  List? list;
+  Map? myMap;
+  TestClass1? child;
+  int? intNumber;
 
   @ignore
-  bool ignored;
+  bool? ignored;
 
   @SerializedName("the_renamed")
-  String renamed;
+  String? renamed;
 
   TestClass1();
 }
 
 @serializable
-class SimpleDateContainer extends _$SimpleDateContainerSerializable {
-  DateTime testDate;
+class SimpleDateContainer extends SerializableMap with _$SimpleDateContainerSerializable {
+  DateTime? testDate;
 }
 
 
@@ -145,7 +145,7 @@ main() {
     test('serialize: DateTime', () {
       var obj = SimpleDateContainer()
         ..testDate = DateTime.now();
-      expect(toJson(obj), '{"testDate":"${obj.testDate.toIso8601String()}"}');
+      expect(toJson(obj), '{"testDate":"${obj.testDate?.toIso8601String()}"}');
     });
   });
 }

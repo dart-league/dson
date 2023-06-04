@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of example.serialize_cyclical;
+part of 'serialize_cyclical.dart';
 
 // **************************************************************************
 // SerializableGenerator
 // **************************************************************************
 
-abstract class _$EmployeeSerializable extends SerializableMap {
-  int get key;
-  String get firstName;
-  String get lastName;
-  Address get address;
-  Employee get manager;
-  set key(int v);
-  set firstName(String v);
-  set lastName(String v);
-  set address(Address v);
-  set manager(Employee v);
+mixin _$EmployeeSerializable on SerializableMap {
+  int? get key;
+  String? get firstName;
+  String? get lastName;
+  Address? get address;
+  Employee? get manager;
+  set key(int? v);
+  set firstName(String? v);
+  set lastName(String? v);
+  set address(Address? v);
+  set manager(Employee? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'key':
         return key;
@@ -34,7 +34,7 @@ abstract class _$EmployeeSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Employee');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'key':
         key = __value;
@@ -55,24 +55,24 @@ abstract class _$EmployeeSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Employee');
   }
 
-  Iterable<String> get keys => EmployeeClassMirror.fields.keys;
+  Iterable<String> get keys => EmployeeClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$AddressSerializable extends SerializableMap {
-  int get key;
-  String get street;
-  String get city;
-  String get country;
-  String get postalCode;
-  Employee get owner;
-  set key(int v);
-  set street(String v);
-  set city(String v);
-  set country(String v);
-  set postalCode(String v);
-  set owner(Employee v);
+mixin _$AddressSerializable on SerializableMap {
+  int? get key;
+  String? get street;
+  String? get city;
+  String? get country;
+  String? get postalCode;
+  Employee? get owner;
+  set key(int? v);
+  set street(String? v);
+  set city(String? v);
+  set country(String? v);
+  set postalCode(String? v);
+  set owner(Employee? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'key':
         return key;
@@ -90,7 +90,7 @@ abstract class _$AddressSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Address');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'key':
         key = __value;
@@ -114,7 +114,7 @@ abstract class _$AddressSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Address');
   }
 
-  Iterable<String> get keys => AddressClassMirror.fields.keys;
+  Iterable<String> get keys => AddressClassMirror.fields?.keys ?? [];
 }
 
 // **************************************************************************
@@ -134,29 +134,20 @@ const $$Employee_fields_address =
 const $$Employee_fields_manager =
     DeclarationMirror(name: 'manager', type: Employee);
 
-const EmployeeClassMirror = ClassMirror(name: 'Employee', constructors: {
-  '': FunctionMirror(name: '', $call: _Employee__Constructor)
-}, annotations: [
-  cyclical
-], fields: {
-  'key': $$Employee_fields_key,
-  'firstName': $$Employee_fields_firstName,
-  'lastName': $$Employee_fields_lastName,
-  'address': $$Employee_fields_address,
-  'manager': $$Employee_fields_manager
-}, getters: [
-  'key',
-  'firstName',
-  'lastName',
-  'address',
-  'manager'
-], setters: [
-  'key',
-  'firstName',
-  'lastName',
-  'address',
-  'manager'
-]);
+const EmployeeClassMirror = ClassMirror(
+    name: 'Employee',
+    constructors: {'': FunctionMirror(name: '', $call: _Employee__Constructor)},
+    annotations: [cyclical],
+    fields: {
+      'key': $$Employee_fields_key,
+      'firstName': $$Employee_fields_firstName,
+      'lastName': $$Employee_fields_lastName,
+      'address': $$Employee_fields_address,
+      'manager': $$Employee_fields_manager
+    },
+    getters: ['key', 'firstName', 'lastName', 'address', 'manager'],
+    setters: ['key', 'firstName', 'lastName', 'address', 'manager'],
+    superclass: SerializableMap);
 
 _Address__Constructor([positionalParams, namedParams]) => Address();
 
@@ -170,32 +161,21 @@ const $$Address_fields_postalCode =
     DeclarationMirror(name: 'postalCode', type: String);
 const $$Address_fields_owner = DeclarationMirror(name: 'owner', type: Employee);
 
-const AddressClassMirror = ClassMirror(name: 'Address', constructors: {
-  '': FunctionMirror(name: '', $call: _Address__Constructor)
-}, annotations: [
-  cyclical
-], fields: {
-  'key': $$Address_fields_key,
-  'street': $$Address_fields_street,
-  'city': $$Address_fields_city,
-  'country': $$Address_fields_country,
-  'postalCode': $$Address_fields_postalCode,
-  'owner': $$Address_fields_owner
-}, getters: [
-  'key',
-  'street',
-  'city',
-  'country',
-  'postalCode',
-  'owner'
-], setters: [
-  'key',
-  'street',
-  'city',
-  'country',
-  'postalCode',
-  'owner'
-]);
+const AddressClassMirror = ClassMirror(
+    name: 'Address',
+    constructors: {'': FunctionMirror(name: '', $call: _Address__Constructor)},
+    annotations: [cyclical],
+    fields: {
+      'key': $$Address_fields_key,
+      'street': $$Address_fields_street,
+      'city': $$Address_fields_city,
+      'country': $$Address_fields_country,
+      'postalCode': $$Address_fields_postalCode,
+      'owner': $$Address_fields_owner
+    },
+    getters: ['key', 'street', 'city', 'country', 'postalCode', 'owner'],
+    setters: ['key', 'street', 'city', 'country', 'postalCode', 'owner'],
+    superclass: SerializableMap);
 
 // **************************************************************************
 // InitMirrorsGenerator

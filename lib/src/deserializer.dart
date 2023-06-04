@@ -120,7 +120,7 @@ _convertGenericT(receiver, subType, Map fillerMap) {
 ///  returns Deserialized value
 ///  Throws [IncorrectTypeTransform] if json data types doesn't match.
 ///  Throws [NoConstructorError]
-Object _convertValue(/*Type | List<Type>*/ valueType, Object value, [String key = '@OBJECT']) {
+Object? _convertValue(/*Type | List<Type>*/ valueType, dynamic value, [String key = '@OBJECT']) {
 //  _desLog.fine(() => "Converting (\"${key}\": $value) to ${valueType}");
 
   if (value == null) return null;
@@ -210,22 +210,21 @@ Object _convertValue(/*Type | List<Type>*/ valueType, Object value, [String key 
 ///  Throws [NoConstructorError] if the class doesn't either have a constructor
 ///    without or only optional parameters, or parameters matching final fields.
 Object _initiateClass(Type type, [filler]) {
-  ClassMirror classMirror = reflectType(type);
+  var classMirror = reflectType(type);
 //  _desLog.fine("Parsing to class: ${type}");
 
-  if (classMirror.isEnum) {
-    return classMirror.values[filler];
+  if (classMirror!.isEnum) {
+    return classMirror.values?[filler];
   }
 
-  var constructor = classMirror.constructors[''];
+  var constructor = classMirror.constructors?[''];
 
-  List positionalParams = List(constructor.positionalParameters?.length ?? 0);
+  List positionalParams = List.filled(constructor?.positionalParameters?.length ?? 0, null);
   Map<String, dynamic> namedParameters = {};
 
-  if (constructor.parameters.length > 0
-      && constructor.parameters?.every((p) => classMirror.fields[p.name]?.isFinal == true) == true) {
-    var i = 0;
-    constructor.positionalParameters?.forEach((p) => positionalParams[i++] = filler[p.name]);
+  if (constructor!.parameters!.isNotEmpty
+      && constructor.parameters?.every((p) => classMirror.fields?[p.name]?.isFinal == true) == true) {
+    positionalParams = List.of(constructor.positionalParameters?.map((p) => filler[p.name]) ?? []);
     constructor.namedParameters?.forEach((name, p) => namedParameters[name] = filler[name]);
   }
 

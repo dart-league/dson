@@ -6,21 +6,21 @@ import 'package:dson/dson.dart';
 part 'map_to_object.g.dart'; // this line is needed for the generator
 
 @serializable
-class EntityClass extends _$EntityClassSerializable {
-  String name;
-  String _setted;
+class EntityClass extends SerializableMap with _$EntityClassSerializable {
+  String? name;
+  String? _setted;
 
   @SerializedName("renamed")
-  bool otherName;
+  bool? otherName;
 
   @ignore
-  String notVisible;
+  String? notVisible;
 
-  List<EntityClass> children;
+  List<EntityClass>? children;
 
-  set setted(String s) => _setted = s;
+  set setted(String? s) => _setted = s;
 
-  String get setted => _setted;
+  String? get setted => _setted;
 }
 
 void main() {
@@ -46,8 +46,8 @@ void main() {
       ]
     },
     {"name": "test2"}
-  ], [List, EntityClass]);
+  ], [() => List<EntityClass>.empty(growable: true), EntityClass]);
   print(list.length); // > 2
   print(list[0].name); // > test
-  print(list[0].children[0].name); // > child1
+  print(list[0].children?[0].name); // > child1
 }

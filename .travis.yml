@@ -1,5 +1,0 @@
-language: dart
-dart:
-  - stable
-  - dev
-script: dartanalyzer --fatal-warnings . && pub run build_runner test --delete-conflicting-outputs

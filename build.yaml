@@ -2,7 +2,7 @@ targets:
   $default:
     builders:
       dson:
-        generate_for: [example/**, test/**]
+        generate_for: [example/**, test/**, bench/**]
       serializable:
         generate_for:
           exclude: ['**']

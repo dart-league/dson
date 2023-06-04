@@ -6,21 +6,21 @@ part 'serialize_cyclical_list.g.dart'; // this line is needed for the generator
 
 @serializable
 @cyclical
-class Student extends _$StudentSerializable {
-  int id;
-  String name;
+class Student extends SerializableMap with _$StudentSerializable {
+  int? id;
+  String? name;
 
-  List<Course> courses;
+  List<Course>? courses;
 }
 
 @serializable
 @cyclical
-class Course extends _$CourseSerializable {
-  int id;
+class Course extends SerializableMap with _$CourseSerializable {
+  int? id;
 
-  DateTime beginDate;
+  DateTime? beginDate;
 
-  List<Student> students;
+  List<Student>? students;
 }
 
 void main() {
@@ -58,7 +58,7 @@ void main() {
 
   print(toJson(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
 
-  print(toJson(student1, depth: ['courses']));
+  print(toJson(student1, expand: ['courses']));
 /* will print:
       '{'
         '"id":1,'
@@ -78,7 +78,7 @@ void main() {
       ']');
   */
 
-  print(toJson(student2.courses, depth: ['students']));
+  print(toJson(student2.courses, expand: ['students']));
 /* will print:
       '['
         '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":['

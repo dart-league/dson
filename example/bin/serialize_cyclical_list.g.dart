@@ -1,20 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of example.serialize_cyclical_list;
+part of 'serialize_cyclical_list.dart';
 
 // **************************************************************************
 // SerializableGenerator
 // **************************************************************************
 
-abstract class _$StudentSerializable extends SerializableMap {
-  int get id;
-  String get name;
-  List<Course> get courses;
-  set id(int v);
-  set name(String v);
-  set courses(List<Course> v);
+mixin _$StudentSerializable on SerializableMap {
+  int? get id;
+  String? get name;
+  List<Course>? get courses;
+  set id(int? v);
+  set name(String? v);
+  set courses(List<Course>? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'id':
         return id;
@@ -26,7 +26,7 @@ abstract class _$StudentSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Student');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'id':
         id = __value;
@@ -35,25 +35,25 @@ abstract class _$StudentSerializable extends SerializableMap {
         name = __value;
         return;
       case 'courses':
-        courses =
-            fromSerialized(__value, [() => List<Course>(), () => Course()]);
+        courses = fromSerialized(__value,
+            [() => List<Course>.empty(growable: true), () => Course()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Student');
   }
 
-  Iterable<String> get keys => StudentClassMirror.fields.keys;
+  Iterable<String> get keys => StudentClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$CourseSerializable extends SerializableMap {
-  int get id;
-  DateTime get beginDate;
-  List<Student> get students;
-  set id(int v);
-  set beginDate(DateTime v);
-  set students(List<Student> v);
+mixin _$CourseSerializable on SerializableMap {
+  int? get id;
+  DateTime? get beginDate;
+  List<Student>? get students;
+  set id(int? v);
+  set beginDate(DateTime? v);
+  set students(List<Student>? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'id':
         return id;
@@ -65,7 +65,7 @@ abstract class _$CourseSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Course');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'id':
         id = __value;
@@ -74,14 +74,14 @@ abstract class _$CourseSerializable extends SerializableMap {
         beginDate = fromSerializedDateTime(__value);
         return;
       case 'students':
-        students =
-            fromSerialized(__value, [() => List<Student>(), () => Student()]);
+        students = fromSerialized(__value,
+            [() => List<Student>.empty(growable: true), () => Student()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Course');
   }
 
-  Iterable<String> get keys => CourseClassMirror.fields.keys;
+  Iterable<String> get keys => CourseClassMirror.fields?.keys ?? [];
 }
 
 // **************************************************************************
@@ -95,23 +95,18 @@ const $$Student_fields_name = DeclarationMirror(name: 'name', type: String);
 const $$Student_fields_courses =
     DeclarationMirror(name: 'courses', type: [List, Course]);
 
-const StudentClassMirror = ClassMirror(name: 'Student', constructors: {
-  '': FunctionMirror(name: '', $call: _Student__Constructor)
-}, annotations: [
-  cyclical
-], fields: {
-  'id': $$Student_fields_id,
-  'name': $$Student_fields_name,
-  'courses': $$Student_fields_courses
-}, getters: [
-  'id',
-  'name',
-  'courses'
-], setters: [
-  'id',
-  'name',
-  'courses'
-]);
+const StudentClassMirror = ClassMirror(
+    name: 'Student',
+    constructors: {'': FunctionMirror(name: '', $call: _Student__Constructor)},
+    annotations: [cyclical],
+    fields: {
+      'id': $$Student_fields_id,
+      'name': $$Student_fields_name,
+      'courses': $$Student_fields_courses
+    },
+    getters: ['id', 'name', 'courses'],
+    setters: ['id', 'name', 'courses'],
+    superclass: SerializableMap);
 
 _Course__Constructor([positionalParams, namedParams]) => Course();
 
@@ -121,23 +116,18 @@ const $$Course_fields_beginDate =
 const $$Course_fields_students =
     DeclarationMirror(name: 'students', type: [List, Student]);
 
-const CourseClassMirror = ClassMirror(name: 'Course', constructors: {
-  '': FunctionMirror(name: '', $call: _Course__Constructor)
-}, annotations: [
-  cyclical
-], fields: {
-  'id': $$Course_fields_id,
-  'beginDate': $$Course_fields_beginDate,
-  'students': $$Course_fields_students
-}, getters: [
-  'id',
-  'beginDate',
-  'students'
-], setters: [
-  'id',
-  'beginDate',
-  'students'
-]);
+const CourseClassMirror = ClassMirror(
+    name: 'Course',
+    constructors: {'': FunctionMirror(name: '', $call: _Course__Constructor)},
+    annotations: [cyclical],
+    fields: {
+      'id': $$Course_fields_id,
+      'beginDate': $$Course_fields_beginDate,
+      'students': $$Course_fields_students
+    },
+    getters: ['id', 'beginDate', 'students'],
+    setters: ['id', 'beginDate', 'students'],
+    superclass: SerializableMap);
 
 // **************************************************************************
 // InitMirrorsGenerator

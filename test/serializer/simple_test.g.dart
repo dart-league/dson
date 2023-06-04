@@ -1,16 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of serializer.simple_test;
+part of 'simple_test.dart';
 
 // **************************************************************************
 // SerializableGenerator
 // **************************************************************************
 
-abstract class _$JustObjectSerializable extends SerializableMap {
-  Object get object;
-  set object(Object v);
+mixin _$JustObjectSerializable on SerializableMap {
+  Object? get object;
+  set object(Object? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'object':
         return object;
@@ -18,7 +18,7 @@ abstract class _$JustObjectSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'JustObject');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'object':
         object = __value;
@@ -27,15 +27,15 @@ abstract class _$JustObjectSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'JustObject');
   }
 
-  Iterable<String> get keys => JustObjectClassMirror.fields.keys;
+  Iterable<String> get keys => JustObjectClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$TestGetterSerializable extends SerializableMap {
+mixin _$TestGetterSerializable on SerializableMap {
   String get _name;
   String get name;
   set _name(String v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case '_name':
         return _name;
@@ -45,7 +45,7 @@ abstract class _$TestGetterSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'TestGetter');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case '_name':
         _name = __value;
@@ -54,10 +54,10 @@ abstract class _$TestGetterSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'TestGetter');
   }
 
-  Iterable<String> get keys => TestGetterClassMirror.fields.keys;
+  Iterable<String> get keys => TestGetterClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$NestedClassSerializable extends SerializableMap {
+mixin _$NestedClassSerializable on SerializableMap {
   String get name;
   List<dynamic> get list;
   TestGetter get getter;
@@ -65,7 +65,7 @@ abstract class _$NestedClassSerializable extends SerializableMap {
   set list(List<dynamic> v);
   set getter(TestGetter v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'name':
         return name;
@@ -77,13 +77,14 @@ abstract class _$NestedClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'NestedClass');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'name':
         name = __value;
         return;
       case 'list':
-        list = fromSerialized(__value, () => List<dynamic>());
+        list =
+            fromSerialized(__value, () => List<dynamic>.empty(growable: true));
         return;
       case 'getter':
         getter = fromSerialized(__value, () => TestGetter());
@@ -92,14 +93,14 @@ abstract class _$NestedClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'NestedClass');
   }
 
-  Iterable<String> get keys => NestedClassClassMirror.fields.keys;
+  Iterable<String> get keys => NestedClassClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$SetClassSerializable extends SerializableMap {
+mixin _$SetClassSerializable on SerializableMap {
   Set<dynamic> get names;
   set names(Set<dynamic> v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'names':
         return names;
@@ -107,7 +108,7 @@ abstract class _$SetClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'SetClass');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'names':
         names = fromSerialized(__value, () => Set<dynamic>());
@@ -116,30 +117,30 @@ abstract class _$SetClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'SetClass');
   }
 
-  Iterable<String> get keys => SetClassClassMirror.fields.keys;
+  Iterable<String> get keys => SetClassClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$TestClass1Serializable extends SerializableMap {
-  String get name;
-  bool get matter;
-  num get number;
-  List<dynamic> get list;
-  Map<dynamic, dynamic> get myMap;
-  TestClass1 get child;
-  int get intNumber;
-  bool get ignored;
-  String get renamed;
-  set name(String v);
-  set matter(bool v);
-  set number(num v);
-  set list(List<dynamic> v);
-  set myMap(Map<dynamic, dynamic> v);
-  set child(TestClass1 v);
-  set intNumber(int v);
-  set ignored(bool v);
-  set renamed(String v);
+mixin _$TestClass1Serializable on SerializableMap {
+  String? get name;
+  bool? get matter;
+  num? get number;
+  List<dynamic>? get list;
+  Map<dynamic, dynamic>? get myMap;
+  TestClass1? get child;
+  int? get intNumber;
+  bool? get ignored;
+  String? get renamed;
+  set name(String? v);
+  set matter(bool? v);
+  set number(num? v);
+  set list(List<dynamic>? v);
+  set myMap(Map<dynamic, dynamic>? v);
+  set child(TestClass1? v);
+  set intNumber(int? v);
+  set ignored(bool? v);
+  set renamed(String? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'name':
         return name;
@@ -163,7 +164,7 @@ abstract class _$TestClass1Serializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'TestClass1');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'name':
         name = __value;
@@ -175,7 +176,8 @@ abstract class _$TestClass1Serializable extends SerializableMap {
         number = __value;
         return;
       case 'list':
-        list = fromSerialized(__value, () => List<dynamic>());
+        list =
+            fromSerialized(__value, () => List<dynamic>.empty(growable: true));
         return;
       case 'myMap':
         myMap = fromSerialized(__value, () => Map<dynamic, dynamic>());
@@ -196,14 +198,14 @@ abstract class _$TestClass1Serializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'TestClass1');
   }
 
-  Iterable<String> get keys => TestClass1ClassMirror.fields.keys;
+  Iterable<String> get keys => TestClass1ClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$SimpleDateContainerSerializable extends SerializableMap {
-  DateTime get testDate;
-  set testDate(DateTime v);
+mixin _$SimpleDateContainerSerializable on SerializableMap {
+  DateTime? get testDate;
+  set testDate(DateTime? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'testDate':
         return testDate;
@@ -211,7 +213,7 @@ abstract class _$SimpleDateContainerSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'SimpleDateContainer');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'testDate':
         testDate = fromSerializedDateTime(__value);
@@ -220,7 +222,8 @@ abstract class _$SimpleDateContainerSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'SimpleDateContainer');
   }
 
-  Iterable<String> get keys => SimpleDateContainerClassMirror.fields.keys;
+  Iterable<String> get keys =>
+      SimpleDateContainerClassMirror.fields?.keys ?? [];
 }
 
 // **************************************************************************
@@ -232,37 +235,40 @@ _JustObject__Constructor([positionalParams, namedParams]) => JustObject();
 const $$JustObject_fields_object =
     DeclarationMirror(name: 'object', type: Object);
 
-const JustObjectClassMirror = ClassMirror(name: 'JustObject', constructors: {
-  '': FunctionMirror(name: '', $call: _JustObject__Constructor)
-}, fields: {
-  'object': $$JustObject_fields_object
-}, getters: [
-  'object'
-], setters: [
-  'object'
-]);
+const JustObjectClassMirror = ClassMirror(
+    name: 'JustObject',
+    constructors: {
+      '': FunctionMirror(name: '', $call: _JustObject__Constructor)
+    },
+    fields: {'object': $$JustObject_fields_object},
+    getters: ['object'],
+    setters: ['object'],
+    superclass: SerializableMap);
 
 _TestGetter__Constructor([positionalParams, namedParams]) =>
-    TestGetter(positionalParams[0]);
+    TestGetter(positionalParams[0] ?? '');
 
 const $$TestGetter_fields__name =
     DeclarationMirror(name: '_name', type: String);
 const $$TestGetter_fields_name = DeclarationMirror(name: 'name', type: String);
 
-const TestGetterClassMirror = ClassMirror(name: 'TestGetter', constructors: {
-  '': FunctionMirror(
-      name: '',
-      positionalParameters: [DeclarationMirror(name: '_name', type: String)],
-      $call: _TestGetter__Constructor)
-}, fields: {
-  '_name': $$TestGetter_fields__name,
-  'name': $$TestGetter_fields_name
-}, getters: [
-  '_name',
-  'name'
-], setters: [
-  '_name'
-]);
+const TestGetterClassMirror = ClassMirror(
+    name: 'TestGetter',
+    constructors: {
+      '': FunctionMirror(
+          name: '',
+          positionalParameters: [
+            DeclarationMirror(name: '_name', type: String)
+          ],
+          $call: _TestGetter__Constructor)
+    },
+    fields: {
+      '_name': $$TestGetter_fields__name,
+      'name': $$TestGetter_fields_name
+    },
+    getters: ['_name', 'name'],
+    setters: ['_name'],
+    superclass: SerializableMap);
 
 _NestedClass__Constructor([positionalParams, namedParams]) =>
     NestedClass(positionalParams[0], positionalParams[1], positionalParams[2]);
@@ -273,29 +279,28 @@ const $$NestedClass_fields_list =
 const $$NestedClass_fields_getter =
     DeclarationMirror(name: 'getter', type: TestGetter);
 
-const NestedClassClassMirror = ClassMirror(name: 'NestedClass', constructors: {
-  '': FunctionMirror(
-      name: '',
-      positionalParameters: [
-        DeclarationMirror(name: 'name', type: String, isRequired: true),
-        DeclarationMirror(
-            name: 'list', type: [List, dynamic], isRequired: true),
-        DeclarationMirror(name: 'getter', type: TestGetter, isRequired: true)
-      ],
-      $call: _NestedClass__Constructor)
-}, fields: {
-  'name': $$NestedClass_fields_name,
-  'list': $$NestedClass_fields_list,
-  'getter': $$NestedClass_fields_getter
-}, getters: [
-  'name',
-  'list',
-  'getter'
-], setters: [
-  'name',
-  'list',
-  'getter'
-]);
+const NestedClassClassMirror = ClassMirror(
+    name: 'NestedClass',
+    constructors: {
+      '': FunctionMirror(
+          name: '',
+          positionalParameters: [
+            DeclarationMirror(name: 'name', type: String, isRequired: true),
+            DeclarationMirror(
+                name: 'list', type: [List, dynamic], isRequired: true),
+            DeclarationMirror(
+                name: 'getter', type: TestGetter, isRequired: true)
+          ],
+          $call: _NestedClass__Constructor)
+    },
+    fields: {
+      'name': $$NestedClass_fields_name,
+      'list': $$NestedClass_fields_list,
+      'getter': $$NestedClass_fields_getter
+    },
+    getters: ['name', 'list', 'getter'],
+    setters: ['name', 'list', 'getter'],
+    superclass: SerializableMap);
 
 _SetClass__Constructor([positionalParams, namedParams]) =>
     SetClass(positionalParams[0]);
@@ -303,20 +308,21 @@ _SetClass__Constructor([positionalParams, namedParams]) =>
 const $$SetClass_fields_names =
     DeclarationMirror(name: 'names', type: [Set, dynamic]);
 
-const SetClassClassMirror = ClassMirror(name: 'SetClass', constructors: {
-  '': FunctionMirror(
-      name: '',
-      positionalParameters: [
-        DeclarationMirror(name: 'names', type: [Set, dynamic], isRequired: true)
-      ],
-      $call: _SetClass__Constructor)
-}, fields: {
-  'names': $$SetClass_fields_names
-}, getters: [
-  'names'
-], setters: [
-  'names'
-]);
+const SetClassClassMirror = ClassMirror(
+    name: 'SetClass',
+    constructors: {
+      '': FunctionMirror(
+          name: '',
+          positionalParameters: [
+            DeclarationMirror(
+                name: 'names', type: [Set, dynamic], isRequired: true)
+          ],
+          $call: _SetClass__Constructor)
+    },
+    fields: {'names': $$SetClass_fields_names},
+    getters: ['names'],
+    setters: ['names'],
+    superclass: SerializableMap);
 
 _TestClass1__Constructor([positionalParams, namedParams]) => TestClass1();
 
@@ -341,39 +347,45 @@ const $$TestClass1_fields_renamed = DeclarationMirror(
   type: String,
 );
 
-const TestClass1ClassMirror = ClassMirror(name: 'TestClass1', constructors: {
-  '': FunctionMirror(name: '', $call: _TestClass1__Constructor)
-}, fields: {
-  'name': $$TestClass1_fields_name,
-  'matter': $$TestClass1_fields_matter,
-  'number': $$TestClass1_fields_number,
-  'list': $$TestClass1_fields_list,
-  'myMap': $$TestClass1_fields_myMap,
-  'child': $$TestClass1_fields_child,
-  'intNumber': $$TestClass1_fields_intNumber,
-  'ignored': $$TestClass1_fields_ignored,
-  'the_renamed': $$TestClass1_fields_renamed
-}, getters: [
-  'name',
-  'matter',
-  'number',
-  'list',
-  'myMap',
-  'child',
-  'intNumber',
-  'ignored',
-  'the_renamed'
-], setters: [
-  'name',
-  'matter',
-  'number',
-  'list',
-  'myMap',
-  'child',
-  'intNumber',
-  'ignored',
-  'the_renamed'
-]);
+const TestClass1ClassMirror = ClassMirror(
+    name: 'TestClass1',
+    constructors: {
+      '': FunctionMirror(name: '', $call: _TestClass1__Constructor)
+    },
+    fields: {
+      'name': $$TestClass1_fields_name,
+      'matter': $$TestClass1_fields_matter,
+      'number': $$TestClass1_fields_number,
+      'list': $$TestClass1_fields_list,
+      'myMap': $$TestClass1_fields_myMap,
+      'child': $$TestClass1_fields_child,
+      'intNumber': $$TestClass1_fields_intNumber,
+      'ignored': $$TestClass1_fields_ignored,
+      'the_renamed': $$TestClass1_fields_renamed
+    },
+    getters: [
+      'name',
+      'matter',
+      'number',
+      'list',
+      'myMap',
+      'child',
+      'intNumber',
+      'ignored',
+      'the_renamed'
+    ],
+    setters: [
+      'name',
+      'matter',
+      'number',
+      'list',
+      'myMap',
+      'child',
+      'intNumber',
+      'ignored',
+      'the_renamed'
+    ],
+    superclass: SerializableMap);
 
 _SimpleDateContainer__Constructor([positionalParams, namedParams]) =>
     SimpleDateContainer();
@@ -386,15 +398,10 @@ const SimpleDateContainerClassMirror = ClassMirror(
     constructors: {
       '': FunctionMirror(name: '', $call: _SimpleDateContainer__Constructor)
     },
-    fields: {
-      'testDate': $$SimpleDateContainer_fields_testDate
-    },
-    getters: [
-      'testDate'
-    ],
-    setters: [
-      'testDate'
-    ]);
+    fields: {'testDate': $$SimpleDateContainer_fields_testDate},
+    getters: ['testDate'],
+    setters: ['testDate'],
+    superclass: SerializableMap);
 
 // **************************************************************************
 // InitMirrorsGenerator

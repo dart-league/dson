@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of example.json_to_object;
+part of 'json_to_object.dart';
 
 // **************************************************************************
 // SerializableGenerator
 // **************************************************************************
 
-abstract class _$EntityClassSerializable extends SerializableMap {
-  String get name;
-  String get _setted;
-  bool get otherName;
-  String get notVisible;
-  List<EntityClass> get children;
-  String get setted;
-  set name(String v);
-  set _setted(String v);
-  set otherName(bool v);
-  set notVisible(String v);
-  set children(List<EntityClass> v);
-  set setted(String v);
+mixin _$EntityClassSerializable on SerializableMap {
+  String? get name;
+  String? get _setted;
+  bool? get otherName;
+  String? get notVisible;
+  List<EntityClass>? get children;
+  String? get setted;
+  set name(String? v);
+  set _setted(String? v);
+  set otherName(bool? v);
+  set notVisible(String? v);
+  set children(List<EntityClass>? v);
+  set setted(String? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'name':
         return name;
@@ -38,7 +38,7 @@ abstract class _$EntityClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'EntityClass');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'name':
         name = __value;
@@ -53,8 +53,10 @@ abstract class _$EntityClassSerializable extends SerializableMap {
         notVisible = __value;
         return;
       case 'children':
-        children = fromSerialized(
-            __value, [() => List<EntityClass>(), () => EntityClass()]);
+        children = fromSerialized(__value, [
+          () => List<EntityClass>.empty(growable: true),
+          () => EntityClass()
+        ]);
         return;
       case 'setted':
         setted = __value;
@@ -63,7 +65,7 @@ abstract class _$EntityClassSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'EntityClass');
   }
 
-  Iterable<String> get keys => EntityClassClassMirror.fields.keys;
+  Iterable<String> get keys => EntityClassClassMirror.fields?.keys ?? [];
 }
 
 // **************************************************************************
@@ -86,30 +88,22 @@ const $$EntityClass_fields_children =
 const $$EntityClass_fields_setted =
     DeclarationMirror(name: 'setted', type: String);
 
-const EntityClassClassMirror = ClassMirror(name: 'EntityClass', constructors: {
-  '': FunctionMirror(name: '', $call: _EntityClass__Constructor)
-}, fields: {
-  'name': $$EntityClass_fields_name,
-  '_setted': $$EntityClass_fields__setted,
-  'renamed': $$EntityClass_fields_otherName,
-  'notVisible': $$EntityClass_fields_notVisible,
-  'children': $$EntityClass_fields_children,
-  'setted': $$EntityClass_fields_setted
-}, getters: [
-  'name',
-  '_setted',
-  'renamed',
-  'notVisible',
-  'children',
-  'setted'
-], setters: [
-  'name',
-  '_setted',
-  'renamed',
-  'notVisible',
-  'children',
-  'setted'
-]);
+const EntityClassClassMirror = ClassMirror(
+    name: 'EntityClass',
+    constructors: {
+      '': FunctionMirror(name: '', $call: _EntityClass__Constructor)
+    },
+    fields: {
+      'name': $$EntityClass_fields_name,
+      '_setted': $$EntityClass_fields__setted,
+      'renamed': $$EntityClass_fields_otherName,
+      'notVisible': $$EntityClass_fields_notVisible,
+      'children': $$EntityClass_fields_children,
+      'setted': $$EntityClass_fields_setted
+    },
+    getters: ['name', '_setted', 'renamed', 'notVisible', 'children', 'setted'],
+    setters: ['name', '_setted', 'renamed', 'notVisible', 'children', 'setted'],
+    superclass: SerializableMap);
 
 // **************************************************************************
 // InitMirrorsGenerator

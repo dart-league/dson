@@ -1,8 +1,9 @@
 name: dson_example
 version: 0.0.1
-author: Luis Vargas <luisvargastijerino@gmail.com>
+publish_to: none
+
 environment:
-  sdk: '>=2.0.0 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 dependencies:
   dson:
     path: ../
@@ -12,5 +13,5 @@ dev_dependencies:
 #dependency_overrides:
 #  built_mirrors:
 #    path: ../../built_mirrors
-#  serializable_core:
+#  serializable:
 #    path: ../../serializable

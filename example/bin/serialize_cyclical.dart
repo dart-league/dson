@@ -6,26 +6,26 @@ part 'serialize_cyclical.g.dart';  // this line is needed for the generator
 
 @serializable
 @cyclical
-class Employee extends _$EmployeeSerializable {
-  @uId int key;
-  String firstName;
-  String lastName;
+class Employee extends SerializableMap with _$EmployeeSerializable {
+  @uId int? key;
+  String? firstName;
+  String? lastName;
 
-  Address address;
+  Address? address;
 
-  Employee manager;
+  Employee? manager;
 }
 
 @serializable
 @cyclical
-class Address extends _$AddressSerializable {
-  @uId int key;
-  String street;
-  String city;
-  String country;
-  String postalCode;
+class Address extends SerializableMap with _$AddressSerializable {
+  @uId int? key;
+  String? street;
+  String? city;
+  String? country;
+  String? postalCode;
 
-  Employee owner;
+  Employee? owner;
 }
 
 
@@ -60,14 +60,14 @@ void main() {
   print(toJson(employee.address)); // will print: '{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}}'
 
   // depth is a optional parameter that could be a list that should contains strings or Maps<String, Map>
-  print(toJson(employee, depth: ['address']));
+  print(toJson(employee, expand: ['address']));
   /* will print:
            '{"id":2,"firstName":"Luis","lastName":"Vargas",'
               '"address":{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}},'
               '"manager":{"id":1}}'
   */
 
-  print(toJson(employee, depth: [{'manager': ['address']}, 'address']));
+  print(toJson(employee, expand: [{'manager': ['address']}, 'address']));
   /* will print:
          '{"id":2,"firstName":"Luis","lastName":"Vargas",'
             '"address":{"id":2,"street":"some street","city":"Miami","country":"USA",'

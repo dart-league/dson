@@ -7,67 +7,67 @@ part 'exclude_test.g.dart';
 
 @cyclical
 @serializable
-class Employee extends _$EmployeeSerializable {
-  int id;
-  String firstName;
-  String lastName;
+class Employee extends SerializableMap with _$EmployeeSerializable {
+  int? id;
+  String? firstName;
+  String? lastName;
 
-  Address address;
+  Address? address;
 
-  Employee manager;
+  Employee? manager;
 }
 
 @cyclical
 @serializable
-class Address extends _$AddressSerializable {
-  int id;
-  String street;
-  String city;
-  String country;
-  String postalCode;
+class Address extends SerializableMap with _$AddressSerializable {
+  int? id;
+  String? street;
+  String? city;
+  String? country;
+  String? postalCode;
 
-  Employee owner;
+  Employee? owner;
 }
 
 @cyclical
 @serializable
-class Employee2 extends _$Employee2Serializable {
-  String firstName;
-  String lastName;
+class Employee2 extends SerializableMap with _$Employee2Serializable {
+  String? firstName;
+  String? lastName;
 
-  Address2 address;
+  Address2? address;
 
-  Employee2 manager;
+  Employee2? manager;
 }
 
 @cyclical
 @serializable
-class Address2 extends _$Address2Serializable {
-  String street;
-  String city;
-  String country;
-  String postalCode;
+class Address2 extends SerializableMap with _$Address2Serializable {
+  String? street;
+  String? city;
+  String? country;
+  String? postalCode;
 
-  Employee2 owner;
+  Employee2? owner;
 }
 
 @cyclical
 @serializable
-class Student extends _$StudentSerializable {
-  int id;
-  String name;
+class Student extends SerializableMap with _$StudentSerializable {
+  int? id;
+  String? name;
 
-  List<Course> courses;
+  List<Course>? courses;
 }
 
 @cyclical
 @serializable
-class Course extends _$CourseSerializable {
-  int id;
+class Course extends SerializableMap with _$CourseSerializable {
+  int? id;
 
-  DateTime beginDate;
+  DateTime? beginDate;
 
-  List<Student> students;
+  List<Student>? students;
 }
 
 main() {
@@ -97,11 +97,11 @@ main() {
     });
 
     test('address.street with depth', () {
-      expect(toJson(manager, exclude: {'address': 'street'}, depth: 'address'), '{"id":1,"firstName":"Jhon","lastName":"Doe","address":{"id":1,"city":"Miami","country":"USA","owner":{"id":1}}}');
+      expect(toJson(manager, exclude: {'address': 'street'}, expand: 'address'), '{"id":1,"firstName":"Jhon","lastName":"Doe","address":{"id":1,"city":"Miami","country":"USA","owner":{"id":1}}}');
     });
 
     test('address.street and address.city with depth', () {
-      expect(toJson(manager, exclude: {'address': ['street', 'city']}, depth: 'address'), '{"id":1,"firstName":"Jhon","lastName":"Doe","address":{"id":1,"country":"USA","owner":{"id":1}}}');
+      expect(toJson(manager, exclude: {'address': ['street', 'city']}, expand: 'address'), '{"id":1,"firstName":"Jhon","lastName":"Doe","address":{"id":1,"country":"USA","owner":{"id":1}}}');
     });
   });
 
@@ -139,11 +139,11 @@ main() {
     });
 
     test('student.courses*.beginDate', () {
-      expect(toJson(students, depth: 'courses', exclude: {'courses': 'beginDate'}), '[{"id":1,"name":"student1","courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":3,"students":[{"id":1},{"id":3}]}]},{"id":2,"name":"student2","courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":2,"students":[{"id":2},{"id":3}]}]},{"id":3,"name":"student3","courses":[{"id":2,"students":[{"id":2},{"id":3}]},{"id":3,"students":[{"id":1},{"id":3}]}]}]');
+      expect(toJson(students, expand: 'courses', exclude: {'courses': 'beginDate'}), '[{"id":1,"name":"student1","courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":3,"students":[{"id":1},{"id":3}]}]},{"id":2,"name":"student2","courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":2,"students":[{"id":2},{"id":3}]}]},{"id":3,"name":"student3","courses":[{"id":2,"students":[{"id":2},{"id":3}]},{"id":3,"students":[{"id":1},{"id":3}]}]}]');
     });
 
     test('students*.name and students*.courses*.beginDate', () {
-      expect(toJson(students, depth: 'courses', exclude: ['name', {'courses': 'beginDate'}]), '[{"id":1,"courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":3,"students":[{"id":1},{"id":3}]}]},{"id":2,"courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":2,"students":[{"id":2},{"id":3}]}]},{"id":3,"courses":[{"id":2,"students":[{"id":2},{"id":3}]},{"id":3,"students":[{"id":1},{"id":3}]}]}]');
+      expect(toJson(students, expand: 'courses', exclude: ['name', {'courses': 'beginDate'}]), '[{"id":1,"courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":3,"students":[{"id":1},{"id":3}]}]},{"id":2,"courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":2,"students":[{"id":2},{"id":3}]}]},{"id":3,"courses":[{"id":2,"students":[{"id":2},{"id":3}]},{"id":3,"students":[{"id":1},{"id":3}]}]}]');
     });
   });
 
@@ -177,15 +177,18 @@ main() {
     var students = {"s1":student1, "s2":student2, "s3":student3};
 
     test('students name', () {
-      expect(toJson(students, exclude: 'name'), '{"s1":{"id":1,"courses":[{"id":1},{"id":3}]},"s2":{"id":2,"courses":[{"id":1},{"id":2}]},"s3":{"id":3,"courses":[{"id":2},{"id":3}]}}');
+      expect('{"s1":{"id":1,"courses":[{"id":1},{"id":3}]},"s2":{"id":2,"courses":[{"id":1},{"id":2}]},"s3":{"id":3,"courses":[{"id":2},{"id":3}]}}',
+          toJson(students, exclude: 'name'));
     });
 
     test('student.courses*.beginDate', () {
-      expect(toJson(students, depth: 'courses', exclude: {'courses': 'beginDate'}), '{"s1":{"id":1,"name":"student1","courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":3,"students":[{"id":1},{"id":3}]}]},"s2":{"id":2,"name":"student2","courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":2,"students":[{"id":2},{"id":3}]}]},"s3":{"id":3,"name":"student3","courses":[{"id":2,"students":[{"id":2},{"id":3}]},{"id":3,"students":[{"id":1},{"id":3}]}]}}');
+      expect('{"s1":{"id":1,"name":"student1","courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":3,"students":[{"id":1},{"id":3}]}]},"s2":{"id":2,"name":"student2","courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":2,"students":[{"id":2},{"id":3}]}]},"s3":{"id":3,"name":"student3","courses":[{"id":2,"students":[{"id":2},{"id":3}]},{"id":3,"students":[{"id":1},{"id":3}]}]}}',
+          toJson(students, expand: 'courses', exclude: {'courses': 'beginDate'}));
     });
 
     test('students*.name and students*.courses*.beginDate', () {
-      expect(toJson(students, depth: 'courses', exclude: ['name', {'courses': 'beginDate'}]), '{"s1":{"id":1,"courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":3,"students":[{"id":1},{"id":3}]}]},"s2":{"id":2,"courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":2,"students":[{"id":2},{"id":3}]}]},"s3":{"id":3,"courses":[{"id":2,"students":[{"id":2},{"id":3}]},{"id":3,"students":[{"id":1},{"id":3}]}]}}');
+      expect('{"s1":{"id":1,"courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":3,"students":[{"id":1},{"id":3}]}]},"s2":{"id":2,"courses":[{"id":1,"students":[{"id":1},{"id":2}]},{"id":2,"students":[{"id":2},{"id":3}]}]},"s3":{"id":3,"courses":[{"id":2,"students":[{"id":2},{"id":3}]},{"id":3,"students":[{"id":1},{"id":3}]}]}}',
+          toJson(students, expand: 'courses', exclude: ['name', {'courses': 'beginDate'}]));
     });
   });
 }

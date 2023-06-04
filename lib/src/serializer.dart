@@ -3,7 +3,7 @@ part of dson;
 //Logger _serLog = Logger('object_mapper_serializer');
 
 /// Variable that save all the serialized objects. If an object 
-/// has been serilized in the past is going to be saved by this variable
+/// has been serialized in the past is going to be saved by this variable
 /// and is not going to be serialized again.
 var _serializedStack = <Object, Map>{};
 
@@ -17,14 +17,14 @@ bool isSimple(value) => isPrimitive(value) || value is DateTime || value is List
 /// 
 /// Parameters:
 /// 
-/// [depth] :  determines how deep is going to be the serialization and avoids stack overflow produced by cyclical object references.
+/// [expand] :  determines how deep is going to be the serialization and avoids stack overflow produced by cyclical object references.
 /// [exclude] : exclude some attributes. It could be [String], [Map], or [List]
-String toJson(object, {bool parseString: false, depth, exclude}) {
+String toJson(object, {bool parseString = false, expand, exclude}) {
 //  _serLog.fine("Start serializing");
 
   if (!parseString && object is String) return object;
 
-  var result = json.encode(objectToSerializable(object, depth: depth, exclude: exclude));
+  var result = json.encode(objectToSerializable(object, expand: expand, exclude: exclude));
 
   _serializedStack.clear();
 
@@ -36,19 +36,19 @@ String toJson(object, {bool parseString: false, depth, exclude}) {
 ///
 /// Parameters:
 ///
-/// * [depth] :  determines how deep is going to be the serialization and avoids stack overflow produced by cyclical object references.
+/// * [expand] :  determines how deep is going to be the serialization and avoids stack overflow produced by cyclical object references.
 /// * [exclude] : exclude some attributes. It could be [String], [Map], or [List]
-Map toMap(object, {depth, exclude, String fieldName}) =>
-    objectToSerializable(object, depth: depth, exclude: exclude);
+Map toMap(object, {expand, exclude, String fieldName = ''}) =>
+    objectToSerializable(object, expand: expand, exclude: exclude);
 
 /// Converts the [object] to a serializable [Map], [String], [int], [DateTime]
-/// or any other serializiable object.
+/// or any other serializable object.
 /// 
 /// Parameters:
 /// 
-/// * [depth] :  determines how deep is going to be the serialization and to avoid cyclical object reference stack overflow. 
+/// * [expand] :  determines how deep is going to be the serialization and to avoid cyclical object reference stack overflow. 
 /// * [exclude] : exclude some attributes. It could be [String], [Map], or [List]
-Object objectToSerializable(object, {depth, exclude, String fieldName}) {
+dynamic objectToSerializable(object, {expand, exclude, String? fieldName}) {
   if (isPrimitive(object)) {
 //    _serLog.fine("Found primetive: $object");
     return object;
@@ -57,36 +57,36 @@ Object objectToSerializable(object, {depth, exclude, String fieldName}) {
     return object.toIso8601String();
   } else if (object is List) {
 //    _serLog.fine("Found list: $object");
-    return _serializeList(object, depth, exclude, fieldName);
+    return _serializeList(object, expand, exclude, fieldName);
   } else if (object is! SerializableMap && object is Map) {
 //    _serLog.fine("Found map: $object");
-    return _serializeMap(object, depth, exclude, fieldName);
+    return _serializeMap(object, expand, exclude, fieldName);
   } else if (object is Set) {
 //    _serLog.fine("Found set: $object");
-    return _serializeSet(object, depth, exclude, fieldName);
+    return _serializeSet(object, expand, exclude, fieldName);
   } else {
 //    _serLog.fine("Found object: $object");
-    return _serializeObject(object, depth, exclude, fieldName);
+    return _serializeObject(object, expand, exclude, fieldName);
   }
 }
 
 /// Converts a List into a serializable [List]
-List _serializeList(List list, depth, exclude, String fieldName) {
+List _serializeList(List list, expand, exclude, String? fieldName) {
   List newList = [];
 
   list.forEach((item) {
-    newList.add(objectToSerializable(item, depth: depth, exclude: exclude, fieldName: fieldName));
+    newList.add(objectToSerializable(item, expand: expand, exclude: exclude, fieldName: fieldName));
   });
 
   return newList;
 }
 
 /// Converts a List into a serializable [List]
-List _serializeSet(Set set, depth, exclude, String fieldName) {
+List _serializeSet(Set set, expand, exclude, String? fieldName) {
   List newList = [];
 
   set.forEach((item) {
-    newList.add(objectToSerializable(item, depth: depth, exclude: exclude, fieldName: fieldName));
+    newList.add(objectToSerializable(item, expand: expand, exclude: exclude, fieldName: fieldName));
   });
 
   return newList;
@@ -94,11 +94,11 @@ List _serializeSet(Set set, depth, exclude, String fieldName) {
 
 
 /// Converts a [Map] into a serializable [Map]
-Map _serializeMap(Map map, depth, exclude, String fieldName) {
+Map _serializeMap(Map map, expand, exclude, String? fieldName) {
   Map newMap = Map<String, Object>();
   map.forEach((key, val) {
     if (val != null) {
-      newMap[key] = objectToSerializable(val, depth: depth, exclude: exclude, fieldName: fieldName);
+      newMap[key] = objectToSerializable(val, expand: expand, exclude: exclude, fieldName: fieldName);
     }
   });
 
@@ -106,11 +106,11 @@ Map _serializeMap(Map map, depth, exclude, String fieldName) {
 }
 
 /// Runs through the Object keys by using a ClassMirror.
-Object _serializeObject(obj, depth, exclude, fieldName) {
+Object _serializeObject(obj, expand, exclude, fieldName) {
   var classMirror = reflect(obj);
 //  _serLog.fine("Serializing class: ${classMirror.name}");
 
-  if(classMirror.isEnum) {
+  if(classMirror!.isEnum) {
     return obj.index;
 //    return {'index': obj.index, 'name': obj.toString().split(".")[1]};
   }
@@ -120,10 +120,10 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
   if (_serializedStack[obj] == null) {
 
     var publicVariables = classMirror.fields;
-    depth = _getNextDepth(depth, fieldName);
-    if (depth != null || !_isCyclical(classMirror) || fieldName == null) {
-      publicVariables.forEach((fieldName, decl) {
-        if(!fieldName.startsWith('_')) _pushField(fieldName, decl, obj, result, depth, exclude);
+    expand = _getNextExpand(expand, fieldName);
+    if (expand != null || !_isCyclical(classMirror) || fieldName == null) {
+      publicVariables?.forEach((fieldName, decl) {
+        if(!fieldName.startsWith('_')) _pushField(fieldName, decl, obj, result, expand, exclude);
       });
 
       _serializedStack[obj] = result;
@@ -131,7 +131,7 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
 
     if (_isCyclical(classMirror)) {
       var uIdField = _getUIdAttrFromClass(classMirror);
-      if (publicVariables[uIdField] == null) {
+      if (publicVariables?[uIdField] == null) {
         result['hashcode'] = obj.hashCode;
       } else {
         result[uIdField] = obj[uIdField];
@@ -139,8 +139,7 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
     }
 
   } else {
-    // ignore: strong_mode_down_cast_composite
-    result = _serializedStack[obj];
+    result = _serializedStack[obj] as Map<String, dynamic>;
   }
 
 //  _serLog.fine("Serialization completed.");
@@ -150,22 +149,22 @@ Object _serializeObject(obj, depth, exclude, fieldName) {
 /// Checks the DeclarationMirror [variable] for annotations and adds
 /// the value to the [result] map. If there's no [SerializedName] annotation
 /// with a different name set it will use the name of [symbol].
-void _pushField(String fieldName, DeclarationMirror variable, SerializableMap obj, Map<String, dynamic> result, depth, exclude) {
+void _pushField(String fieldName, DeclarationMirror variable, SerializableMap obj, Map<String, dynamic> result, expand, exclude) {
 
   if (fieldName.isEmpty) return;
 
 //  InstanceMirror field = instMirror.invokeGetter(fieldName);
-  Object value = obj[fieldName];
+  Object? value = obj[fieldName];
 //  _serLog.finer("Start serializing field: ${fieldName}");
 
   fieldName = variable.name;
-  // check if there is a DartsonProperty annotation
+  // check if there is a DsonProperty annotation
 
-//  _serLog.finer("depth: $depth");
+//  _serLog.finer("expand: $expand");
 
   //If the value is not null and the annotation @ignore is not on variable declaration
   if (value != null && !_getIsIgnoredFromDeclaration(variable)
-      // And exclude is pressent
+      // And exclude is present
       && (exclude == null
           // or exclude is Map (we are excluding nested attribute)
           || exclude is Map
@@ -177,29 +176,29 @@ void _pushField(String fieldName, DeclarationMirror variable, SerializableMap ob
 //    _serLog.finer("Serializing field: ${fieldName}");
 
     result[fieldName] = objectToSerializable(value,
-        depth: depth,
+        expand: expand,
         exclude: _getNext(exclude, fieldName),
         fieldName: fieldName);
   }
 }
 
-/// Gets the next depth from the actual depth for the nested attribute with name [fieldName]
-_getNextDepth(depth, String fieldName) {
+/// Gets the next expand from the actual expand for the nested attribute with name [fieldName]
+_getNextExpand(expand, String? fieldName) {
   if(fieldName != null) {
-    return _getNext(depth, fieldName);
+    return _getNext(expand, fieldName);
   } else {
-    return depth;
+    return expand;
   }
 }
 
-/// Gets the next [excludeOrDepth] for the nested attribute with name [fieldName]
-_getNext(excludeOrDepth, String fieldName) {
-  if (excludeOrDepth is List) {
-    excludeOrDepth = excludeOrDepth.firstWhere((e) => //
-    e == fieldName || e is Map && e.keys.contains(fieldName), orElse: () => null);
+/// Gets the next [excludeOrExpand] for the nested attribute with name [fieldName]
+_getNext(excludeOrExpand, String fieldName) {
+  if (excludeOrExpand is List) {
+    excludeOrExpand = excludeOrExpand.firstWhereOrNull((e) => //
+    e == fieldName || e is Map && e.keys.contains(fieldName));
   }
 
-  if(excludeOrDepth is Map) return excludeOrDepth[fieldName];
+  if(excludeOrExpand is Map) return excludeOrExpand[fieldName];
 
-  if(excludeOrDepth is String && excludeOrDepth == fieldName) return excludeOrDepth;
+  if(excludeOrExpand is String && excludeOrExpand == fieldName) return excludeOrExpand;
 }

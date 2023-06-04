@@ -1,20 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of simple_bench;
+part of 'simple_bench.dart';
 
 // **************************************************************************
 // SerializableGenerator
 // **************************************************************************
 
-abstract class _$SimpleSerializable extends SerializableMap {
-  String get id;
-  double get value;
-  bool get flag;
-  set id(String v);
-  set value(double v);
-  set flag(bool v);
+mixin _$SimpleSerializable on SerializableMap {
+  String? get id;
+  double? get value;
+  bool? get flag;
+  set id(String? v);
+  set value(double? v);
+  set flag(bool? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'id':
         return id;
@@ -26,7 +26,7 @@ abstract class _$SimpleSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Simple');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'id':
         id = __value;
@@ -41,16 +41,16 @@ abstract class _$SimpleSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Simple');
   }
 
-  Iterable<String> get keys => SimpleClassMirror.fields.keys;
+  Iterable<String> get keys => SimpleClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$ComplexSerializable extends SerializableMap {
-  Simple get simple;
-  List<Simple> get list;
-  set simple(Simple v);
-  set list(List<Simple> v);
+mixin _$ComplexSerializable on SerializableMap {
+  Simple? get simple;
+  List<Simple>? get list;
+  set simple(Simple? v);
+  set list(List<Simple>? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'simple':
         return simple;
@@ -60,19 +60,20 @@ abstract class _$ComplexSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Complex');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'simple':
         simple = fromSerialized(__value, () => Simple());
         return;
       case 'list':
-        list = fromSerialized(__value, [() => List<Simple>(), () => Simple()]);
+        list = fromSerialized(__value,
+            [() => List<Simple>.empty(growable: true), () => Simple()]);
         return;
     }
     throwFieldNotFoundException(__key, 'Complex');
   }
 
-  Iterable<String> get keys => ComplexClassMirror.fields.keys;
+  Iterable<String> get keys => ComplexClassMirror.fields?.keys ?? [];
 }
 
 // **************************************************************************
@@ -85,21 +86,17 @@ const $$Simple_fields_id = DeclarationMirror(name: 'id', type: String);
 const $$Simple_fields_value = DeclarationMirror(name: 'value', type: double);
 const $$Simple_fields_flag = DeclarationMirror(name: 'flag', type: bool);
 
-const SimpleClassMirror = ClassMirror(name: 'Simple', constructors: {
-  '': FunctionMirror(name: '', $call: _Simple__Constructor)
-}, fields: {
-  'id': $$Simple_fields_id,
-  'value': $$Simple_fields_value,
-  'flag': $$Simple_fields_flag
-}, getters: [
-  'id',
-  'value',
-  'flag'
-], setters: [
-  'id',
-  'value',
-  'flag'
-]);
+const SimpleClassMirror = ClassMirror(
+    name: 'Simple',
+    constructors: {'': FunctionMirror(name: '', $call: _Simple__Constructor)},
+    fields: {
+      'id': $$Simple_fields_id,
+      'value': $$Simple_fields_value,
+      'flag': $$Simple_fields_flag
+    },
+    getters: ['id', 'value', 'flag'],
+    setters: ['id', 'value', 'flag'],
+    superclass: SerializableMap);
 
 _Complex__Constructor([positionalParams, namedParams]) => Complex();
 
@@ -112,7 +109,8 @@ const ComplexClassMirror = ClassMirror(
     constructors: {'': FunctionMirror(name: '', $call: _Complex__Constructor)},
     fields: {'simple': $$Complex_fields_simple, 'list': $$Complex_fields_list},
     getters: ['simple', 'list'],
-    setters: ['simple', 'list']);
+    setters: ['simple', 'list'],
+    superclass: SerializableMap);
 
 // **************************************************************************
 // InitMirrorsGenerator

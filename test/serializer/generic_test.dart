@@ -6,33 +6,33 @@ import 'package:test/test.dart';
 part 'generic_test.g.dart';
 
 @serializable
-class Page<T> extends _$PageSerializable<T> {
-  int size;
+class Page<T> extends SerializableMap with _$PageSerializable<T> {
+  int? size;
 
-  int total;
+  int? total;
 
-  int number;
+  int? number;
 
-  List<T> items;
+  List<T>? items;
 }
 
 @serializable
 // ignore: mixin_inherits_from_not_object
 class Resource<T, ID> extends Page<T> with _$ResourceSerializable<T, ID> {
-  ID id;
+  ID? id;
 }
 
 @serializable
-class Person extends _$PersonSerializable {
-  int id;
+class Person extends SerializableMap with _$PersonSerializable {
+  int? id;
 
-  String name;
+  String? name;
 }
 
 @serializable
 // ignore: mixin_inherits_from_not_object
 class Employee extends Person with _$EmployeeSerializable {
-  double salary;
+  double? salary;
 }
 
 main() {

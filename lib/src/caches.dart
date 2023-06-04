@@ -5,8 +5,8 @@ Map _uIdFromClassCache = {};
 /// gets the name of the attribute annotated with `@uId`, if there is none then returns 'id'
 String _getUIdAttrFromClass(ClassMirror cm) =>
     _uIdFromClassCache.putIfAbsent(cm, () =>
-    cm.fields.values
-        .firstWhere((v) => v.annotations?.contains((a) => a == uId) ?? false, orElse: () => null)
+    cm.fields?.values
+        .firstWhereOrNull((v) => v.annotations?.contains((a) => a == uId) ?? false)
         ?.name ?? 'id'
     );
 

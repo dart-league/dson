@@ -6,23 +6,22 @@ import 'dart:html';
 part 'main.g.dart';
 
 @serializable
-class Person extends _$PersonSerializable {
-  int id;
-  String firstName;
-  String lastName;
-  DateTime dateOfBirth;
+class Person extends SerializableMap with _$PersonSerializable {
+  int? id;
+  String? firstName;
+  String? lastName;
+  DateTime? dateOfBirth;
 }
 
 @serializable
 // ignore: mixin_inherits_from_not_object
 class Employee extends Person with _$EmployeeSerializable {
-  double salary;
+  double? salary;
 }
 
 @serializable
-// ignore: mixin_inherits_from_not_object
 class Manager extends Employee with _$ManagerSerializable {
-  List<Employee> subordinates;
+  List<Employee>? subordinates;
 }
 
 main() {
@@ -63,7 +62,7 @@ main() {
 }
 
 printToScreen(String value) {
-  document.body.append(PreElement()..appendText(value));
+  document.body?.append(PreElement()..appendText(value));
 }
 
 

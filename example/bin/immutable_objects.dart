@@ -5,11 +5,11 @@ import 'package:dson/dson.dart';
 part 'immutable_objects.g.dart';
 
 @serializable
-class Person extends _$PersonSerializable {
+class Person extends SerializableMap with _$PersonSerializable {
   final int id;
-  final String name;
+  final String? name;
 
-  Person({this.id, this.name});
+  Person({this.id = 0, this.name});
 }
 
 main() {

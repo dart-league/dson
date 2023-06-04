@@ -1,19 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of deserializer.deserialize_default_constructor_with_args;
+part of 'deserialize_default_constructor_with_args_test.dart';
 
 // **************************************************************************
 // SerializableGenerator
 // **************************************************************************
 
-abstract class _$ClassWithConstructorWithArgumentsSerializable
-    extends SerializableMap {
+mixin _$ClassWithConstructorWithArgumentsSerializable on SerializableMap {
   int get id;
-  String get name;
+  String? get name;
   set id(int v);
-  set name(String v);
+  set name(String? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'id':
         return id;
@@ -23,7 +22,7 @@ abstract class _$ClassWithConstructorWithArgumentsSerializable
     throwFieldNotFoundException(__key, 'ClassWithConstructorWithArguments');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'id':
         id = __value;
@@ -36,7 +35,7 @@ abstract class _$ClassWithConstructorWithArgumentsSerializable
   }
 
   Iterable<String> get keys =>
-      ClassWithConstructorWithArgumentsClassMirror.fields.keys;
+      ClassWithConstructorWithArgumentsClassMirror.fields?.keys ?? [];
 }
 
 // **************************************************************************
@@ -45,31 +44,30 @@ abstract class _$ClassWithConstructorWithArgumentsSerializable
 
 _ClassWithConstructorWithArguments__Constructor(
         [positionalParams, namedParams]) =>
-    ClassWithConstructorWithArguments(id: namedParams['id']);
+    ClassWithConstructorWithArguments(id: namedParams['id'] ?? 0);
 
 const $$ClassWithConstructorWithArguments_fields_id =
     DeclarationMirror(name: 'id', type: int);
 const $$ClassWithConstructorWithArguments_fields_name =
     DeclarationMirror(name: 'name', type: String);
 
-const ClassWithConstructorWithArgumentsClassMirror =
-    ClassMirror(name: 'ClassWithConstructorWithArguments', constructors: {
-  '': FunctionMirror(
-      name: '',
-      namedParameters: {
-        'id': DeclarationMirror(name: 'id', type: int, isNamed: true)
-      },
-      $call: _ClassWithConstructorWithArguments__Constructor)
-}, fields: {
-  'id': $$ClassWithConstructorWithArguments_fields_id,
-  'name': $$ClassWithConstructorWithArguments_fields_name
-}, getters: [
-  'id',
-  'name'
-], setters: [
-  'id',
-  'name'
-]);
+const ClassWithConstructorWithArgumentsClassMirror = ClassMirror(
+    name: 'ClassWithConstructorWithArguments',
+    constructors: {
+      '': FunctionMirror(
+          name: '',
+          namedParameters: {
+            'id': DeclarationMirror(name: 'id', type: int, isNamed: true)
+          },
+          $call: _ClassWithConstructorWithArguments__Constructor)
+    },
+    fields: {
+      'id': $$ClassWithConstructorWithArguments_fields_id,
+      'name': $$ClassWithConstructorWithArguments_fields_name
+    },
+    getters: ['id', 'name'],
+    setters: ['id', 'name'],
+    superclass: SerializableMap);
 
 // **************************************************************************
 // InitMirrorsGenerator

@@ -1,31 +1,31 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of example.object_to_map;
+part of 'object_to_map.dart';
 
 // **************************************************************************
 // SerializableGenerator
 // **************************************************************************
 
-abstract class _$PersonSerializable extends SerializableMap {
-  int get id;
-  String get firstName;
+mixin _$PersonSerializable on SerializableMap {
+  int? get id;
+  String? get firstName;
   dynamic get lastName;
-  double get height;
-  DateTime get dateOfBirth;
-  String get otherName;
-  String get notVisible;
-  String get _private;
-  String get doGetter;
-  set id(int v);
-  set firstName(String v);
+  double? get height;
+  DateTime? get dateOfBirth;
+  String? get otherName;
+  String? get notVisible;
+  String? get _private;
+  String? get doGetter;
+  set id(int? v);
+  set firstName(String? v);
   set lastName(dynamic v);
-  set height(double v);
-  set dateOfBirth(DateTime v);
-  set otherName(String v);
-  set notVisible(String v);
-  set _private(String v);
+  set height(double? v);
+  set dateOfBirth(DateTime? v);
+  set otherName(String? v);
+  set notVisible(String? v);
+  set _private(String? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'id':
         return id;
@@ -49,7 +49,7 @@ abstract class _$PersonSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Person');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'id':
         id = __value;
@@ -79,7 +79,7 @@ abstract class _$PersonSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Person');
   }
 
-  Iterable<String> get keys => PersonClassMirror.fields.keys;
+  Iterable<String> get keys => PersonClassMirror.fields?.keys ?? [];
 }
 
 // **************************************************************************
@@ -107,38 +107,42 @@ const $$Person_fields__private =
 const $$Person_fields_doGetter =
     DeclarationMirror(name: 'doGetter', type: String);
 
-const PersonClassMirror = ClassMirror(name: 'Person', constructors: {
-  '': FunctionMirror(name: '', $call: _Person__Constructor)
-}, fields: {
-  'id': $$Person_fields_id,
-  'firstName': $$Person_fields_firstName,
-  'lastName': $$Person_fields_lastName,
-  'height': $$Person_fields_height,
-  'dateOfBirth': $$Person_fields_dateOfBirth,
-  'renamed': $$Person_fields_otherName,
-  'notVisible': $$Person_fields_notVisible,
-  '_private': $$Person_fields__private,
-  'doGetter': $$Person_fields_doGetter
-}, getters: [
-  'id',
-  'firstName',
-  'lastName',
-  'height',
-  'dateOfBirth',
-  'renamed',
-  'notVisible',
-  '_private',
-  'doGetter'
-], setters: [
-  'id',
-  'firstName',
-  'lastName',
-  'height',
-  'dateOfBirth',
-  'renamed',
-  'notVisible',
-  '_private'
-]);
+const PersonClassMirror = ClassMirror(
+    name: 'Person',
+    constructors: {'': FunctionMirror(name: '', $call: _Person__Constructor)},
+    fields: {
+      'id': $$Person_fields_id,
+      'firstName': $$Person_fields_firstName,
+      'lastName': $$Person_fields_lastName,
+      'height': $$Person_fields_height,
+      'dateOfBirth': $$Person_fields_dateOfBirth,
+      'renamed': $$Person_fields_otherName,
+      'notVisible': $$Person_fields_notVisible,
+      '_private': $$Person_fields__private,
+      'doGetter': $$Person_fields_doGetter
+    },
+    getters: [
+      'id',
+      'firstName',
+      'lastName',
+      'height',
+      'dateOfBirth',
+      'renamed',
+      'notVisible',
+      '_private',
+      'doGetter'
+    ],
+    setters: [
+      'id',
+      'firstName',
+      'lastName',
+      'height',
+      'dateOfBirth',
+      'renamed',
+      'notVisible',
+      '_private'
+    ],
+    superclass: SerializableMap);
 
 // **************************************************************************
 // InitMirrorsGenerator

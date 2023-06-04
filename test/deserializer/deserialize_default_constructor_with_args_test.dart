@@ -6,11 +6,11 @@ import 'package:test/test.dart';
 part 'deserialize_default_constructor_with_args_test.g.dart';
 
 @serializable
-class ClassWithConstructorWithArguments extends _$ClassWithConstructorWithArgumentsSerializable {
+class ClassWithConstructorWithArguments extends SerializableMap with _$ClassWithConstructorWithArgumentsSerializable {
   int id;
-  String name;
+  String? name;
 
-  ClassWithConstructorWithArguments({this.id});
+  ClassWithConstructorWithArguments({this.id = 0});
 }
 
 main() {

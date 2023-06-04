@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of example.generics;
+part of 'generics.dart';
 
 // **************************************************************************
 // SerializableGenerator
 // **************************************************************************
 
-abstract class _$PageSerializable<T> extends SerializableMap {
-  int get size;
-  int get total;
-  int get number;
-  List<T> get items;
-  set size(int v);
-  set total(int v);
-  set number(int v);
-  set items(List<T> v);
+mixin _$PageSerializable<T> on SerializableMap {
+  int? get size;
+  int? get total;
+  int? get number;
+  List<T>? get items;
+  set size(int? v);
+  set total(int? v);
+  set number(int? v);
+  set items(List<T>? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'size':
         return size;
@@ -30,7 +30,7 @@ abstract class _$PageSerializable<T> extends SerializableMap {
     throwFieldNotFoundException(__key, 'Page');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'size':
         size = __value;
@@ -42,22 +42,22 @@ abstract class _$PageSerializable<T> extends SerializableMap {
         number = __value;
         return;
       case 'items':
-        items = fromSerialized(__value, () => List<T>());
+        items = fromSerialized(__value, () => List<T>.empty(growable: true));
         return;
     }
     throwFieldNotFoundException(__key, 'Page');
   }
 
-  Iterable<String> get keys => PageClassMirror.fields.keys;
+  Iterable<String> get keys => PageClassMirror.fields?.keys ?? [];
 }
 
-abstract class _$PersonSerializable extends SerializableMap {
-  int get id;
-  String get name;
-  set id(int v);
-  set name(String v);
+mixin _$PersonSerializable on SerializableMap {
+  int? get id;
+  String? get name;
+  set id(int? v);
+  set name(String? v);
 
-  operator [](Object __key) {
+  operator [](Object? __key) {
     switch (__key) {
       case 'id':
         return id;
@@ -67,7 +67,7 @@ abstract class _$PersonSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Person');
   }
 
-  operator []=(Object __key, __value) {
+  operator []=(Object? __key, __value) {
     switch (__key) {
       case 'id':
         id = __value;
@@ -79,7 +79,7 @@ abstract class _$PersonSerializable extends SerializableMap {
     throwFieldNotFoundException(__key, 'Person');
   }
 
-  Iterable<String> get keys => PersonClassMirror.fields.keys;
+  Iterable<String> get keys => PersonClassMirror.fields?.keys ?? [];
 }
 
 // **************************************************************************
@@ -94,24 +94,18 @@ const $$Page_fields_number = DeclarationMirror(name: 'number', type: int);
 const $$Page_fields_items =
     DeclarationMirror(name: 'items', type: [List, dynamic]);
 
-const PageClassMirror = ClassMirror(name: 'Page', constructors: {
-  '': FunctionMirror(name: '', $call: _Page__Constructor)
-}, fields: {
-  'size': $$Page_fields_size,
-  'total': $$Page_fields_total,
-  'number': $$Page_fields_number,
-  'items': $$Page_fields_items
-}, getters: [
-  'size',
-  'total',
-  'number',
-  'items'
-], setters: [
-  'size',
-  'total',
-  'number',
-  'items'
-]);
+const PageClassMirror = ClassMirror(
+    name: 'Page',
+    constructors: {'': FunctionMirror(name: '', $call: _Page__Constructor)},
+    fields: {
+      'size': $$Page_fields_size,
+      'total': $$Page_fields_total,
+      'number': $$Page_fields_number,
+      'items': $$Page_fields_items
+    },
+    getters: ['size', 'total', 'number', 'items'],
+    setters: ['size', 'total', 'number', 'items'],
+    superclass: SerializableMap);
 
 _Person__Constructor([positionalParams, namedParams]) => Person();
 
@@ -123,7 +117,8 @@ const PersonClassMirror = ClassMirror(
     constructors: {'': FunctionMirror(name: '', $call: _Person__Constructor)},
     fields: {'id': $$Person_fields_id, 'name': $$Person_fields_name},
     getters: ['id', 'name'],
-    setters: ['id', 'name']);
+    setters: ['id', 'name'],
+    superclass: SerializableMap);
 
 // **************************************************************************
 // InitMirrorsGenerator

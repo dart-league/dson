@@ -11,23 +11,23 @@ class SomeAnnotation extends Annotation {
 @serializable
 @cyclical
 @SomeAnnotation()
-class Book extends _$BookSerializable {
-  int id;
+class Book extends SerializableMap with _$BookSerializable {
+  int? id;
 
-  String name;
+  String? name;
 
-  List<Author> authors;
+  List<Author>? authors;
 }
 
 @serializable
 @cyclical
 @SomeAnnotation()
-class Author extends _$AuthorSerializable {
-  int id;
+class Author extends SerializableMap with _$AuthorSerializable {
+  int? id;
 
-  String name;
+  String? name;
 
-  List<Book> books;
+  List<Book>? books;
 }
 
 main() {
@@ -81,7 +81,7 @@ main() {
     var s = Stopwatch()..start();
 
     for (int i=0; i<1000; i++) {
-      books = fromJson(booksJson, [List, Book]);
+      books = fromJson(booksJson, [() => List<Book>.empty(growable: true), Book]);
     }
 
     s.stop();
@@ -91,7 +91,7 @@ main() {
     s..reset()..start();
 
     for (int i=0; i<1000; i++) {
-      toJson(books, depth: 'authors');
+      toJson(books, expand: 'authors');
     }
 
     s.stop();
@@ -99,5 +99,7 @@ main() {
     serializeTimeTotal += s.elapsedMicroseconds;
   }
 
-  print("totals:\n\tserialization:\t\t${serializeTimeTotal/50}\n\tdeserialization:\t${deserializeTimeTotal/50}");
+  print('''totals:
+  serialization:   ${serializeTimeTotal/50/1000} ms
+  deserialization: ${deserializeTimeTotal/50/1000} ms''');
 }

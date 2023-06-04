@@ -5,27 +5,27 @@ import 'package:dson/dson.dart';
 part 'extend_generics.g.dart';
 
 abstract class IManager<T> {
-  List<Employee<T>> subordinates;
+  List<Employee<T>>? subordinates;
 }
 
 @serializable
-class Person<T> extends _$PersonSerializable<T> {
-  int id;
-  String firstName;
-  T lastName;
-  DateTime dateOfBirth;
+class Person<T> extends SerializableMap with _$PersonSerializable<T> {
+  int? id;
+  String? firstName;
+  T? lastName;
+  DateTime? dateOfBirth;
 }
 
 @serializable
 // ignore: mixin_inherits_from_not_object
 class Employee<T> extends Person<T> with _$EmployeeSerializable<T> {
-  double salary;
+  double? salary;
 }
 
 @serializable
 // ignore: mixin_inherits_from_not_object
 class Manager<T> extends Employee<T> with _$ManagerSerializable<T> implements IManager<T> {
-  List<Employee<T>> subordinates;
+  List<Employee<T>>? subordinates;
 }
 
 main() {

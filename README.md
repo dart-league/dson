@@ -1,9 +1,7 @@
 # DSON
 
 ![Build
-Status](https://travis-ci.org/dart-league/dson.svg?branch=master)
-
-<https://travis-ci.org/dart-league/dson>
+Status](https://github.com/dart-league/dson/actions/workflows/test.yml/badge.svg?branch=master)
 
 DSON is a dart library which converts Dart Objects into their JSON
 representation.
@@ -18,7 +16,7 @@ differences:
     produce code as fast and small as Dartson transformer.
 
   - DSON has the ability to serialize cyclical objects by mean of
-    `depth` parameter, which allows users to specify how deep in the
+    `expand` parameter, which allows users to specify how deep in the
     object graph they want to serialize.
 
   - DSON has the ability to exclude attributes for serialziation in two
@@ -52,14 +50,14 @@ differences:
 ``` yaml
 ...
 dependencies:
-  ...
+  #...
   dson: any # replace for latest version
-  ...
+  #...
 dev_dependencies:
-  ...
+  #...
   build_runner: any
   build_web_compilers: any
-  ...
+  #...
 ```
 
 3- Create/edit `bin/main.dart` or `web/main.dart` and add the code shown
@@ -82,23 +80,23 @@ import 'package:dson/dson.dart';
 part 'object_to_json.g.dart'; // this line is needed for the generator
 
 @serializable
-class Person extends _$PersonSerializable {
-  int id;
-  String firstName;
+class Person extends SerializableMap with _$PersonSerializable {
+  int? id;
+  String? firstName;
   var lastName; //This is a dynamic attribute could be String, int, double, num, date or another type
-  double height;
-  DateTime dateOfBirth;
+  double? height;
+  DateTime? dateOfBirth;
 
   @SerializedName("renamed")
-  String otherName;
+  String? otherName;
 
   @ignore
-  String notVisible;
+  String? notVisible;
 
   // private members are never serialized
-  String _private = "name";
+  String? _private = "name";
 
-  String get doGetter => _private;
+  String? get doGetter => _private;
 }
 
 void main() {
@@ -133,23 +131,23 @@ import 'package:dson/dson.dart';
 part 'object_to_map.g.dart';  // this line is needed for the generator
 
 @serializable
-class Person extends _$PersonSerializable {
-  int id;
-  String firstName;
+class Person extends SerializableMap with _$PersonSerializable {
+  int? id;
+  String? firstName;
   var lastName; //This is a dynamic attribute could be String, int, duble, num, date or another type
-  double height;
-  DateTime dateOfBirth;
+  double? height;
+  DateTime? dateOfBirth;
 
   @SerializedName("renamed")
-  String otherName;
+  String? otherName;
 
   @ignore
-  String notVisible;
+  String? notVisible;
 
   // private members are never serialized
-  String _private = "name";
+  String? _private = "name";
 
-  String get doGetter => _private;
+  String? get doGetter => _private;
 }
 
 void main() {
@@ -174,7 +172,7 @@ void main() {
 
 To serialize objects that contains Cyclical References it would be
 needed to use the annotation `@cyclical`. If this annotation is present
-and the `depth` variable is not set then the non-primitive objects are
+and the `expand` variable is not set then the non-primitive objects are
 not going to be parsed and only the id (or hashmap if the object does
 not contains id) is going to be present. Let’s see next example:
 
@@ -187,26 +185,26 @@ part 'serialize_cyclical.g.dart';  // this line is needed for the generator
 
 @serializable
 @cyclical
-class Employee extends _$EmployeeSerializable {
-  @uId int key;
-  String firstName;
-  String lastName;
+class Employee extends SerializableMap with _$EmployeeSerializable {
+  @uId int? key;
+  String? firstName;
+  String? lastName;
 
-  Address address;
+  Address? address;
 
-  Employee manager;
+  Employee? manager;
 }
 
 @serializable
 @cyclical
-class Address extends _$AddressSerializable {
-  @uId int key;
-  String street;
-  String city;
-  String country;
-  String postalCode;
+class Address extends SerializableMap with _$AddressSerializable {
+  @uId int? key;
+  String? street;
+  String? city;
+  String? country;
+  String? postalCode;
 
-  Employee owner;
+  Employee? owner;
 }
 
 
@@ -241,14 +239,14 @@ void main() {
   print(toJson(employee.address)); // will print: '{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}}'
 
   // depth is a optional parameter that could be a list that should contains strings or Maps<String, Map>
-  print(toJson(employee, depth: ['address']));
+  print(toJson(employee, expand: ['address']));
   /* will print:
            '{"id":2,"firstName":"Luis","lastName":"Vargas",'
               '"address":{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}},'
               '"manager":{"id":1}}'
   */
 
-  print(toJson(employee, depth: [{'manager': ['address']}, 'address']));
+  print(toJson(employee, expand: [{'manager': ['address']}, 'address']));
   /* will print:
          '{"id":2,"firstName":"Luis","lastName":"Vargas",'
             '"address":{"id":2,"street":"some street","city":"Miami","country":"USA",'
@@ -262,7 +260,7 @@ void main() {
 as you can see employee has an address, and the address has an owner of
 type Employee. If the property `id` is not present in the object then it
 is going to take the `hashcode` value from the object as reference. And
-finally, the `depth` parameter passed to serialize function tells
+finally, the `expand` parameter passed to serialize function tells
 serializer how deep you want to go throw the reference. This help us not
 only to avoid cyclical reference, but to determine what referenced
 objects should be serialized.
@@ -278,21 +276,21 @@ part 'serialize_cyclical_list.g.dart'; // this line is needed for the generator
 
 @serializable
 @cyclical
-class Student extends _$StudentSerializable {
-  int id;
-  String name;
+class Student extends SerializableMap with _$StudentSerializable {
+  int? id;
+  String? name;
 
-  List<Course> courses;
+  List<Course>? courses;
 }
 
 @serializable
 @cyclical
-class Course extends _$CourseSerializable {
-  int id;
+class Course extends SerializableMap with _$CourseSerializable {
+  int? id;
 
-  DateTime beginDate;
+  DateTime? beginDate;
 
-  List<Student> students;
+  List<Student>? students;
 }
 
 void main() {
@@ -330,7 +328,7 @@ void main() {
 
   print(toJson(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
 
-  print(toJson(student1, depth: ['courses']));
+  print(toJson(student1, expand: ['courses']));
 /* will print:
       '{'
         '"id":1,'
@@ -350,7 +348,7 @@ void main() {
       ']');
   */
 
-  print(toJson(student2.courses, depth: ['students']));
+  print(toJson(student2.courses, expand: ['students']));
 /* will print:
       '['
         '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":['
@@ -389,21 +387,21 @@ part 'exclude_attributes.g.dart';  // this line is needed for the generator
 
 @serializable
 @cyclical
-class Student extends _$StudentSerializable {
-  int id;
-  String name;
+class Student extends SerializableMap with _$StudentSerializable {
+  int? id;
+  String? name;
 
-  List<Course> courses;
+  List<Course>? courses;
 }
 
 @serializable
 @cyclical
-class Course extends _$CourseSerializable {
-  int id;
+class Course extends SerializableMap with _$CourseSerializable {
+  int? id;
 
-  DateTime beginDate;
+  DateTime? beginDate;
 
-  List<Student> students;
+  List<Student>? students;
 }
 
 void main() {
@@ -448,7 +446,7 @@ void main() {
   */
   print(toJson(student1)); // will print: '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]}'
 
-  print(toJson(student1, depth: 'courses', exclude: 'name'));
+  print(toJson(student1, expand: 'courses', exclude: 'name'));
   /* will print:
       '{'
         '"id":1,'
@@ -467,7 +465,7 @@ void main() {
       ']');
   */
 
-  print(toJson(student2.courses, depth: 'students', exclude: {'students': 'name'}));
+  print(toJson(student2.courses, expand: 'students', exclude: {'students': 'name'}));
   /* will print:
       '['
         '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":['
@@ -481,7 +479,7 @@ void main() {
       ']'
    */
 
-  print(toJson(student2.courses, depth: 'students', exclude: ['beginDate', {'students': 'name'}]));
+  print(toJson(student2.courses, expand: 'students', exclude: ['beginDate', {'students': 'name'}]));
   /* will print:
       '['
         '{"id":1,"students":['
@@ -513,20 +511,20 @@ import 'package:dson/dson.dart';
 part 'json_to_object.g.dart';  // this line is needed for the generator
 
 @serializable
-class EntityClass extends _$EntityClassSerializable {
-  String name;
-  String _setted;
+class EntityClass extends SerializableMap with _$EntityClassSerializable {
+  String? name;
+  String? _setted;
 
   @SerializedName("renamed")
-  bool otherName;
+  bool? otherName;
 
   @ignore
-  String notVisible;
+  String? notVisible;
 
-  List<EntityClass> children;
+  List<EntityClass>? children;
 
-  set setted(String s) => _setted = s;
-  String get setted => _setted;
+  set setted(String? s) => _setted = s;
+  String? get setted => _setted;
 }
 
 void main() {
@@ -541,10 +539,12 @@ void main() {
   print(object.setted); // > awesome
 
   // to deserialize a list of items use [fromJsonList]
-  List<EntityClass> list = fromJson('[{"name":"test", "children": [{"name":"child1"},{"name":"child2"}]},{"name":"test2"}]', [List, EntityClass]);
+  List<EntityClass> list = fromJson(
+      '[{"name":"test", "children": [{"name":"child1"},{"name":"child2"}]},{"name":"test2"}]',
+      [() => List<EntityClass>.empty(growable: true), EntityClass]);
   print(list.length); // > 2
   print(list[0].name); // > test
-  print(list[0].children[0].name); // > child1
+  print(list[0].children?[0].name); // > child1
 }
 ```
 
@@ -563,21 +563,21 @@ import 'package:dson/dson.dart';
 part 'map_to_object.g.dart'; // this line is needed for the generator
 
 @serializable
-class EntityClass extends _$EntityClassSerializable {
-  String name;
-  String _setted;
+class EntityClass extends SerializableMap with _$EntityClassSerializable {
+  String? name;
+  String? _setted;
 
   @SerializedName("renamed")
-  bool otherName;
+  bool? otherName;
 
   @ignore
-  String notVisible;
+  String? notVisible;
 
-  List<EntityClass> children;
+  List<EntityClass>? children;
 
-  set setted(String s) => _setted = s;
+  set setted(String? s) => _setted = s;
 
-  String get setted => _setted;
+  String? get setted => _setted;
 }
 
 void main() {
@@ -603,10 +603,10 @@ void main() {
       ]
     },
     {"name": "test2"}
-  ], [List, EntityClass]);
+  ], [() => List<EntityClass>.empty(growable: true), EntityClass]);
   print(list.length); // > 2
   print(list[0].name); // > test
-  print(list[0].children[0].name); // > child1
+  print(list[0].children?[0].name); // > child1
 }
 ```
 
@@ -630,23 +630,23 @@ import 'package:dson/dson.dart';
 part 'extend_serializables.g.dart';
 
 @serializable
-class Person extends _$PersonSerializable {
-  int id;
-  String firstName;
-  String lastName;
-  DateTime dateOfBirth;
+class Person extends SerializableMap with _$PersonSerializable {
+  int? id;
+  String? firstName;
+  String? lastName;
+  DateTime? dateOfBirth;
 }
 
 @serializable
 // ignore: mixin_inherits_from_not_object
 class Employee extends Person with _$EmployeeSerializable {
-  double salary;
+  double? salary;
 }
 
 @serializable
 // ignore: mixin_inherits_from_not_object
 class Manager extends Employee with _$ManagerSerializable {
-  List<Employee> subordinates;
+  List<Employee>? subordinates;
 }
 
 main() {
@@ -701,11 +701,11 @@ import 'package:dson/dson.dart';
 part 'immutable_objects.g.dart';
 
 @serializable
-class Person extends _$PersonSerializable {
+class Person extends SerializableMap with _$PersonSerializable {
   final int id;
-  final String name;
+  final String? name;
 
-  Person({this.id, this.name});
+  Person({this.id = 0, this.name});
 }
 
 main() {
@@ -723,29 +723,12 @@ main() {
 }
 ```
 
-> Be sure the names of the fields and constructor parameters match. If
-> they do not match, then the deserialized object will contain
-> attributes with null value
+    Be sure the names of the fields and constructor parameters match. If they do not match, then the deserialized object will contain attributes with null value
 
 # Serialize/Deserialize Generic Objects
 
 Serializing generic objects is pretty simple, you only need to call the
 `toJson` function as fallow:
-
-``` dart
-  var jsonStr = toJson(page);
-```
-
-Deserialization however is more complicated. You need to specify a list
-of factories and types starting with the top class. In the same list of
-factory you will also need to specify a map of factories for each
-generic attribute, for example:
-
-``` dart
-  Page<Person> page2 = fromJson(jsonStr, [() => Page<Person>(), {'items': [() => List<Person>(), Person]}]);
-```
-
-the full code of the example should look as fallow:
 
 ``` dart
 library example.generics;
@@ -755,21 +738,21 @@ import 'package:dson/dson.dart';
 part 'generics.g.dart';
 
 @serializable
-class Page<T> extends _$PageSerializable<T> {
-  int size;
+class Page<T> extends SerializableMap with _$PageSerializable<T> {
+  int? size;
 
-  int total;
+  int? total;
 
-  int number;
+  int? number;
 
-  List<T> items;
+  List<T>? items;
 }
 
 @serializable
-class Person extends _$PersonSerializable {
-  int id;
+class Person extends SerializableMap with _$PersonSerializable {
+  int? id;
 
-  String name;
+  String? name;
 }
 
 main() {
@@ -785,16 +768,137 @@ main() {
     ..total = 100
     ..items = [p];
 
+  // tag::serialize[]
   var jsonStr = toJson(page);
+  // end::serialize[]
   print('jsonStr: $jsonStr');
 
-  Page<Person> page2 = fromJson(jsonStr, [() => Page<Person>(), {'items': [() => List<Person>(), Person]}]);
+  // tag::deserialize[]
+  Page<Person> page2 = fromJson(jsonStr, [() => Page<Person>(), {'items': [() => List<Person>.empty(growable: true), Person]}]);
+  // end::deserialize[]
 
   print('page2.size: ${page2.size}');
   print('page2.number: ${page2.number}');
   print('page2.total: ${page2.total}');
-  print('page2.items[0].id: ${page2.items[0].id}');
-  print('page2.items[0].name: ${page2.items[0].name}');
+  print('page2.items[0].id: ${page2.items?[0].id}');
+  print('page2.items[0].name: ${page2.items?[0].name}');
+}
+```
+
+Deserialization however is more complicated. You need to specify a list
+of factories and types starting with the top class. In the same list of
+factory you will also need to specify a map of factories for each
+generic attribute, for example:
+
+``` dart
+library example.generics;
+
+import 'package:dson/dson.dart';
+
+part 'generics.g.dart';
+
+@serializable
+class Page<T> extends SerializableMap with _$PageSerializable<T> {
+  int? size;
+
+  int? total;
+
+  int? number;
+
+  List<T>? items;
+}
+
+@serializable
+class Person extends SerializableMap with _$PersonSerializable {
+  int? id;
+
+  String? name;
+}
+
+main() {
+  _initMirrors();
+
+  var p = Person()
+    ..id = 1
+    ..name = 'person 1';
+
+  var page = Page<Person>()
+    ..size = 1
+    ..number = 1
+    ..total = 100
+    ..items = [p];
+
+  // tag::serialize[]
+  var jsonStr = toJson(page);
+  // end::serialize[]
+  print('jsonStr: $jsonStr');
+
+  // tag::deserialize[]
+  Page<Person> page2 = fromJson(jsonStr, [() => Page<Person>(), {'items': [() => List<Person>.empty(growable: true), Person]}]);
+  // end::deserialize[]
+
+  print('page2.size: ${page2.size}');
+  print('page2.number: ${page2.number}');
+  print('page2.total: ${page2.total}');
+  print('page2.items[0].id: ${page2.items?[0].id}');
+  print('page2.items[0].name: ${page2.items?[0].name}');
+}
+```
+
+the full code of the example should look as fallow:
+
+``` dart
+library example.generics;
+
+import 'package:dson/dson.dart';
+
+part 'generics.g.dart';
+
+@serializable
+class Page<T> extends SerializableMap with _$PageSerializable<T> {
+  int? size;
+
+  int? total;
+
+  int? number;
+
+  List<T>? items;
+}
+
+@serializable
+class Person extends SerializableMap with _$PersonSerializable {
+  int? id;
+
+  String? name;
+}
+
+main() {
+  _initMirrors();
+
+  var p = Person()
+    ..id = 1
+    ..name = 'person 1';
+
+  var page = Page<Person>()
+    ..size = 1
+    ..number = 1
+    ..total = 100
+    ..items = [p];
+
+  // tag::serialize[]
+  var jsonStr = toJson(page);
+  // end::serialize[]
+  print('jsonStr: $jsonStr');
+
+  // tag::deserialize[]
+  Page<Person> page2 = fromJson(jsonStr, [() => Page<Person>(), {'items': [() => List<Person>.empty(growable: true), Person]}]);
+  // end::deserialize[]
+
+  print('page2.size: ${page2.size}');
+  print('page2.number: ${page2.number}');
+  print('page2.total: ${page2.total}');
+  print('page2.items[0].id: ${page2.items?[0].id}');
+  print('page2.items[0].name: ${page2.items?[0].name}');
 }
 ```
 
@@ -806,9 +910,9 @@ use something simpler like just passing the type like next:
 Page<Person> page2 = fromJson(jsonStr, Page<Person>);
 ```
 
-Sadly it is not possible in dart to pass generic typed types as
-parameters, but in previous versions of the library this was possible
-just passing an array of types as fallow:
+Sadly, it is not possible in dart to pass generic types as parameters,
+but in previous versions of the library this was possible just passing
+an array of types as fallow:
 
 ``` dart
 Page<Person> page2 = fromJson(jsonStr, [Page, Person]);
@@ -819,14 +923,14 @@ and `]` respectively and also add two more brackets at the start and end
 of the type.
 
 However, that was only possible in previous versions of Dart SDK. The
-latest version does not allows to set values of dynamic types into the
+latest version does not allow to set values of dynamic types into the
 attributes of classes. So that, we need to specify the conversion
 process using factory functions and types as fallow:
 
   - First take the generic `Page<Person>` that will be converted from
     json.
 
-  - Replace the `<` and `>` by brackets, so it should look as follow
+  - Replace the `<` and `>` by brackets, so it should look as follows
     `Page[Person]`.
 
   - Add brackets at the start and end: `[Page[Person]]`
@@ -845,7 +949,7 @@ process using factory functions and types as fallow:
 ```
 
   - If the generic would be a `List` or `Map` the previous would be
-    enough. However the generic is `Page` which means we need to know
+    enough. However, the generic is `Page` which means we need to know
     which is the attribute that handle the generic type, in this case is
     `items`. Knowing that we replace `Person` by a map with the names of
     the attributes as keys and a factory of the types as values. As a
@@ -858,7 +962,7 @@ process using factory functions and types as fallow:
 ```
 
   - Remember that passing generic types as parameter is disallowed, so
-    we need to convert it to an array of factories and types. Hence you
+    we need to convert it to an array of factories and types. Hence, you
     should have something like next:
 
 <!-- end list -->
@@ -873,7 +977,7 @@ process using factory functions and types as fallow:
 <!-- end list -->
 
 ``` dart
-{'items': [List, Person]}
+  {'items': [List, Person]}
 ```
 
   - here you can also notice that `List` is a generic, so it should be
@@ -882,7 +986,7 @@ process using factory functions and types as fallow:
 <!-- end list -->
 
 ``` dart
-() => List<Person>
+() => List<Person>.empty(growable: true)
 ```
 
   - then we replace this factory in the `items` value of the previous
@@ -891,7 +995,7 @@ process using factory functions and types as fallow:
 <!-- end list -->
 
 ``` dart
-{'items': [() => List<Person>(), Person]
+{'items': [() => List<Person>.empty(growable: true), Person]
 ```
 
   - And finally we replace this map in the previous list as fallow:
@@ -899,7 +1003,7 @@ process using factory functions and types as fallow:
 <!-- end list -->
 
 ``` dart
-[() => Page<Person>(), {'items': [() => List<Person>(), Person]}]
+[() => Page<Person>(), {'items': [() => List<Person>.empty(growable: true), Person]}]
 ```
 
 # Serialize/Deserialize Extended Generic Objects
@@ -915,27 +1019,27 @@ import 'package:dson/dson.dart';
 part 'extend_generics.g.dart';
 
 abstract class IManager<T> {
-  List<Employee<T>> subordinates;
+  List<Employee<T>>? subordinates;
 }
 
 @serializable
-class Person<T> extends _$PersonSerializable<T> {
-  int id;
-  String firstName;
-  T lastName;
-  DateTime dateOfBirth;
+class Person<T> extends SerializableMap with _$PersonSerializable<T> {
+  int? id;
+  String? firstName;
+  T? lastName;
+  DateTime? dateOfBirth;
 }
 
 @serializable
 // ignore: mixin_inherits_from_not_object
 class Employee<T> extends Person<T> with _$EmployeeSerializable<T> {
-  double salary;
+  double? salary;
 }
 
 @serializable
 // ignore: mixin_inherits_from_not_object
 class Manager<T> extends Employee<T> with _$ManagerSerializable<T> implements IManager<T> {
-  List<Employee<T>> subordinates;
+  List<Employee<T>>? subordinates;
 }
 
 main() {
@@ -1001,11 +1105,12 @@ main() {
 Please don’t edit `README.md`, instead edit `_README.adoc` then run next
 command:
 
-    asciidoctor -b docbook _README.adoc && pandoc -f docbook -t gfm _README.xml -o README.md
+asciidoctor -b docbook \_README.adoc && pandoc -f docbook -t gfm
+\_README.xml -o README.md\</programlisting\>
 
 ### Issues
 
-If you find any problem please create a
+If you find any problem please create an
 [issue](https://github.com/dart-league/dson/issues/new)
 
 ### Pull Request

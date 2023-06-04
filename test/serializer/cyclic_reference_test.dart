@@ -41,14 +41,14 @@ main() {
     });
 
     test('serialize employee with address and no manager', () {
-      expect(toJson(employee, depth: 'address'),
+      expect(toJson(employee, expand: 'address'),
              '{"id":2,"firstName":"Luis","lastName":"Vargas",'
                 '"address":{"id":2,"street":"some street","city":"Miami","country":"USA","owner":{"id":2}},'
                 '"manager":{"id":1}}');
     });
 
     test('serialize employee with address, manager and manager address', () {
-      expect(toJson(employee, depth: [{'manager': 'address'}, 'address']),
+      expect(toJson(employee, expand: [{'manager': 'address'}, 'address']),
              '{"id":2,"firstName":"Luis","lastName":"Vargas",'
                 '"address":{"id":2,"street":"some street","city":"Miami","country":"USA",'
                   '"owner":{"id":2}},'
@@ -99,7 +99,7 @@ main() {
     });
 
     test('serialize employee with address and no manager', () {
-      expect(toJson(employee, depth: ['address']),
+      expect(toJson(employee, expand: ['address']),
              matches(
                  r'\{"firstName":"Luis","lastName":"Vargas",'
                     r'"address":\{"street":"some street","city":"Miami","country":"USA","owner":\{"hashcode":\d+\},"hashcode":\d+\},'
@@ -108,7 +108,7 @@ main() {
     });
 
     test('serialize employee with address, manager and manager address', () {
-      expect(toJson(employee, depth: [{'manager': ['address']}, 'address']),
+      expect(toJson(employee, expand: [{'manager': ['address']}, 'address']),
              matches(
                  r'\{'
                     r'"firstName":"Luis",'
@@ -171,7 +171,7 @@ main() {
     });
 
     test('serializing student1 with courses', () {
-      expect(toJson(student1, depth: ['courses']),
+      expect(toJson(student1, expand: ['courses']),
           '{'
             '"id":1,'
             '"name":"student1",'
@@ -191,7 +191,7 @@ main() {
     });
 
     test('serializing student1.courses with students', () {
-      expect(toJson(student2.courses, depth: ['students']),
+      expect(toJson(student2.courses, expand: ['students']),
           '['
             '{"id":1,"beginDate":"2015-01-01T00:00:00.000Z","students":['
               '{"id":1,"name":"student1","courses":[{"id":1},{"id":3}]},'
@@ -209,65 +209,65 @@ main() {
 
 @cyclical
 @serializable
-class Employee extends _$EmployeeSerializable {
-  int id;
-  String firstName;
-  String lastName;
+class Employee extends SerializableMap with _$EmployeeSerializable {
+  int? id;
+  String? firstName;
+  String? lastName;
   
-  Address address;
+  Address? address;
   
-  Employee manager;
+  Employee? manager;
 }
 
 @cyclical
 @serializable
-class Address extends _$AddressSerializable {
-  int id;
-  String street;
-  String city;
-  String country;
-  String postalCode;
+class Address extends SerializableMap with _$AddressSerializable {
+  int? id;
+  String? street;
+  String? city;
+  String? country;
+  String? postalCode;
   
-  Employee owner;
+  Employee? owner;
 }
 
 @cyclical
 @serializable
-class Employee2 extends _$Employee2Serializable {
-  String firstName;
-  String lastName;
+class Employee2 extends SerializableMap with _$Employee2Serializable {
+  String? firstName;
+  String? lastName;
   
-  Address2 address;
+  Address2? address;
   
-  Employee2 manager;
+  Employee2? manager;
 }
 
 @cyclical
 @serializable
-class Address2 extends _$Address2Serializable {
-  String street;
-  String city;
-  String country;
-  String postalCode;
+class Address2 extends SerializableMap with _$Address2Serializable {
+  String? street;
+  String? city;
+  String? country;
+  String? postalCode;
   
-  Employee2 owner;
+  Employee2? owner;
 }
 
 @cyclical
 @serializable
-class Student extends _$StudentSerializable {
-  int id;
-  String name;
+class Student extends SerializableMap with _$StudentSerializable {
+  int? id;
+  String? name;
   
-  List<Course> courses;
+  List<Course>? courses;
 }
 
 @cyclical
 @serializable
-class Course extends _$CourseSerializable {
-  int id;
+class Course extends SerializableMap with _$CourseSerializable {
+  int? id;
   
-  DateTime beginDate;
+  DateTime? beginDate;
   
-  List<Student> students;
+  List<Student>? students;
 }

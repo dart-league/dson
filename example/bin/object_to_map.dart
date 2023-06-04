@@ -5,23 +5,23 @@ import 'package:dson/dson.dart';
 part 'object_to_map.g.dart';  // this line is needed for the generator
 
 @serializable
-class Person extends _$PersonSerializable {
-  int id;
-  String firstName;
+class Person extends SerializableMap with _$PersonSerializable {
+  int? id;
+  String? firstName;
   var lastName; //This is a dynamic attribute could be String, int, duble, num, date or another type
-  double height;
-  DateTime dateOfBirth;
+  double? height;
+  DateTime? dateOfBirth;
 
   @SerializedName("renamed")
-  String otherName;
+  String? otherName;
 
   @ignore
-  String notVisible;
+  String? notVisible;
 
   // private members are never serialized
-  String _private = "name";
+  String? _private = "name";
 
-  String get doGetter => _private;
+  String? get doGetter => _private;
 }
 
 void main() {

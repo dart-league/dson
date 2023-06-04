@@ -6,7 +6,7 @@ import 'package:dson/dson.dart';
 part 'IncorrectTypeTransform_test.g.dart';
 
 @serializable
-class SomeSerializable extends _$SomeSerializableSerializable {
+class SomeSerializable extends SerializableMap with _$SomeSerializableSerializable {
 }
 
 main() {
